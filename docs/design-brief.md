@@ -115,7 +115,12 @@ All pairs below pass WCAG AA (computed in `docs/preview/palettes.js`; the previe
 | Engagement models | Light (`surface`) | calm, comparable |
 | Contact block + footer | Dark (`darkAlt`) | strong close, trust strip on dark |
 
-### 3.3 Typography: **chosen: Helvetica Now (self-hosted) + Geist Mono**
+### 3.3 Typography: **two font sets with one switch**
+- **`free` (default, used for the public repo and any deploy unless switched):** **Inter Tight** (headings) · **Inter** (body) · **Geist Mono** (labels, numbers, buttons). All OFL; self-hosted woff2 in the build.
+- **`licensed` (optional):** **Helvetica Now Display** · **Helvetica Now Text** · Geist Mono. Font files stay **only on the owner's machine** (git-ignored, never pushed). If the files are missing, the browser falls back to the free set automatically.
+- **How to switch:** preview page has a "Font set" toggle (remembered per browser). In the site: one setting `NEXT_PUBLIC_FONT_SET=free|licensed` (env) → sets `<html data-fonts="…">`; all components use `--font-display`, `--font-text`, `--font-mono`, so nothing else changes. Only the active set's heading font (weight 500) is preloaded.
+
+Original Helvetica Now plan (kept for reference):
 | Role | Font | Weights | Fallback stack |
 |---|---|---|---|
 | Headings (display, h1–h3, roll-call) | **Helvetica Now Display** | 300, 400, 500, 700 | Inter Tight → Helvetica Neue → Arial |

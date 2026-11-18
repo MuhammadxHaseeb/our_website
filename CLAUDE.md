@@ -16,7 +16,7 @@
 ## Waiting on the owner
 - Liquid-metal logo video, made from `docs/logo/epox-wordmark-white.svg`.
 - Assets later: app screenshots/recordings for both cases.
-- Font files: owner asked to push them; held back because the repo is public (would publish Monotype's files). Will push if the repo is made private.
+- Fonts: Helvetica Now files stay **local only** (owner's decision). Site uses the **free set by default** with a font switch (see decisions log).
 
 ## Decisions log
 | Date | Decision | Reason |
@@ -34,6 +34,7 @@
 | 2026-11-18 | Logo: **"epox"**, Helvetica Now Display Bold, lowercase, −6.5% (`docs/logo/epox-wordmark-*.svg`) | Owner's pick; best shape for liquid metal |
 | 2026-11-18 | Mono font: **Geist Mono** instead of Suisse Int'l Mono | Suisse not available; owner: "use what suits best" |
 | 2026-11-18 | Font licensing: owner takes responsibility | Owner: "don't worry" |
+| 2026-11-18 | **Two font sets + switch**: `free` default (Inter Tight / Inter / Geist Mono), `licensed` optional (Helvetica Now Display / Text, local files only). Switch = `data-fonts` on `<html>`; site setting `NEXT_PUBLIC_FONT_SET` | Public repo can't carry Monotype files; owner wants Helvetica available locally |
 | 2026-11-18 | Brand idea **"We find it first."** (+ live-status dot as proof device) | Matches outbound sales model |
 | 2026-11-18 | **Dark** home hero | Owner's pick |
 | 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |

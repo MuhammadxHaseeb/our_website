@@ -4,10 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Epox: brand preview</title>
-<link rel="preload" href="fonts/licensed/HelveticaNowDisplay-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  /* Font switch: free (default, public) or licensed (Helvetica Now, local files only). Remembered per browser. */
+  (function () {
+    var set = 'free';
+    try { set = localStorage.getItem('epox-fonts') || 'free'; } catch (e) {}
+    document.documentElement.dataset.fonts = set;
+    if (set === 'licensed') {
+      var l = document.createElement('link'); l.rel = 'preload'; l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = '';
+      l.href = 'fonts/licensed/HelveticaNowDisplay-Medium.woff2'; document.head.appendChild(l);
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- free fallbacks only (used if the licensed files are missing) -->
+<!-- free font set (default) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@300;400;500;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="fonts.css">
 <style>
@@ -71,6 +82,7 @@
   .btn-secondary-dark { background: transparent; color: var(--on-dark); border-color: var(--n-700); } .btn-secondary-dark:hover { border-color: var(--on-dark); }
   .btn-primary { background: var(--ink); color: var(--paper); } .btn-primary:hover { background: var(--n-700); }
   .btn-secondary { background: transparent; color: var(--text); border-color: var(--line); } .btn-secondary:hover { border-color: var(--text); }
+  .fontswitch .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .ph { display: grid; place-items: center; border: 1px dashed var(--n-600); border-radius: 16px; color: var(--muted-on-dark); font: 500 11px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; aspect-ratio: 16/9; margin-top: 72px; }
   .content { padding: clamp(72px, 9vw, 128px) clamp(24px, 5vw, 72px); }
   .content .sh h2 { font: 500 clamp(32px, 3.6vw, 64px)/1.02 var(--font-display); letter-spacing: -0.03em; margin: 12px 0 0; max-width: 18ch; text-wrap: balance; }
@@ -108,18 +120,23 @@
 <body>
 <main class="page">
   <span class="label">Epox · brand preview · step 1, round 2</span>
-  <h1 class="doc-h1">Liquid Silver, Helvetica Now, and the epox wordmark</h1>
-  <p class="doc-lead">Your choices applied: palette A, Helvetica Now Display + Text, Geist Mono for labels and buttons, brand idea "We find it first", dark hero, no characters (slots kept). Wordmark 2 ("epox", Bold lowercase) is chosen; the liquid-metal video is made from it.</p>
+  <h1 class="doc-h1">Liquid Silver, the epox wordmark, and a font switch</h1>
+  <p class="doc-lead">Your choices applied: palette A, free fonts by default (Inter Tight + Inter + Geist Mono) with a switch to Helvetica Now when the local files are present, brand idea "We find it first", dark hero, no characters (slots kept). Wordmark 2 ("epox", Bold lowercase) is chosen; the liquid-metal video is made from it.</p>
   <dl class="decisions">
     <div><dt class="label">Palette</dt><dd>A · Liquid Silver</dd></div>
-    <div><dt class="label">Fonts</dt><dd>Helvetica Now Display / Text · Geist Mono</dd></div>
+    <div><dt class="label">Fonts</dt><dd id="fontName">Inter Tight / Inter · Geist Mono</dd></div>
     <div><dt class="label">Brand idea</dt><dd>We find it first</dd></div>
     <div><dt class="label">Hero</dt><dd>Dark</dd></div>
   </dl>
-  <p class="warn" id="fontWarn" hidden style="margin-top:32px"></p>
+  <div class="fontswitch" role="group" aria-label="Font set" style="margin-top:40px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span class="label" style="margin-right:8px">Font set</span>
+    <button type="button" class="btn btn-secondary" data-set="free" aria-pressed="true">Free · Inter Tight + Inter</button>
+    <button type="button" class="btn btn-secondary" data-set="licensed" aria-pressed="false">Helvetica Now (local)</button>
+  </div>
+  <p class="warn" id="fontWarn" hidden style="margin-top:16px"></p>
 
   <section class="block" aria-labelledby="wm">
-    <div class="sh"><div><span class="label">/ Logo</span><h2 class="doc-h2" id="wm">Three wordmarks in Helvetica Now Display</h2></div><span class="label">03</span></div>
+    <div class="sh"><div><span class="label">/ Logo</span><h2 class="doc-h2" id="wm">Three wordmarks (outlined Helvetica Now Display)</h2></div><span class="label">03</span></div>
     <div class="marks">
       <article class="mark">
         <div class="tile light"><img src="../logo/wordmark-1-medium-black.svg" alt="Wordmark option 1: Epox in Medium"></div>
@@ -199,12 +216,12 @@
   <section class="block" aria-labelledby="type">
     <div class="sh"><div><span class="label">/ Type</span><h2 class="doc-h2" id="type">Type scale</h2></div></div>
     <div class="spec">
-      <div><span class="label">display · Now Display 500</span><span style="font:500 clamp(56px,8vw,140px)/0.92 var(--font-display);letter-spacing:-0.045em">Found it.</span></div>
-      <div><span class="label">h1 · Now Display 500</span><span style="font:500 clamp(44px,6vw,96px)/0.98 var(--font-display);letter-spacing:-0.04em;text-wrap:balance">A nutrition app with a real nutritionist inside</span></div>
-      <div><span class="label">h2 · Now Display 500</span><span style="font:500 clamp(32px,3.6vw,64px)/1.02 var(--font-display);letter-spacing:-0.03em">You'll always know what's happening</span></div>
-      <div><span class="label">h3 · Now Display 500</span><span style="font:500 clamp(22px,1.8vw,32px)/1.15 var(--font-display);letter-spacing:-0.02em">Business software</span></div>
-      <div><span class="label">lead · Now Text 400</span><span style="font:400 clamp(19px,1.5vw,24px)/1.45 var(--font-text);max-width:52ch">We design, build and launch software, then stay on to keep it running and growing.</span></div>
-      <div><span class="label">body · Now Text 400 · 17px</span><span style="max-width:64ch">Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out. No more arguments over the deposit.</span></div>
+      <div><span class="label">display · Display 500</span><span style="font:500 clamp(56px,8vw,140px)/0.92 var(--font-display);letter-spacing:-0.045em">Found it.</span></div>
+      <div><span class="label">h1 · Display 500</span><span style="font:500 clamp(44px,6vw,96px)/0.98 var(--font-display);letter-spacing:-0.04em;text-wrap:balance">A nutrition app with a real nutritionist inside</span></div>
+      <div><span class="label">h2 · Display 500</span><span style="font:500 clamp(32px,3.6vw,64px)/1.02 var(--font-display);letter-spacing:-0.03em">You'll always know what's happening</span></div>
+      <div><span class="label">h3 · Display 500</span><span style="font:500 clamp(22px,1.8vw,32px)/1.15 var(--font-display);letter-spacing:-0.02em">Business software</span></div>
+      <div><span class="label">lead · Text 400</span><span style="font:400 clamp(19px,1.5vw,24px)/1.45 var(--font-text);max-width:52ch">We design, build and launch software, then stay on to keep it running and growing.</span></div>
+      <div><span class="label">body · Text 400 · 17px</span><span style="max-width:64ch">Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out. No more arguments over the deposit.</span></div>
       <div><span class="label">label / button · Geist Mono 500</span><span class="label" style="color:var(--text);font-size:12px">/ Services · S/01 · Case 002 · Since 2019 · Let's talk →</span></div>
     </div>
   </section>
@@ -215,11 +232,21 @@ function lum(h){const c=h.slice(1).match(/../g).map(x=>{const v=parseInt(x,16)/2
 const cr=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+.05)/(y+.05)};
 document.getElementById('scale').innerHTML = S.map(([k,v]) => { const dark = lum(v) < 0.25; const fg = dark ? '#FFFFFF' : '#0A0A0A';
   return `<div class="chip" style="background:${v};color:${fg};${k==='50'?'border:1px solid #E2E4E7;':''}"><span>n-${k}</span><span>${v}<br>W ${cr(v,'#FFFFFF').toFixed(1)} · I ${cr(v,'#0A0A0A').toFixed(1)}</span></div>`; }).join('');
-// tell the viewer when licensed fonts are missing (e.g. viewing the public repo)
-document.fonts.ready.then(() => {
-  const miss = [['Helvetica Now Display','500'],['Helvetica Now Text','400'],['Geist Mono','500']].filter(([f,w]) => ![...document.fonts].some(ff => ff.family.replace(/"/g,'') === f && ff.status === 'loaded'));
-  if (miss.length) { const el = document.getElementById('fontWarn'); el.hidden = false; el.textContent = 'Not loaded, showing free fallback: ' + miss.map(m=>m[0]).join(', '); }
-});
+// font switch
+const NAMES = { free: 'Inter Tight / Inter · Geist Mono', licensed: 'Helvetica Now Display / Text · Geist Mono' };
+async function applyFonts(set) {
+  document.documentElement.dataset.fonts = set;
+  try { localStorage.setItem('epox-fonts', set); } catch (e) {}
+  document.querySelectorAll('.fontswitch button').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === set));
+  document.getElementById('fontName').textContent = NAMES[set];
+  const warn = document.getElementById('fontWarn'); warn.hidden = true;
+  if (set === 'licensed') {
+    const ok = await document.fonts.load('500 40px "Helvetica Now Display"').then(r => r.length > 0).catch(() => false);
+    if (!ok) { warn.hidden = false; warn.textContent = 'Helvetica Now files not found in docs/preview/fonts/licensed/ (they stay local, never pushed). Showing the free set.'; }
+  }
+}
+document.querySelectorAll('.fontswitch button').forEach(b => b.addEventListener('click', () => applyFonts(b.dataset.set)));
+applyFonts(document.documentElement.dataset.fonts || 'free');
 </script>
 </body>
 </html>
