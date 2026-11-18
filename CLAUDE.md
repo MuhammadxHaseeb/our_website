@@ -1,7 +1,7 @@
 # CLAUDE.md: Project memory
 
 ## ▶ Resume here (last updated 2026-11-19)
-- **Where we are:** Step 2 approved and committed (light-first palette + bolder motion, c97c488). **Step 3 started: home page `/` built** (all 10 sections from brief §6), not committed yet, waiting for owner feedback.
+- **Where we are:** Step 2 approved (c97c488). **Step 3: home page `/` built and pushed** (2866da8); owner is connecting Vercel so changes show live.
 - **Last owner feedback (2026-11-19):** (1) wants a **light, easy-to-read palette**: white background with cards, no graphite/dark sections → done: whole site is light first (see decisions log), styleguide + temp home updated, a11y 100. (2) Felt the styleguide demo is **"quite static"** and asked whether the site will have animations/effects → answered: motion spec is built and running (Linear-style UI motion + Hello Monday-style scroll moments), but the biggest moments (hero intro, liquid-metal logo, case image hovers, page transitions between real pages, characters) need real pages/assets. Owner chose **bolder** → added hero intro (H3), word-by-word title rise (H13), hero media expand on scroll (H14), media unveil (H15), magnetic buttons (L10); brief §4.2b. Prod Lighthouse mobile unchanged (home 97, styleguide 95, CLS 0, a11y 100). Frames + video: `docs/review/step2-motion/`. Owner approved both ("commit this"). **Ask first: feedback on the home page?** Open question: logo video background must change from ink to white (or stay as a dark media tile) now that the hero is light.
 - **Next:** owner reviews home → fix feedback → commit → **services** (+ /services/mobile-apps) → work (+ 2 case studies, MDX) → how-we-work → about → contact (wire **Resend**) → privacy + 404. For each page: say which assets it needs, build desktop + mobile, screenshot with Playwright, record a scroll video, check the Design rules + Lighthouse 90+, show the owner, wait for feedback, commit.
 - **To run:** start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide (live demo at `#demo`).
@@ -52,6 +52,7 @@
 | 2026-11-19 | Free font weights trimmed to those in use (Inter Tight 300/500, Inter 400/500, Geist Mono 500), all preloaded | CLS 0.065 → 0 on mobile Lighthouse |
 | 2026-11-19 | Dimmed states use AA-large colours: roll-call inactive n-600 on ink, statement unrevealed n-500 on white | Lighthouse colour-contrast; design rule |
 | 2026-11-19 | **Bolder motion**: H3 hero intro (word masks), H13 title rise, H14 media expand, H15 media unveil, L10 magnetic buttons, on top of the spec; same guardrails | Owner: styleguide felt "quite static"; chose "Bolder" |
+| 2026-11-19 | **Hosting: Vercel**, connected to GitHub `main` (Root Directory `site`); pushes to main = live site | Owner wants to see changes live |
 | 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |
 
 ## Built so far (site/)
@@ -106,6 +107,6 @@
 - research/raw/ is reference material. We take inspiration; we never copy their text, images, illustrations, logos or code, and never recreate their pages one-to-one.
 - Read only on reference sites: no form submits, sign-ups, chats or logins.
 - Use real content from our-company.md; mark gaps `[PLACEHOLDER: …]` and missing art `[ASSET: …]`.
-- Commit after each finished page with a clear message. **Don't deploy anywhere until the owner says so.**
+- Commit after each finished page with a clear message. **Deploy = Vercel only** (owner approved 2026-11-19): Vercel project linked to the GitHub repo, Root Directory `site`; every push to `main` goes live, other branches get preview links. Don't deploy anywhere else.
 - Stop and wait for owner approval at the end of each step (brief → setup/styleguide → each page).
 - **Git: no AI contributor.** Commits and PRs go out under the user's name alone: no `Co-Authored-By` lines, no "Generated with Claude Code" or other AI attribution. Remote: https://github.com/MuhammadxHaseeb/our_website
