@@ -10,83 +10,100 @@
 - **Countries served:** anyone who needs it; no target region.
 
 ## Services
-Epox offers all kinds of software services. Full catalogue below: everything found on Webisoft and Hello Monday plus what software houses commonly sell. **TODO (owner): tick what Epox offers and mark the 2–3 to push hardest with ★.**
+**Owner's direction:** a software house shows the *areas* it works in, not a deep catalogue. The site lists a short set of service areas so a prospect instantly sees "they can help me". The detailed ticked list below is **internal reference only** (for tags, SEO later, sales calls), not for the site.
+
+### What the site shows (7 areas + one "also" line)
+| # | Area | One-line promise (draft) | Tags shown under it (from owner's ticks) |
+|---|---|---|---|
+| 01 | **Web & SaaS development** | Websites, web apps and SaaS products built to scale. | Company sites · E-commerce · Web portals · SaaS · Custom web apps |
+| 02 | **Mobile apps** | iOS and Android apps people keep using. | iOS · Android · Cross-platform |
+| 03 | **Business software** | Systems that replace spreadsheets and manual work. | ERP · CRM · Automation · Dashboards · Integrations · Internal tools |
+| 04 | **AI solutions** | AI that does real work inside your product or team. | AI agents & chatbots · LLM integration · Workflow automation · Data pipelines |
+| 05 | **UI/UX & branding** | Design that makes products clear and brands memorable. | UI/UX · UX research · Design systems · Brand identity · Motion |
+| 06 | **Cloud & DevOps** | Infrastructure that stays fast and ships safely. | Cloud setup & migration · CI/CD |
+| 07 | **Launch, growth & support** | We stay after launch: testing, marketing and maintenance. | QA · Maintenance · Marketing · Project rescue |
+| + | *Also:* | Desktop apps · Blockchain · Game development | |
+
+Ways to work with us (separate section, no prices): Fixed project · Dedicated developers · Monthly retainer → "Let's talk".
+No ★ focus services: owner wants to present Epox as able to help anyone.
+
+### Internal reference: full ticked catalogue (not for the site)
 
 ### 01 Product development
 - [ ] Discovery / product strategy workshops
 - [ ] Rapid prototyping & proof of concept
 - [ ] MVP development
-- [ ] SaaS development
-- [ ] Custom web application development
-- [ ] Mobile apps: iOS, Android, cross-platform (Flutter / React Native)
-- [ ] Desktop applications
+- [✓ ] SaaS development
+- [✓ ] Custom web application development
+- [✓ ] Mobile apps: iOS, Android, cross-platform (Flutter / React Native)
+- [✓ ] Desktop applications
 - [ ] Progressive web apps (PWA)
-- [ ] Project takeover / rescue of stalled projects
+- [✓ ] Project takeover / rescue of stalled projects
 - [ ] Legacy modernization & migration
 
 ### 02 Web
-- [ ] Company websites & landing pages
-- [ ] E-commerce (Shopify, WooCommerce, custom)
+- [✓ ] Company websites & landing pages
+- [✓ ] E-commerce (Shopify, WooCommerce, custom)
 - [ ] CMS sites (WordPress, Webflow, headless CMS)
-- [ ] Web portals (customer, vendor, partner)
-- [ ] Frontend development (React, Next.js, Vue, Angular)
-- [ ] Backend & API development (Node, Python, .NET, PHP/Laravel, Go)
-- [ ] Performance & SEO technical fixes
+- [✓ ] Web portals (customer, vendor, partner)
+- [✓ ] Frontend development (React, Next.js, Vue, Angular)
+- [✓ ] Backend & API development (Node, Python, .NET, PHP/Laravel, Go)
+- [✓ ] Performance & SEO technical fixes
 
 ### 03 Enterprise & business software
-- [ ] ERP development / customization (Odoo, ERPNext, custom)
-- [ ] CRM development / customization (custom, Salesforce, HubSpot)
-- [ ] Business process automation (replace spreadsheets & manual steps)
-- [ ] Systems integration & third-party APIs (payments, ERP, CRM, accounting)
-- [ ] Dashboards, reporting & BI
-- [ ] Internal tools & admin panels
-- [ ] Digital transformation consulting
+- [✓ ] ERP development / customization (Odoo, ERPNext, custom)
+- [✓ ] CRM development / customization (custom, Salesforce, HubSpot)
+- [✓ ] Business process automation (replace spreadsheets & manual steps)
+- [✓] Systems integration & third-party APIs (payments, ERP, CRM, accounting)
+- [✓ ] Dashboards, reporting & BI
+- [✓ ] Internal tools & admin panels
+- [✓ ] Digital transformation consulting
 
 ### 04 AI & data
-- [ ] AI strategy / opportunity analysis
-- [ ] LLM / GPT integration into products
-- [ ] AI agents & chatbots (support, sales, internal)
-- [ ] AI automation of workflows
+- [✓ ] AI strategy / opportunity analysis
+- [✓ ] LLM / GPT integration into products
+- [✓ ] AI agents & chatbots (support, sales, internal)
+- [✓ ] AI automation of workflows
 - [ ] Document digitization / OCR / data extraction
 - [ ] Machine learning models & predictive analytics
 - [ ] Computer vision
 - [ ] MCP servers / connecting AI to company data
-- [ ] Data engineering, pipelines & warehousing
+- [✓ ] Data engineering, pipelines & warehousing
 
 ### 05 Design
-- [ ] UI/UX design (web & mobile)
-- [ ] UX research & usability testing
-- [ ] Design systems
-- [ ] Branding & visual identity (logo, colours, type)
-- [ ] Illustration & motion design / animation
-- [ ] Product redesign
+- [✓ ] UI/UX design (web & mobile)
+- [✓ ] UX research & usability testing
+- [✓ ] Design systems
+- [✓ ] Branding & visual identity (logo, colours, type)
+- [✓ ] Illustration & motion design / animation
+- [✓ ] Product redesign
 
 ### 06 Cloud, DevOps & security
-- [ ] Cloud setup & migration (AWS, GCP, Azure)
-- [ ] DevOps, CI/CD pipelines
+- [✓ ] Cloud setup & migration (AWS, GCP, Azure)
+- [✓ ] DevOps, CI/CD pipelines
 - [ ] Cloud cost optimization
 - [ ] Infrastructure monitoring & support
 - [ ] Application security audits / pen-test fixes
 - [ ] Compliance-ready builds (GDPR, HIPAA, SOC 2 practices)
 
 ### 07 Quality & support
-- [ ] QA & manual testing
+- [✓ ] QA & manual testing
 - [ ] Test automation
-- [ ] Maintenance & support retainers (bug fixes, updates, uptime)
+- [✓ ] Maintenance & support retainers (bug fixes, updates, uptime)
 - [ ] Technical due diligence / code audits
 
 ### 08 Advisory & team models
-- [ ] Dedicated developers / dedicated team
+- [✓ ] Dedicated developers / dedicated team
 - [ ] Staff augmentation (developers inside the client's team)
 - [ ] Fractional CTO / technical consulting
 - [ ] Software development outsourcing (full project ownership)
 
 ### 09 Specialized (only if relevant)
-- [ ] Blockchain / smart contracts / Web3
-- [ ] Game development
+- [✓ ] Blockchain / smart contracts / Web3
+- [✓ ] Game development
 - [ ] AR / VR / 3D experiences
 - [ ] IoT & embedded software
-- [ ] Industry software: healthcare, fintech, logistics, real estate, education, textile/manufacturing (Faisalabad strength?), sports
+- [✓ ] Industry software: healthcare, fintech, logistics, real estate, education, textile/manufacturing (Faisalabad strength?), sports
 
 ## Target clients
 - **Anyone who needs it:** no fixed industry, size or region.
@@ -102,14 +119,16 @@ Clients are described **without names** (Webisoft style: client descriptor + sec
 **Design requirement:** case study pages must be a reusable template fed by data (one file/entry per project), so adding a project = adding one entry, no new page design.
 
 ### Case 001: Nutrition app with real nutritionists
-- **Client descriptor:** TODO (e.g. "A health & wellness startup"), **Sector:** Health & nutrition, **Engagement:** TODO, **Status:** TODO
+- **Client descriptor:** TODO (e.g. "A health & wellness startup"), **Sector:** Health & nutrition, **Engagement:** Full build + ongoing marketing & maintenance, **Status:** Live, Epox still marketing & maintaining
+- **Platforms:** Android, iOS, website (owner listed these three; confirm which apply to each project), **Duration:** TODO
 - **Challenge:** people who track their meals have no expert to guide them; generic diet apps give generic advice.
 - **What we built:** a mobile app where users log meals and track their nutrition, plus a built-in human side: users talk directly to a real nutrition doctor inside the app.
 - **Result:** TODO, ask owner later (users, retention, consultations booked).
 - **Tech / platforms:** TODO
 
 ### Case 002: Move-in / move-out inspection app for European rentals
-- **Client descriptor:** TODO (e.g. "A European proptech company"), **Sector:** Real estate / PropTech, **Region:** Europe, **Engagement:** TODO, **Status:** TODO
+- **Client descriptor:** TODO (e.g. "A European proptech company"), **Sector:** Real estate / PropTech, **Region:** Europe, **Engagement:** Full build + ongoing marketing & maintenance, **Status:** Live, Epox still marketing & maintaining
+- **Platforms:** Android, iOS, website (confirm per project), **Duration:** TODO
 - **Challenge:** at the end of a rental, tenants and landlords disagree about the property's condition, and deposits get disputed with no proof either way.
 - **What we built:** an app for tenants and owners in European countries. At move-in the tenant walks through the property taking photos, sealed into a tamper-proof record; at move-out they walk through again and both sides compare the condition side by side.
 - **Result:** TODO, ask owner later (disputes avoided, inspections completed, countries live).
@@ -164,8 +183,8 @@ Notes: A is the most "tech"; B is the most "premium agency"; C is the safest for
 - Default suggestion: **Geist + Geist Mono + Instrument Serif** (one family feel, very premium) or **Inter Tight/Inter + JetBrains Mono + Instrument Serif**.
 
 ## Contact & social links
-- General email + contact form (TODO: which email address? WhatsApp number? LinkedIn/other socials?)
+- General email + contact form. **TODO (owner will add later):** email address, WhatsApp, socials.
 
 ## What we want the website to achieve
-- Support outbound sales: a prospect who receives our message checks the site → trusts us → replies / books a call.
-- TODO (owner): confirm, and anything else (hiring, inbound leads later, partnerships)?
+- **Confirmed:** support outbound sales. A prospect who receives our message checks the site → trusts us → replies / books a call.
+- **No hiring/careers section.**
