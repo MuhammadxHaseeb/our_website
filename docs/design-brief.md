@@ -200,7 +200,7 @@ Durations: `--dur-fast: 100ms` · `--dur-menu: 180ms` · `--dur-ui: 240ms` · `-
 | H4 | **Liquid-metal logo loop** (owner's video) | home hero, footer (small) | 6–8 s seamless loop, plays only when visible | poster frame + loop only on Wi-Fi/`saveData=false` | poster frame |
 | H5 | **Character scenes: later.** At launch the slot holds the chapter's big number (S/01) in Now Display Light; when art arrives it's sprite/Lottie | /services chapters (sticky left), 404, footer | 2–4 s idle loops, ease-in-out | inline above text, 1 loop then still | still frame |
 | H6 | **Statement reveal**: words go from muted to ink as you scroll (word spans, real text kept for screen readers) | home "About Epox" statement | scrubbed with scroll | per-line fade on enter | full ink |
-| H7 | **Stacking service rows**: rows pin and collapse into an index | home services | CSS sticky + scrub | plain list | plain list |
+| H7 | **Stacking service rows**: rows pin and collapse into an index | home services | CSS sticky (≥768px wide and ≥600px tall; row step 48–64px) | plain list | plain list |
 | H8 | **Roll-call**: industry/project names grey → ink/white at screen centre, side info appears | home "Built for" | scrubbed; info fade 400 ms | each item lights on enter, no scrub | all lit |
 | H9 | **Case image hover**: mask reveal + scale 1.03 + "•" bullet slides in before title | work grid, home work | 600 ms ease-out-quint | none (tap goes straight to case) | none |
 | H10 | Optional **WebGL ripple** on case images (R3F, lazy, desktop + capable GPU only) | /work grid only | 700 ms | static (H9 only) | static |

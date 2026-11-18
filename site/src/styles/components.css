@@ -55,6 +55,7 @@
   /* ---------------- section header ---------------- */
   .sh { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-8); }
   @media (min-width: 900px) { .sh { grid-template-columns: 3fr 8fr 1fr; align-items: end; gap: var(--gutter); } .sh-count { justify-self: end; } }
+  @media (max-width: 899px) { .sh-count { display: none; } } /* on phones the count sits alone under the title */
 
   /* ---------------- form ---------------- */
   .field { display: grid; gap: var(--space-2); }
@@ -136,8 +137,10 @@
   html[data-motion="reduced"] .case-card:hover .media-hover > * { transform: none; }
 
   /* ---------------- stacking service rows (H7) ---------------- */
-  @media (min-width: 1024px) {
-    html:not([data-motion="reduced"]) .stack-rows .stack-row { position: sticky; top: calc(var(--stack-top, 88px) + var(--i) * 64px); background: var(--paper); }
+  /* tablet and up, and tall enough that 7 stacked rows never run off screen */
+  @media (min-width: 768px) and (min-height: 600px) {
+    /* step between pinned rows shrinks on short screens (48–64px) so all 7 stay in view */
+    html:not([data-motion="reduced"]) .stack-rows .stack-row { position: sticky; top: calc(var(--stack-top, 88px) + var(--i) * clamp(48px, 8vh, 64px)); background: var(--paper); }
   }
 
   /* ---------------- roll-call (H8) ---------------- */

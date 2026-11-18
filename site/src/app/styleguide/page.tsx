@@ -46,7 +46,7 @@ const MOTION = [
   ['H14', 'Hero media opens to full width while scrolling', 'scrubbed (clip-path)', 'Hero logo placeholder (≥768px)', 'Bolder pass'],
   ['H15', 'Media wipes up + settles from zoom', '1100ms / 1400ms ease-out-quint', '§ Case cards', 'Bolder pass'],
   ['H6', 'Statement reveal (GSAP ScrollTrigger scrub)', 'scrubbed', '§ Statement', 'Hello Monday'],
-  ['H7', 'Stacking service rows (sticky)', 'CSS sticky', '§ Service rows (≥1024px)', 'Webisoft'],
+  ['H7', 'Stacking service rows (sticky)', 'CSS sticky', '§ Service rows (tablet and up)', 'Webisoft'],
   ['H8', 'Roll-call lights at screen centre', '400ms', '§ Roll-call', 'Hello Monday'],
   ['H9', 'Case media hover + bullet slide-in', '600ms / 240ms', '§ Case cards', 'Hello Monday'],
 ] as const;
