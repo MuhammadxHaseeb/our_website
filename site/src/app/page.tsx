@@ -51,7 +51,7 @@ export default function Home() {
       {/* 3 · Services (H7 stacking rows) */}
       <section className="section" aria-labelledby="services-title">
         <div className="container-x">
-          <SectionHeader id="services-title" label="Services" title="Seven ways we can help" count="07" action={<ArrowLink href="/services">All services</ArrowLink>} />
+          <SectionHeader id="services-title" label="Services" title="Seven ways we can help" action={<ArrowLink href="/services">All services</ArrowLink>} />
           <ServiceRows items={services} stacking />
           <p className="mt-8 t-small muted">Also: {alsoServices.join(' · ')}</p>
         </div>
@@ -60,7 +60,7 @@ export default function Home() {
       {/* 4 · Selected work (H15 unveil, H9 hover) */}
       <section className="section soft" aria-labelledby="work-title">
         <div className="container-x">
-          <SectionHeader id="work-title" label="Work" title="Two products, both still live" count="02" action={<ArrowLink href="/work">All work</ArrowLink>} />
+          <SectionHeader id="work-title" label="Work" title="Two products, both still live" action={<ArrowLink href="/work">All work</ArrowLink>} />
           <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
         </div>
       </section>
@@ -77,7 +77,7 @@ export default function Home() {
       {/* 6 · Built for (H8 roll-call) */}
       <section className="section soft" aria-labelledby="industries-title">
         <div className="container-x">
-          <SectionHeader id="industries-title" label="Built for" title="Industries we've shipped in" count={String(industries.filter(i => !i.name.startsWith('[')).length).padStart(2, '0')} />
+          <SectionHeader id="industries-title" label="Built for" title="Industries we've shipped in" />
           <RollCall items={industries} />
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function Home() {
       {/* 8 · Ways to work with us (no prices) */}
       <section className="section soft" aria-labelledby="models-title">
         <div className="container-x">
-          <SectionHeader id="models-title" label="Ways to work" title="Three ways to work with us" count="03" />
+          <SectionHeader id="models-title" label="Ways to work" title="Three ways to work with us" />
           <EngagementModels />
           <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call, under NDA if you need it.</p>
         </div>

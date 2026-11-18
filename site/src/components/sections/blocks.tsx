@@ -11,8 +11,8 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
     <ol className={stacking ? 'stack-rows' : undefined}>
       {items.map((s, i) => (
         <li key={s.slug} className="stack-row border-t border-line" style={{ '--i': i } as React.CSSProperties}>
-          <Link href={`/services/${s.slug}`} className="group grid gap-x-[var(--gutter)] gap-y-3 py-6 md:grid-cols-12 md:py-8" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
-            <span className="t-label muted md:col-span-3 md:pt-2">S/{s.n}</span>
+          <Link href={`/services/${s.slug}`} className="group grid grid-cols-[2.75rem_1fr] gap-x-3 py-4 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3 md:py-8" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
+            <span className="t-label muted pt-1.5 md:col-span-3 md:pt-2">S/{s.n}</span>
             <span className="md:col-span-8">
               <span className="t-h3 block transition-colors duration-100 group-hover:text-[var(--accent-on-light)]">{s.title}</span>
               <span className="mt-2 block max-w-[52ch] muted">{s.promise}</span>

@@ -56,8 +56,8 @@ export function CharacterSlot({ art, fallback = null, label }: { art?: ReactNode
 }
 
 /* ------------------------------------------------------------------ Section header */
-export function SectionHeader({ label, title, count, action, id, as: As = 'h2' }:
-  { label: string; title: ReactNode; count?: string; action?: ReactNode; id?: string; as?: 'h1' | 'h2' }) {
+export function SectionHeader({ label, title, action, id, as: As = 'h2' }:
+  { label: string; title: ReactNode; action?: ReactNode; id?: string; as?: 'h1' | 'h2' }) {
   return (
     <header className="sh">
       <Label>/ {label}</Label>
@@ -67,7 +67,6 @@ export function SectionHeader({ label, title, count, action, id, as: As = 'h2' }
           : <As id={id} className={As === 'h1' ? 't-h1' : 't-h2'} style={{ maxWidth: '18ch' }}>{title}</As>}
         {action}
       </div>
-      {count && <span className="t-label muted sh-count" aria-label={`${Number(count)} items`}>{count}</span>}
     </header>
   );
 }

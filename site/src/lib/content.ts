@@ -33,15 +33,15 @@ export type CaseStudy = {
 
 export const cases: CaseStudy[] = [
   {
-    n: '001', slug: 'nutrition-coaching-app', headline: 'A nutrition app with a real nutritionist inside',
-    summary: 'People log meals and track their nutrition, then talk directly to a real nutrition doctor inside the app, not a generic diet bot.',
-    sector: 'Health & nutrition', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
+    n: '001', slug: 'rental-inspection-app', headline: 'Apps that settle rental disputes before they start',
+    summary: 'Tenants photograph the property at move-in into a tamper-proof record, then both sides compare it side by side at move-out.',
+    sector: 'PropTech', region: 'Europe', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
     engagement: 'Build, marketing, maintenance', status: 'Live', duration: '[PLACEHOLDER: duration]', asset: 'case 001 hero · 16:10',
   },
   {
-    n: '002', slug: 'rental-inspection-app', headline: 'Apps that settle rental disputes before they start',
-    summary: 'Tenants photograph the property at move-in into a tamper-proof record, then both sides compare it side by side at move-out.',
-    sector: 'PropTech', region: 'Europe', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
+    n: '002', slug: 'nutrition-coaching-app', headline: 'A nutrition app with a real nutritionist inside',
+    summary: 'People log meals and track their nutrition, then talk directly to a real nutrition doctor inside the app, not a generic diet bot.',
+    sector: 'Health & nutrition', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
     engagement: 'Build, marketing, maintenance', status: 'Live', duration: '[PLACEHOLDER: duration]', asset: 'case 002 hero · 16:10',
   },
 ];
@@ -67,8 +67,8 @@ export const stats = [
 ];
 
 export const industries = [
-  { name: 'Health & nutrition', count: 1, line: 'Meal tracking with real nutritionists in the loop.' },
   { name: 'PropTech', count: 1, line: 'Move-in and move-out records tenants and landlords both trust.' },
+  { name: 'Health & nutrition', count: 1, line: 'Meal tracking with real nutritionists in the loop.' },
   { name: '[PLACEHOLDER: industry]', count: 0, line: '[PLACEHOLDER: one-line outcome]' },
 ];
 

@@ -58,7 +58,7 @@ export function RollCall({ items }: { items: { name: string; count: number; line
           <li key={it.name + i} data-roll={i} className="roll-item grid items-end gap-x-[var(--gutter)] gap-y-3 md:grid-cols-12" data-active={active === i}>
             <span className="roll-meta t-label md:col-span-2 md:pb-4" style={{ color: 'var(--muted)' }}>{ph ? '' : `• ${it.count} project${it.count === 1 ? '' : 's'}`}</span>
             <span className="t-rollcall md:col-span-6">{ph ? <Ph>{it.name}</Ph> : it.name}</span>
-            <span className="roll-meta md:col-span-4 md:pb-4" style={{ color: 'var(--muted)' }}>{it.line.startsWith('[') ? <Ph>{it.line}</Ph> : it.line}</span>
+            <span className={`roll-meta md:col-span-4 ${ph ? '' : 'md:pb-4'}`} style={{ color: 'var(--muted)' }}>{it.line.startsWith('[') ? <Ph>{it.line}</Ph> : it.line}</span>
           </li>
         );
       })}

@@ -51,11 +51,11 @@ const MOTION = [
   ['H9', 'Case media hover + bullet slide-in', '600ms / 240ms', '§ Case cards', 'Hello Monday'],
 ] as const;
 
-function Block({ id, label, title, children, tone, count }: { id: string; label: string; title: string; children: React.ReactNode; tone?: 'dark' | 'soft'; count?: string }) {
+function Block({ id, label, title, children, tone }: { id: string; label: string; title: string; children: React.ReactNode; tone?: 'dark' | 'soft' }) {
   return (
     <section id={id} className={`section ${tone === 'dark' ? 'dark' : tone === 'soft' ? 'soft' : ''}`} data-header-tone={tone === 'dark' ? 'dark' : undefined}>
       <div className="container-x" data-reveal>
-        <SectionHeader label={label} title={title} count={count} />
+        <SectionHeader label={label} title={title} />
         {children}
       </div>
     </section>
@@ -76,7 +76,7 @@ export default function Styleguide() {
         </div>
       </section>
 
-      <Block id="colour" label="Colour" title="Liquid Silver, light first" count="11">
+      <Block id="colour" label="Colour" title="Liquid Silver, light first">
         <ol className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-11">
           {SCALE.map(([k, v]) => (
             <li key={k} className="flex aspect-[1/1.2] flex-col justify-between rounded-[var(--r-inner)] p-3 t-label" style={{ background: v, color: contrast(v, '#FFFFFF') > 4.5 ? '#FFFFFF' : '#0A0A0A', boxShadow: k === '50' ? 'inset 0 0 0 1px var(--line)' : undefined }}>
@@ -96,7 +96,7 @@ export default function Styleguide() {
         </table></div>
       </Block>
 
-      <Block id="type" label="Type" title="Type scale" count="09">
+      <Block id="type" label="Type" title="Type scale">
         <dl>
           {TYPE.map(([k, cls, sample]) => (
             <div key={k} className="grid gap-3 border-t border-line py-8 md:grid-cols-12 md:items-baseline">
@@ -108,7 +108,7 @@ export default function Styleguide() {
         <p className="mt-8 t-small muted">Active font set is set by <code className="t-label">NEXT_PUBLIC_FONT_SET</code> (free: Inter Tight · Inter · Geist Mono / licensed: Helvetica Now, local only).</p>
       </Block>
 
-      <Block id="space" label="Space" title="Spacing, grid and radius" tone="soft" count="11">
+      <Block id="space" label="Space" title="Spacing, grid and radius" tone="soft">
         <ol className="grid gap-3">
           {SPACE.map(s => (
             <li key={s} className="grid grid-cols-[5rem_1fr] items-center gap-4"><span className="t-label muted t-num">{s}px</span><span className="h-3 rounded-full bg-ink" style={{ width: s }} /></li>
@@ -163,13 +163,13 @@ export default function Styleguide() {
 
       <section id="services" className="section">
         <div className="container-x">
-          <SectionHeader label="Services" title="Seven ways we can help" count="07" action={<ArrowLink href="/services">All services</ArrowLink>} />
+          <SectionHeader label="Services" title="Seven ways we can help" action={<ArrowLink href="/services">All services</ArrowLink>} />
           <ServiceRows items={services} stacking />
           <p className="mt-8 t-small muted">Also: {alsoServices.join(' · ')}</p>
         </div>
       </section>
 
-      <Block id="cases" label="Work" title="Two products, both still live" tone="soft" count="02">
+      <Block id="cases" label="Work" title="Two products, both still live" tone="soft">
         <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
       </Block>
 
@@ -180,16 +180,16 @@ export default function Styleguide() {
 
       <section id="rollcall" className="soft section">
         <div className="container-x">
-          <SectionHeader label="Built for" title="Industries we've shipped in" count="02" />
+          <SectionHeader label="Built for" title="Industries we've shipped in" />
           <RollCall items={industries} />
         </div>
       </section>
 
-      <Block id="stats" label="Numbers" title="The short version" count="04">
+      <Block id="stats" label="Numbers" title="The short version">
         <StatsScoreboard stats={stats} />
       </Block>
 
-      <Block id="models" label="Ways to work" title="Three ways to work with us" tone="soft" count="03">
+      <Block id="models" label="Ways to work" title="Three ways to work with us" tone="soft">
         <EngagementModels />
       </Block>
 
@@ -197,7 +197,7 @@ export default function Styleguide() {
         <div className="container-x"><Label>/ Statement</Label><div className="mt-10"><StatementReveal text="Most of our clients didn't come looking for us. We found a problem in their product, showed them the fix, and stayed to keep it working." /></div></div>
       </section>
 
-      <Block id="faq" label="FAQ" title="Questions we hear first" count="03">
+      <Block id="faq" label="FAQ" title="Questions we hear first">
         <Faq items={[
           { q: 'Do you work under NDA?', a: 'Yes. We can sign yours or send ours before you share anything.' },
           { q: 'Who owns the code?', a: <>You do. <Ph>[PLACEHOLDER: confirm ownership & handover terms]</Ph></> },
@@ -215,7 +215,7 @@ export default function Styleguide() {
         <div className="grid gap-16 md:grid-cols-2"><ContactForm forceState="success" /><ContactForm forceState="error" /></div>
       </Block>
 
-      <Block id="motion" label="Motion" title="Motion spec, live on this page" count={String(MOTION.length).padStart(2, '0')}>
+      <Block id="motion" label="Motion" title="Motion spec, live on this page">
         <div className="overflow-x-auto"><table className="w-full min-w-[720px] t-small">
           <caption className="sr-only">Motion effects</caption>
           <thead><tr className="text-left">{['#', 'Effect', 'Timing', 'See it', 'Style'].map(h => <th key={h} className="t-label muted pb-3 font-medium">{h}</th>)}</tr></thead>
