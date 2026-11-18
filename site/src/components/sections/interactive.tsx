@@ -1,0 +1,92 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { loadGsap, prefersReducedMotion } from '@/lib/motion';
+import { Ph } from '@/components/ui/primitives';
+
+/* ------------------------------------------------ Count-up number (L7), tabular, once */
+export function CountUp({ to, raw = false, duration = 1200 }: { to: number; raw?: boolean; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [v, setV] = useState(to);
+  useEffect(() => {
+    const el = ref.current; if (!el || prefersReducedMotion()) return;
+    const from = raw ? Math.max(0, to - 12) : 0;
+    setV(from);
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return; io.disconnect();
+      const t0 = performance.now();
+      const ease = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)); // ease-out-expo
+      const tick = (t: number) => { const p = Math.min(1, (t - t0) / duration); setV(Math.round(from + (to - from) * ease(p))); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.6 });
+    io.observe(el); return () => io.disconnect();
+  }, [to, raw, duration]);
+  return <span ref={ref} className="t-num">{v}</span>;
+}
+
+export function StatsScoreboard({ stats }: { stats: { value: number | null; label: string; raw?: boolean }[] }) {
+  return (
+    <dl className="grid grid-cols-2 gap-x-[var(--gutter)] gap-y-12 lg:grid-cols-4">
+      {stats.map(s => (
+        <div key={s.label} className="flex flex-col-reverse justify-end border-t border-line pt-6">
+          <dt className="t-label muted mt-5">{s.label.startsWith('[') ? <Ph>{s.label}</Ph> : s.label}</dt>
+          <dd className="t-num" style={{ font: '300 clamp(3.5rem, 2.4rem + 4.5vw, 8rem)/0.9 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
+            {s.value === null ? <Ph>[PLACEHOLDER]</Ph> : <CountUp to={s.value} raw={s.raw} />}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/* ------------------------------------------------ Roll-call (H8): names light up at screen centre */
+export function RollCall({ items }: { items: { name: string; count: number; line: string }[] }) {
+  const ref = useRef<HTMLOListElement>(null);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const list = ref.current; if (!list) return;
+    const els = Array.from(list.querySelectorAll<HTMLElement>('[data-roll]'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.roll)); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    els.forEach(e => io.observe(e)); return () => io.disconnect();
+  }, []);
+  return (
+    <ol ref={ref} className="grid gap-6 md:gap-10">
+      {items.map((it, i) => {
+        const ph = it.name.startsWith('[');
+        return (
+          <li key={it.name + i} data-roll={i} className="roll-item grid items-end gap-x-[var(--gutter)] gap-y-3 md:grid-cols-12" data-active={active === i}>
+            <span className="roll-meta t-label md:col-span-2 md:pb-4" style={{ color: 'var(--muted-on-dark)' }}>{ph ? '' : `• ${it.count} project${it.count === 1 ? '' : 's'}`}</span>
+            <span className="t-rollcall md:col-span-6">{ph ? <Ph>{it.name}</Ph> : it.name}</span>
+            <span className="roll-meta md:col-span-4 md:pb-4" style={{ color: 'var(--muted-on-dark)' }}>{it.line.startsWith('[') ? <Ph>{it.line}</Ph> : it.line}</span>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+/* ------------------------------------------------ Statement reveal (H6): words go muted → ink, scrubbed (GSAP) */
+export function StatementReveal({ text }: { text: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    const el = ref.current; if (!el || prefersReducedMotion()) return;
+    let kill = () => {};
+    loadGsap().then(({ ScrollTrigger }) => {
+      const words = Array.from(el.querySelectorAll<HTMLElement>('.w'));
+      const st = ScrollTrigger.create({
+        trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true,
+        onUpdate: (self) => { const n = Math.round(self.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); },
+      });
+      kill = () => st.kill();
+    });
+    return () => kill();
+  }, []);
+  const words = text.split(' ');
+  return (
+    <p ref={ref} className="statement t-h2" style={{ maxWidth: '24ch' }}>
+      <span className="sr-only">{text}</span>
+      {words.map((w, i) => <span key={i} aria-hidden className="w">{w}{i < words.length - 1 ? ' ' : ''}</span>)}
+    </p>
+  );
+}

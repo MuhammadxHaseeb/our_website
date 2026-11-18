@@ -6,3 +6,6 @@ Thumbs.db
 # Licensed commercial fonts: never commit to the public repo
 assets/*.zip
 **/fonts/licensed/
+
+# Next.js build output anywhere
+.next/

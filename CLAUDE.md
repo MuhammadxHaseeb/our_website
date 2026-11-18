@@ -3,15 +3,16 @@
 ## Project overview
 - **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; 7 service areas (see `our-company.md`).
 - **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach, then get a reply / call.
-- **Current phase:** **DESIGN & BUILD.** Step 1 (design brief + asset list + palette/font preview) **done, waiting for owner approval** → Step 2 setup (`site/`, Next.js) → Step 3 pages.
+- **Current phase:** **DESIGN & BUILD.** Step 1 ✅ · **Step 2 (setup + /styleguide) built, waiting for owner review** → Step 3 pages.
+- **Site:** `site/` (Next.js 16 · React 19 · TS · Tailwind v4 · MDX · GSAP/ScrollTrigger + Lenis lazy). Run: start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide. Tokens: `site/src/styles/tokens.css`. See `site/README.md`.
 - **Key docs:** `docs/design-brief.md` (direction, tokens, motion, sitemap, pages, components) · `docs/assets-needed.md` (asset checklist) · `docs/preview/index.html` (palettes + fonts in real UI) · `research/overview.md` · `our-company.md`.
 
 ## Build status
 | Step | Status |
 |---|---|
 | 1. Design brief, assets list, preview page | ✅ approved |
-| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ next |
-| 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ |
+| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ✅ built · awaiting owner review · Lighthouse mobile: home 97/100/96/100, styleguide 95/100/96/(SEO 60 = noindex by design) · CLS 0 · no overflow at 360/390px · reduced motion + keyboard menu tested · review shots `docs/review/step2/` |
+| 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ layout (header, mega-menu, mobile sheet, footer, smooth scroll, page enter) already built in Step 2 |
 
 ## Waiting on the owner
 - Liquid-metal logo video, made from `docs/logo/epox-wordmark-white.svg`.
@@ -39,7 +40,16 @@
 | 2026-11-18 | **Dark** home hero | Owner's pick |
 | 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |
 | 2026-11-18 | Contact form → **Resend** to owner's inbox (wire at /contact) | Owner accepted recommendation |
+| 2026-11-19 | Free font weights trimmed to those in use (Inter Tight 300/500, Inter 400/500, Geist Mono 500), all preloaded | CLS 0.065 → 0 on mobile Lighthouse |
+| 2026-11-19 | Dimmed states use AA-large colours: roll-call inactive n-600 on ink, statement unrevealed n-500 on white | Lighthouse colour-contrast; design rule |
 | 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |
+
+## Built so far (site/)
+- Tokens (palette A scale, type scale, spacing, radius, motion) + font switch (`NEXT_PUBLIC_FONT_SET`).
+- Layout: Header (morphing mega-menu, mobile sheet, hide-on-scroll, tone follows `data-header-tone`), Footer, MotionProvider (Lenis lazy, reveal observer), page-enter template (skipped on first load for LCP).
+- Components: Logo, Button, ArrowLink, Label, Tag/Tags, Live, AssetPlaceholder, Ph/Val, CharacterSlot, SectionHeader, FactTable, ServiceRows (stacking), CaseCard, TrustStrip, EngagementModels, ProcessSteps, Faq, StatsScoreboard/CountUp, RollCall, StatementReveal (GSAP), LiveDemo, ContactBlock, ContactForm (+ /api/contact stub, 501 until Resend).
+- Pages: `/styleguide` (noindex), temporary `/` (dark hero only).
+- Known: Link prefetch 404s (best-practices 96) until Step 3 pages exist.
 
 ## Open placeholders & missing assets
 - Content: contact email/WhatsApp/socials; case platforms per project, durations, results; client descriptors; logo; founder/contact (later). Full list: design brief §8 "Content gaps".

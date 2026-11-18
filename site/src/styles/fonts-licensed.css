@@ -1,0 +1,9 @@
+/* Licensed font set (Helvetica Now). Files live ONLY on the owner's machine in
+   public/fonts/licensed/ (git-ignored, never pushed). Active when NEXT_PUBLIC_FONT_SET=licensed.
+   Declarations are harmless when unused: browsers only download a face that is actually rendered. */
+@font-face { font-family: 'Helvetica Now Display'; src: url('/fonts/licensed/HelveticaNowDisplay-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('/fonts/licensed/HelveticaNowDisplay-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('/fonts/licensed/HelveticaNowDisplay-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Display'; src: url('/fonts/licensed/HelveticaNowDisplay-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Text'; src: url('/fonts/licensed/HelveticaNowText-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Helvetica Now Text'; src: url('/fonts/licensed/HelveticaNowText-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }

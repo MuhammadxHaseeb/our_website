@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/fonts-licensed.css";
+@import "../styles/components.css";
+
+/* Tailwind utilities generated from the tokens (no one-off values) */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-on-dark: var(--on-dark);
+  --color-muted-on-dark: var(--muted-on-dark);
+  --color-line-on-dark: var(--line-on-dark);
+  --color-steel: var(--accent-on-light);
+  --color-silver: var(--accent-on-dark);
+  --color-dark-alt: var(--dark-alt);
+  --color-n-50: var(--n-50); --color-n-100: var(--n-100); --color-n-200: var(--n-200); --color-n-300: var(--n-300);
+  --color-n-400: var(--n-400); --color-n-500: var(--n-500); --color-n-600: var(--n-600); --color-n-700: var(--n-700);
+  --color-n-800: var(--n-800); --color-n-900: var(--n-900); --color-n-950: var(--n-950);
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --font-mono: var(--font-mono);
+  --radius-card: var(--r-card);
+  --radius-inner: var(--r-inner);
+  --radius-input: var(--r-input);
+  --radius-tag: var(--r-tag);
+  --ease-out-quint: var(--ease-out-quint);
+  --ease-out-quad: var(--ease-out-quad);
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper); color: var(--text);
+    font: 400 var(--fs-body)/var(--lh-body) var(--font-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--n-300); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  img, video { display: block; max-width: 100%; height: auto; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+}
+
+/* ------------------------------------------------------------ typography */
+@layer components {
+  .container-x { width: 100%; max-width: calc(var(--max) + 2 * var(--margin)); margin-inline: auto; padding-inline: var(--margin); }
+  .section { padding-block: var(--section-y); }
+  .section-tight { padding-block: var(--section-y-tight); }
+  .dark { background: var(--ink); color: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark); }
+  .dark-alt { background: var(--dark-alt); color: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark); }
+  .soft { background: var(--surface); }
+
+  .t-display { font: 500 var(--fs-display)/var(--lh-display) var(--font-display); letter-spacing: var(--tr-display); text-wrap: balance; }
+  .t-h1 { font: 500 var(--fs-h1)/var(--lh-h1) var(--font-display); letter-spacing: var(--tr-h1); text-wrap: balance; }
+  .t-h2 { font: 500 var(--fs-h2)/var(--lh-h2) var(--font-display); letter-spacing: var(--tr-h2); text-wrap: balance; }
+  .t-h3 { font: 500 var(--fs-h3)/var(--lh-h3) var(--font-display); letter-spacing: var(--tr-h3); text-wrap: balance; }
+  .t-rollcall { font: 300 var(--fs-rollcall)/0.95 var(--font-display); letter-spacing: var(--tr-h1); }
+  .t-lead { font: 400 var(--fs-lead)/var(--lh-lead) var(--font-text); letter-spacing: -0.01em; text-wrap: pretty; }
+  .t-body { font: 400 var(--fs-body)/var(--lh-body) var(--font-text); }
+  .t-small { font: 400 var(--fs-small)/1.5 var(--font-text); }
+  .t-label { font: 500 var(--fs-label)/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label); font-variant-numeric: tabular-nums; }
+  .t-num { font-variant-numeric: tabular-nums; }
+  .muted { color: var(--muted); }
+  .emph { color: var(--accent-on-light); }
+  .dark .emph, .dark-alt .emph { color: var(--accent-on-dark); }
+
+  /* ------------------------------------------------------------ links */
+  .link {
+    color: inherit; text-decoration: underline; text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+    transition: text-decoration-color var(--dur-fast) var(--ease-out-quad);
+  }
+  .link:hover { text-decoration-color: currentColor; }
+
+  /* ------------------------------------------------------------ reveal (L4) */
+  html.js:not([data-motion="reduced"]) [data-reveal] {
+    opacity: 0; transform: translateY(var(--rise));
+    transition: opacity var(--dur-enter) var(--ease-out-quint), transform var(--dur-enter) var(--ease-out-quint);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+  }
+  html.js:not([data-motion="reduced"]) [data-reveal].is-in { opacity: 1; transform: none; }
+
+  /* page enter (H2, template.tsx) */
+  .page-enter { animation: page-enter 600ms var(--ease-out-quint) both; }
+  @keyframes page-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  html[data-motion="reduced"] .page-enter { animation: none; }
+}

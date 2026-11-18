@@ -1,0 +1,129 @@
+/* =====================================================================
+   EPOX DESIGN TOKENS: single source of truth (docs/design-brief.md §3–4)
+   Palette A · Liquid Silver. Every component reads from these variables.
+   ===================================================================== */
+
+:root {
+  /* ---------- neutral scale (contrast vs #FFF / vs #0A0A0A in brief §3.1) ---------- */
+  --n-50: #F7F8F9;
+  --n-100: #F3F4F5;
+  --n-200: #E2E4E7;
+  --n-300: #C4C8CE; /* silver: emphasis on dark only */
+  --n-400: #A3A8AF;
+  --n-500: #80868E; /* large text only on white */
+  --n-600: #5C6168;
+  --n-700: #4B5058; /* steel: emphasis on white */
+  --n-800: #2A2D31;
+  --n-900: #141516;
+  --n-950: #0A0A0A;
+
+  /* ---------- semantic colours ---------- */
+  --ink: var(--n-950);
+  --paper: #FFFFFF;
+  --surface: var(--n-100);
+  --line: var(--n-200);
+  --text: var(--n-950);
+  --muted: var(--n-600);
+  --on-dark: #F5F6F7;
+  --muted-on-dark: var(--n-400);
+  --line-on-dark: var(--n-800);
+  --accent-on-light: var(--n-700);
+  --accent-on-dark: var(--n-300);
+  --dark-alt: var(--n-900);
+  --focus: #3B82F6; /* focus ring only (functional, not decoration) */
+  --success: #1F7A45;
+  --error: #B3261E;
+  --error-on-dark: #FF9A92;
+
+  /* ---------- fonts (set by data-fonts on <html>) ---------- */
+  --font-display: var(--font-inter-tight), 'Helvetica Neue', Arial, sans-serif;
+  --font-text: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+
+  /* ---------- type scale (fluid 360 → 1920) ---------- */
+  --fs-display: clamp(3.5rem, 2.2rem + 6.4vw, 10.5rem);   /* 56 → 168 */
+  --fs-h1: clamp(2.75rem, 1.9rem + 4.2vw, 6.5rem);        /* 44 → 104 */
+  --fs-h2: clamp(2rem, 1.5rem + 2.4vw, 4rem);             /* 32 → 64 */
+  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 2rem);         /* 22 → 32 */
+  --fs-rollcall: clamp(3rem, 1.8rem + 6vw, 9.5rem);       /* 48 → 152 */
+  --fs-lead: clamp(1.1875rem, 1.1rem + 0.45vw, 1.5rem);   /* 19 → 24 */
+  --fs-body: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);     /* 16 → 17 */
+  --fs-small: 0.875rem;                                   /* 14 */
+  --fs-label: 0.71875rem;                                 /* 11.5 */
+
+  --lh-display: 0.92;
+  --lh-h1: 0.98;
+  --lh-h2: 1.02;
+  --lh-h3: 1.15;
+  --lh-lead: 1.45;
+  --lh-body: 1.6;
+
+  --tr-display: -0.045em;
+  --tr-h1: -0.04em;
+  --tr-h2: -0.03em;
+  --tr-h3: -0.02em;
+  --tr-label: 0.06em;
+
+  /* ---------- spacing (4-based) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 192px;
+  --section-y: clamp(72px, 4rem + 6vw, 192px);
+  --section-y-tight: clamp(56px, 3rem + 4vw, 128px);
+  --gutter: clamp(16px, 1rem + 0.5vw, 24px);
+  --margin: clamp(20px, 4vw, 64px);
+  --max: 1440px;
+
+  /* ---------- radius (nested rule: inner = outer − padding) ---------- */
+  --r-card: 16px;
+  --r-card-pad: 8px;
+  --r-inner: calc(var(--r-card) - var(--r-card-pad)); /* 8px */
+  --r-input: 10px;
+  --r-tag: 6px;
+  --r-pill: 999px;
+
+  /* ---------- motion ---------- */
+  --ease-out-quad: cubic-bezier(.25, .46, .45, .94);
+  --ease-out-quint: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.55, .055, .675, .19);
+  --dur-fast: 100ms;
+  --dur-press: 80ms;
+  --dur-menu: 180ms;
+  --dur-ui: 240ms;
+  --dur-media: 400ms;
+  --dur-hover-media: 600ms;
+  --dur-enter: 800ms;
+  --dur-hero: 1000ms;
+  --stagger: 60ms;
+  --rise: 16px;
+
+  /* ---------- icons ---------- */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --icon-stroke: 1.5;
+}
+
+/* ---------- font sets ---------- */
+:root[data-fonts="licensed"] {
+  --font-display: 'Helvetica Now Display', var(--font-inter-tight), 'Helvetica Neue', Arial, sans-serif;
+  --font-text: 'Helvetica Now Text', var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------- motion: mobile + reduced ---------- */
+@media (max-width: 767px) {
+  :root { --dur-enter: 600ms; --rise: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-enter: 0ms; --dur-hero: 0ms; --dur-menu: 0ms; --dur-ui: 0ms; --dur-media: 0ms; --rise: 0px; --stagger: 0ms; }
+}
