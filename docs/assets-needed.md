@@ -9,24 +9,23 @@ Legend: **P1** = needed for launch · **P2** = nice to have · ☐ = not receive
 Owner has no assets yet → **every asset is a marked placeholder** until sent. Characters: **not at launch** (layouts keep a `CharacterSlot`).
 
 ## Launch: batch 1 (in this order)
-1. **Pick a wordmark**: 3 options I made in Helvetica Now Display: `docs/logo/wordmark-{1-medium,2-bold-lower,3-light-caps}-{black,white}.svg` (side by side in `docs/preview/index.html`). Once picked, L1–L2 are done and L5/OG images follow from it.
-2. **Liquid-metal logo loop** made from the picked wordmark (MP4 + WebM + still) · L4
-3. **Suisse Int'l Mono** woff2 (Regular + Medium) · F1 (font, not image, but blocks buttons/labels)
-4. Case 001 + Case 002 app screenshots / screen recordings · C1–C4 (owner: later)
+1. ✅ **Wordmark picked**: "epox", Bold lowercase → `docs/logo/epox-wordmark-{black,white,currentcolor}.svg`.
+2. **Liquid-metal logo loop** made from `docs/logo/epox-wordmark-white.svg` (MP4 + WebM + still) · L4
+3. Case 001 + Case 002 app screenshots / screen recordings · C1–C4 (owner: later)
 
 ## 0. Fonts
 | ☐ | File | Where | Notes | Priority |
 |---|---|---|---|---|
-| ✅ | Helvetica Now Display / Text (`assets/font-1.zip`, `assets/font-2.zip`) | all headings/body | received; kept out of git; **web licence to confirm** | P1 |
-| ☐ | `SuisseIntlMono-Regular.woff2`, `SuisseIntlMono-Medium.woff2` (F1) | labels, numbers, tags, buttons | not received; Geist Mono stands in | P1 |
+| ✅ | Helvetica Now Display / Text (`assets/font-1.zip`, `assets/font-2.zip`) | all headings/body | received; kept out of the public repo; owner handles licensing | P1 |
+| ✅ | Geist Mono (free, OFL) | labels, numbers, tags, buttons | replaces Suisse Int'l Mono (owner: "use what suits best"); self-hosted in the build | P1 |
 
 ---
 
 ## 1. Logo
 | ☐ | File name | Where used | What / style notes | Size & ratio | Format | Priority |
 |---|---|---|---|---|---|---|
-| ◐ | `logo-wordmark-black.svg` (L1) | header on light, footer on light, OG images | **3 options drafted** in `docs/logo/` (outlined Helvetica Now Display): 1 "Epox" Medium −4% · 2 "epox" Bold lowercase −6.5% · 3 "EPOX" Light caps +6%. Owner picks one | vector, trimmed | SVG (outlined) | P1 |
-| ◐ | `logo-wordmark-white.svg` (L2) | header on dark hero, footer, dark sections | same, white (drafted for all 3) | vector | SVG | P1 |
+| ✅ | `docs/logo/epox-wordmark-black.svg` (L1) | header on light, footer on light, OG images | **chosen:** "epox", Helvetica Now Display Bold, lowercase, −6.5% (outlined) | vector, trimmed | SVG | P1 |
+| ✅ | `docs/logo/epox-wordmark-white.svg` (L2) + `-currentcolor.svg` | header on dark hero, footer, dark sections | same, white / currentColor | vector | SVG | P1 |
 | ☐ | `logo-mark.svg` (L3) | favicon, app icon, small spots | single-letter mark or "E" monogram derived from wordmark (optional) | square, 1:1 | SVG | P2 |
 | ☐ | `logo-liquid-metal.webm` + `.mp4` + `logo-liquid-metal-poster.png` (L4) | **home hero** (large, beside/behind headline) and **footer** (small loop). **Not** a loading screen (no preloader rule). | exported from collidingScopes/liquid-logo **using the picked wordmark SVG**; silver/chrome liquid on **solid `#0A0A0A` background** (palette A ink; no transparency needed); seamless 6–8 s loop; slow, calm motion; logo centred with ~20% padding | hero: 1920×1080 (16:9) **and** 1080×1350 (4:5) for mobile; footer: 800×450 | WebM (VP9, ≤ 2.5 MB) + MP4 (H.264, ≤ 3 MB), 30 fps, no audio; poster = first frame PNG 1920×1080 | P1 |
 | ☐ | `favicon.svg` / I generate `favicon.ico`, `apple-touch-icon.png` (L5) | browser tab, iOS home | wordmark "E" or mark, works at 16 px, on ink square | 512×512 source | SVG or PNG | P1 |

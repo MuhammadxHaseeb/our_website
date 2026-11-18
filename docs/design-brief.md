@@ -1,7 +1,7 @@
 # Epox website: design brief
 
-_Step 1 of phase 2 · updated 2026-11-18 · Status: **owner decisions made** (palette A, Helvetica Now + Suisse Int'l Mono, brand idea 1, dark hero, no characters at launch). **Waiting on:** wordmark pick, Suisse Int'l Mono files, font licence confirmation._
-Preview in real UI: `docs/preview/index.html` (serve over http, e.g. `npx serve docs/preview`; screenshots in `docs/preview/shots/`). Wordmark options: `docs/logo/`.
+_Step 1 of phase 2 · updated 2026-11-18 · Status: **Step 1 approved** (palette A, Helvetica Now Display/Text + Geist Mono, wordmark "epox" Bold lowercase, brand idea 1, dark hero, no characters at launch). Next: Step 2 setup._
+Preview in real UI: `docs/preview/index.html` (serve over http, e.g. `npx serve docs/preview`; screenshots in `docs/preview/shots/`). Logo: `docs/logo/epox-wordmark-{black,white,currentcolor}.svg` (other options kept for the record).
 Sources: `research/overview.md`, `research/sites/*.md`, `our-company.md`, design rules in `CLAUDE.md`.
 
 ---
@@ -115,17 +115,17 @@ All pairs below pass WCAG AA (computed in `docs/preview/palettes.js`; the previe
 | Engagement models | Light (`surface`) | calm, comparable |
 | Contact block + footer | Dark (`darkAlt`) | strong close, trust strip on dark |
 
-### 3.3 Typography: **chosen: Webisoft's fonts, self-hosted**
+### 3.3 Typography: **chosen: Helvetica Now (self-hosted) + Geist Mono**
 | Role | Font | Weights | Fallback stack |
 |---|---|---|---|
 | Headings (display, h1–h3, roll-call) | **Helvetica Now Display** | 300, 400, 500, 700 | Inter Tight → Helvetica Neue → Arial |
 | Body, lead, nav links | **Helvetica Now Text** | 400, 500 | Inter → Helvetica Neue → Arial |
-| Labels, numbers, tags, **buttons** | **Suisse Int'l Mono** | 400, 500 | Geist Mono → ui-monospace |
+| Labels, numbers, tags, **buttons** | **Geist Mono** (free, OFL; Suisse Int'l Mono not available) | 400, 500 | ui-monospace → Menlo |
 | Editorial serif | **none for now** | n/a | n/a |
 
 Setup: self-hosted **woff2** only, `font-display: swap`, **preload Helvetica Now Display 500** (hero/LCP font), subset to Latin, metric-matched fallbacks (`size-adjust`) to keep CLS < 0.05. Tokens: `--font-display`, `--font-text`, `--font-mono` (see `docs/preview/fonts.css`).
-Status: Helvetica Now Display + Text received (`assets/font-1.zip`, `assets/font-2.zip`). **Suisse Int'l Mono not received**: preview falls back to Geist Mono until it arrives.
-**Licence:** Helvetica Now (Monotype) and Suisse Int'l (Swiss Typefaces) are commercial. Self-hosting on a website needs a **web licence** covering the domain/traffic (a desktop licence doesn't cover it, and files taken from another site's CSS are licensed to that site, not to us). Font files are **git-ignored** (`assets/*.zip`, `**/fonts/licensed/`) because this repo is public; committing them would redistribute them. The build copies them from a local/private source at deploy time. Fallback plan if licences aren't bought: Inter Tight / Inter / Geist Mono (already wired as fallbacks).
+Status: Helvetica Now Display + Text received (`assets/font-1.zip`, `assets/font-2.zip`). Mono: owner said "use what suits best" → **Geist Mono** (closest neutral grotesque mono to Suisse Int'l Mono).
+**Licence:** Helvetica Now (Monotype) is commercial; owner takes responsibility for licensing (2026-11-18). Self-hosting on a website needs a **web licence** covering the domain/traffic (a desktop licence doesn't cover it, and files taken from another site's CSS are licensed to that site, not to us). Font files are **git-ignored** (`assets/*.zip`, `**/fonts/licensed/`) because this repo is public; committing them would redistribute them. The build copies them from a local/private source at deploy time. Fallback plan if licences aren't bought: Inter Tight / Inter / Geist Mono (already wired as fallbacks).
 Rules: mono is labels, numbers, tags and buttons only (uppercase, +0.04–0.06em tracking, `tabular-nums`), never body text; no italics except real emphasis; headings use `text-wrap: balance`, body uses `text-wrap: pretty`.
 
 ### 3.4 Type scale (fluid, 360 → 1920 px)
@@ -293,7 +293,7 @@ Hero ("Tell us the problem. We'll tell you how we'd fix it.") → form (topic ch
 | FAQ accordion | L6 | n/a |
 | Page transition + smooth-scroll provider | H1/H2 with reduced-motion switch | Hello Monday |
 | `CharacterSlot` | empty, layout-neutral slot (renders nothing or the section number until art is added via one prop) | Hello Monday (later) |
-| Logo | inline SVG wordmark (chosen option), black/white via `currentColor` | n/a |
+| Logo | inline SVG "epox" wordmark (`epox-wordmark-currentcolor.svg`), black/white via `currentColor`; min height 18px | n/a |
 
 ---
 
@@ -328,11 +328,12 @@ Spam protection: honeypot + Cloudflare Turnstile.
 | Item | Decision |
 |---|---|
 | Palette | **A · Liquid Silver** (scale in §3.1) |
-| Fonts | **Helvetica Now Display / Helvetica Now Text / Suisse Int'l Mono**, self-hosted, no serif |
+| Fonts | **Helvetica Now Display / Helvetica Now Text** (self-hosted) + **Geist Mono**, no serif |
+| Logo | **"epox", Helvetica Now Display Bold, lowercase, tracking −6.5%** (`docs/logo/epox-wordmark-*.svg`) |
 | Brand idea | **1 · We find it first** |
 | Home hero | **Dark** |
 | Characters | **Not at launch**; layouts work without them; `CharacterSlot` kept |
 | Assets | none yet → marked placeholders everywhere |
 | Contact form | **Resend → owner's inbox** (wired when building /contact) |
 
-**Open:** (1) pick wordmark 1, 2 or 3 (`docs/logo/`, preview page); (2) send Suisse Int'l Mono woff2 (Regular + Medium); (3) confirm web licences for Helvetica Now + Suisse Int'l before launch; (4) app screenshots/recordings later.
+**Open:** liquid-metal logo video (owner makes it from `epox-wordmark-white.svg`); app screenshots/recordings later; font files stay local (public repo, see CLAUDE.md).

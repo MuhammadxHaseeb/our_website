@@ -108,11 +108,11 @@
 <body>
 <main class="page">
   <span class="label">Epox · brand preview · step 1, round 2</span>
-  <h1 class="doc-h1">Liquid Silver, Helvetica Now, and three wordmarks to choose from</h1>
-  <p class="doc-lead">Your choices applied: palette A, Helvetica Now Display + Text, Suisse Int'l Mono for labels and buttons, brand idea "We find it first", dark hero, no characters (slots kept). Pick one of the three wordmarks below; the liquid-metal video is made from it.</p>
+  <h1 class="doc-h1">Liquid Silver, Helvetica Now, and the epox wordmark</h1>
+  <p class="doc-lead">Your choices applied: palette A, Helvetica Now Display + Text, Geist Mono for labels and buttons, brand idea "We find it first", dark hero, no characters (slots kept). Wordmark 2 ("epox", Bold lowercase) is chosen; the liquid-metal video is made from it.</p>
   <dl class="decisions">
     <div><dt class="label">Palette</dt><dd>A · Liquid Silver</dd></div>
-    <div><dt class="label">Fonts</dt><dd>Helvetica Now Display / Text · Suisse Int'l Mono</dd></div>
+    <div><dt class="label">Fonts</dt><dd>Helvetica Now Display / Text · Geist Mono</dd></div>
     <div><dt class="label">Brand idea</dt><dd>We find it first</dd></div>
     <div><dt class="label">Hero</dt><dd>Dark</dd></div>
   </dl>
@@ -123,7 +123,7 @@
     <div class="marks">
       <article class="mark">
         <div class="tile light"><img src="../logo/wordmark-1-medium-black.svg" alt="Wordmark option 1: Epox in Medium"></div>
-        <div class="tile dark"><img src="../logo/wordmark-1-medium-white.svg" alt=""></div>
+        <div class="tile dark"><img src="../logo/epox-wordmark-white.svg" alt=""></div>
         <div class="mini-nav"><img src="../logo/wordmark-1-medium-black.svg" alt=""><span>Header size, 22px</span></div>
         <h3>1 · Epox, Medium</h3>
         <p>Title case, Medium weight, tracking −4%. The calmest and most "established". Reads like a company name, not a startup.</p>
@@ -132,7 +132,7 @@
         <div class="tile light"><img src="../logo/wordmark-2-bold-lower-black.svg" alt="Wordmark option 2: epox in Bold lowercase"></div>
         <div class="tile dark"><img src="../logo/wordmark-2-bold-lower-white.svg" alt=""></div>
         <div class="mini-nav"><img src="../logo/wordmark-2-bold-lower-black.svg" alt=""><span>Header size, 22px</span></div>
-        <h3>2 · epox, Bold lowercase</h3>
+        <h3>2 · epox, Bold lowercase · <span style="color:var(--accent-on-light)">Chosen</span></h3>
         <p>Lowercase, Bold, tight −6.5%. Compact and rounded: the best shape for the liquid-metal animation (thick strokes, blob-friendly "e" and "o").</p>
       </article>
       <article class="mark">
@@ -162,7 +162,7 @@
     <div class="sh"><div><span class="label">/ Real UI</span><h2 class="doc-h2" id="ui">The system on a real page</h2></div></div>
     <div class="ui">
       <div class="hero">
-        <div class="nav"><img src="../logo/wordmark-1-medium-white.svg" alt="Epox" class="wm-white"><ul><li>Services</li><li>Work</li><li>How we work</li><li>About</li><li>Let's talk</li></ul></div>
+        <div class="nav"><img src="../logo/epox-wordmark-white.svg" alt="Epox" class="wm-white"><ul><li>Services</li><li>Work</li><li>How we work</li><li>About</li><li>Let's talk</li></ul></div>
         <div class="label">Epox · Faisalabad · Since 2019</div>
         <h1 class="display">We find the problem <span class="em">before you do.</span></h1>
         <p class="lead">Epox builds web, mobile and AI software. Most of our clients first hear from us with a fix for something they hadn't spotted yet.</p>
@@ -191,7 +191,7 @@
         <p class="big">Have a problem worth solving? <span>Let's talk.</span></p>
         <button class="btn btn-primary-dark">Let's talk →</button>
         <div class="trust"><span class="label">Since 2019</span><span class="label">2 products live</span><span class="label">NDA on request</span><span class="label">Faisalabad, PK · UTC+5</span></div>
-        <small><img src="../logo/wordmark-1-medium-white.svg" alt="Epox" class="wm-white"><span class="label">© 2026 Epox</span></small>
+        <small><img src="../logo/epox-wordmark-white.svg" alt="Epox" class="wm-white"><span class="label">© 2026 Epox</span></small>
       </footer>
     </div>
   </section>
@@ -205,7 +205,7 @@
       <div><span class="label">h3 · Now Display 500</span><span style="font:500 clamp(22px,1.8vw,32px)/1.15 var(--font-display);letter-spacing:-0.02em">Business software</span></div>
       <div><span class="label">lead · Now Text 400</span><span style="font:400 clamp(19px,1.5vw,24px)/1.45 var(--font-text);max-width:52ch">We design, build and launch software, then stay on to keep it running and growing.</span></div>
       <div><span class="label">body · Now Text 400 · 17px</span><span style="max-width:64ch">Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out. No more arguments over the deposit.</span></div>
-      <div><span class="label">label / button · Suisse Int'l Mono 500</span><span class="label" style="color:var(--text);font-size:12px">/ Services · S/01 · Case 002 · Since 2019 · Let's talk →</span></div>
+      <div><span class="label">label / button · Geist Mono 500</span><span class="label" style="color:var(--text);font-size:12px">/ Services · S/01 · Case 002 · Since 2019 · Let's talk →</span></div>
     </div>
   </section>
 </main>
@@ -217,7 +217,7 @@ document.getElementById('scale').innerHTML = S.map(([k,v]) => { const dark = lum
   return `<div class="chip" style="background:${v};color:${fg};${k==='50'?'border:1px solid #E2E4E7;':''}"><span>n-${k}</span><span>${v}<br>W ${cr(v,'#FFFFFF').toFixed(1)} · I ${cr(v,'#0A0A0A').toFixed(1)}</span></div>`; }).join('');
 // tell the viewer when licensed fonts are missing (e.g. viewing the public repo)
 document.fonts.ready.then(() => {
-  const miss = [['Helvetica Now Display','500'],['Helvetica Now Text','400'],['Suisse Intl Mono','500']].filter(([f,w]) => ![...document.fonts].some(ff => ff.family.replace(/"/g,'') === f && ff.status === 'loaded'));
+  const miss = [['Helvetica Now Display','500'],['Helvetica Now Text','400'],['Geist Mono','500']].filter(([f,w]) => ![...document.fonts].some(ff => ff.family.replace(/"/g,'') === f && ff.status === 'loaded'));
   if (miss.length) { const el = document.getElementById('fontWarn'); el.hidden = false; el.textContent = 'Not loaded, showing free fallback: ' + miss.map(m=>m[0]).join(', '); }
 });
 </script>

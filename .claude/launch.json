@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brand-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5180", "--directory", "docs"],
+      "port": 5180,
+      "url": "http://localhost:5180"
+    }
+  ]
+}

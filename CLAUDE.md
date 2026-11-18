@@ -9,15 +9,14 @@
 ## Build status
 | Step | Status |
 |---|---|
-| 1. Design brief, assets list, preview page | ✅ decisions made; wordmark pick pending |
-| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ next, after owner OK |
+| 1. Design brief, assets list, preview page | ✅ approved |
+| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ next |
 | 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ |
 
 ## Waiting on the owner
-- **Pick wordmark** 1 / 2 / 3 (`docs/logo/`), then owner makes the liquid-metal video from it.
-- **Suisse Int'l Mono** woff2 files (Regular + Medium): not in the zips; Geist Mono stands in.
-- **Confirm web licences** for Helvetica Now + Suisse Int'l before launch (files are git-ignored; repo is public).
+- Liquid-metal logo video, made from `docs/logo/epox-wordmark-white.svg`.
 - Assets later: app screenshots/recordings for both cases.
+- Font files: owner asked to push them; held back because the repo is public (would publish Monotype's files). Will push if the repo is made private.
 
 ## Decisions log
 | Date | Decision | Reason |
@@ -31,7 +30,10 @@
 | 2026-11-18 | Motion: Linear style for UI/info, Hello Monday style for signature moments; reduced-motion + Lighthouse 90+ guardrails | Owner's brief (phase 2) |
 | 2026-11-18 | Own art only; marked placeholders `[ASSET: …]`, `[PLACEHOLDER: …]` until owner sends | Never use reference art or stock filler |
 | 2026-11-18 | Palette **A · Liquid Silver** (neutral scale n-50…n-950, silver n-300 emphasis on dark, steel n-700 on light) | Owner's pick |
-| 2026-11-18 | Fonts: **Helvetica Now Display / Text + Suisse Int'l Mono** (labels, numbers, buttons), self-hosted woff2, swap, preload Display 500; **no serif** | Owner's pick; licensed files git-ignored (public repo) |
+| 2026-11-18 | Fonts: **Helvetica Now Display / Text**, self-hosted woff2, swap, preload Display 500; **no serif** | Owner's pick; licensed files git-ignored (public repo) |
+| 2026-11-18 | Logo: **"epox"**, Helvetica Now Display Bold, lowercase, −6.5% (`docs/logo/epox-wordmark-*.svg`) | Owner's pick; best shape for liquid metal |
+| 2026-11-18 | Mono font: **Geist Mono** instead of Suisse Int'l Mono | Suisse not available; owner: "use what suits best" |
+| 2026-11-18 | Font licensing: owner takes responsibility | Owner: "don't worry" |
 | 2026-11-18 | Brand idea **"We find it first."** (+ live-status dot as proof device) | Matches outbound sales model |
 | 2026-11-18 | **Dark** home hero | Owner's pick |
 | 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |
