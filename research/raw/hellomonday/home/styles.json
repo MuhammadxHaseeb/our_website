@@ -1,0 +1,171 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "5 days until Monday\nWe make digital (and magical)…\nBranding\n",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Branding",
+      "family": "ClarendonBTWXX-Light",
+      "size": "80px",
+      "weight": "300",
+      "lineHeight": "64px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "We make digital (and magical)…",
+      "family": "nb_internationalproregular",
+      "size": "14px",
+      "weight": "400",
+      "lineHeight": "21.98px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 1509
+    },
+    {
+      "value": "nb_internationalproregular",
+      "weight": 1295
+    },
+    {
+      "value": "nb_internationalprolight",
+      "weight": 148
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "23px / 300",
+      "weight": 1360
+    },
+    {
+      "value": "14px / 400",
+      "weight": 762
+    },
+    {
+      "value": "13px / 400",
+      "weight": 533
+    },
+    {
+      "value": "19px / 400",
+      "weight": 135
+    },
+    {
+      "value": "18px / 400",
+      "weight": 68
+    },
+    {
+      "value": "90px / 400",
+      "weight": 40
+    },
+    {
+      "value": "18px / 300",
+      "weight": 33
+    },
+    {
+      "value": "15px / 400",
+      "weight": 13
+    },
+    {
+      "value": "80px / 300",
+      "weight": 8
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#000000",
+      "weight": 1899
+    },
+    {
+      "value": "#c6c5c5",
+      "weight": 838
+    },
+    {
+      "value": "#ffffff",
+      "weight": 182
+    },
+    {
+      "value": "#2c2d2e",
+      "weight": 33
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#ffffff",
+      "weight": 12816
+    },
+    {
+      "value": "#f8f6f5",
+      "weight": 5828
+    },
+    {
+      "value": "#191919",
+      "weight": 1504
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

@@ -1,0 +1,158 @@
+{
+  "url": "https://hellomonday.com/",
+  "libraries": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "SplitText": false,
+    "Lenis": true,
+    "Locomotive": false,
+    "THREE": false,
+    "PIXI": false,
+    "Lottie": false,
+    "Rive": false,
+    "Swiper": false,
+    "Splide": false,
+    "Barba": false,
+    "Swup": false,
+    "AOS": false,
+    "FramerMotion": false,
+    "Webflow_IX2": false,
+    "Motion_one": false
+  },
+  "counts": {
+    "canvas": 2,
+    "video": 2,
+    "autoplayVideo": 2,
+    "svgAnimate": 0,
+    "webglCanvases": 1
+  },
+  "reducedMotionRules": [],
+  "reducedMotionInJS": false,
+  "keyframes": {
+    "vjs-spinner-show": [
+      "100% {visibility: visible;}"
+    ],
+    "vjs-spinner-spin": [
+      "100% {transform: rotate(1turn);}"
+    ],
+    "vjs-spinner-fade": [
+      "0% {border-top-color: rgb(255, 255, 255);}",
+      "20% {border-top-color: rgb(255, 255, 255);}",
+      "35% {border-top-color: rgb(255, 255, 255);}",
+      "60% {border-top-color: rgb(255, 255, 255);}",
+      "100% {border-top-color: rgb(255, 255, 255);}"
+    ]
+  },
+  "cssTransitionDurations": [
+    [
+      "1s",
+      17
+    ],
+    [
+      "0.5s",
+      10
+    ],
+    [
+      "0.2s",
+      7
+    ],
+    [
+      "0.1s",
+      7
+    ],
+    [
+      "0s",
+      5
+    ],
+    [
+      "0.3s",
+      4
+    ],
+    [
+      "0.4s",
+      3
+    ]
+  ],
+  "cssEasings": [
+    [
+      "ease",
+      51
+    ],
+    [
+      "cubic-bezier(0.25",
+      2
+    ],
+    [
+      "0.46",
+      2
+    ],
+    [
+      "0.45",
+      2
+    ],
+    [
+      "0.94)",
+      2
+    ],
+    [
+      "linear",
+      2
+    ],
+    [
+      "0",
+      1
+    ],
+    [
+      "cubic-bezier(0.6",
+      1
+    ],
+    [
+      "0.2",
+      1
+    ],
+    [
+      "0.8)",
+      1
+    ]
+  ],
+  "elements": [
+    {
+      "label": "button",
+      "text": "",
+      "cls": "button",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "New York\n\n36 East 20th St, 6th Floor\nNew",
+      "cls": "office",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Copenhagen\n\nLangebrogade 6E, 2nd floor\n1",
+      "cls": "office",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Aarhus\n\nBanegardspladsen 20A, 1.TV\n8000 ",
+      "cls": "office",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    }
+  ],
+  "customCursor": false,
+  "dataAttrs": []
+}

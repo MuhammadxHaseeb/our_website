@@ -1,0 +1,82 @@
+[
+ {
+  "t": 1.5,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6.5,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 16.7,
+  "what": "hover nav \"Webisoft\""
+ },
+ {
+  "t": 17.8,
+  "what": "hover nav \"Open menu\""
+ },
+ {
+  "t": 18.9,
+  "what": "hover nav \"01\nServices\""
+ },
+ {
+  "t": 21.8,
+  "what": "hover nav \"S01\nAdvisory\""
+ },
+ {
+  "t": 24.8,
+  "what": "hover nav \"S02\nArtificial Intelligence\""
+ },
+ {
+  "t": 27.7,
+  "what": "hover nav \"S03\nBlockchain\""
+ },
+ {
+  "t": 30.6,
+  "what": "hover nav \"S04\nProduct Development\""
+ },
+ {
+  "t": 34.9,
+  "what": "hover \"CONTACT US CONTACT US\" @y=1604"
+ },
+ {
+  "t": 36.2,
+  "what": "hover \"Advisory Gain strategic insights fr\" @y=1604"
+ },
+ {
+  "t": 38.4,
+  "what": "scrollY=2306 / 10059"
+ },
+ {
+  "t": 40,
+  "what": "hover \"Gain strategic insights from our fr\" @y=3284"
+ },
+ {
+  "t": 41.2,
+  "what": "hover \"EXPLORE EXPLORE\" @y=3284"
+ },
+ {
+  "t": 44.7,
+  "what": "scrollY=4709 / 10059"
+ },
+ {
+  "t": 45.3,
+  "what": "hover \"VIEW ALL VIEW FOW\" @y=4954"
+ },
+ {
+  "t": 46.5,
+  "what": "hover \"I/001 Startups Empowering startups \" @y=4954"
+ },
+ {
+  "t": 51,
+  "what": "scrollY=7107 / 10059"
+ },
+ {
+  "t": 54.5,
+  "what": "scrollY=9156 / 10059"
+ },
+ {
+  "t": 57.2,
+  "what": "reached end"
+ }
+]

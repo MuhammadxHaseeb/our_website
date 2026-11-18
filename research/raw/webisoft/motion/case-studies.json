@@ -1,0 +1,288 @@
+{
+  "url": "https://webisoft.com/case-studies",
+  "libraries": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "SplitText": false,
+    "Lenis": true,
+    "Locomotive": false,
+    "THREE": false,
+    "PIXI": false,
+    "Lottie": false,
+    "Rive": false,
+    "Swiper": false,
+    "Splide": false,
+    "Barba": false,
+    "Swup": false,
+    "AOS": false,
+    "FramerMotion": false,
+    "Webflow_IX2": false,
+    "Motion_one": false
+  },
+  "counts": {
+    "canvas": 0,
+    "video": 0,
+    "autoplayVideo": 0,
+    "svgAnimate": 0,
+    "webglCanvases": 0
+  },
+  "reducedMotionRules": [],
+  "reducedMotionInJS": false,
+  "keyframes": {
+    "blink-animation": [
+      "50% {visibility: hidden;}"
+    ],
+    "blink-once-animation": [
+      "0% {opacity: 1;}",
+      "40% {opacity: 0;}",
+      "60% {opacity: 1;}",
+      "80% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "DropdownContentUpShow": [
+      "0% {opacity: 0; transform: translateY(-1em);}",
+      "100% {opacity: 1; transform: translateY(0px);}"
+    ],
+    "DropdownContentUpHide": [
+      "0% {opacity: 1; transform: translateY(0px);}",
+      "100% {opacity: 0; transform: translateY(-1em);}"
+    ],
+    "DropdownContentBottomShow": [
+      "0% {opacity: 0; transform: translateY(1em);}",
+      "100% {opacity: 1; transform: translateY(0px);}"
+    ],
+    "DropdownContentBottomHide": [
+      "0% {opacity: 1; transform: translateY(0px);}",
+      "100% {opacity: 0; transform: translateY(1em);}"
+    ]
+  },
+  "cssTransitionDurations": [
+    [
+      "0.3s",
+      5
+    ],
+    [
+      "0.2s",
+      2
+    ],
+    [
+      "1ms",
+      1
+    ],
+    [
+      "0.25s",
+      1
+    ]
+  ],
+  "cssEasings": [
+    [
+      "ease",
+      7
+    ],
+    [
+      "linear",
+      3
+    ],
+    [
+      "step-end",
+      1
+    ]
+  ],
+  "elements": [
+    {
+      "label": "button",
+      "text": "Open menu",
+      "cls": "cHeaderMenuButton c-header-menu-button",
+      "transition": "border-left-color 0.6s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "01\nServices",
+      "cls": "c-dropdown-toggle c-header-menu-nav-link || h4",
+      "transition": "opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s",
+      "animation": null,
+      "willChange": null,
+      "transform": "matrix(1, 0, 0, 1, 0, 12)"
+    },
+    {
+      "label": "button",
+      "text": "LET'S TALK\nLET'S TALK",
+      "cls": "c-button",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "ALL\n007",
+      "cls": "csi-filter is-active",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "AUTOMOTIVE\n002",
+      "cls": "csi-filter",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "OIL & GAS / ENERGY\n001",
+      "cls": "csi-filter",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Webisoft",
+      "cls": "cLogo c-logo c-header-menu-bar-logo",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S01\nAdvisory",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S02\nArtificial Intelligence",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S03\nBlockchain",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S04\nProduct Development",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S05\nEnterprise Software",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "001\nPUBLIC SECTOR\n\nA CANADIAN FEDERAL PU",
+      "cls": "csi-card",
+      "transition": "background 0.25s linear",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "001\nPUBLIC SECTOR",
+      "cls": "csi-card-top",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Seized digital assets, held to the stand",
+      "cls": "csi-card-title",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "A secure platform to seize, hold and tra",
+      "cls": "c-text-body csi-card-body",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "PHASE 1 DELIVERED\nREAD THE STORY →",
+      "cls": "csi-card-foot",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "002\nENERGY AND OFFSHORE LOGISTICS\n\nA MAR",
+      "cls": "csi-card",
+      "transition": "background 0.25s linear",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "CLUTCH 4.9/5 · 23 REVIEWS\n4.9/5",
+      "cls": "cRating c-rating c-text-label",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Advisory",
+      "cls": "c-button c-footer-blink-link",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Artificial Intelligence (AI)",
+      "cls": "c-button c-footer-blink-link",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    }
+  ],
+  "customCursor": false,
+  "dataAttrs": [
+    "data-parallax",
+    "data-parallax-speed",
+    "data-parallax-trigger"
+  ]
+}

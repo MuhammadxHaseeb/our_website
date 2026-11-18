@@ -1,0 +1,94 @@
+[
+ {
+  "t": 2.7,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 7.7,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 8,
+  "what": "hover nav \"\""
+ },
+ {
+  "t": 9.1,
+  "what": "hover nav \"Product\""
+ },
+ {
+  "t": 12,
+  "what": "hover nav \"Resources\""
+ },
+ {
+  "t": 14.9,
+  "what": "hover nav \"Customers\""
+ },
+ {
+  "t": 17.9,
+  "what": "hover nav \"Pricing\""
+ },
+ {
+  "t": 20.8,
+  "what": "hover nav \"Now\""
+ },
+ {
+  "t": 23.7,
+  "what": "hover nav \"Contact\""
+ },
+ {
+  "t": 28.3,
+  "what": "scrollY=2400 / 9990"
+ },
+ {
+  "t": 29.9,
+  "what": "hover \"Linear Agent +\" @y=3360"
+ },
+ {
+  "t": 31.2,
+  "what": "hover \"Customer Requests +\" @y=3360"
+ },
+ {
+  "t": 34.7,
+  "what": "scrollY=4800 / 9990"
+ },
+ {
+  "t": 35.4,
+  "what": "hover \"Learn more →\" @y=5040"
+ },
+ {
+  "t": 36.9,
+  "what": "hover \"ENG-2298 Add granular project permi\" @y=5040"
+ },
+ {
+  "t": 40.5,
+  "what": "hover \"Issues +\" @y=6720"
+ },
+ {
+  "t": 41.8,
+  "what": "hover \"Git automations +\" @y=6720"
+ },
+ {
+  "t": 43.7,
+  "what": "scrollY=7200 / 9990"
+ },
+ {
+  "t": 45.7,
+  "what": "hover \"Customer stories →\" @y=8400"
+ },
+ {
+  "t": 46.9,
+  "what": "hover \"Get started\" @y=8400"
+ },
+ {
+  "t": 49.9,
+  "what": "scrollY=9090 / 9990"
+ },
+ {
+  "t": 51.1,
+  "what": "hover \"Contact sales\" @y=9090"
+ },
+ {
+  "t": 53.3,
+  "what": "reached end"
+ }
+]

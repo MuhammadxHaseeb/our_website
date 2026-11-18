@@ -1,0 +1,145 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Filter:\n\nProducts\n\nExperiences\n\nBranding\n\nDream With AI\nFilt",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": null,
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "Dream With AI",
+      "family": "ClarendonBTWXX-Light",
+      "size": "23px",
+      "weight": "300",
+      "lineHeight": "27.37px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 2930
+    },
+    {
+      "value": "nb_internationalproregular",
+      "weight": 2028
+    },
+    {
+      "value": "nb_internationalprolight",
+      "weight": 17
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "23px / 300",
+      "weight": 2829
+    },
+    {
+      "value": "14px / 400",
+      "weight": 1083
+    },
+    {
+      "value": "13px / 400",
+      "weight": 945
+    },
+    {
+      "value": "18px / 400",
+      "weight": 68
+    },
+    {
+      "value": "18px / 300",
+      "weight": 33
+    },
+    {
+      "value": "19px / 400",
+      "weight": 17
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#000000",
+      "weight": 3345
+    },
+    {
+      "value": "#c6c5c5",
+      "weight": 1586
+    },
+    {
+      "value": "#2c2d2e",
+      "weight": 33
+    },
+    {
+      "value": "#ffffff",
+      "weight": 11
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#ffffff",
+      "weight": 11520
+    },
+    {
+      "value": "#f8f6f5",
+      "weight": 11301
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

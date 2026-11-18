@@ -1,0 +1,117 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Artificial Intelligence\n\n \n\n15 min. read\n\n16 Ideas for AI-po",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": null,
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "16 Ideas for AI-powered E-Commerce With Our Friends at Burro",
+      "family": "ClarendonBTWXX-Light",
+      "size": "70px",
+      "weight": "300",
+      "lineHeight": "70px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 316
+    },
+    {
+      "value": "nb_internationalproregular",
+      "weight": 221
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "70px / 300",
+      "weight": 316
+    },
+    {
+      "value": "14px / 400",
+      "weight": 221
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#000000",
+      "weight": 526
+    },
+    {
+      "value": "#ffffff",
+      "weight": 11
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f8f6f5",
+      "weight": 4080
+    },
+    {
+      "value": "#ffffff",
+      "weight": 3899
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

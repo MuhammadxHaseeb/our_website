@@ -1,0 +1,58 @@
+[
+ {
+  "t": 2.2,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 7.2,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 17.4,
+  "what": "hover nav \"Webisoft\""
+ },
+ {
+  "t": 18.3,
+  "what": "hover nav \"Open menu\""
+ },
+ {
+  "t": 19.4,
+  "what": "hover nav \"01\nServices\""
+ },
+ {
+  "t": 22.3,
+  "what": "hover nav \"S01\nAdvisory\""
+ },
+ {
+  "t": 25.2,
+  "what": "hover nav \"S02\nArtificial Intelligence\""
+ },
+ {
+  "t": 28.1,
+  "what": "hover nav \"S03\nBlockchain\""
+ },
+ {
+  "t": 31,
+  "what": "hover nav \"S04\nProduct Development\""
+ },
+ {
+  "t": 35.1,
+  "what": "hover \"Product Development Services (11)\" @y=1579"
+ },
+ {
+  "t": 36.3,
+  "what": "hover \"Fast Prototyping PRDCT 001 Fast Pro\" @y=1579"
+ },
+ {
+  "t": 38.4,
+  "what": "scrollY=2304 / 5412"
+ },
+ {
+  "t": 41.9,
+  "what": "scrollY=4500 / 5412"
+ },
+ {
+  "t": 45.1,
+  "what": "reached end"
+ }
+]

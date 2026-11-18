@@ -1,0 +1,126 @@
+[
+ {
+  "t": 2.1,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 7.1,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 7.3,
+  "what": "hover nav \"\""
+ },
+ {
+  "t": 8.3,
+  "what": "hover nav \"Product\""
+ },
+ {
+  "t": 11.3,
+  "what": "hover nav \"Resources\""
+ },
+ {
+  "t": 14.2,
+  "what": "hover nav \"Customers\""
+ },
+ {
+  "t": 17.1,
+  "what": "hover nav \"Pricing\""
+ },
+ {
+  "t": 20,
+  "what": "hover nav \"Now\""
+ },
+ {
+  "t": 22.9,
+  "what": "hover nav \"Contact\""
+ },
+ {
+  "t": 26.5,
+  "what": "hover \"Agents for every use case, at your \" @y=1680"
+ },
+ {
+  "t": 27.7,
+  "what": "hover \"Orchestrate issues at scale Delegat\" @y=1680"
+ },
+ {
+  "t": 29.8,
+  "what": "scrollY=2400 / 15325"
+ },
+ {
+  "t": 31.1,
+  "what": "hover \"Cycles +\" @y=3360"
+ },
+ {
+  "t": 32.4,
+  "what": "hover \"Modern sprint planning, purpose-bui\" @y=3360"
+ },
+ {
+  "t": 35.3,
+  "what": "scrollY=4800 / 15325"
+ },
+ {
+  "t": 35.8,
+  "what": "hover \"Linear MCP +\" @y=5040"
+ },
+ {
+  "t": 37,
+  "what": "hover \"Claude Code Search, create, and upd\" @y=5040"
+ },
+ {
+  "t": 41.1,
+  "what": "scrollY=7200 / 15325"
+ },
+ {
+  "t": 42.7,
+  "what": "hover \"Prevent duplicate trip creation Róż\" @y=8400"
+ },
+ {
+  "t": 44,
+  "what": "hover \"Prevent duplicate trip creation Róż\" @y=8400"
+ },
+ {
+  "t": 46.8,
+  "what": "scrollY=9600 / 15325"
+ },
+ {
+  "t": 47.6,
+  "what": "hover \"Guided reviews +\" @y=10080"
+ },
+ {
+  "t": 48.9,
+  "what": "hover \"A clear path through complex change\" @y=10080"
+ },
+ {
+  "t": 52.2,
+  "what": "hover \"Model how each team actually ships \" @y=11760"
+ },
+ {
+  "t": 53.7,
+  "what": "scrollY=12000 / 15325"
+ },
+ {
+  "t": 55.5,
+  "what": "hover \"The way we decide whether something\" @y=13440"
+ },
+ {
+  "t": 56.8,
+  "what": "hover \"The way we decide whether something\" @y=13440"
+ },
+ {
+  "t": 59.1,
+  "what": "scrollY=14400 / 15325"
+ },
+ {
+  "t": 60.4,
+  "what": "hover \"Get started\" @y=14425"
+ },
+ {
+  "t": 61.6,
+  "what": "hover \"Contact sales\" @y=14425"
+ },
+ {
+  "t": 64.2,
+  "what": "reached end"
+ }
+]

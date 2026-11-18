@@ -1,0 +1,42 @@
+[
+ {
+  "t": 4.1,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 9.2,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 13.6,
+  "what": "scrollY=2366 / 15857"
+ },
+ {
+  "t": 17.6,
+  "what": "scrollY=4754 / 15857"
+ },
+ {
+  "t": 21.6,
+  "what": "scrollY=7150 / 15857"
+ },
+ {
+  "t": 25.6,
+  "what": "scrollY=9548 / 15857"
+ },
+ {
+  "t": 29.2,
+  "what": "scrollY=11951 / 15857"
+ },
+ {
+  "t": 33.7,
+  "what": "scrollY=14362 / 15857"
+ },
+ {
+  "t": 37.2,
+  "what": "scrollY=14957 / 15857"
+ },
+ {
+  "t": 37.6,
+  "what": "reached end"
+ }
+]

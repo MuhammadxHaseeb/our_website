@@ -1,0 +1,26 @@
+[
+ {
+  "t": 2.4,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 7.4,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 13.7,
+  "what": "scrollY=2347 / 7699"
+ },
+ {
+  "t": 17.2,
+  "what": "scrollY=4745 / 7699"
+ },
+ {
+  "t": 20.6,
+  "what": "scrollY=6799 / 7699"
+ },
+ {
+  "t": 22.8,
+  "what": "reached end"
+ }
+]

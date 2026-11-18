@@ -1,0 +1,378 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Skip to content →\nProduct\nResources\nCustomers\nPricing\nNow\nCo",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f7f8f8"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Plan and navigate \nfrom idea to launch",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "72px",
+      "weight": "500",
+      "lineHeight": "72px",
+      "letterSpacing": "-1.584px",
+      "textTransform": "none",
+      "color": "#f7f8f8"
+    },
+    "h2": {
+      "selector": "h2",
+      "sample": "Manage projects\nend-to-end",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "48px",
+      "weight": "510",
+      "lineHeight": "48px",
+      "letterSpacing": "-1.056px",
+      "textTransform": "none",
+      "color": "#f7f8f8"
+    },
+    "h3": {
+      "selector": "h3",
+      "sample": "Close the gap between planning and building",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "15px",
+      "weight": "510",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.165px",
+      "textTransform": "none",
+      "color": "#f7f8f8"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "Product",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "13px",
+      "weight": "400",
+      "lineHeight": "19.5px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#8a8f98"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "Skip to content →",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "14px",
+      "weight": "510",
+      "lineHeight": "21px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#ffffff"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f7f8f8"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "Inter Variable",
+      "weight": 5653
+    },
+    {
+      "value": "Berkeley Mono",
+      "weight": 350
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "15px / 400",
+      "weight": 2498
+    },
+    {
+      "value": "24px / 400",
+      "weight": 725
+    },
+    {
+      "value": "15px / 510",
+      "weight": 598
+    },
+    {
+      "value": "13px / 400",
+      "weight": 504
+    },
+    {
+      "value": "12px / 400",
+      "weight": 271
+    },
+    {
+      "value": "12px / 510",
+      "weight": 213
+    },
+    {
+      "value": "13px / 510",
+      "weight": 183
+    },
+    {
+      "value": "48px / 510",
+      "weight": 174
+    },
+    {
+      "value": "24px / 510",
+      "weight": 168
+    },
+    {
+      "value": "16px / 400",
+      "weight": 158
+    },
+    {
+      "value": "32px / 400",
+      "weight": 149
+    },
+    {
+      "value": "14px / 400",
+      "weight": 145
+    },
+    {
+      "value": "14px / 510",
+      "weight": 45
+    },
+    {
+      "value": "16px / 590",
+      "weight": 39
+    },
+    {
+      "value": "72px / 510",
+      "weight": 38
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#8a8f98",
+      "weight": 3051
+    },
+    {
+      "value": "#d0d6e0",
+      "weight": 1487
+    },
+    {
+      "value": "#f7f8f8",
+      "weight": 979
+    },
+    {
+      "value": "#08090a",
+      "weight": 245
+    },
+    {
+      "value": "#62666d",
+      "weight": 157
+    },
+    {
+      "value": "#ffffff",
+      "weight": 21
+    },
+    {
+      "value": "#c52828",
+      "weight": 18
+    },
+    {
+      "value": "#42af22",
+      "weight": 16
+    },
+    {
+      "value": "#f2994a",
+      "weight": 14
+    },
+    {
+      "value": "#828fff",
+      "weight": 12
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#08090a",
+      "weight": 9335
+    },
+    {
+      "value": "#0f1011",
+      "weight": 1129
+    },
+    {
+      "value": "#f7f8f8",
+      "weight": 207
+    },
+    {
+      "value": "#5e6ad2",
+      "weight": 46
+    },
+    {
+      "value": "#ffffff@0.05",
+      "weight": 43
+    },
+    {
+      "value": "#ffffff@0.03",
+      "weight": 39
+    },
+    {
+      "value": "#e5e5e6",
+      "weight": 8
+    },
+    {
+      "value": "#161718",
+      "weight": 4
+    },
+    {
+      "value": "#1e1f20",
+      "weight": 2
+    },
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#f7f8f8",
+      "weight": 8
+    },
+    {
+      "value": "#ffffff",
+      "weight": 5
+    },
+    {
+      "value": "#8a8f98",
+      "weight": 2
+    }
+  ],
+  "rootCssVariables": {
+    "--header-height": "72px",
+    "--header-blur": "20px",
+    "--page-padding-inline": "24px",
+    "--page-padding-block": "64px",
+    "--page-padding-left": "max(env(safe-area-inset-left), var(--page-padding-inline))",
+    "--page-padding-right": "max(env(safe-area-inset-right), var(--page-padding-inline))",
+    "--page-max-width": "1024px",
+    "--prose-max-width": "624px",
+    "--homepage-outer-padding": "46px",
+    "--homepage-max-width": "calc(1344px + var(--homepage-outer-padding) * 2)",
+    "--homepage-padding-inset": "32px",
+    "--grid-columns": "12",
+    "--page-inset": "32px",
+    "--layer-debug": "11000",
+    "--layer-max": "10000",
+    "--layer-skip-nav": "5000",
+    "--layer-context-menu": "1200",
+    "--layer-tooltip": "1100",
+    "--layer-toasts": "800",
+    "--layer-dialog": "700",
+    "--layer-dialog-overlay": "699",
+    "--layer-command-menu": "650",
+    "--layer-popover": "600",
+    "--layer-overlay": "500",
+    "--layer-header": "100",
+    "--layer-scrollbar": "75",
+    "--layer-footer": "50",
+    "--layer-3": "3",
+    "--layer-2": "2",
+    "--layer-1": "1",
+    "--radius-4": "4px",
+    "--radius-6": "6px",
+    "--radius-8": "8px",
+    "--radius-12": "12px",
+    "--radius-16": "16px",
+    "--radius-24": "24px",
+    "--radius-32": "32px",
+    "--radius-rounded": "9999px",
+    "--radius-circle": "50%",
+    "--border-hairline": "1px",
+    "--font-serif-display": "\"Tiempos Headline\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+    "--font-monospace": "\"Berkeley Mono\", ui-monospace, \"SF Mono\", \"Menlo\", monospace",
+    "--font-regular": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Open Sans\", \"Helvetica Neue\", sans-serif",
+    "--font-emoji": "\"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Segoe UI\", \"Twemoji Mozilla\", \"Noto Color Emoji\", \"Android Emoji\"",
+    "--font-weight-light": "300",
+    "--font-weight-normal": "400",
+    "--font-weight-medium": "510",
+    "--font-weight-semibold": "590",
+    "--font-weight-bold": "680",
+    "--underline-thickness": "clamp(1px, .0625em, 3px)",
+    "--underline-offset": "clamp(2px, .175em, 4px)",
+    "--speed-highlightFadeIn": "0s",
+    "--speed-highlightFadeOut": ".15s",
+    "--speed-quickTransition": ".1s",
+    "--speed-regularTransition": ".25s",
+    "--mask-visible": "black",
+    "--mask-on": "black",
+    "--mask-ease": "#0003",
+    "--mask-invisible": "transparent",
+    "--mask-off": "transparent",
+    "--shadow-none": "0px 0px 0px transparent",
+    "--shadow-tiny": "var(--shadow-none)",
+    "--shadow-low": "var(--shadow-none)",
+    "--shadow-medium": "var(--shadow-none)",
+    "--shadow-high": "var(--shadow-none)",
+    "--transparent": "#fff0",
+    "--min-tap-size": "44px",
+    "--dvh": "1vh",
+    "--100dvh": "calc(100 * var(--dvh))",
+    "--svh": "1vh",
+    "--100svh": "calc(100 * var(--svh))",
+    "--1fr": "minmax(0, 1fr)",
+    "--scrollbar-color": "#ffffff1a",
+    "--scrollbar-color-hover": "#fff3",
+    "--scrollbar-color-active": "#fff6",
+    "--scrollbar-size": "6px",
+    "--scrollbar-size-active": "10px",
+    "--scrollbar-gap": "4px",
+    "--ease-in-quad": "cubic-bezier(.55, .085, .68, .53)",
+    "--ease-in-cubic": "cubic-bezier(.55, .055, .675, .19)",
+    "--ease-in-quart": "cubic-bezier(.895, .03, .685, .22)",
+    "--ease-in-quint": "cubic-bezier(.755, .05, .855, .06)",
+    "--ease-in-expo": "cubic-bezier(.95, .05, .795, .035)",
+    "--ease-in-circ": "cubic-bezier(.6, .04, .98, .335)",
+    "--ease-out-quad": "cubic-bezier(.25, .46, .45, .94)",
+    "--ease-out-cubic": "cubic-bezier(.215, .61, .355, 1)",
+    "--ease-out-quart": "cubic-bezier(.165, .84, .44, 1)",
+    "--ease-out-quint": "cubic-bezier(.23, 1, .32, 1)",
+    "--ease-out-expo": "cubic-bezier(.19, 1, .22, 1)",
+    "--ease-out-circ": "cubic-bezier(.075, .82, .165, 1)",
+    "--ease-in-out-quad": "cubic-bezier(.455, .03, .515, .955)",
+    "--ease-in-out-cubic": "cubic-bezier(.645, .045, .355, 1)",
+    "--ease-in-out-quart": "cubic-bezier(.77, 0, .175, 1)",
+    "--ease-in-out-quint": "cubic-bezier(.86, 0, .07, 1)",
+    "--ease-in-out-expo": "cubic-bezier(1, 0, 0, 1)",
+    "--ease-in-out-circ": "cubic-bezier(.785, .135, .15, .86)",
+    "--color-white": "#fff",
+    "--color-black": "#000",
+    "--color-blue": "#4ea7fc",
+    "--color-red": "#eb5757",
+    "--color-green": "#27a644",
+    "--color-orange": "#fc7840",
+    "--color-yellow": "#f0bf00",
+    "--color-indigo": "#5e6ad2",
+    "--color-teal": "#00b8cc",
+    "--color-linear-plan": "#68cc58",
+    "--color-linear-build": "#d4b144",
+    "--color-linear-security": "#7a7fad",
+    "--focus-ring-color": "var(--color-indigo)",
+    "--focus-ring-width": "2px",
+    "--focus-ring-offset": "2px",
+    "--focus-ring-outline": "var(--focus-ring-width) solid var(--focus-ring-color)",
+    "--focus-ring-space": "calc(var(--focus-ring-width) + var(--focus-ring-offset))",
+    "--pointer": "pointer",
+    "--cursor-pointer": "pointer",
+    "--cursor-disabled": "not-allowed",
+    "--cursor-tooltip": "help",
+    "--font-size-micro": ".6875rem",
+    "--font-size-microPlus": ".6875rem",
+    "--font-size-mini": ".75rem"
+  }
+}

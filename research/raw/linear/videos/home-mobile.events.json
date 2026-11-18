@@ -1,0 +1,30 @@
+[
+ {
+  "t": 2.2,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 7.2,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 7.2,
+  "what": "no mobile menu button found"
+ },
+ {
+  "t": 9.7,
+  "what": "scrollY=1800 / 5936"
+ },
+ {
+  "t": 12.3,
+  "what": "scrollY=3600 / 5936"
+ },
+ {
+  "t": 14.9,
+  "what": "scrollY=5272 / 5936"
+ },
+ {
+  "t": 16.8,
+  "what": "reached end"
+ }
+]

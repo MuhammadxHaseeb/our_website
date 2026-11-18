@@ -1,0 +1,319 @@
+{
+  "url": "https://webisoft.com/",
+  "libraries": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "SplitText": false,
+    "Lenis": true,
+    "Locomotive": false,
+    "THREE": false,
+    "PIXI": false,
+    "Lottie": false,
+    "Rive": false,
+    "Swiper": true,
+    "Splide": false,
+    "Barba": false,
+    "Swup": false,
+    "AOS": false,
+    "FramerMotion": false,
+    "Webflow_IX2": false,
+    "Motion_one": false
+  },
+  "counts": {
+    "canvas": 3,
+    "video": 0,
+    "autoplayVideo": 0,
+    "svgAnimate": 0,
+    "webglCanvases": 1
+  },
+  "reducedMotionRules": [],
+  "reducedMotionInJS": false,
+  "keyframes": {
+    "blink-animation": [
+      "50% {visibility: hidden;}"
+    ],
+    "blink-once-animation": [
+      "0% {opacity: 1;}",
+      "40% {opacity: 0;}",
+      "60% {opacity: 1;}",
+      "80% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "DropdownContentUpShow": [
+      "0% {opacity: 0; transform: translateY(-1em);}",
+      "100% {opacity: 1; transform: translateY(0px);}"
+    ],
+    "DropdownContentUpHide": [
+      "0% {opacity: 1; transform: translateY(0px);}",
+      "100% {opacity: 0; transform: translateY(-1em);}"
+    ],
+    "DropdownContentBottomShow": [
+      "0% {opacity: 0; transform: translateY(1em);}",
+      "100% {opacity: 1; transform: translateY(0px);}"
+    ],
+    "DropdownContentBottomHide": [
+      "0% {opacity: 1; transform: translateY(0px);}",
+      "100% {opacity: 0; transform: translateY(1em);}"
+    ],
+    "swiper-preloader-spin": [
+      "0% {transform: rotate(0deg);}",
+      "100% {transform: rotate(360deg);}"
+    ]
+  },
+  "cssTransitionDurations": [
+    [
+      "0.3s",
+      2
+    ],
+    [
+      "1ms",
+      1
+    ]
+  ],
+  "cssEasings": [
+    [
+      "linear",
+      2
+    ],
+    [
+      "step-end",
+      1
+    ],
+    [
+      "ease",
+      1
+    ],
+    [
+      "var(--swiper-wrapper-transition-timing-function",
+      1
+    ],
+    [
+      "initial)",
+      1
+    ]
+  ],
+  "elements": [
+    {
+      "label": "button",
+      "text": "Open menu",
+      "cls": "cHeaderMenuButton c-header-menu-button",
+      "transition": "border-left-color 0.6s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "01\nServices",
+      "cls": "c-dropdown-toggle c-header-menu-nav-link || h4",
+      "transition": "opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s",
+      "animation": null,
+      "willChange": null,
+      "transform": "matrix(1, 0, 0, 1, 0, 12)"
+    },
+    {
+      "label": "button",
+      "text": "LET'S TALK\nLET'S TALK",
+      "cls": "c-button",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "EXPLORE\nEXPLORE",
+      "cls": "c-button is-hero-anchor",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "CONTACT US\nCONTACT US",
+      "cls": "c-button",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "EXPLORE\nEXPLORE",
+      "cls": "c-button c-stacked-list-block-card-cta",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Webisoft",
+      "cls": "cLogo c-logo c-header-menu-bar-logo",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S01\nAdvisory",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S02\nArtificial Intelligence",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S03\nBlockchain",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S04\nProduct Development",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "S05\nEnterprise Software",
+      "cls": "c-header-menu-nav-sublink || h5",
+      "transition": "background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Advisory\nGain strategic insights from ou",
+      "cls": "c-stacked-list-block-card",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "",
+      "cls": "c-stacked-list-block-card-index || c-text-label",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Advisory",
+      "cls": "c-stacked-list-block-card-title || h3",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Gain strategic insights from our fractio",
+      "cls": "c-stacked-list-block-card-content",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Gain strategic insights from our fractio",
+      "cls": "c-stacked-list-block-card-content-text || c-wysiwyg",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "EXPLORE\nEXPLORE",
+      "cls": "c-button c-stacked-list-block-card-cta",
+      "transition": "background 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "custom software development services",
+      "cls": "",
+      "transition": "0.3s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "product development",
+      "cls": "",
+      "transition": "0.3s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "AI development",
+      "cls": "",
+      "transition": "0.3s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "c-image_img",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "c-image_img",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "c-image_img",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    }
+  ],
+  "customCursor": true,
+  "dataAttrs": [
+    "data-parallax",
+    "data-parallax-speed",
+    "data-parallax-trigger"
+  ]
+}

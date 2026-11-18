@@ -1,0 +1,187 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Launch project\n\nType:\n\n \n\nExperiences\n\nClient:\n\n \n\nDEPT LABS",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Dream With AI",
+      "family": "ClarendonBTWXX-Light",
+      "size": "50px",
+      "weight": "300",
+      "lineHeight": "58px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#ffffff"
+    },
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "Autonomous Dreams",
+      "family": "nb_internationalproregular",
+      "size": "12px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "0.9px",
+      "textTransform": "none",
+      "color": "#f4f4f4"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "nb_internationalprolight",
+      "weight": 828
+    },
+    {
+      "value": "nb_internationalproregular",
+      "weight": 638
+    },
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 224
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "26px / 300",
+      "weight": 554
+    },
+    {
+      "value": "14px / 400",
+      "weight": 422
+    },
+    {
+      "value": "26px / 400",
+      "weight": 274
+    },
+    {
+      "value": "12px / 400",
+      "weight": 134
+    },
+    {
+      "value": "23px / 300",
+      "weight": 110
+    },
+    {
+      "value": "13px / 400",
+      "weight": 69
+    },
+    {
+      "value": "18px / 400",
+      "weight": 68
+    },
+    {
+      "value": "18px / 300",
+      "weight": 33
+    },
+    {
+      "value": "50px / 300",
+      "weight": 13
+    },
+    {
+      "value": "14px / 300",
+      "weight": 13
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#ffffff",
+      "weight": 697
+    },
+    {
+      "value": "#000000",
+      "weight": 588
+    },
+    {
+      "value": "#f4f4f4",
+      "weight": 303
+    },
+    {
+      "value": "#c6c5c5",
+      "weight": 69
+    },
+    {
+      "value": "#2c2d2e",
+      "weight": 33
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#ffffff",
+      "weight": 6864
+    },
+    {
+      "value": "#2a2a2a",
+      "weight": 2900
+    },
+    {
+      "value": "#000000",
+      "weight": 2066
+    },
+    {
+      "value": "#f8f6f5",
+      "weight": 1808
+    },
+    {
+      "value": "#f0f0f0",
+      "weight": 1744
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

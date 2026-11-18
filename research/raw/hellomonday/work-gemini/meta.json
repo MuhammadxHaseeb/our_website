@@ -1,0 +1,48 @@
+{
+  "url": "https://hellomonday.com/work/gemini",
+  "title": "Hello Monday | Gemini",
+  "description": "Hello Monday is a creative studio in New York, Copenhagen, and Aarhus that handcrafts digital (and magical) products, brands, and experiences.",
+  "canonical": null,
+  "lang": "en",
+  "generator": null,
+  "openGraph": {
+    "og:title": "Hello Monday",
+    "og:site_name": "Hello Monday",
+    "og:url": "https://www.hellomonday.com",
+    "og:description": "Hello Monday is a creative studio in New York, Copenhagen, and Aarhus that handcrafts digital (and magical) products, brands, and experiences.",
+    "og:type": "website",
+    "og:image": "https://www.hellomonday.com/assets/images/icons/hello_monday_default_meta.jpg",
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@hellomondaycom",
+    "twitter:creator": "@hellomondaycom",
+    "twitter:title": "Hello Monday",
+    "twitter:description": "Hello Monday is a creative studio in New York, Copenhagen, and Aarhus that handcrafts digital (and magical) products, brands, and experiences.",
+    "twitter:image": "https://www.hellomonday.com/assets/images/icons/hello_monday_default_meta.jpg"
+  },
+  "platformClues": [
+    "HubSpot",
+    "Intercom"
+  ],
+  "libraryHints": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "Lenis": true,
+    "locomotive": false,
+    "THREE": true,
+    "lottie": false,
+    "Swiper": false,
+    "barba": false,
+    "AOS": false,
+    "framerMotion": false,
+    "video": 3
+  },
+  "scripts": [
+    "https://plausible.io/js/script.js",
+    "https://hellomonday.com/build/js/main-187ce11faa.js",
+    "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+  ],
+  "stylesheets": [
+    "https://hellomonday.com/build/css/bundle-c856abf032.css"
+  ],
+  "pageHeight": 9014
+}

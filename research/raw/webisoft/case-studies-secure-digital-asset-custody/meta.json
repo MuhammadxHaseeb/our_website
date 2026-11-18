@@ -1,0 +1,56 @@
+{
+  "url": "https://webisoft.com/case-studies/secure-digital-asset-custody",
+  "title": "A Canadian federal public-safety agency: case study",
+  "description": "A secure platform to seize, hold and track digital assets, built to meet the evidence rules of Canadian criminal law.",
+  "canonical": "https://webisoft.com/case-studies/secure-digital-asset-custody",
+  "lang": "en",
+  "generator": null,
+  "openGraph": {
+    "og:type": "website",
+    "og:site_name": "Webisoft",
+    "og:title": "A Canadian federal public-safety agency: case study",
+    "og:description": "A secure platform to seize, hold and track digital assets, built to meet the evidence rules of Canadian criminal law.",
+    "og:url": "https://webisoft.com/case-studies/secure-digital-asset-custody",
+    "og:locale": "en_US",
+    "og:image": "https://webisoft.com/og/en/case-studies-secure-digital-asset-custody.png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "A Canadian federal public-safety agency: case study",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "A Canadian federal public-safety agency: case study",
+    "twitter:description": "A secure platform to seize, hold and track digital assets, built to meet the evidence rules of Canadian criminal law.",
+    "twitter:image": "https://webisoft.com/og/en/case-studies-secure-digital-asset-custody.png"
+  },
+  "platformClues": [
+    "HubSpot",
+    "Intercom",
+    "Google Tag Manager"
+  ],
+  "libraryHints": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "Lenis": true,
+    "locomotive": false,
+    "THREE": false,
+    "lottie": false,
+    "Swiper": false,
+    "barba": false,
+    "AOS": false,
+    "framerMotion": false,
+    "video": 0
+  },
+  "scripts": [
+    "https://www.gstatic.com/call-tracking/call-tracking_9.js",
+    "https://www.gstatic.com/wcm/loader.js",
+    "https://webisoft.com/cdn-cgi/zaraz/s.js?z=JTdCJTIyZXhlY3V0ZWQlMjIlM0ElNUIlNUQlMkMlMjJ0JTIyJTNBJTIyQSUyMENhbmFkaWFuJTIwZmVkZXJhbCUyMHB1YmxpYy1zYWZldHklMjBhZ2VuY3klM0ElMjBjYXNlJTIwc3R1ZHklMjIlMkMlMjJ4JTIyJTNBMC44NDU5NjgxMzk1MTY3MTg1JTJDJTIydyUyMiUzQTE0NDAlMkMlMjJoJTIyJTNBOTAwJTJDJTIyaiUyMiUzQTkwMCUyQyUyMmUlMjIlM0ExNDQwJTJDJTIybCUyMiUzQSUyMmh0dHBzJTNBJTJGJTJGd2ViaXNvZnQuY29tJTJGY2FzZS1zdHVkaWVzJTJGc2VjdXJlLWRpZ2l0YWwtYXNzZXQtY3VzdG9keSUyMiUyQyUyMnIlMjIlM0ElMjIlMjIlMkMlMjJrJTIyJTNBMjQlMkMlMjJuJTIyJTNBJTIyVVRGLTglMjIlMkMlMjJvJTIyJTNBLTMwMCUyQyUyMnElMjIlM0ElNUIlNUQlN0Q=",
+    "https://px.personsync.com/dist/analytics.js",
+    "https://cdn.jsdelivr.net/npm/@thumbmarkjs/thumbmarkjs/dist/thumbmark.umd.js",
+    "https://www.googletagmanager.com/gtag/js?id=AW-858349063",
+    "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/858349063/?random=1795011692134&cv=11&fst=1795011692134&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6bh0h2v889618618za208zd889618618xecxf1&gcd=13l3l3R3l5l1&dma=0&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120412526~120420416~120469145~120469153~121049589~121191153~121246026~121246034&u_w=1440&u_h=900&url=https%3A%2F%2Fwebisoft.com%2Fcase-studies%2Fsecure-digital-asset-custody&rcb=10&frm=0&tiba=A%20Canadian%20federal%20public-safety%20agency%3A%20case%20study&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1420454138.1795011692&uaa=x86&uab=64&uafvl=HeadlessChrome%3B159.0.8154.6%7CNot%252FA)Brand%3B8.0.0.0%7CChromium%3B159.0.8154.6&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=4",
+    "https://webisoft.com/_astro/BookCall.astro_astro_type_script_index_0_lang.D1-xU2Q4.js",
+    "https://webisoft.com/_astro/LiteV2Layout.astro_astro_type_script_index_0_lang.DWYFOImx.js",
+    "https://webisoft.com/_astro/LiteV2Layout.astro_astro_type_script_index_1_lang.B8xKX6nf.js"
+  ],
+  "stylesheets": [],
+  "pageHeight": 4282
+}

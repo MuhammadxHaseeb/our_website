@@ -1,0 +1,118 @@
+[
+ {
+  "t": 1.8,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6.9,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 7.1,
+  "what": "hover nav \"\""
+ },
+ {
+  "t": 8.1,
+  "what": "hover nav \"Product\""
+ },
+ {
+  "t": 11,
+  "what": "hover nav \"Resources\""
+ },
+ {
+  "t": 13.9,
+  "what": "hover nav \"Customers\""
+ },
+ {
+  "t": 16.9,
+  "what": "hover nav \"Pricing\""
+ },
+ {
+  "t": 19.8,
+  "what": "hover nav \"Now\""
+ },
+ {
+  "t": 22.7,
+  "what": "hover nav \"Contact\""
+ },
+ {
+  "t": 26.3,
+  "what": "hover \"Milestones and dependencies Highlig\" @y=1680"
+ },
+ {
+  "t": 27.5,
+  "what": "hover \"Predict project outcomes Understand\" @y=1680"
+ },
+ {
+  "t": 29.4,
+  "what": "scrollY=2400 / 14801"
+ },
+ {
+  "t": 30.6,
+  "what": "hover \"Documents +\" @y=3360"
+ },
+ {
+  "t": 31.9,
+  "what": "hover \"COLLABORATIVE EDITING WORK TOGETHER\" @y=3360"
+ },
+ {
+  "t": 34.6,
+  "what": "scrollY=4800 / 14801"
+ },
+ {
+  "t": 35,
+  "what": "hover \"Initiatives +\" @y=5040"
+ },
+ {
+  "t": 36.3,
+  "what": "hover \"Make strategic product work legible\" @y=5040"
+ },
+ {
+  "t": 39.5,
+  "what": "hover \"Visual planning +\" @y=6720"
+ },
+ {
+  "t": 41.2,
+  "what": "scrollY=7200 / 14801"
+ },
+ {
+  "t": 42.7,
+  "what": "hover \"For me Popular Recent A personalize\" @y=8400"
+ },
+ {
+  "t": 45.1,
+  "what": "scrollY=9600 / 14801"
+ },
+ {
+  "t": 45.9,
+  "what": "hover \"Insights →\" @y=10080"
+ },
+ {
+  "t": 47.1,
+  "what": "hover \"Cycle time by creation date Instant\" @y=10080"
+ },
+ {
+  "t": 50.4,
+  "what": "scrollY=12000 / 14801"
+ },
+ {
+  "t": 52.2,
+  "what": "hover \"Customer stories →\" @y=13440"
+ },
+ {
+  "t": 53.5,
+  "what": "hover \"Get started\" @y=13440"
+ },
+ {
+  "t": 55.7,
+  "what": "scrollY=13901 / 14801"
+ },
+ {
+  "t": 56.7,
+  "what": "hover \"Contact sales\" @y=13901"
+ },
+ {
+  "t": 58.5,
+  "what": "reached end"
+ }
+]

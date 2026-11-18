@@ -1,0 +1,58 @@
+[
+ {
+  "t": 1,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 16.1,
+  "what": "hover nav \"Webisoft\""
+ },
+ {
+  "t": 17.1,
+  "what": "hover nav \"Open menu\""
+ },
+ {
+  "t": 18.2,
+  "what": "hover nav \"01\nServices\""
+ },
+ {
+  "t": 21.1,
+  "what": "hover nav \"S01\nAdvisory\""
+ },
+ {
+  "t": 24,
+  "what": "hover nav \"S02\nArtificial Intelligence\""
+ },
+ {
+  "t": 27,
+  "what": "hover nav \"S03\nBlockchain\""
+ },
+ {
+  "t": 29.9,
+  "what": "hover nav \"S04\nProduct Development\""
+ },
+ {
+  "t": 34,
+  "what": "hover \"SINCE NOVEMBER 2025, IN PRODUCTION \" @y=1584"
+ },
+ {
+  "t": 35.2,
+  "what": "hover \"BOOK A CALL\" @y=1584"
+ },
+ {
+  "t": 37.3,
+  "what": "scrollY=2304 / 3983"
+ },
+ {
+  "t": 40.4,
+  "what": "scrollY=3083 / 3983"
+ },
+ {
+  "t": 41.1,
+  "what": "reached end"
+ }
+]

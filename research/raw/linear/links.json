@@ -1,0 +1,387 @@
+{
+  "homepage": "https://linear.app/",
+  "finalUrl": "https://linear.app/",
+  "title": "Linear – The system for product development",
+  "navAndFooterSameDomain": [
+    {
+      "text": "Navigate to home",
+      "href": "https://linear.app/homepage"
+    },
+    {
+      "text": "Customers",
+      "href": "https://linear.app/customers"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://linear.app/pricing"
+    },
+    {
+      "text": "Now",
+      "href": "https://linear.app/now"
+    },
+    {
+      "text": "Contact us",
+      "href": "https://linear.app/contact"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://linear.app/docs"
+    },
+    {
+      "text": "Log in",
+      "href": "https://linear.app/login"
+    },
+    {
+      "text": "Sign up",
+      "href": "https://linear.app/signup"
+    },
+    {
+      "text": "",
+      "href": "https://linear.app"
+    },
+    {
+      "text": "Intake",
+      "href": "https://linear.app/intake"
+    },
+    {
+      "text": "Plan",
+      "href": "https://linear.app/plan"
+    },
+    {
+      "text": "AI",
+      "href": "https://linear.app/ai"
+    },
+    {
+      "text": "Build",
+      "href": "https://linear.app/build"
+    },
+    {
+      "text": "Security",
+      "href": "https://linear.app/security"
+    },
+    {
+      "text": "Asks",
+      "href": "https://linear.app/asks"
+    },
+    {
+      "text": "Agents",
+      "href": "https://linear.app/agents"
+    },
+    {
+      "text": "Cloud Coding Agent",
+      "href": "https://linear.app/coding-agent"
+    },
+    {
+      "text": "Customer Requests",
+      "href": "https://linear.app/customer-requests"
+    },
+    {
+      "text": "Insights",
+      "href": "https://linear.app/insights"
+    },
+    {
+      "text": "Mobile",
+      "href": "https://linear.app/mobile"
+    },
+    {
+      "text": "Reviews",
+      "href": "https://linear.app/reviews"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://linear.app/integrations"
+    },
+    {
+      "text": "Changelog",
+      "href": "https://linear.app/changelog"
+    },
+    {
+      "text": "About",
+      "href": "https://linear.app/about"
+    },
+    {
+      "text": "Careers",
+      "href": "https://linear.app/careers"
+    },
+    {
+      "text": "Method",
+      "href": "https://linear.app/method"
+    },
+    {
+      "text": "Quality",
+      "href": "https://linear.app/quality"
+    },
+    {
+      "text": "Brand",
+      "href": "https://linear.app/brand"
+    },
+    {
+      "text": "Switch",
+      "href": "https://linear.app/switch"
+    },
+    {
+      "text": "Download",
+      "href": "https://linear.app/download"
+    },
+    {
+      "text": "Developers",
+      "href": "https://linear.app/developers"
+    },
+    {
+      "text": "Enterprise",
+      "href": "https://linear.app/enterprise"
+    },
+    {
+      "text": "Startups",
+      "href": "https://linear.app/startups"
+    },
+    {
+      "text": "Other Policies",
+      "href": "https://linear.app/legal"
+    },
+    {
+      "text": "Community",
+      "href": "https://linear.app/join-slack"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://linear.app/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://linear.app/terms"
+    },
+    {
+      "text": "DPA",
+      "href": "https://linear.app/dpa"
+    },
+    {
+      "text": "AUP",
+      "href": "https://linear.app/legal/aup"
+    }
+  ],
+  "nav": [
+    {
+      "text": "Navigate to home",
+      "href": "https://linear.app/homepage"
+    },
+    {
+      "text": "Customers",
+      "href": "https://linear.app/customers"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://linear.app/pricing"
+    },
+    {
+      "text": "Now",
+      "href": "https://linear.app/now"
+    },
+    {
+      "text": "Contact",
+      "href": "https://linear.app/contact"
+    },
+    {
+      "text": "Docs",
+      "href": "https://linear.app/docs"
+    },
+    {
+      "text": "Open app",
+      "href": "https://linear.app/login"
+    },
+    {
+      "text": "Log in",
+      "href": "https://linear.app/login"
+    },
+    {
+      "text": "Sign up",
+      "href": "https://linear.app/signup"
+    }
+  ],
+  "footer": [
+    {
+      "text": "",
+      "href": "https://linear.app/"
+    },
+    {
+      "text": "Intake",
+      "href": "https://linear.app/intake"
+    },
+    {
+      "text": "Plan",
+      "href": "https://linear.app/plan"
+    },
+    {
+      "text": "AI",
+      "href": "https://linear.app/ai"
+    },
+    {
+      "text": "Build",
+      "href": "https://linear.app/build"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://linear.app/pricing"
+    },
+    {
+      "text": "Security",
+      "href": "https://linear.app/security"
+    },
+    {
+      "text": "Asks",
+      "href": "https://linear.app/asks"
+    },
+    {
+      "text": "Agents",
+      "href": "https://linear.app/agents"
+    },
+    {
+      "text": "Cloud Coding Agent",
+      "href": "https://linear.app/coding-agent"
+    },
+    {
+      "text": "Customer Requests",
+      "href": "https://linear.app/customer-requests"
+    },
+    {
+      "text": "Insights",
+      "href": "https://linear.app/insights"
+    },
+    {
+      "text": "Mobile",
+      "href": "https://linear.app/mobile"
+    },
+    {
+      "text": "Reviews",
+      "href": "https://linear.app/reviews"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://linear.app/integrations"
+    },
+    {
+      "text": "Changelog",
+      "href": "https://linear.app/changelog"
+    },
+    {
+      "text": "About",
+      "href": "https://linear.app/about"
+    },
+    {
+      "text": "Customers",
+      "href": "https://linear.app/customers"
+    },
+    {
+      "text": "Careers",
+      "href": "https://linear.app/careers"
+    },
+    {
+      "text": "Now",
+      "href": "https://linear.app/now"
+    },
+    {
+      "text": "Method",
+      "href": "https://linear.app/method"
+    },
+    {
+      "text": "Quality",
+      "href": "https://linear.app/quality"
+    },
+    {
+      "text": "Brand",
+      "href": "https://linear.app/brand"
+    },
+    {
+      "text": "Switch",
+      "href": "https://linear.app/switch"
+    },
+    {
+      "text": "Download",
+      "href": "https://linear.app/download"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://linear.app/docs"
+    },
+    {
+      "text": "Developers",
+      "href": "https://linear.app/developers"
+    },
+    {
+      "text": "Enterprise",
+      "href": "https://linear.app/enterprise"
+    },
+    {
+      "text": "Startups",
+      "href": "https://linear.app/startups"
+    },
+    {
+      "text": "Status",
+      "href": "https://linearstatus.com/"
+    },
+    {
+      "text": "Legal",
+      "href": "https://linear.app/legal"
+    },
+    {
+      "text": "Contact us",
+      "href": "https://linear.app/contact"
+    },
+    {
+      "text": "Community",
+      "href": "https://linear.app/join-slack"
+    },
+    {
+      "text": "X (Twitter)",
+      "href": "https://x.com/linear"
+    },
+    {
+      "text": "GitHub",
+      "href": "https://github.com/linear"
+    },
+    {
+      "text": "YouTube",
+      "href": "https://www.youtube.com/@linear"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://linear.app/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://linear.app/terms"
+    },
+    {
+      "text": "Other Policies",
+      "href": "https://linear.app/legal"
+    },
+    {
+      "text": "DPA",
+      "href": "https://linear.app/dpa"
+    },
+    {
+      "text": "AUP",
+      "href": "https://linear.app/legal/aup"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://linear.app/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://linear.app/terms"
+    },
+    {
+      "text": "Other Policies",
+      "href": "https://linear.app/legal"
+    },
+    {
+      "text": "DPA",
+      "href": "https://linear.app/dpa"
+    },
+    {
+      "text": "AUP",
+      "href": "https://linear.app/legal/aup"
+    }
+  ]
+}

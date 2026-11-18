@@ -1,0 +1,144 @@
+{
+  "site": "webisoft",
+  "startUrl": "https://webisoft.com/",
+  "type": "agency",
+  "capturedAt": "2026-11-18T14:08:44.304Z",
+  "pages": [
+    {
+      "url": "https://webisoft.com",
+      "slug": "home",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/",
+      "cat": "home"
+    },
+    {
+      "url": "c:/Program%20Files/Git/advisory",
+      "slug": "program-20files-git-advisory",
+      "ok": false,
+      "notes": [
+        "desktop error: page.goto: net::ERR_FILE_NOT_FOUND at c:/Program%20Files/Git/advisory",
+        "mobile error: page.goto: net::ERR_FILE_NOT_FOUND at c:/Program%20Files/Git/advisory"
+      ],
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/artificial-intelligence-ai",
+      "slug": "artificial-intelligence-ai",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/artificial-intelligence-ai",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/product-development",
+      "slug": "product-development",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/product-development",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/enterprise-software",
+      "slug": "enterprise-software",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/enterprise-software",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/blockchain",
+      "slug": "blockchain",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/blockchain",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/expertise",
+      "slug": "expertise",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/expertise",
+      "cat": "services"
+    },
+    {
+      "url": "https://webisoft.com/industries",
+      "slug": "industries",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/industries",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://webisoft.com/case-studies",
+      "slug": "case-studies",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/case-studies",
+      "cat": "portfolio"
+    },
+    {
+      "url": "https://webisoft.com/case-studies/secure-digital-asset-custody",
+      "slug": "case-studies-secure-digital-asset-custody",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/case-studies/secure-digital-asset-custody",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://webisoft.com/case-studies/offshore-logistics-erp",
+      "slug": "case-studies-offshore-logistics-erp",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/case-studies/offshore-logistics-erp",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://webisoft.com/case-studies/out-of-home-ad-operations",
+      "slug": "case-studies-out-of-home-ad-operations",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/case-studies/out-of-home-ad-operations",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://webisoft.com/about",
+      "slug": "about",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/about",
+      "cat": "about"
+    },
+    {
+      "url": "https://webisoft.com/contact",
+      "slug": "contact",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/contact",
+      "cat": "contact"
+    },
+    {
+      "url": "https://webisoft.com/articles",
+      "slug": "articles",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://webisoft.com/articles",
+      "cat": "blog"
+    }
+  ]
+}

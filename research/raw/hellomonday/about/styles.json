@@ -1,0 +1,187 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Jump ahead:\n\nContact\n\nCode of Honor\n\nMondayteers\n\nWho we are",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Who we are",
+      "family": "ClarendonBTWXX-Light",
+      "size": "130px",
+      "weight": "300",
+      "lineHeight": "110.5px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "New York",
+      "family": "ClarendonBTWXX-Light",
+      "size": "70px",
+      "weight": "300",
+      "lineHeight": "59.5px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "nb_internationalproregular",
+      "weight": 3116
+    },
+    {
+      "value": "nb_internationalprolight",
+      "weight": 1088
+    },
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 432
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "13px / 400",
+      "weight": 2614
+    },
+    {
+      "value": "19px / 400",
+      "weight": 481
+    },
+    {
+      "value": "14px / 400",
+      "weight": 439
+    },
+    {
+      "value": "30px / 400",
+      "weight": 414
+    },
+    {
+      "value": "23px / 300",
+      "weight": 273
+    },
+    {
+      "value": "16px / 300",
+      "weight": 137
+    },
+    {
+      "value": "16px / 400",
+      "weight": 119
+    },
+    {
+      "value": "18px / 400",
+      "weight": 68
+    },
+    {
+      "value": "18px / 300",
+      "weight": 33
+    },
+    {
+      "value": "70px / 300",
+      "weight": 24
+    },
+    {
+      "value": "80px / 300",
+      "weight": 24
+    },
+    {
+      "value": "130px / 300",
+      "weight": 10
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#000000",
+      "weight": 4342
+    },
+    {
+      "value": "#c6c5c5",
+      "weight": 234
+    },
+    {
+      "value": "#2c2d2e",
+      "weight": 33
+    },
+    {
+      "value": "#b9b9b9",
+      "weight": 16
+    },
+    {
+      "value": "#ffffff",
+      "weight": 11
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#ffffff",
+      "weight": 11520
+    },
+    {
+      "value": "#f8f6f5",
+      "weight": 6952
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    },
+    {
+      "value": "#000000",
+      "weight": 3
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

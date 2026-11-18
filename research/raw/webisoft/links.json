@@ -1,0 +1,335 @@
+{
+  "homepage": "https://webisoft.com/",
+  "finalUrl": "https://webisoft.com/",
+  "title": "Custom Software Development Company | Webisoft",
+  "navAndFooterSameDomain": [
+    {
+      "text": "Webisoft",
+      "href": "https://webisoft.com"
+    },
+    {
+      "text": "Advisory",
+      "href": "https://webisoft.com/advisory"
+    },
+    {
+      "text": "Artificial Intelligence (AI)",
+      "href": "https://webisoft.com/artificial-intelligence-ai"
+    },
+    {
+      "text": "Blockchain",
+      "href": "https://webisoft.com/blockchain"
+    },
+    {
+      "text": "Product Development",
+      "href": "https://webisoft.com/product-development"
+    },
+    {
+      "text": "Enterprise Software",
+      "href": "https://webisoft.com/enterprise-software"
+    },
+    {
+      "text": "INDUSTRIES",
+      "href": "https://webisoft.com/industries"
+    },
+    {
+      "text": "PRODUCTS",
+      "href": "https://webisoft.com/products"
+    },
+    {
+      "text": "ABOUT",
+      "href": "https://webisoft.com/about"
+    },
+    {
+      "text": "CONTACT US LET'S TALK / F034671",
+      "href": "https://webisoft.com/contact"
+    },
+    {
+      "text": "FRANÇAIS FRANÇAIS",
+      "href": "https://webisoft.com/fr"
+    },
+    {
+      "text": "CASE STUDIES",
+      "href": "https://webisoft.com/case-studies"
+    },
+    {
+      "text": "EXPERTISE",
+      "href": "https://webisoft.com/expertise"
+    },
+    {
+      "text": "MONTREAL",
+      "href": "https://webisoft.com/montreal"
+    },
+    {
+      "text": "Articles",
+      "href": "https://webisoft.com/articles"
+    },
+    {
+      "text": "Podcasts",
+      "href": "https://webisoft.com/podcasts"
+    },
+    {
+      "text": "TERMS & CONDITIONS TERMS & CONDITIONS",
+      "href": "https://webisoft.com/terms-conditions"
+    },
+    {
+      "text": "PRIVACY POLICY PRIVACY POLICY",
+      "href": "https://webisoft.com/privacy-policy"
+    }
+  ],
+  "nav": [
+    {
+      "text": "Webisoft",
+      "href": "https://webisoft.com/"
+    },
+    {
+      "text": "S01 Advisory",
+      "href": "https://webisoft.com/advisory"
+    },
+    {
+      "text": "S02 Artificial Intelligence",
+      "href": "https://webisoft.com/artificial-intelligence-ai"
+    },
+    {
+      "text": "S03 Blockchain",
+      "href": "https://webisoft.com/blockchain"
+    },
+    {
+      "text": "S04 Product Development",
+      "href": "https://webisoft.com/product-development"
+    },
+    {
+      "text": "S05 Enterprise Software",
+      "href": "https://webisoft.com/enterprise-software"
+    },
+    {
+      "text": "02 Industries",
+      "href": "https://webisoft.com/industries"
+    },
+    {
+      "text": "03 Products",
+      "href": "https://webisoft.com/products"
+    },
+    {
+      "text": "04 About",
+      "href": "https://webisoft.com/about"
+    },
+    {
+      "text": "05 Contact",
+      "href": "https://webisoft.com/contact"
+    },
+    {
+      "text": "CONTACT US LET'S TALK / F034671",
+      "href": "https://webisoft.com/contact"
+    },
+    {
+      "text": "FRANÇAIS FRANÇAIS",
+      "href": "https://webisoft.com/fr"
+    },
+    {
+      "text": "CLUTCH 4.9/5 · 23 REVIEWS 4.9/5",
+      "href": "https://clutch.co/profile/webisoft"
+    },
+    {
+      "text": "Advisory",
+      "href": "https://webisoft.com/advisory"
+    },
+    {
+      "text": "Artificial Intelligence (AI)",
+      "href": "https://webisoft.com/artificial-intelligence-ai"
+    },
+    {
+      "text": "Blockchain",
+      "href": "https://webisoft.com/blockchain"
+    },
+    {
+      "text": "Product Development",
+      "href": "https://webisoft.com/product-development"
+    },
+    {
+      "text": "Enterprise Software",
+      "href": "https://webisoft.com/enterprise-software"
+    },
+    {
+      "text": "INDUSTRIES",
+      "href": "https://webisoft.com/industries"
+    },
+    {
+      "text": "PRODUCTS",
+      "href": "https://webisoft.com/products"
+    },
+    {
+      "text": "ABOUT",
+      "href": "https://webisoft.com/about"
+    },
+    {
+      "text": "CASE STUDIES",
+      "href": "https://webisoft.com/case-studies"
+    },
+    {
+      "text": "EXPERTISE",
+      "href": "https://webisoft.com/expertise"
+    },
+    {
+      "text": "MONTREAL",
+      "href": "https://webisoft.com/montreal"
+    },
+    {
+      "text": "Articles",
+      "href": "https://webisoft.com/articles"
+    },
+    {
+      "text": "Podcasts",
+      "href": "https://webisoft.com/podcasts"
+    },
+    {
+      "text": "LinkedIn",
+      "href": "https://www.linkedin.com/company/webisoftdigital/"
+    },
+    {
+      "text": "Facebook",
+      "href": "https://www.facebook.com/WebisoftDigital"
+    },
+    {
+      "text": "X (Twitter)",
+      "href": "https://x.com/webisoft"
+    },
+    {
+      "text": "Instagram",
+      "href": "https://www.instagram.com/agencewebisoft/"
+    },
+    {
+      "text": "460 Saint-Catherine W. Suite 305 Montreal, Quebec H3B 1A7",
+      "href": "https://maps.google.com/?q=460%20Saint-Catherine%20W.%20%20Suite%20305%20%20Montreal,%20Quebec%20%20H3B%201A7"
+    },
+    {
+      "text": "333 SE 2nd Avenue Suite 2000 Miami Florida 33131",
+      "href": "https://maps.google.com/?q=333%20SE%202nd%20Avenue%20%20Suite%202000%20%20Miami%20Florida%20%2033131"
+    },
+    {
+      "text": "460 Saint-Catherine W. Suite 305 Montreal, Quebec H3B 1A7",
+      "href": "https://maps.google.com/?q=460%20Saint-Catherine%20W.%20%20Suite%20305%20%20Montreal,%20Quebec%20%20H3B%201A7"
+    },
+    {
+      "text": "333 SE 2nd Avenue Suite 2000 Miami Florida 33131",
+      "href": "https://maps.google.com/?q=333%20SE%202nd%20Avenue%20%20Suite%202000%20%20Miami%20Florida%20%2033131"
+    },
+    {
+      "text": "TERMS & CONDITIONS TERMS & CONDITIONS",
+      "href": "https://webisoft.com/terms-conditions"
+    },
+    {
+      "text": "PRIVACY POLICY PRIVACY POLICY",
+      "href": "https://webisoft.com/privacy-policy"
+    },
+    {
+      "text": "DESIGNED BY LOCOMOTIVE® DESIGNED BY LOCOMOTIVE®",
+      "href": "https://locomotive.ca/"
+    }
+  ],
+  "footer": [
+    {
+      "text": "FRANÇAIS FRANÇAIS",
+      "href": "https://webisoft.com/fr"
+    },
+    {
+      "text": "CLUTCH 4.9/5 · 23 REVIEWS 4.9/5",
+      "href": "https://clutch.co/profile/webisoft"
+    },
+    {
+      "text": "Advisory",
+      "href": "https://webisoft.com/advisory"
+    },
+    {
+      "text": "Artificial Intelligence (AI)",
+      "href": "https://webisoft.com/artificial-intelligence-ai"
+    },
+    {
+      "text": "Blockchain",
+      "href": "https://webisoft.com/blockchain"
+    },
+    {
+      "text": "Product Development",
+      "href": "https://webisoft.com/product-development"
+    },
+    {
+      "text": "Enterprise Software",
+      "href": "https://webisoft.com/enterprise-software"
+    },
+    {
+      "text": "INDUSTRIES",
+      "href": "https://webisoft.com/industries"
+    },
+    {
+      "text": "PRODUCTS",
+      "href": "https://webisoft.com/products"
+    },
+    {
+      "text": "ABOUT",
+      "href": "https://webisoft.com/about"
+    },
+    {
+      "text": "CASE STUDIES",
+      "href": "https://webisoft.com/case-studies"
+    },
+    {
+      "text": "EXPERTISE",
+      "href": "https://webisoft.com/expertise"
+    },
+    {
+      "text": "MONTREAL",
+      "href": "https://webisoft.com/montreal"
+    },
+    {
+      "text": "Articles",
+      "href": "https://webisoft.com/articles"
+    },
+    {
+      "text": "Podcasts",
+      "href": "https://webisoft.com/podcasts"
+    },
+    {
+      "text": "LinkedIn",
+      "href": "https://www.linkedin.com/company/webisoftdigital/"
+    },
+    {
+      "text": "Facebook",
+      "href": "https://www.facebook.com/WebisoftDigital"
+    },
+    {
+      "text": "X (Twitter)",
+      "href": "https://x.com/webisoft"
+    },
+    {
+      "text": "Instagram",
+      "href": "https://www.instagram.com/agencewebisoft/"
+    },
+    {
+      "text": "460 Saint-Catherine W. Suite 305 Montreal, Quebec H3B 1A7",
+      "href": "https://maps.google.com/?q=460%20Saint-Catherine%20W.%20%20Suite%20305%20%20Montreal,%20Quebec%20%20H3B%201A7"
+    },
+    {
+      "text": "333 SE 2nd Avenue Suite 2000 Miami Florida 33131",
+      "href": "https://maps.google.com/?q=333%20SE%202nd%20Avenue%20%20Suite%202000%20%20Miami%20Florida%20%2033131"
+    },
+    {
+      "text": "460 Saint-Catherine W. Suite 305 Montreal, Quebec H3B 1A7",
+      "href": "https://maps.google.com/?q=460%20Saint-Catherine%20W.%20%20Suite%20305%20%20Montreal,%20Quebec%20%20H3B%201A7"
+    },
+    {
+      "text": "333 SE 2nd Avenue Suite 2000 Miami Florida 33131",
+      "href": "https://maps.google.com/?q=333%20SE%202nd%20Avenue%20%20Suite%202000%20%20Miami%20Florida%20%2033131"
+    },
+    {
+      "text": "TERMS & CONDITIONS TERMS & CONDITIONS",
+      "href": "https://webisoft.com/terms-conditions"
+    },
+    {
+      "text": "PRIVACY POLICY PRIVACY POLICY",
+      "href": "https://webisoft.com/privacy-policy"
+    },
+    {
+      "text": "DESIGNED BY LOCOMOTIVE® DESIGNED BY LOCOMOTIVE®",
+      "href": "https://locomotive.ca/"
+    }
+  ]
+}

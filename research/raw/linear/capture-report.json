@@ -1,0 +1,53 @@
+{
+  "site": "linear",
+  "startUrl": "https://linear.app/",
+  "type": "product",
+  "capturedAt": "2026-11-18T14:36:19.990Z",
+  "pages": [
+    {
+      "url": "https://linear.app",
+      "slug": "home",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://linear.app/",
+      "cat": "home"
+    },
+    {
+      "url": "https://linear.app/plan",
+      "slug": "plan",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://linear.app/plan",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://linear.app/build",
+      "slug": "build",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://linear.app/build",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://linear.app/ai",
+      "slug": "ai",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://linear.app/ai",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://linear.app/customers",
+      "slug": "customers",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://linear.app/customers",
+      "cat": "explicit"
+    }
+  ]
+}

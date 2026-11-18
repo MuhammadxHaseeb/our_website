@@ -1,0 +1,129 @@
+{
+  "site": "hellomonday",
+  "startUrl": "https://hellomonday.com/",
+  "type": "agency",
+  "capturedAt": "2026-11-18T14:40:53.409Z",
+  "pages": [
+    {
+      "url": "https://hellomonday.com",
+      "slug": "home",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/",
+      "cat": "home"
+    },
+    {
+      "url": "https://hellomonday.com/work",
+      "slug": "work",
+      "ok": true,
+      "notes": [
+        "sections: viewport slices"
+      ],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work",
+      "cat": "portfolio"
+    },
+    {
+      "url": "https://hellomonday.com/work/dream-with-ai",
+      "slug": "work-dream-with-ai",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/dream-with-ai",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://hellomonday.com/work/gemini",
+      "slug": "work-gemini",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/gemini",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://hellomonday.com/work/the-web-can-do-what",
+      "slug": "work-the-web-can-do-what",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/the-web-can-do-what",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://hellomonday.com/services",
+      "slug": "services",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/services",
+      "cat": "services"
+    },
+    {
+      "url": "https://hellomonday.com/product",
+      "slug": "product",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/product",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://hellomonday.com/about",
+      "slug": "about",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/about",
+      "cat": "about"
+    },
+    {
+      "url": "https://hellomonday.com/stories",
+      "slug": "stories",
+      "ok": true,
+      "notes": [
+        "sections: viewport slices"
+      ],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/stories",
+      "cat": "explicit"
+    },
+    {
+      "url": "https://hellomonday.com/work/aurorasolar",
+      "slug": "work-aurorasolar",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/aurorasolar",
+      "cat": "portfolio"
+    },
+    {
+      "url": "https://hellomonday.com/work/collective-health",
+      "slug": "work-collective-health",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/collective-health",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://hellomonday.com/work/epos-branding-meets-ecommerce",
+      "slug": "work-epos-branding-meets-ecommerce",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/epos-branding-meets-ecommerce",
+      "cat": "case-study"
+    },
+    {
+      "url": "https://hellomonday.com/work/wove",
+      "slug": "work-wove",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://hellomonday.com/work/wove",
+      "cat": "case-study"
+    }
+  ]
+}

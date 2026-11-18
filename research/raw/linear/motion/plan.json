@@ -1,0 +1,561 @@
+{
+  "url": "https://linear.app/plan",
+  "libraries": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "SplitText": false,
+    "Lenis": false,
+    "Locomotive": false,
+    "THREE": false,
+    "PIXI": false,
+    "Lottie": false,
+    "Rive": false,
+    "Swiper": false,
+    "Splide": false,
+    "Barba": false,
+    "Swup": false,
+    "AOS": false,
+    "FramerMotion": false,
+    "Webflow_IX2": false,
+    "Motion_one": false
+  },
+  "counts": {
+    "canvas": 0,
+    "video": 1,
+    "autoplayVideo": 1,
+    "svgAnimate": 0,
+    "webglCanvases": 0
+  },
+  "reducedMotionRules": [
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: no-preference) → .WinFxq_content { transform-origin: var(--transform-origin); } .WinFxq_content[data-open] { animation: WinFxq_contextMenuIn var(--speed-quickTransition) var(--ease-out-quad); } .WinFxq_content[data-ending-style] { animation: WinFxq_contextMenuOut var(--speed-quickTransition) var(--ease-in-quad); }",
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: no-preference) → .TZTsQG_mobileMenuContent[data-open] { animation: 0.18s ease 0s 1 normal both running TZTsQG_mobileMenuIn; } .TZTsQG_mobileMenuContent[data-ending-style] { animation: 0.18s ease 0s 1 normal both running TZTsQG_mobileMenuOut; }",
+    "(prefers-reduced-motion: no-preference) → .TZTsQG_content { --duration: .18s; --anim-amount: 48px; animation: var(--duration) var(--ease-in-out-quad) both; } .TZTsQG_content :is(.TZTsQG_subItems, .TZTsQG_contentFooter) > * { animation: var(--duration) var(--ease-in-out-quad) both; will-change: transform; } .TZTsQG_content[data-open][data-activation-direction=\"left\"] { animation-name: TZTsQG_fadeIn; } .TZTsQG_content[data-open][data-activation-direction=\"left\"] :is(.TZTsQG_subItems, .TZTsQG_contentFooter) > * { animation-name: TZTsQG_slideFromLeft; }",
+    "(prefers-reduced-motion: no-preference) → .TZTsQG_popup { animation: 0.18s ease 0s 1 normal both running TZTsQG_scaleIn; } .TZTsQG_popup[data-ending-style] { animation: 0.18s ease 0s 1 normal both running TZTsQG_scaleOut; }",
+    "(prefers-reduced-motion: no-preference) → html.js .Sz_9La_root[data-fade=\"true\"] { opacity: 0; mask: var(--mask-start); --mask-start: linear-gradient(to right, #000 25%, #000000e6 50%, #0000) 150% 0 / 4 html.js .Sz_9La_root[data-fade=\"true\"][data-loaded=\"true\"] { animation: 0.8s ease 0s 1 normal both running Sz_9La_load; }",
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: no-preference) → .xt7VyG_content { animation: xt7VyG_scroll var(--Marquee-duration) linear infinite; } .xt7VyG_content.xt7VyG_vertical { animation: xt7VyG_scroll-vertical var(--Marquee-duration) linear infinite; } .xt7VyG_content:nth-child(2) { visibility: visible; animation: xt7VyG_scroll-abs var(--Marquee-duration) linear infinite; } .xt7VyG_content:nth-child(2).xt7VyG_vertical { animation: xt7VyG_scroll-abs-vertical var(--Marquee-duration) linear infinite; }",
+    "(prefers-reduced-motion:reduced) → .xt7VyG_content[aria-hidden=\"true\"] { display: none; }",
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: reduce) → .GJ9TEa_purposeLift, .GJ9TEa_purposeEdge { transition: none; }",
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: reduce) → :is(._8fVXdW_codeColumn .line.diff-old, ._8fVXdW_codeColumn .line.diff-new) { transition: none; }",
+    "(prefers-reduced-motion: reduce) → ._8fVXdW_codeColumn .line.diff-old::before { transition: none; }",
+    "(prefers-reduced-motion: reduce) → ._8fVXdW_codeColumn .line.diff-new::before { transition: none; }",
+    "(prefers-reduced-motion: reduce) → .fFDhtq_dot { opacity: 1; }",
+    "(prefers-reduced-motion: reduce) → .fFDhtq_inView .fFDhtq_dot { animation: auto ease 0s 1 normal none running none; }",
+    "(prefers-reduced-motion: no-preference) → .Fzcv4W_smooth-scroll { scroll-behavior: smooth; }",
+    "(prefers-reduced-motion: no-preference) → .qM9FAa_cursor { animation: 1.25s ease 0s infinite normal none running qM9FAa_cursorBlink; }"
+  ],
+  "reducedMotionInJS": false,
+  "keyframes": {
+    "_6QN9Vq_tooltipOpen": [
+      "0% {opacity: 0; transform: scale(0.9);}",
+      "100% {opacity: 1; transform: scale(1);}"
+    ],
+    "_6QN9Vq_tooltipClose": [
+      "0% {opacity: 1; transform: scale(1);}",
+      "100% {opacity: 0; transform: scale(0.9);}"
+    ],
+    "WinFxq_contextMenuIn": [
+      "0% {opacity: 0; transform: scale(0.9);}",
+      "100% {opacity: 1; transform: scale(1);}"
+    ],
+    "WinFxq_contextMenuOut": [
+      "0% {opacity: 1; transform: scale(1);}",
+      "100% {opacity: 0; transform: scale(0.9);}"
+    ],
+    "TZTsQG_mobileMenuIn": [
+      "0% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "TZTsQG_mobileMenuOut": [
+      "0% {opacity: 1;}",
+      "100% {opacity: 0;}"
+    ],
+    "TZTsQG_slideFromRight": [
+      "0% {transform: translateX(var(--anim-amount));}",
+      "100% {transform: translate(0px);}"
+    ],
+    "TZTsQG_slideFromLeft": [
+      "0% {transform: translateX(calc(-1 * var(--anim-amount)));}",
+      "100% {transform: translate(0px);}"
+    ],
+    "TZTsQG_slideToRight": [
+      "0% {transform: translate(0px);}",
+      "100% {transform: translateX(var(--anim-amount));}"
+    ],
+    "TZTsQG_slideToLeft": [
+      "0% {transform: translate(0px);}",
+      "100% {transform: translateX(calc(-1 * var(--anim-amount)));}"
+    ],
+    "TZTsQG_scaleIn": [
+      "0% {opacity: 0; transform: scale(0.98);}",
+      "100% {opacity: 1; transform: scale(1);}"
+    ],
+    "TZTsQG_scaleOut": [
+      "0% {opacity: 1; transform: scale(1);}",
+      "100% {opacity: 0; transform: scale(0.98);}"
+    ],
+    "TZTsQG_fadeIn": [
+      "0% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "TZTsQG_fadeOut": [
+      "0% {opacity: 1;}",
+      "100% {opacity: 0;}"
+    ],
+    "Sz_9La_load": [
+      "100% {opacity: 1; mask: var(--mask-end);}"
+    ],
+    "wOrUyW_scaleIn": [
+      "0% {opacity: 0; transform: translate(-50%) scale(0.96);}",
+      "100% {opacity: 1; transform: translate(-50%) scale(1);}"
+    ],
+    "wOrUyW_scaleOut": [
+      "0% {opacity: 1; transform: translate(-50%) scale(1);}",
+      "100% {opacity: 0; transform: translate(-50%) scale(0.96);}"
+    ],
+    "wOrUyW_fadeIn": [
+      "0% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "wOrUyW_fadeOut": [
+      "0% {opacity: 1;}",
+      "100% {opacity: 0;}"
+    ],
+    "wOrUyW_dialogBounce": [
+      "50% {transform: translate(-50%) scale(0.98);}"
+    ],
+    "vaulFadeIn": [
+      "0% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "vaulFadeOut": [
+      "100% {opacity: 0;}"
+    ],
+    "vaulSlideFromBottom": [
+      "0% {transform: translate3d(0, var(--initial-transform,100%), 0);}",
+      "100% {transform: translate(0px);}"
+    ],
+    "vaulSlideToBottom": [
+      "100% {transform: translate3d(0, var(--initial-transform,100%), 0);}"
+    ],
+    "xt7VyG_scroll": [
+      "0% {transform: translate(0px);}",
+      "100% {transform: translateX(calc(-100% - var(--Marquee-gap)));}"
+    ],
+    "xt7VyG_scroll-vertical": [
+      "0% {transform: translateY(0px);}",
+      "100% {transform: translateY(calc(-100% - var(--Marquee-gap)));}"
+    ],
+    "xt7VyG_scroll-abs": [
+      "0% {transform: translateX(calc(100% + var(--Marquee-gap)));}",
+      "100% {transform: translate(0px);}"
+    ],
+    "xt7VyG_scroll-abs-vertical": [
+      "0% {transform: translateY(calc(100% + var(--Marquee-gap)));}",
+      "100% {transform: translateY(0px);}"
+    ],
+    "fFDhtq_dotIn": [
+      "0% {opacity: 0; transform: scale(0.4);}",
+      "100% {opacity: 1; transform: scale(1);}"
+    ],
+    "qM9FAa_shimmerSweep": [
+      "0% {background-position: 150% 0px;}",
+      "100% {background-position: -50% 0px;}"
+    ],
+    "qM9FAa_cursorBlink": [
+      "0% {opacity: 1;}",
+      "49% {opacity: 1;}",
+      "50% {opacity: 0;}",
+      "99% {opacity: 0;}",
+      "100% {opacity: 1;}"
+    ],
+    "_4YXZSa_pillarHeroPulse": [
+      "100% {box-shadow: rgba(243, 79, 82, 0) 0px 0px 0px 10px;}"
+    ],
+    "-VOcTG_agentBorderSweep": [
+      "0% {background-position: 0px center;}",
+      "100% {background-position: 120px center;}"
+    ],
+    "-VOcTG_agentLabelSweep": [
+      "0% {background-position: calc(-1 * var(--badge-label-offset)) 50%, 0 50%;}",
+      "100% {background-position: calc(120px - var(--badge-label-offset)) 50%, 0 50%;}"
+    ],
+    "gli-small-medley": [
+      "0% {transform: translate(0px);}",
+      "0.8696% {transform: translate(-1.4706%);}",
+      "1.7391% {transform: translate(-2.9412%);}",
+      "2.6087% {transform: translate(-4.4118%);}",
+      "3.4783% {transform: translate(-5.8824%);}",
+      "4.3478% {transform: translate(-7.3529%);}"
+    ],
+    "gli-sprite": [
+      "0% {transform: translate(0px);}",
+      "5% {transform: translate(-100%);}",
+      "5.0001% {transform: translate(0px);}",
+      "10% {transform: translate(-100%);}",
+      "10.0001% {transform: translate(0px);}",
+      "15% {transform: translate(-100%);}"
+    ],
+    "qqCMlG_suffixEnter": [
+      "0% {opacity: 0;}"
+    ],
+    "qqCMlG_suffixExit": [
+      "0% {opacity: 1;}"
+    ],
+    "PPSGPG_blink": [
+      "50% {visibility: hidden;}"
+    ],
+    "_4phDSW_highlightReveal": [
+      "0% {clip-path: inset(0px 100% 0px 0px);}",
+      "100% {clip-path: inset(0px);}"
+    ]
+  },
+  "cssTransitionDurations": [
+    [
+      "0s",
+      17
+    ],
+    [
+      "0.2s",
+      11
+    ],
+    [
+      "0.4s",
+      11
+    ],
+    [
+      "0.1s",
+      7
+    ],
+    [
+      "0.5s",
+      6
+    ],
+    [
+      "var(--speed-highlightFadeIn)",
+      6
+    ],
+    [
+      "0.12s",
+      5
+    ],
+    [
+      "0.3s",
+      5
+    ],
+    [
+      "0.22s",
+      4
+    ],
+    [
+      "0.7s",
+      3
+    ],
+    [
+      "0.15s",
+      3
+    ],
+    [
+      "80ms",
+      1
+    ],
+    [
+      "0.6s",
+      1
+    ],
+    [
+      "60ms",
+      1
+    ],
+    [
+      "0.25s",
+      1
+    ]
+  ],
+  "cssEasings": [
+    [
+      "ease",
+      71
+    ],
+    [
+      "ease-out",
+      14
+    ],
+    [
+      "0",
+      13
+    ],
+    [
+      "1)",
+      12
+    ],
+    [
+      "cubic-bezier(0.32",
+      9
+    ],
+    [
+      "0.72",
+      9
+    ],
+    [
+      "linear",
+      5
+    ],
+    [
+      "steps(8)",
+      4
+    ],
+    [
+      "steps(7)",
+      3
+    ],
+    [
+      "steps(6)",
+      3
+    ],
+    [
+      "cubic-bezier(0.66",
+      2
+    ],
+    [
+      "ease-in-out",
+      2
+    ],
+    [
+      "steps(12)",
+      2
+    ],
+    [
+      "steps(9)",
+      2
+    ],
+    [
+      "steps(5)",
+      2
+    ]
+  ],
+  "elements": [
+    {
+      "label": "button",
+      "text": "Product",
+      "cls": "TZTsQG_anchor TZTsQG_trigger hCgVwa_reset-button",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "Resources",
+      "cls": "TZTsQG_anchor TZTsQG_trigger hCgVwa_reset-button",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "Projects\n+",
+      "cls": "UBZV-G_trigger",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "Documents\n+",
+      "cls": "UBZV-G_trigger",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "COLLABORATIVE EDITING\nWORK TOGETHER ON P",
+      "cls": "_4phDSW_feature",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "button",
+      "text": "INLINE COMMENTS\nDISCUSS IDEAS DIRECTLY I",
+      "cls": "_4phDSW_feature",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Navigate to home",
+      "cls": "TZTsQG_logoLink I_mUeq_root",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Customers",
+      "cls": "TZTsQG_anchor I_mUeq_root",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Pricing",
+      "cls": "TZTsQG_anchor I_mUeq_root",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Now",
+      "cls": "TZTsQG_anchor I_mUeq_root",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Contact",
+      "cls": "TZTsQG_anchor I_mUeq_root",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Log in",
+      "cls": "TZTsQG_anchor I_mUeq_root",
+      "transition": "color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Overview\nActivity\nCustomers\nIssues\nClose",
+      "cls": "kmKW8a_card kmKW8a_hero ImRUSq_root ImRUSq_column",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Milestones and dependencies\n\nHighlight k",
+      "cls": "kmKW8a_card ImRUSq_root ImRUSq_column",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Predict project outcomes\n\nUnderstand how",
+      "cls": "kmKW8a_card ImRUSq_root ImRUSq_column",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Off Track\nLaunch postponed until legal i",
+      "cls": "kmKW8a_card ImRUSq_root ImRUSq_column",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Off Track\nLaunch postponed until legal i",
+      "cls": "Z-_uma_card",
+      "transition": "opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "card",
+      "text": "Off Track\nLaunch postponed until legal i",
+      "cls": "Z-_uma_cardContent",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "",
+      "cls": "Jmh1Wq_logoWrapper I_mUeq_root I_mUeq_variant-fade",
+      "transition": "color 0.1s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Intake",
+      "cls": "Jmh1Wq_sectionLink I_mUeq_root I_mUeq_variant-dimmed",
+      "transition": "color 0.1s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Plan",
+      "cls": "Jmh1Wq_sectionLink I_mUeq_root I_mUeq_variant-dimmed",
+      "transition": "color 0.1s",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "Sz_9La_root",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "VfJKka_image Sz_9La_root",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "image",
+      "text": "",
+      "cls": "-Nutwq_avatar Sz_9La_root",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    }
+  ],
+  "customCursor": true,
+  "dataAttrs": []
+}

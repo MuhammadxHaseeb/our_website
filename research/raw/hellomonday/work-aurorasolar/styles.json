@@ -1,0 +1,183 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Type:\n\n \n\nBranding\n\nClient:\n\n \n\nAurora Solar\n\nDeliverables:\n",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Aurora Solar - Hitting fast-forward on the solar future",
+      "family": "ClarendonBTWXX-Light",
+      "size": "50px",
+      "weight": "300",
+      "lineHeight": "58px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "h2": null,
+    "h3": {
+      "selector": "h3",
+      "sample": "Brandmark",
+      "family": "nb_internationalproregular",
+      "size": "12px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "0.9px",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "nb_internationalproregular, Georgia, \"Times New Roman\", Times, serif",
+      "size": "22px",
+      "weight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#000000"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "nb_internationalprolight",
+      "weight": 1422
+    },
+    {
+      "value": "nb_internationalproregular",
+      "weight": 692
+    },
+    {
+      "value": "ClarendonBTWXX-Light",
+      "weight": 256
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "26px / 300",
+      "weight": 981
+    },
+    {
+      "value": "26px / 400",
+      "weight": 441
+    },
+    {
+      "value": "14px / 400",
+      "weight": 408
+    },
+    {
+      "value": "12px / 400",
+      "weight": 203
+    },
+    {
+      "value": "23px / 300",
+      "weight": 100
+    },
+    {
+      "value": "18px / 400",
+      "weight": 68
+    },
+    {
+      "value": "50px / 300",
+      "weight": 55
+    },
+    {
+      "value": "13px / 400",
+      "weight": 47
+    },
+    {
+      "value": "14px / 300",
+      "weight": 34
+    },
+    {
+      "value": "18px / 300",
+      "weight": 33
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#000000",
+      "weight": 2279
+    },
+    {
+      "value": "#c6c5c5",
+      "weight": 47
+    },
+    {
+      "value": "#2c2d2e",
+      "weight": 33
+    },
+    {
+      "value": "#ffffff",
+      "weight": 11
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f0f0f0",
+      "weight": 12169
+    },
+    {
+      "value": "#f4f4f4",
+      "weight": 11520
+    },
+    {
+      "value": "#ffffff",
+      "weight": 6864
+    },
+    {
+      "value": "#fec351",
+      "weight": 2324
+    },
+    {
+      "value": "#f8f6f5",
+      "weight": 1808
+    },
+    {
+      "value": "#db7093",
+      "weight": 819
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [
+    {
+      "value": "#000000",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}
