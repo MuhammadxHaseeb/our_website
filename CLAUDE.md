@@ -1,80 +1,79 @@
 # CLAUDE.md: Project memory
 
 ## Project overview
-- **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; offers all kinds of software services (owner picks focus services from the catalogue in `our-company.md`).
-- **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach; Clutch/PSEB-style badges don't matter to the owner.
-- **Current phase:** RESEARCH done → company interview in progress. No page design or website code until the user says so.
-- **End goal:** design and build our own company website using this research plus `our-company.md`.
+- **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; 7 service areas (see `our-company.md`).
+- **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach, then get a reply / call.
+- **Current phase:** **DESIGN & BUILD.** Step 1 (design brief + asset list + palette/font preview) **done, waiting for owner approval** → Step 2 setup (`site/`, Next.js) → Step 3 pages.
+- **Key docs:** `docs/design-brief.md` (direction, tokens, motion, sitemap, pages, components) · `docs/assets-needed.md` (asset checklist) · `docs/preview/index.html` (palettes + fonts in real UI) · `research/overview.md` · `our-company.md`.
 
-## Research status
-| # | Site | Focus | Captured | Live-scanned | Analyzed | Notes |
-|---|------|-------|----------|--------------|----------|-------|
-| 1 | webisoft.com | Corporate look (+ full service pass) | ✅ 15 pages | ✅ Chrome + 6 videos | ✅ | [notes](research/sites/webisoft.md) |
-| 2 | linear.app | Animations & motion | ✅ 5 pages | ✅ Chrome + 6 videos | ✅ | [notes](research/sites/linear.md) |
-| 3 | hellomonday.com | Animations & motion + Creative presentation (+ full service pass) | ✅ 13 pages | ✅ Chrome + 10 videos | ✅ | [notes](research/sites/hellomonday.md) |
-| 4 | (competitors) | Services & pricing | waiting for links | | | |
+## Build status
+| Step | Status |
+|---|---|
+| 1. Design brief, assets list, preview page | ✅ written, awaiting owner choices |
+| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ blocked on step 1 approval |
+| 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ |
 
-Overview and comparison: [research/overview.md](research/overview.md)
+## Waiting on the owner
+- Choose: **palette** (A Liquid Silver / B Bone & Charcoal / C Ink Navy), **fonts** (per role), **brand idea**, **light vs dark hero**.
+- First asset batch (see `docs/assets-needed.md`, "Launch: batch 1").
+- Contact form destination (options in design brief §8).
 
-## Key insights so far
-### Corporate look
-- Webisoft signals scale with **Swiss-editorial discipline, not blue-corporate**: 1 accent (#de5849), B&W photos, grey panels, mono labels, dotted rules, strict grid.
-- **Number everything** (S/001, "(11) services", "007 stories", "/005"). Counting the offer reads as scale.
-- Trust stack beside every form: since 2016 · Clutch 4.9/23 · SOC 2 · HIPAA · AWS partner · GPTW · offices · "90% senior" · "NDA on request".
-- **Anonymized case studies** (client descriptor + Sector/Engagement/Status table) solve NDA problems.
-### Animations & motion
-- Linear: premium with **zero animation libraries**: CSS keyframes, 100ms hovers, 180ms menus, 700–1000ms ease-out entrances, full reduced-motion.
-- Best motion **demonstrates the product/process** (scripted HTML UI demos), not decoration.
-- Hello Monday: GSAP + Lenis + WebGL for personality; heavy, slow first load, no reduced-motion. Borrow ideas, not weight.
-### Creative presentation
-- One brand idea everywhere ("make Mondays better"), recurring **illustrated characters**, services as 3 story chapters.
-- **Client roll-call** (giant names light up + project count), **award scoreboard**, productized offer page with a named human.
-### Services & pricing
-- Neither agency shows prices; Webisoft names models as services (staff augmentation, nearshore, fractional CTO, team extension, full build).
-- Gap: nobody shows engagement-model comparison, "from" prices, visible weekly process, or hard metrics.
+## Decisions log
+| Date | Decision | Reason |
+|---|---|---|
+| 2026-11-18 | Case studies anonymized, data-driven template (one MDX per project) | NDA-friendly; easy to add projects |
+| 2026-11-18 | No team photos/founder for now; general contact (email + form) | Owner's call; revisit later |
+| 2026-11-18 | Site shows 7 service areas + "also" line; full catalogue internal only | Prospect just needs "they can help me" |
+| 2026-11-18 | No prices; 3 models (fixed project, dedicated developers, monthly retainer) → "Let's talk" | Pricing discussed on calls |
+| 2026-11-18 | No hiring/careers section | Owner's call |
+| 2026-11-18 | Black + white base + one 3rd colour chosen by owner in real UI | Premium through restraint |
+| 2026-11-18 | Motion: Linear style for UI/info, Hello Monday style for signature moments; reduced-motion + Lighthouse 90+ guardrails | Owner's brief (phase 2) |
+| 2026-11-18 | Own art only; marked placeholders `[ASSET: …]`, `[PLACEHOLDER: …]` until owner sends | Never use reference art or stock filler |
+| 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |
 
-## Decisions from the owner (details in our-company.md)
-- Case studies: anonymized (Webisoft style); 2 so far (nutrition app with real nutritionists; EU rental move-in/out inspection app). Results TODO, ask later. **Case study pages = data-driven template** so new projects are one entry.
-- No team photos / founder for now; general contact (email + form); contact details TODO (owner adds later).
-- Services on site = **7 short areas** (Web & SaaS, Mobile, Business software, AI, UI/UX & branding, Cloud & DevOps, Launch/growth/support) + "also" line; full ticked catalogue is internal only. No ★ focus.
-- Both case-study apps are live; Epox still does their marketing & maintenance. Site goal confirmed (outbound credibility → reply/call). **No hiring section.**
-- No prices: show 3 models (fixed project, dedicated developers, monthly retainer) → "Let's talk".
-- Brand: premium restraint, black + white base, 3rd colour undecided (palettes A–D proposed, owner picks in real UI during design). Wordmark logo "Epox" in black/white/liquid-metal. Free fonts: sans + mono (+ optional serif).
+## Open placeholders & missing assets
+- Content: contact email/WhatsApp/socials; case platforms per project, durations, results; client descriptors; logo; founder/contact (later). Full list: design brief §8 "Content gaps".
+- Assets: all of `docs/assets-needed.md` (nothing received yet).
 
-## Ideas for our site
-- Webisoft-style section header system + numbered services → sub-services + industries & tech-stack directories.
-- Case studies: fact table + Challenge / What we built / Result **with metrics**; anonymized where under NDA.
-- Linear-style **live HTML demos of how we work** (board → Done, CI green, weekly Slack update).
-- Motion spec: CSS-first, 100–200ms UI, 700–800ms easeOutQuint entrances, reduced-motion on.
-- Small personality layer: one brand idea (e.g. timezone "we ship while you sleep" widget) + illustrated team characters.
-- Engagement models table with "starting from" ranges (gap in market).
-- Stacking numbered service rows; client/industry roll-call; numbers scoreboard; trust strip near forms.
-- Real B&W team photos with roles; named contact person on CTA.
+## Design rules (check every component/page against these before showing the owner)
+- No filler badges, labels or decorations that don't carry information.
+- Drop redundant labels (don't label what's already obvious).
+- No random italics; italics only for real emphasis or editorial serif moments.
+- Mono font only for labels, numbers, tags and code-style elements, never body text.
+- Use the design tokens and components everywhere; no one-off colors, sizes or spacing.
+- Make the main feature of each section clearly the largest thing in it.
+- Group related things with spacing, not boxes and lines.
+- Headlines must be specific to us ("Apps that settle rental disputes before they start"), never generic ("Innovative solutions for your business").
+- One primary CTA per section, visually dominant; everything else secondary.
+- Use the chosen palette's third color for emphasis only, never as decoration.
+- One icon set, one stroke width, one size scale.
+- No embellishments: no gradients, glows or shadows unless the design brief calls for them.
+- Nested corners: inner radius = outer radius − padding.
+- Text contrast passes WCAG AA (4.5:1 body, 3:1 large text); no light-gray body text.
+- Headlines wrap cleanly: no single-word last lines (`text-wrap: balance`).
+- Align optically: adjust icons, quotes and round shapes until they look aligned, not just pixel-aligned.
+- Tabular numbers for stats, counters, tables and anything that changes.
+- Loading and success/error states for the contact form and any lazy-loaded media or WebGL.
+- Animate useful feedback (hover, press, submit, menu open) before decorative motion.
 
-## Notes & to-dos
-- Gotcha: in Git Bash, `--pages /advisory` gets path-mangled. Use full URLs or `export MSYS_NO_PATHCONV=1`.
-- Claude in Chrome viewport stuck at 1536×639 (resize ignored); phone-width motion comes from Playwright videos.
-- Hello Monday lazy-loads images in its scroller → full-page PNGs show grey boxes; use `sections/*-slice.png` (`capture.js --slices`).
-- Tools: `scripts/capture.js` (capture, `--text-only`, `--slices [--only a,b]`), `scripts/record.js` (videos + motion facts + events.json timestamps). Frames: `videos/frames/`.
-- [x] Capture · [x] Live scan + videos · [x] Site notes + overview
-- [ ] Company interview to fill `our-company.md` (in progress)
-- [ ] Add competitor sites when the user sends them (Services & pricing focus)
+## Research summary (details in research/)
+- Sites: Webisoft (corporate look), Linear (motion), Hello Monday (motion + creative); all captured, live-scanned, analyzed. Notes: `research/sites/*.md`; comparison: `research/overview.md`.
+- Adopt: Webisoft structure (section headers, numbered services, trust strip, fact-table case studies); Linear motion budget + live HTML process demos; Hello Monday personality (brand idea, characters, roll-call, scoreboard, story chapters).
+- Gaps we fill: engagement-model comparison, visible weekly process, timezone/communication proof, results with numbers.
+- Competitor research (Services & pricing): still waiting for links. Suggested: arbisoft.com, 10pearls.com, devsinc.com, tkxel.com, netguru.com, simform.com.
+- Other suggested references (not researched until approved): anduril.com, stripe.com, epam.com, lusion.co, activetheory.net, locomotive.ca, basicagency.com, instrument.com.
 
-## Open questions
-- Owner to tick services + mark 2–3 ★ in `our-company.md` catalogue (57 items, 9 groups).
-- Interview mostly done. Still TODO from owner (later): contact email/WhatsApp/socials, platforms per case study, project durations, case results, logo, founder/contact person.
-- Next phase (design) starts only when the user says so.
-- **Direct competitors** for Services & pricing: please send links. Suggestions to approve: arbisoft.com, 10pearls.com, devsinc.com, tkxel.com (Pakistan); netguru.com, simform.com (big offshore houses with visible engagement models).
-- **Suggested new sites (not researched until approved):**
-  - Corporate look: anduril.com (Awwwards technology; defence-grade corporate restraint), stripe.com (enterprise trust at scale), epam.com (global IT services corporate).
-  - Animations & motion: lusion.co, activetheory.net, locomotive.ca (the studio that built Webisoft's site).
-  - Creative presentation: basicagency.com (BASIC/DEPT®), instrument.com, bulletproof.com (Awwwards agency list).
-  - Note: Awwwards agency/technology lists (2026-11) are dominated by small studio portfolios; picks above are the most relevant to a software house.
+## Notes & tools
+- `scripts/capture.js` (capture, `--text-only`, `--slices [--only a,b]`), `scripts/record.js` (videos + motion facts + events.json). In Git Bash use full URLs or `export MSYS_NO_PATHCONV=1`.
+- Claude in Chrome viewport stuck at 1536×639; phone-width checks via Playwright.
+- Hello Monday full-page PNGs show grey boxes; use `sections/*-slice.png`.
 
 ## Working rules
-- Update CLAUDE.md whenever a step finishes, we learn something important, or the user tells us something, without being asked.
-- Detailed notes live in research/ and company info in our-company.md. Read them when relevant instead of copying them in here.
-- When the user gives new links later (with a focus), run the same capture → live scan → analyze steps and update research/overview.md.
-- research/raw/ is private reference material. We take inspiration from other sites; we never copy their text, images, logos or code onto ours.
-- Read only on reference sites: no form submits, sign-ups, chats or logins. Paraphrase; don't paste large chunks of copy.
-- **Git: no AI contributor.** Commits and PRs go out under the user's name alone: no `Co-Authored-By` lines, no "Generated with Claude Code" or other AI attribution in commit messages, PR titles or descriptions. Remote: https://github.com/MuhammadxHaseeb/our_website
+- Update CLAUDE.md whenever a step finishes, we learn something important, or the user tells us something, without being asked: phase, decisions log, what's built, open placeholders and missing assets.
+- Detailed notes live in research/ and docs/; company info in our-company.md. Read them when relevant instead of copying them in here.
+- research/raw/ is reference material. We take inspiration; we never copy their text, images, illustrations, logos or code, and never recreate their pages one-to-one.
+- Read only on reference sites: no form submits, sign-ups, chats or logins.
+- Use real content from our-company.md; mark gaps `[PLACEHOLDER: …]` and missing art `[ASSET: …]`.
+- Commit after each finished page with a clear message. **Don't deploy anywhere until the owner says so.**
+- Stop and wait for owner approval at the end of each step (brief → setup/styleguide → each page).
+- **Git: no AI contributor.** Commits and PRs go out under the user's name alone: no `Co-Authored-By` lines, no "Generated with Claude Code" or other AI attribution. Remote: https://github.com/MuhammadxHaseeb/our_website
