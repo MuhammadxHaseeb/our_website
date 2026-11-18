@@ -22,7 +22,11 @@ export function MotionProvider() {
   }, []);
 
   useEffect(() => {
-    scrollToTop();
+    // new route → start at the top, unless the URL points at a section (#anchor)
+    if (window.location.hash) {
+      const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+      target?.scrollIntoView();
+    } else scrollToTop();
     const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]:not(.is-in)'));
     if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('is-in')); return; }
     const io = new IntersectionObserver((entries) => {
