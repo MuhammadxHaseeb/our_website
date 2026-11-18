@@ -98,10 +98,25 @@ Epox offers all kinds of software services. Full catalogue below: everything fou
 - TODO: anything else (speed, price, quality, communication, specific tech)?
 
 ## Portfolio
-TODO: projects and case studies (problem → solution → results, metrics). Matters most of all for an outbound model: a prospect who got a cold message will look for proof that we solved a similar problem before. Anonymized cases are fine (Webisoft format).
+Clients are described **without names** (Webisoft style: client descriptor + sector + engagement + status). Two projects for now; more will be added later.
+**Design requirement:** case study pages must be a reusable template fed by data (one file/entry per project), so adding a project = adding one entry, no new page design.
+
+### Case 001: Nutrition app with real nutritionists
+- **Client descriptor:** TODO (e.g. "A health & wellness startup"), **Sector:** Health & nutrition, **Engagement:** TODO, **Status:** TODO
+- **Challenge:** people who track their meals have no expert to guide them; generic diet apps give generic advice.
+- **What we built:** a mobile app where users log meals and track their nutrition, plus a built-in human side: users talk directly to a real nutrition doctor inside the app.
+- **Result:** TODO, ask owner later (users, retention, consultations booked).
+- **Tech / platforms:** TODO
+
+### Case 002: Move-in / move-out inspection app for European rentals
+- **Client descriptor:** TODO (e.g. "A European proptech company"), **Sector:** Real estate / PropTech, **Region:** Europe, **Engagement:** TODO, **Status:** TODO
+- **Challenge:** at the end of a rental, tenants and landlords disagree about the property's condition, and deposits get disputed with no proof either way.
+- **What we built:** an app for tenants and owners in European countries. At move-in the tenant walks through the property taking photos, sealed into a tamper-proof record; at move-out they walk through again and both sides compare the condition side by side.
+- **Result:** TODO, ask owner later (disputes avoided, inspections completed, countries live).
+- **Tech / platforms:** TODO
 
 ## Clients & testimonials
-TODO: client names/logos we may show, quotes, video testimonials. Why it matters: proof for cold-outreach prospects.
+TODO: no named clients or quotes yet. Ask later whether either client would give an anonymous quote ("Founder, European proptech company").
 
 ## Trust signals
 - Owner: Clutch / GoodFirms / PSEB / P@SHA / certifications **don't matter** to how Epox sells (outbound).
@@ -109,16 +124,47 @@ TODO: client names/logos we may show, quotes, video testimonials. Why it matters
 - TODO (optional): any of the above exist anyway? Even one review link or registration costs nothing to show.
 
 ## Pricing & engagement models
-TODO: hourly rates, dedicated developers, fixed projects, packages. Why it matters: none of the reference sites show prices; a simple "how we work with you" models table is a gap we could own.
+- **No prices on the site.** Pricing is discussed on a call.
+- Show *how we work* (no numbers), each routing to **"Let's talk"**:
+  1. **Fixed project**: defined scope, timeline and deliverables.
+  2. **Dedicated developers**: engineers working as part of the client's team.
+  3. **Monthly retainer**: ongoing development, maintenance and support.
 
 ## Team
-TODO: key people, roles, photos available? (A named founder/contact strongly helps outbound: the prospect wants to see who emailed them.)
+- **Not shown for now:** no team photos, no founder profile. Site uses a general contact (email + form).
+- TODO (later): add founder/contact person with photo. Why: outbound prospects want to see who reached out to them.
 
 ## Brand assets
-TODO: logo, colors, fonts, existing materials
+**Goal:** premium, rich, established brand, not a freelancer. Premium comes from restraint: fewer colours, fewer elements, more space.
+
+**Feel:** lots of white space · very large confident headlines · few words · sharp alignment · high-quality images · smooth, unhurried motion.
+
+**Logo:** TODO, a clean wordmark "Epox". Must work in black, in white, and as a liquid-metal animation.
+
+**Colours:** black + white base; third colour **not decided**. Owner picks after seeing them in real UI in the design phase. Proposals:
+
+| | A. Liquid Silver | B. Bone & Charcoal | C. Ink Navy | D. Graphite & Champagne (extra) |
+|---|---|---|---|---|
+| Mood | technical, futuristic, pairs with liquid-metal logo | soft, editorial, gallery-like | corporate, trustworthy, finance-grade | quiet luxury, private-bank feel |
+| Black (text / dark sections) | `#0A0A0A` | `#0B0B0A` | `#0A0A0A` | `#0C0C0C` |
+| White (page) | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` |
+| Accent | silver `#C7CBD1` (gradient `#E9EBEE → #A7ACB3 → #6E737A` for metal) | bone `#EDE7DC` | ink navy `#0F1E3A` | champagne `#C2A878` |
+| Accent dark / hover | `#8A9098` | charcoal `#2B2A27` | `#1B2F57` | `#9E8556` |
+| Soft surface (panels) | `#F3F4F5` | `#F7F4EE` | `#EEF1F6` | `#F5F3EF` |
+| Muted text | `#6B7078` | `#77726A` | `#5B6475` | `#6F6A62` |
+| Hairline / border | `#E2E4E7` | `#DDD6C9` | `#D9DEE8` | `#E4DFD6` |
+| Best use of accent | logo, metal highlights on dark sections, thin rules | large bone panels, warm section backgrounds | headings on white, buttons, dark sections in navy instead of black | tiny accents only: numbers, underlines, one CTA |
+
+Notes: A is the most "tech"; B is the most "premium agency"; C is the safest for enterprise buyers; D is the most luxurious but easiest to overdo. All four keep black/white doing 90% of the work.
+
+**Fonts (all free, Google Fonts / open licence):**
+- **Sans (headings + body), pick one:** *Inter Tight* / *Inter* (closest to Linear), *Geist* (sharp, modern, Vercel), *Manrope* (rounder, friendlier). Closest to Webisoft's Helvetica Now: **Inter Tight** for headlines + **Inter** for body.
+- **Mono (labels, numbers, "S/001" style):** *Geist Mono* (pairs with Geist), *JetBrains Mono*, *IBM Plex Mono* (closest to Suisse Intl Mono's feel).
+- **Optional serif for big editorial moments:** *Instrument Serif* (elegant, high-contrast, display), *Fraunces* (warm, characterful), *Newsreader* (calm editorial). Closest to Hello Monday's Clarendon mood: *Fraunces* at light weight.
+- Default suggestion: **Geist + Geist Mono + Instrument Serif** (one family feel, very premium) or **Inter Tight/Inter + JetBrains Mono + Instrument Serif**.
 
 ## Contact & social links
-TODO
+- General email + contact form (TODO: which email address? WhatsApp number? LinkedIn/other socials?)
 
 ## What we want the website to achieve
 - Support outbound sales: a prospect who receives our message checks the site → trusts us → replies / books a call.

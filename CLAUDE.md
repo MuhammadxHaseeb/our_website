@@ -33,6 +33,12 @@ Overview and comparison: [research/overview.md](research/overview.md)
 - Neither agency shows prices; Webisoft names models as services (staff augmentation, nearshore, fractional CTO, team extension, full build).
 - Gap: nobody shows engagement-model comparison, "from" prices, visible weekly process, or hard metrics.
 
+## Decisions from the owner (details in our-company.md)
+- Case studies: anonymized (Webisoft style); 2 so far (nutrition app with real nutritionists; EU rental move-in/out inspection app). Results TODO, ask later. **Case study pages = data-driven template** so new projects are one entry.
+- No team photos / founder for now; general contact (email + form).
+- No prices: show 3 models (fixed project, dedicated developers, monthly retainer) → "Let's talk".
+- Brand: premium restraint, black + white base, 3rd colour undecided (palettes A–D proposed, owner picks in real UI during design). Wordmark logo "Epox" in black/white/liquid-metal. Free fonts: sans + mono (+ optional serif).
+
 ## Ideas for our site
 - Webisoft-style section header system + numbered services → sub-services + industries & tech-stack directories.
 - Case studies: fact table + Challenge / What we built / Result **with metrics**; anonymized where under NDA.
@@ -54,7 +60,7 @@ Overview and comparison: [research/overview.md](research/overview.md)
 
 ## Open questions
 - Owner to tick services + mark 2–3 ★ in `our-company.md` catalogue (57 items, 9 groups).
-- Interview round 2 pending: portfolio/proof, team & contact person, pricing models, brand assets.
+- Interview round 3: contact email/WhatsApp/socials, case study details (platforms, engagement, status), site goals confirmation. Later: case results, founder/contact person.
 - **Direct competitors** for Services & pricing: please send links. Suggestions to approve: arbisoft.com, 10pearls.com, devsinc.com, tkxel.com (Pakistan); netguru.com, simform.com (big offshore houses with visible engagement models).
 - **Suggested new sites (not researched until approved):**
   - Corporate look: anduril.com (Awwwards technology; defence-grade corporate restraint), stripe.com (enterprise trust at scale), epam.com (global IT services corporate).
