@@ -1,14 +1,14 @@
 # Epox website: design brief
 
-_Step 1 of phase 2 · 2026-11-18 · Status: **waiting for owner approval** (palette, fonts, brand idea, hero light/dark, first assets)._
-Preview of palettes + fonts in real UI: open `docs/preview/index.html` in a browser (screenshots in `docs/preview/shots/`).
+_Step 1 of phase 2 · updated 2026-11-18 · Status: **owner decisions made** (palette A, Helvetica Now + Suisse Int'l Mono, brand idea 1, dark hero, no characters at launch). **Waiting on:** wordmark pick, Suisse Int'l Mono files, font licence confirmation._
+Preview in real UI: `docs/preview/index.html` (serve over http, e.g. `npx serve docs/preview`; screenshots in `docs/preview/shots/`). Wordmark options: `docs/logo/`.
 Sources: `research/overview.md`, `research/sites/*.md`, `our-company.md`, design rules in `CLAUDE.md`.
 
 ---
 
 ## 1. Direction
 
-Epox should feel like an **established engineering studio that happens to have taste**: a white, spacious, Swiss-editorial site with very large type, one disciplined accent colour, and proof everywhere. The **structure and trust** come from Webisoft (section-header system, numbered services, fact-table case studies, trust strip beside every form); the **interaction quality** comes from Linear (100–200 ms feedback, ease-out entrances, live HTML demos that *show* how we work); the **personality** comes from Hello Monday (one recurring brand idea, editorial serif moments, smooth scroll, a roll-call, story-chapter services, our own illustrated characters). Restraint does the premium work: black and white carry ~90% of every page, the third colour appears only as emphasis, and every section has one obvious largest thing and one primary action. Because Epox sells **outbound**, every page is designed for a visitor who arrived from our message: within 10 seconds they must see *who we are, that we've solved problems like theirs, and how to reply*.
+Epox should feel like an **established engineering studio that happens to have taste**: a white, spacious, Swiss-editorial site with very large type, one disciplined accent colour, and proof everywhere. The **structure and trust** come from Webisoft (section-header system, numbered services, fact-table case studies, trust strip beside every form); the **interaction quality** comes from Linear (100–200 ms feedback, ease-out entrances, live HTML demos that *show* how we work); the **personality** comes from Hello Monday (one recurring brand idea, very large editorial type, smooth scroll, a roll-call, story-chapter services, and **slots for our own illustrated characters later**: the site launches without them and works fully without them). Restraint does the premium work: black and white carry ~90% of every page, the third colour appears only as emphasis, and every section has one obvious largest thing and one primary action. Because Epox sells **outbound**, every page is designed for a visitor who arrived from our message: within 10 seconds they must see *who we are, that we've solved problems like theirs, and how to reply*.
 
 | Idea | From | Where we use it |
 |---|---|---|
@@ -24,8 +24,8 @@ Epox should feel like an **established engineering studio that happens to have t
 | Morphing mega-menu | Linear | Header (Services menu) |
 | Feature "chapter" layout (title left, copy right, demo full-width) | Linear | Service detail pages |
 | Recurring brand idea | Hello Monday | Hero, footer line, 404, case framing |
-| Illustrated characters per service | Hello Monday | /services chapters, hero (optional), 404, footer |
-| Big editorial serif moments | Hello Monday | One hero word, footer CTA line, roll-call names |
+| Illustrated characters per service (**later**; layouts keep an empty `CharacterSlot`) | Hello Monday | /services chapters, 404, footer |
+| Big editorial type moments (Now Display at display sizes; **no serif for now**) | Hello Monday | Hero emphasis line in silver, footer CTA line, roll-call names |
 | Roll-call (names light up at screen centre) | Hello Monday | Home "Industries we've built for" |
 | Numbers scoreboard | Hello Monday (awards) | Home + /about (our numbers, not awards) |
 | Services told as story chapters | Hello Monday | /services page |
@@ -36,7 +36,7 @@ Epox should feel like an **established engineering studio that happens to have t
 
 ---
 
-## 2. Brand idea (pick one)
+## 2. Brand idea: **chosen: 1 "We find it first."** (2's live-status dot is used as a proof device)
 
 Rooted in `our-company.md`: Epox **finds a business's problem and reaches out with the fix**; both launched apps are **still live and still run by Epox**; the team is in **Faisalabad (UTC+5)**.
 
@@ -60,7 +60,27 @@ Recommendation: **1 as the brand idea, with 2's live-status dot as its proof dev
 
 ## 3. Design tokens
 
-### 3.1 Colour: three palettes (owner chooses one)
+### 3.1 Colour: **chosen: A · Liquid Silver**
+Full neutral scale (contrast vs white / vs ink n-950):
+| Step | Hex | on white | on ink | Role |
+|---|---|---|---|---|
+| n-50 | `#F7F8F9` | 1.1 | 18.6 | subtle hover on white |
+| n-100 | `#F3F4F5` | 1.1 | 18.0 | `surface`: soft panels, tags |
+| n-200 | `#E2E4E7` | 1.3 | 15.5 | `line`: hairlines |
+| n-300 | `#C4C8CE` | 1.7 | 11.8 | **silver**: emphasis on dark (`accentOnDark`), primary-dark hover |
+| n-400 | `#A3A8AF` | 2.4 | 8.3 | `mutedOnDark` |
+| n-500 | `#80868E` | 3.7 | 5.4 | large text only on white (≥ 24px); muted on dark |
+| n-600 | `#5C6168` | 6.2 | 3.2 | `muted` text on white |
+| n-700 | `#4B5058` | 8.1 | 2.4 | **steel**: emphasis on white (`accentOnLight`), primary hover, live dot |
+| n-800 | `#2A2D31` | 13.8 | 1.4 | hairlines on dark |
+| n-900 | `#141516` | 18.3 | 1.1 | `darkAlt`: footer / second dark section |
+| n-950 | `#0A0A0A` | 19.8 | 1.0 | `ink`: dark sections, text, primary button |
+
+Plus `paper #FFFFFF` and `onDark #F5F6F7`. **Rules:** on white, text uses n-600…n-950 (n-500 only ≥ 24px); on ink, text uses n-50…n-500; silver never as text on white; the metal gradient exists only inside the liquid-metal logo video.
+
+<details><summary>Original three proposals (for the record)</summary>
+
+
 All pairs below pass WCAG AA (computed in `docs/preview/palettes.js`; the preview shows the ratio for each). Black + white do ~90% of the work; the third colour is **emphasis only** (one hero word, live dot, primary-button hover, footer accent), never decoration.
 
 | Token | A · Liquid Silver | B · Bone & Charcoal | C · Ink Navy | Use |
@@ -80,28 +100,33 @@ All pairs below pass WCAG AA (computed in `docs/preview/palettes.js`; the previe
 - **A Liquid Silver:** most "tech"; pairs with the liquid-metal logo. Silver is **never text on white** (1.6:1); on light it switches to steel.
 - **B Bone & Charcoal:** most "premium agency": warm bone panels, charcoal footer.
 - **C Ink Navy:** safest for enterprise buyers; navy replaces black in the footer and as heading emphasis.
-- After the owner picks, Step 2 builds the full scale (50–950 steps of the accent and the neutral greys) from that palette, all re-checked for contrast.
+- Full scale built above from palette A.
+
+</details>
 
 ### 3.2 Light and dark sections
 | Section | Tone | Why |
 |---|---|---|
 | Header | follows the section under it (dark on dark hero, light elsewhere); frosted when stuck (`backdrop-filter`) | stays legible |
-| Home hero | **Dark (recommended)** or Light (owner chooses) | liquid-metal logo and live demo read best on ink; dark hero = Linear calm; light hero = Webisoft/Hello Monday openness |
+| Home hero | **Dark (chosen)** | liquid-metal logo and live demo read best on ink; dark hero = Linear calm; light hero = Webisoft/Hello Monday openness |
 | Services, work, about content | Light (`paper`) | white space = premium |
 | Live "how we work" demo | Dark (`ink`) | UI demos read like a real app |
 | Roll-call | Dark (`ink`) | grey → white "light up" effect needs dark |
 | Engagement models | Light (`surface`) | calm, comparable |
 | Contact block + footer | Dark (`darkAlt`) | strong close, trust strip on dark |
 
-### 3.3 Typography (owner chooses one per role; all free)
-| Role | Option 1 | Option 2 | Alt | Original it replaces |
-|---|---|---|---|---|
-| Headings | **Inter Tight** 500 (Google) | **Switzer** 500 (Fontshare) | Geist | Helvetica Now Display, Inter Display |
-| Body | **Inter** 400 (Google) | **Geist** 400 (Google) | Switzer | Helvetica Now Text, Inter, NB International Pro |
-| Mono labels/numbers | **Geist Mono** 500 (Google) | **JetBrains Mono** 500 (Google) | IBM Plex Mono | Suisse Intl Mono, Berkeley Mono |
-| Editorial serif (optional) | **Zodiak** Light (Fontshare) | **Fraunces** Light (Google) | Instrument Serif | Clarendon BT Light |
-Default proposal: **Inter Tight + Inter + Geist Mono + Zodiak.**
-Rules: serif is used **upright** (no italics) for 1–3 words per page max; mono is labels/numbers only (uppercase, +0.04–0.06em tracking, `tabular-nums`); headings use `text-wrap: balance`, body uses `text-wrap: pretty`.
+### 3.3 Typography: **chosen: Webisoft's fonts, self-hosted**
+| Role | Font | Weights | Fallback stack |
+|---|---|---|---|
+| Headings (display, h1–h3, roll-call) | **Helvetica Now Display** | 300, 400, 500, 700 | Inter Tight → Helvetica Neue → Arial |
+| Body, lead, nav links | **Helvetica Now Text** | 400, 500 | Inter → Helvetica Neue → Arial |
+| Labels, numbers, tags, **buttons** | **Suisse Int'l Mono** | 400, 500 | Geist Mono → ui-monospace |
+| Editorial serif | **none for now** | n/a | n/a |
+
+Setup: self-hosted **woff2** only, `font-display: swap`, **preload Helvetica Now Display 500** (hero/LCP font), subset to Latin, metric-matched fallbacks (`size-adjust`) to keep CLS < 0.05. Tokens: `--font-display`, `--font-text`, `--font-mono` (see `docs/preview/fonts.css`).
+Status: Helvetica Now Display + Text received (`assets/font-1.zip`, `assets/font-2.zip`). **Suisse Int'l Mono not received**: preview falls back to Geist Mono until it arrives.
+**Licence:** Helvetica Now (Monotype) and Suisse Int'l (Swiss Typefaces) are commercial. Self-hosting on a website needs a **web licence** covering the domain/traffic (a desktop licence doesn't cover it, and files taken from another site's CSS are licensed to that site, not to us). Font files are **git-ignored** (`assets/*.zip`, `**/fonts/licensed/`) because this repo is public; committing them would redistribute them. The build copies them from a local/private source at deploy time. Fallback plan if licences aren't bought: Inter Tight / Inter / Geist Mono (already wired as fallbacks).
+Rules: mono is labels, numbers, tags and buttons only (uppercase, +0.04–0.06em tracking, `tabular-nums`), never body text; no italics except real emphasis; headings use `text-wrap: balance`, body uses `text-wrap: pretty`.
 
 ### 3.4 Type scale (fluid, 360 → 1920 px)
 | Token | Size (clamp) | Line-height | Tracking | Weight | Use |
@@ -110,7 +135,7 @@ Rules: serif is used **upright** (no italics) for 1–3 words per page max; mono
 | `h1` | clamp(44px, 6vw, 104px) | 0.98 | −0.04em | 500 | page heroes |
 | `h2` | clamp(32px, 3.6vw, 64px) | 1.02 | −0.03em | 500 | section headlines |
 | `h3` | clamp(22px, 1.8vw, 32px) | 1.15 | −0.02em | 500 | rows, cards |
-| `serif-xl` | clamp(48px, 8vw, 152px) | 0.95 | −0.01em | 300 | roll-call names, footer line |
+| `rollcall` | clamp(48px, 8vw, 152px) | 0.95 | −0.04em | 300 (Now Display Light) | roll-call names |
 | `lead` | clamp(19px, 1.5vw, 24px) | 1.45 | −0.01em | 400 | intro paragraphs |
 | `body` | 17px (mobile 16px) | 1.6 | −0.005em | 400 | body |
 | `small` | 14px | 1.5 | 0 | 400 | captions, meta |
@@ -153,7 +178,7 @@ Durations: `--dur-fast: 100ms` · `--dur-menu: 180ms` · `--dur-ui: 240ms` · `-
 | H2 | **Page transition**: content fades/rises out, ink curtain ≤ 0.35 s, new page lines rise in | route changes | out 250 ms ease-in, in 600 ms ease-out-quint (total ≤ 0.9 s) | fade only 300 ms | none |
 | H3 | **Hero intro**: headline lines unmask upward (stagger 80 ms); liquid-metal logo video fades in; **no preloader** | home hero | 1000 ms ease-out-quint; text is in the DOM and visible within the first paint (LCP safe) | same, shorter (700 ms) | static |
 | H4 | **Liquid-metal logo loop** (owner's video) | home hero, footer (small) | 6–8 s seamless loop, plays only when visible | poster frame + loop only on Wi-Fi/`saveData=false` | poster frame |
-| H5 | **Character scenes** (owner's illustrations; sprite/Lottie) | /services chapters (sticky left), 404, footer | 2–4 s idle loops, ease-in-out | inline above text, 1 loop then still | still frame |
+| H5 | **Character scenes: later.** At launch the slot holds the chapter's big number (S/01) in Now Display Light; when art arrives it's sprite/Lottie | /services chapters (sticky left), 404, footer | 2–4 s idle loops, ease-in-out | inline above text, 1 loop then still | still frame |
 | H6 | **Statement reveal**: words go from muted to ink as you scroll (word spans, real text kept for screen readers) | home "About Epox" statement | scrubbed with scroll | per-line fade on enter | full ink |
 | H7 | **Stacking service rows**: rows pin and collapse into an index | home services | CSS sticky + scrub | plain list | plain list |
 | H8 | **Roll-call**: industry/project names grey → ink/white at screen centre, side info appears | home "Built for" | scrubbed; info fade 400 ms | each item lights on enter, no scrub | all lit |
@@ -205,7 +230,7 @@ Service slugs: `web-saas-development`, `mobile-apps`, `business-software`, `ai-s
 ## 6. Page-by-page plan
 
 ### Home `/`
-1. **Hero** (dark recommended). Kicker `EPOX · FAISALABAD · SINCE 2019`; display headline from the chosen brand idea (one serif word as emphasis); one-line lead; primary "Let's talk", secondary "See our work"; liquid-metal logo video. _Pattern:_ Webisoft hero restraint + Hello Monday editorial word. _Content:_ basics, USP. `[ASSET: liquid-metal logo video]`
+1. **Hero** (dark recommended). Kicker `EPOX · FAISALABAD · SINCE 2019`; display headline "We find the problem / **before you do.**" (second line in silver n-300 as emphasis); one-line lead; primary "Let's talk", secondary "See our work"; liquid-metal logo video. _Pattern:_ Webisoft hero restraint + Hello Monday editorial scale. _Content:_ basics, USP. `[ASSET: liquid-metal logo video]`
 2. **Proof strip**: three small facts in mono + text: "Since 2019" · "2 products live, still run by us" · "Web · Mobile · AI". _Pattern:_ Linear logo-row caption. _Content:_ basics, portfolio status.
 3. **Services** `/ SERVICES · Seven ways we can help · 07`: 7 stacking rows (S/01–S/07: title, one-line promise, tags, "Explore"). _Pattern:_ Webisoft stacking rows. _Content:_ 7 areas table.
 4. **Selected work** `/ WORK · Two products, both still live · 02`: two large case cards (image, outcome headline, fact row, live dot). _Pattern:_ Webisoft fact cards + Hello Monday image hover. _Content:_ cases 001/002. `[ASSET: case hero images]`
@@ -217,7 +242,7 @@ Service slugs: `web-saas-development`, `mobile-apps`, `business-software`, `ai-s
 10. **Contact block + footer** (dark): headline, 3 "what happens next" steps, short form, "Book a call" `[PLACEHOLDER: booking link]`, trust strip, footer columns. _Pattern:_ Webisoft contact block.
 
 ### Services `/services`
-Hero (h1 + lead) → 7 **story chapters** (sticky character scene left `[ASSET: character scene per service]`, kicker "We build", serif-free h2, one opinionated paragraph, tags, 1 related case if any, "Explore [area]") → engagement models → contact block. _Pattern:_ Hello Monday services chapters + Webisoft numbering.
+Hero (h1 + lead) → 7 **story chapters** (sticky left slot: large chapter number now, `CharacterSlot` for art later; kicker "We build", h2, one opinionated paragraph, tags, 1 related case if any, "Explore [area]") → engagement models → contact block. _Pattern:_ Hello Monday services chapters + Webisoft numbering.
 
 ### Service detail `/services/[slug]` (template; first: Mobile apps)
 Hero (S/02 · Mobile apps, h1 specific to the area, lead) → "What we build" (4–6 numbered capabilities from the internal catalogue) → feature chapters (title left / copy right / visual full-width, Linear) → related case (nutrition + rental apps for mobile) → tech we use (tags) `[PLACEHOLDER: tech stack per area]` → FAQ (L6) → contact block.
@@ -240,7 +265,7 @@ Hero ("A software house from Faisalabad, building since 2019") → statement (H6
 Hero ("Tell us the problem. We'll tell you how we'd fix it.") → form (topic chips: New project · Existing product · Dedicated developers · Other; name, email, company (optional), message; consent text) with loading/success/error states → "Book a call" `[PLACEHOLDER: booking link]` → what happens next (3 steps) → email `[PLACEHOLDER: email]` + WhatsApp `[PLACEHOLDER]`.
 
 ### 404 / privacy
-404: character scene + "Found: a page that doesn't exist." + links. Privacy: plain text page `[PLACEHOLDER: legal text]`.
+404: "Found: a page that doesn't exist." in display type + links (`CharacterSlot` for later art). Privacy: plain text page `[PLACEHOLDER: legal text]`.
 
 ---
 
@@ -248,7 +273,7 @@ Hero ("Tell us the problem. We'll tell you how we'd fix it.") → form (topic ch
 | Component | Notes | From |
 |---|---|---|
 | Header + mega-menu | wordmark left; Services (mega: 7 areas with one-liners, morphing panel), Work, How we work, About; "Let's talk" pill right; frosted when stuck; mobile full-screen sheet; keyboard: arrow keys, Esc, focus trap | Linear |
-| Footer | serif CTA line, columns (Services, Company, Contact), live dot "2 products live", © + since 2019, small logo loop | Webisoft + Hello Monday |
+| Footer | display CTA line ("Have a problem worth solving? **Let's talk.**", second sentence silver), columns (Services, Company, Contact), live dot "2 products live", © + since 2019, small logo loop | Webisoft + Hello Monday |
 | Section header | kicker (mono) · headline (h2) · count (mono) · optional "View all →" | Webisoft |
 | Buttons | primary (pill, ink/paper), secondary (outline), text link (underline offset 4 px); sizes md/lg; press + focus states | Linear |
 | Tags | mono uppercase, `surface` bg, radius 6 | Webisoft |
@@ -258,7 +283,7 @@ Hero ("Tell us the problem. We'll tell you how we'd fix it.") → form (topic ch
 | Fact table | dl grid, mono dt, tabular dd | Webisoft |
 | Live demo frames | board, CI checks, chat update, "FOUND:" marker; HTML/CSS only | Linear |
 | Stats scoreboard | big numerals (tabular, count-up), mono label | Hello Monday |
-| Roll-call | serif-xl names, count + one-liner, image on desktop | Hello Monday |
+| Roll-call | `rollcall` names (Now Display Light), count + one-liner, image on desktop | Hello Monday |
 | Engagement models table | 3 columns, rows of attributes, CTA under each | gap |
 | Statement reveal | word-level scroll reveal | Webisoft |
 | Contact block | headline, 3 steps, form, book-a-call, trust strip | Webisoft |
@@ -267,6 +292,8 @@ Hero ("Tell us the problem. We'll tell you how we'd fix it.") → form (topic ch
 | Media | video (poster, lazy, plays in view), image (AVIF/WebP, blur placeholder), `[ASSET]` placeholder | n/a |
 | FAQ accordion | L6 | n/a |
 | Page transition + smooth-scroll provider | H1/H2 with reduced-motion switch | Hello Monday |
+| `CharacterSlot` | empty, layout-neutral slot (renders nothing or the section number until art is added via one prop) | Hello Monday (later) |
+| Logo | inline SVG wordmark (chosen option), black/white via `currentColor` | n/a |
 
 ---
 
@@ -297,9 +324,15 @@ Spam protection: honeypot + Cloudflare Turnstile.
 
 ---
 
-## Questions for the owner (Step 1 approval)
-1. Palette: **A Liquid Silver · B Bone & Charcoal · C Ink Navy**?
-2. Fonts: headings (Inter Tight / Switzer), body (Inter / Geist), mono (Geist Mono / JetBrains Mono), serif (Zodiak / Fraunces / none)?
-3. Brand idea: **1 We find it first** (recommended) · 2 Built. Launched. Still here. · 3 Your night shift?
-4. Home hero: **dark** (recommended) or light?
-5. First asset batch: see `docs/assets-needed.md` → "Launch: batch 1".
+## Owner decisions (2026-11-18) and what's still open
+| Item | Decision |
+|---|---|
+| Palette | **A · Liquid Silver** (scale in §3.1) |
+| Fonts | **Helvetica Now Display / Helvetica Now Text / Suisse Int'l Mono**, self-hosted, no serif |
+| Brand idea | **1 · We find it first** |
+| Home hero | **Dark** |
+| Characters | **Not at launch**; layouts work without them; `CharacterSlot` kept |
+| Assets | none yet → marked placeholders everywhere |
+| Contact form | **Resend → owner's inbox** (wired when building /contact) |
+
+**Open:** (1) pick wordmark 1, 2 or 3 (`docs/logo/`, preview page); (2) send Suisse Int'l Mono woff2 (Regular + Medium); (3) confirm web licences for Helvetica Now + Suisse Int'l before launch; (4) app screenshots/recordings later.

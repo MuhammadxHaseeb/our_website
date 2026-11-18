@@ -9,14 +9,15 @@
 ## Build status
 | Step | Status |
 |---|---|
-| 1. Design brief, assets list, preview page | ✅ written, awaiting owner choices |
-| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ blocked on step 1 approval |
+| 1. Design brief, assets list, preview page | ✅ decisions made; wordmark pick pending |
+| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ⏳ next, after owner OK |
 | 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ |
 
 ## Waiting on the owner
-- Choose: **palette** (A Liquid Silver / B Bone & Charcoal / C Ink Navy), **fonts** (per role), **brand idea**, **light vs dark hero**.
-- First asset batch (see `docs/assets-needed.md`, "Launch: batch 1").
-- Contact form destination (options in design brief §8).
+- **Pick wordmark** 1 / 2 / 3 (`docs/logo/`), then owner makes the liquid-metal video from it.
+- **Suisse Int'l Mono** woff2 files (Regular + Medium): not in the zips; Geist Mono stands in.
+- **Confirm web licences** for Helvetica Now + Suisse Int'l before launch (files are git-ignored; repo is public).
+- Assets later: app screenshots/recordings for both cases.
 
 ## Decisions log
 | Date | Decision | Reason |
@@ -29,11 +30,18 @@
 | 2026-11-18 | Black + white base + one 3rd colour chosen by owner in real UI | Premium through restraint |
 | 2026-11-18 | Motion: Linear style for UI/info, Hello Monday style for signature moments; reduced-motion + Lighthouse 90+ guardrails | Owner's brief (phase 2) |
 | 2026-11-18 | Own art only; marked placeholders `[ASSET: …]`, `[PLACEHOLDER: …]` until owner sends | Never use reference art or stock filler |
+| 2026-11-18 | Palette **A · Liquid Silver** (neutral scale n-50…n-950, silver n-300 emphasis on dark, steel n-700 on light) | Owner's pick |
+| 2026-11-18 | Fonts: **Helvetica Now Display / Text + Suisse Int'l Mono** (labels, numbers, buttons), self-hosted woff2, swap, preload Display 500; **no serif** | Owner's pick; licensed files git-ignored (public repo) |
+| 2026-11-18 | Brand idea **"We find it first."** (+ live-status dot as proof device) | Matches outbound sales model |
+| 2026-11-18 | **Dark** home hero | Owner's pick |
+| 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |
+| 2026-11-18 | Contact form → **Resend** to owner's inbox (wire at /contact) | Owner accepted recommendation |
 | 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |
 
 ## Open placeholders & missing assets
 - Content: contact email/WhatsApp/socials; case platforms per project, durations, results; client descriptors; logo; founder/contact (later). Full list: design brief §8 "Content gaps".
-- Assets: all of `docs/assets-needed.md` (nothing received yet).
+- Assets: all of `docs/assets-needed.md` (nothing received yet; Helvetica Now fonts received). Use `[ASSET: …]` placeholders.
+- **Licensed fonts never go into git** (`assets/*.zip`, `**/fonts/licensed/` are ignored). Check `git status` before every commit.
 
 ## Design rules (check every component/page against these before showing the owner)
 - No filler badges, labels or decorations that don't carry information.

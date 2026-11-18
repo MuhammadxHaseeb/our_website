@@ -2,3 +2,7 @@ node_modules/
 research/raw/**/videos/_tmp/
 .DS_Store
 Thumbs.db
+
+# Licensed commercial fonts: never commit to the public repo
+assets/*.zip
+**/fonts/licensed/

@@ -5,22 +5,30 @@ Drop files in `site/public/assets/incoming/` (or share a link) using the **file 
 
 Legend: **P1** = needed for launch · **P2** = nice to have · ☐ = not received yet
 
-## Launch: batch 1 (please send these first)
-1. Logo wordmark (SVG, black + white) · L1–L2
-2. Liquid-metal logo loop (MP4 + WebM + still) · L4
-3. Case 001 + Case 002 app screenshots (or screen recordings) · C1–C4
-4. Favicon source (or I derive it from the wordmark) · L5
-5. Confirm illustration route (see "Characters": commission/draw, or launch without characters first)
+## Status (2026-11-18)
+Owner has no assets yet → **every asset is a marked placeholder** until sent. Characters: **not at launch** (layouts keep a `CharacterSlot`).
+
+## Launch: batch 1 (in this order)
+1. **Pick a wordmark**: 3 options I made in Helvetica Now Display: `docs/logo/wordmark-{1-medium,2-bold-lower,3-light-caps}-{black,white}.svg` (side by side in `docs/preview/index.html`). Once picked, L1–L2 are done and L5/OG images follow from it.
+2. **Liquid-metal logo loop** made from the picked wordmark (MP4 + WebM + still) · L4
+3. **Suisse Int'l Mono** woff2 (Regular + Medium) · F1 (font, not image, but blocks buttons/labels)
+4. Case 001 + Case 002 app screenshots / screen recordings · C1–C4 (owner: later)
+
+## 0. Fonts
+| ☐ | File | Where | Notes | Priority |
+|---|---|---|---|---|
+| ✅ | Helvetica Now Display / Text (`assets/font-1.zip`, `assets/font-2.zip`) | all headings/body | received; kept out of git; **web licence to confirm** | P1 |
+| ☐ | `SuisseIntlMono-Regular.woff2`, `SuisseIntlMono-Medium.woff2` (F1) | labels, numbers, tags, buttons | not received; Geist Mono stands in | P1 |
 
 ---
 
 ## 1. Logo
 | ☐ | File name | Where used | What / style notes | Size & ratio | Format | Priority |
 |---|---|---|---|---|---|---|
-| ☐ | `logo-wordmark-black.svg` (L1) | header on light, footer on light, OG images | clean wordmark "Epox"; geometric, tight tracking; must read at 20 px tall; no tagline in the file | vector; artboard trimmed to the letters | SVG (outlined text) | P1 |
-| ☐ | `logo-wordmark-white.svg` (L2) | header on dark hero, footer, dark sections | same, white | vector | SVG | P1 |
+| ◐ | `logo-wordmark-black.svg` (L1) | header on light, footer on light, OG images | **3 options drafted** in `docs/logo/` (outlined Helvetica Now Display): 1 "Epox" Medium −4% · 2 "epox" Bold lowercase −6.5% · 3 "EPOX" Light caps +6%. Owner picks one | vector, trimmed | SVG (outlined) | P1 |
+| ◐ | `logo-wordmark-white.svg` (L2) | header on dark hero, footer, dark sections | same, white (drafted for all 3) | vector | SVG | P1 |
 | ☐ | `logo-mark.svg` (L3) | favicon, app icon, small spots | single-letter mark or "E" monogram derived from wordmark (optional) | square, 1:1 | SVG | P2 |
-| ☐ | `logo-liquid-metal.webm` + `.mp4` + `logo-liquid-metal-poster.png` (L4) | **home hero** (large, beside/behind headline) and **footer** (small loop). **Not** a loading screen (no preloader rule). | exported from collidingScopes/liquid-logo; silver/chrome liquid on **solid ink background in the chosen palette's `ink` hex** (no transparency needed); seamless 6–8 s loop; slow, calm motion; logo centred with ~20% padding | hero: 1920×1080 (16:9) **and** 1080×1350 (4:5) for mobile; footer: 800×450 | WebM (VP9, ≤ 2.5 MB) + MP4 (H.264, ≤ 3 MB), 30 fps, no audio; poster = first frame PNG 1920×1080 | P1 |
+| ☐ | `logo-liquid-metal.webm` + `.mp4` + `logo-liquid-metal-poster.png` (L4) | **home hero** (large, beside/behind headline) and **footer** (small loop). **Not** a loading screen (no preloader rule). | exported from collidingScopes/liquid-logo **using the picked wordmark SVG**; silver/chrome liquid on **solid `#0A0A0A` background** (palette A ink; no transparency needed); seamless 6–8 s loop; slow, calm motion; logo centred with ~20% padding | hero: 1920×1080 (16:9) **and** 1080×1350 (4:5) for mobile; footer: 800×450 | WebM (VP9, ≤ 2.5 MB) + MP4 (H.264, ≤ 3 MB), 30 fps, no audio; poster = first frame PNG 1920×1080 | P1 |
 | ☐ | `favicon.svg` / I generate `favicon.ico`, `apple-touch-icon.png` (L5) | browser tab, iOS home | wordmark "E" or mark, works at 16 px, on ink square | 512×512 source | SVG or PNG | P1 |
 
 ## 2. Case studies (one set per project)
@@ -44,7 +52,7 @@ Style for all: **black ink line illustration on white**, confident uneven line, 
 | ☐ | `char-404.svg` (I3) | 404 page | a character with a magnifier finding an empty frame ("Found: a page that doesn't exist") | 1000×800 (5:4) | SVG | P2 |
 | ☐ | `char-footer.svg` (I4) | footer | one small idle scene (e.g. working at night by a window, but our own) | 600×600 | SVG | P2 |
 | ☐ | `char-contact.svg` (I5) | contact page | character holding a note "FOUND:" | 800×800 | SVG | P2 |
-**Decision needed:** commission/draw the characters (P1 for /services), or launch without characters and use case screens + type only (fully premium, less personality), adding characters later.
+**Decision (2026-11-18): launch without characters.** All rows above are **later / P2**. Each place keeps a `CharacterSlot` (at launch it shows the section number or nothing), so adding art later is one file + one prop, no layout change.
 
 ## 4. Photography (optional; no team photos for now)
 | ☐ | File name | Where used | What / style | Size | Format | Priority |

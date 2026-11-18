@@ -3,254 +3,223 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Epox: palette &amp; font preview</title>
+<title>Epox: brand preview</title>
+<link rel="preload" href="fonts/licensed/HelveticaNowDisplay-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@300;400;500;600&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Instrument+Serif&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600&f[]=zodiak@300,400&display=swap" rel="stylesheet">
-<script src="palettes.js"></script>
+<!-- free fallbacks only (used if the licensed files are missing) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@300;400;500;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <style>
   :root {
-    --f-head: 'Inter Tight', sans-serif;
-    --f-body: 'Inter', sans-serif;
-    --f-mono: 'Geist Mono', monospace;
-    --f-serif: 'Zodiak', serif;
+    /* Palette A · Liquid Silver: neutral scale */
+    --n-50:#F7F8F9; --n-100:#F3F4F5; --n-200:#E2E4E7; --n-300:#C4C8CE; --n-400:#A3A8AF; --n-500:#80868E;
+    --n-600:#5C6168; --n-700:#4B5058; --n-800:#2A2D31; --n-900:#141516; --n-950:#0A0A0A;
+    --ink: var(--n-950); --paper: #FFFFFF; --surface: var(--n-100); --line: var(--n-200);
+    --text: var(--n-950); --muted: var(--n-600); --on-dark: #F5F6F7; --muted-on-dark: var(--n-400);
+    --accent-on-light: var(--n-700); --accent-on-dark: var(--n-300); --dark-alt: var(--n-900);
+    --ease-out-quad: cubic-bezier(.25,.46,.45,.94); --ease-out-quint: cubic-bezier(.22,1,.36,1);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: #fff; color: #0a0a0a; font-family: 'Inter', sans-serif; }
-  .page { max-width: 1680px; margin: 0 auto; padding: 48px 32px 96px; }
-  .doc-h1 { font: 500 44px/1.05 'Inter Tight', sans-serif; letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
-  .doc-lead { font-size: 17px; color: #4a4f57; max-width: 760px; margin: 0 0 40px; line-height: 1.5; }
-  .doc-h2 { font: 500 28px/1.1 'Inter Tight', sans-serif; letter-spacing: -0.01em; margin: 72px 0 8px; }
-  .doc-note { font-size: 15px; color: #4a4f57; margin: 0 0 24px; max-width: 900px; line-height: 1.5; }
-  .controls { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: end; padding: 20px 0; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; position: sticky; top: 0; background: #fff; z-index: 10; }
-  .controls label { display: grid; gap: 6px; font: 500 11px/1 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: .04em; color: #4a4f57; }
-  .controls select, .controls button { font: 400 14px 'Inter', sans-serif; padding: 8px 10px; border: 1px solid #cfcfcf; border-radius: 6px; background: #fff; color: #0a0a0a; cursor: pointer; }
-  .controls button[aria-pressed="true"] { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+  body { margin: 0; background: var(--paper); color: var(--text); font: 400 17px/1.6 var(--font-text); -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1440px; margin: 0 auto; padding: 56px clamp(20px, 4vw, 64px) 120px; }
+  .label { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .doc-h1 { font: 500 clamp(40px, 5vw, 72px)/0.98 var(--font-display); letter-spacing: -0.04em; margin: 12px 0 16px; text-wrap: balance; }
+  .doc-lead { font-size: 19px; line-height: 1.5; color: var(--muted); max-width: 62ch; margin: 0; text-wrap: pretty; }
+  .doc-h2 { font: 500 clamp(28px, 3vw, 44px)/1.02 var(--font-display); letter-spacing: -0.03em; margin: 8px 0 12px; text-wrap: balance; }
+  section.block { margin-top: 128px; }
+  .sh { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; margin-bottom: 48px; }
+  .note { color: var(--muted); max-width: 70ch; margin: 0; }
+  .decisions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 56px; }
+  .decisions dd { margin: 6px 0 0; font: 500 20px/1.25 var(--font-display); letter-spacing: -0.015em; }
 
-  /* ---------- palette columns ---------- */
-  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
-  @media (max-width: 1100px) { .cols { grid-template-columns: 1fr; } }
-  .col-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-  .col-title h3 { font: 500 22px 'Inter Tight', sans-serif; margin: 0; }
-  .col-title span { font: 400 13px 'Inter', sans-serif; color: #4a4f57; }
-  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-bottom: 12px; }
-  .sw { aspect-ratio: 1.6; border-radius: 6px; border: 1px solid rgba(0,0,0,.08); display: flex; align-items: end; padding: 6px; font: 500 9.5px/1.2 'Geist Mono', monospace; }
+  /* wordmarks */
+  .marks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+  @media (max-width: 1000px) { .marks { grid-template-columns: 1fr; } }
+  .mark h3 { font: 500 20px/1.2 var(--font-display); letter-spacing: -0.015em; margin: 12px 0 4px; }
+  .mark p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+  .tile { border-radius: 16px; display: grid; place-items: center; aspect-ratio: 16/10; padding: 12%; }
+  .tile.light { background: var(--surface); } .tile.dark { background: var(--ink); margin-top: 8px; }
+  .tile img { width: 100%; max-height: 100%; }
+  .mini-nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); margin-top: 8px; }
+  .mini-nav img { height: 22px; width: auto; }
+  .mini-nav span { font: 400 13px var(--font-text); color: var(--muted); }
 
-  .mini { border: 1px solid #e3e3e3; border-radius: 12px; overflow: hidden; font-family: var(--f-body); }
-  .mini .hero { background: var(--ink); color: var(--onDark); padding: 22px 28px 40px; }
-  .mini.light-hero .hero { background: var(--paper); color: var(--text); border-bottom: 1px solid var(--line); }
-  .mini .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px; }
-  .wordmark { font: 600 22px/1 var(--f-head); letter-spacing: -0.03em; }
-  .mini .nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; font-size: 13px; }
-  .mini .nav li { color: var(--mutedOnDark); }
-  .mini.light-hero .nav li { color: var(--muted); }
-  .kicker { font: 500 11px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--mutedOnDark); margin-bottom: 18px; font-variant-numeric: tabular-nums; }
-  .mini.light-hero .kicker { color: var(--muted); }
-  .hero h1 { font: 500 clamp(30px, 3.2vw, 46px)/1.02 var(--f-head); letter-spacing: -0.035em; margin: 0 0 18px; text-wrap: balance; }
-  .hero h1 em { font-family: var(--f-serif); font-style: normal; font-weight: 300; letter-spacing: -0.01em; color: var(--accentOnDark); }
-  .mini.light-hero .hero h1 em { color: var(--accentOnLight); }
-  .hero p { font-size: 15px; line-height: 1.5; color: var(--mutedOnDark); max-width: 420px; margin: 0 0 28px; }
-  .mini.light-hero .hero p { color: var(--muted); }
-  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
-  .btn { font: 500 13px/1 var(--f-body); padding: 13px 18px; border-radius: 999px; border: 1px solid transparent; transition: background-color 100ms cubic-bezier(.25,.46,.45,.94), color 100ms, border-color 100ms; cursor: pointer; }
-  .hero .btn-primary { background: var(--onDark); color: var(--ink); }
-  .hero .btn-primary:hover { background: var(--accentOnDark); }
-  .hero .btn-secondary { background: transparent; color: var(--onDark); border-color: color-mix(in srgb, var(--onDark) 30%, transparent); }
-  .hero .btn-secondary:hover { border-color: var(--onDark); }
-  .mini.light-hero .hero .btn-primary { background: var(--ink); color: var(--paper); }
-  .mini.light-hero .hero .btn-primary:hover { background: var(--accentStrong); }
-  .mini.light-hero .hero .btn-secondary { color: var(--text); border-color: var(--line); }
-  .metal { margin-top: 32px; height: 4px; border-radius: 2px; background: var(--metal, transparent); }
+  /* palette scale */
+  .scale { display: grid; grid-template-columns: repeat(11, minmax(0,1fr)); gap: 6px; }
+  @media (max-width: 900px) { .scale { grid-template-columns: repeat(4, 1fr); } }
+  .chip { border-radius: 10px; aspect-ratio: 1/1.15; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; font: 500 11px/1.35 var(--font-mono); font-variant-numeric: tabular-nums; }
+  .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 32px; margin-top: 40px; }
+  .roles div { display: grid; grid-template-columns: 1fr auto; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .roles code { font: 500 12px var(--font-mono); color: var(--muted); }
 
-  .content { background: var(--paper); color: var(--text); padding: 36px 28px 40px; }
-  .sh { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px; margin-bottom: 28px; }
-  .sh .kicker { color: var(--muted); margin: 0 0 10px; }
-  .sh h2 { font: 500 28px/1.05 var(--f-head); letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
-  .sh .count { font: 500 11px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
-  .row { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; padding: 16px 0; border-top: 1px solid var(--line); }
-  .row .n { font: 500 11px/1.6 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
-  .row h3 { font: 500 18px/1.2 var(--f-head); letter-spacing: -0.015em; margin: 0 0 4px; }
-  .row p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
-  .row .tags { grid-column: 2; display: flex; gap: 6px; flex-wrap: wrap; }
-  .tag { font: 500 10.5px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .04em; color: var(--text); padding: 5px 7px; border-radius: 4px; background: var(--surface); }
+  /* real UI */
+  .ui { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+  .hero { background: var(--ink); color: var(--on-dark); padding: 28px clamp(24px, 5vw, 72px) 96px; }
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(80px, 12vw, 168px); }
+  .nav img { height: 24px; }
+  .nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; font: 400 15px var(--font-text); color: var(--muted-on-dark); }
+  .nav ul li:last-child { color: var(--ink); background: var(--on-dark); padding: 11px 16px; border-radius: 999px; margin-left: 8px; font: 500 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+  @media (max-width: 800px) { .nav ul li:not(:last-child) { display: none; } }
+  .hero .label { color: var(--muted-on-dark); margin-bottom: 28px; }
+  .display { font: 500 clamp(56px, 8.6vw, 148px)/0.92 var(--font-display); letter-spacing: -0.045em; margin: 0 0 40px; max-width: 12ch; text-wrap: balance; }
+  .display .em { color: var(--accent-on-dark); }
+  .hero .lead { font-size: clamp(19px, 1.5vw, 23px); line-height: 1.45; color: var(--muted-on-dark); max-width: 44ch; margin: 0 0 48px; text-wrap: pretty; }
+  .btn { font: 500 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; padding: 16px 22px; border-radius: 999px; border: 1px solid transparent; display: inline-flex; gap: 10px; align-items: center; cursor: pointer; transition: background-color 100ms var(--ease-out-quad), color 100ms var(--ease-out-quad), border-color 100ms var(--ease-out-quad); }
+  .btn:active { transform: scale(.98); }
+  .btn-primary-dark { background: var(--on-dark); color: var(--ink); } .btn-primary-dark:hover { background: var(--n-300); }
+  .btn-secondary-dark { background: transparent; color: var(--on-dark); border-color: var(--n-700); } .btn-secondary-dark:hover { border-color: var(--on-dark); }
+  .btn-primary { background: var(--ink); color: var(--paper); } .btn-primary:hover { background: var(--n-700); }
+  .btn-secondary { background: transparent; color: var(--text); border-color: var(--line); } .btn-secondary:hover { border-color: var(--text); }
+  .ph { display: grid; place-items: center; border: 1px dashed var(--n-600); border-radius: 16px; color: var(--muted-on-dark); font: 500 11px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; aspect-ratio: 16/9; margin-top: 72px; }
+  .content { padding: clamp(72px, 9vw, 128px) clamp(24px, 5vw, 72px); }
+  .content .sh h2 { font: 500 clamp(32px, 3.6vw, 64px)/1.02 var(--font-display); letter-spacing: -0.03em; margin: 12px 0 0; max-width: 18ch; text-wrap: balance; }
+  .row { display: grid; grid-template-columns: 96px 1fr auto; gap: 8px 24px; padding: 28px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  .row h3 { font: 500 clamp(22px, 1.8vw, 32px)/1.15 var(--font-display); letter-spacing: -0.02em; margin: 0 0 8px; }
+  .row p { margin: 0 0 16px; color: var(--muted); max-width: 52ch; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font: 500 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .05em; padding: 7px 9px; border-radius: 6px; background: var(--surface); }
+  @media (max-width: 700px) { .row { grid-template-columns: 1fr; } .row .btn { justify-self: start; } }
+  .cases { background: var(--surface); padding: clamp(72px, 9vw, 128px) clamp(24px, 5vw, 72px); }
+  .card { background: var(--paper); border-radius: 16px; padding: 8px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+  @media (max-width: 900px) { .card { grid-template-columns: 1fr; } }
+  .card .media { border-radius: 8px; background: var(--n-200); display: grid; place-items: center; min-height: 340px; font: 500 11px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border: 1px dashed var(--n-500); }
+  .card .body { padding: clamp(24px, 3vw, 48px); }
+  .card h3 { font: 500 clamp(26px, 2.4vw, 40px)/1.05 var(--font-display); letter-spacing: -0.03em; margin: 16px 0 16px; text-wrap: balance; }
+  .card p { color: var(--muted); margin: 0 0 32px; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin: 0 0 32px; }
+  .facts dd { margin: 4px 0 0; font-size: 15px; }
+  .live { display: inline-flex; align-items: center; gap: 8px; } .live::before { content:''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-on-light); }
+  .foot { background: var(--dark-alt); color: var(--on-dark); padding: clamp(72px, 9vw, 128px) clamp(24px, 5vw, 72px) 32px; }
+  .foot .big { font: 500 clamp(40px, 6vw, 104px)/0.98 var(--font-display); letter-spacing: -0.04em; margin: 0 0 48px; max-width: 14ch; text-wrap: balance; }
+  .foot .big span { color: var(--accent-on-dark); }
+  .trust { display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 28px 0; border-top: 1px solid var(--n-800); margin-top: 72px; }
+  .trust .label { color: var(--muted-on-dark); }
+  .foot small { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--n-800); }
+  .foot small .label { color: var(--muted-on-dark); }
+  .foot img { height: 20px; }
 
-  .card-wrap { background: var(--surface); padding: 28px; }
-  .card { background: var(--paper); border-radius: 10px; padding: 22px; color: var(--text); transition: background-color 180ms ease-out; }
-  .card .kicker { color: var(--muted); margin-bottom: 14px; }
-  .card h3 { font: 500 21px/1.15 var(--f-head); letter-spacing: -0.02em; margin: 0 0 10px; text-wrap: balance; }
-  .card p { font-size: 14px; line-height: 1.5; color: var(--muted); margin: 0 0 18px; }
-  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 0 0 18px; }
-  .facts dt { font: 500 10.5px var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
-  .facts dd { margin: 0; font-size: 13.5px; }
-  .live { display: inline-flex; align-items: center; gap: 6px; }
-  .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accentOnLight); }
-  .link { font: 500 13px var(--f-body); color: var(--text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); transition: text-decoration-color 100ms; }
-  .link:hover { text-decoration-color: currentColor; }
-  .card-btns { display: flex; gap: 10px; margin-top: 22px; }
-  .card-btns .btn-primary { background: var(--ink); color: var(--paper); }
-  .card-btns .btn-primary:hover { background: var(--accentStrong); }
-  .card-btns .btn-secondary { background: transparent; color: var(--text); border-color: var(--line); }
-
-  .foot { background: var(--darkAlt); color: var(--onDark); padding: 32px 28px 22px; }
-  .foot .big { font: 300 34px/1 var(--f-serif); letter-spacing: -0.01em; margin: 0 0 24px; text-wrap: balance; }
-  .foot .big b { font-weight: 300; color: var(--accentOnDark); }
-  .foot .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 13px; margin-bottom: 28px; }
-  .foot .cols3 div { display: grid; gap: 6px; color: var(--mutedOnDark); }
-  .foot .cols3 strong { font: 500 10.5px var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--onDark); margin-bottom: 4px; }
-  .foot small { display: flex; justify-content: space-between; font: 400 11px var(--f-mono); color: var(--mutedOnDark); padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--onDark) 14%, transparent); }
-
-  .contrast { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12.5px; }
-  .contrast td { padding: 5px 4px; border-bottom: 1px solid #eee; }
-  .contrast td:nth-child(2) { font: 500 12px 'Geist Mono', monospace; text-align: right; font-variant-numeric: tabular-nums; }
-  .pass { color: #0b6b2f; font-weight: 600; } .fail { color: #b3261e; font-weight: 600; }
-  .chip { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; border: 1px solid rgba(0,0,0,.15); margin-right: 2px; }
-
-  /* ---------- fonts ---------- */
-  .role { display: grid; grid-template-columns: 300px repeat(3, minmax(0,1fr)); gap: 20px; padding: 28px 0; border-top: 1px solid #e6e6e6; align-items: start; }
-  @media (max-width: 1100px) { .role { grid-template-columns: 1fr; } }
-  .role h3 { font: 500 20px 'Inter Tight', sans-serif; margin: 0 0 6px; }
-  .role .why { font-size: 13.5px; color: #4a4f57; line-height: 1.5; margin: 0; }
-  .orig, .cand { border: 1px solid #e6e6e6; border-radius: 10px; padding: 14px; min-height: 150px; }
-  .orig { background: #fafafa; }
-  .orig img { max-width: 100%; display: block; margin-top: 10px; border-radius: 4px; }
-  .orig img[src*="mono-row"] { width: 100%; image-rendering: auto; }
-  .lab { font: 500 10.5px/1.3 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: .05em; color: #4a4f57; }
-  .lab b { color: #0a0a0a; font-weight: 500; }
-  .cand .sample { margin-top: 12px; color: #0a0a0a; }
-  .dark-sample { background: #0a0a0a; color: #f5f6f7 !important; padding: 12px; border-radius: 6px; }
-  .src { font-size: 12px; color: #4a4f57; margin-top: 10px; }
-  .ph { font: 500 11px 'Geist Mono', monospace; color: #4a4f57; border: 1px dashed #bbb; border-radius: 6px; padding: 8px; display: inline-block; }
+  /* type specimen */
+  .spec > div { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  @media (max-width: 800px) { .spec > div { grid-template-columns: 1fr; } }
+  .warn { color: #8A1C14; font: 500 12px var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
 </style>
 </head>
 <body>
-<div class="page">
-  <h1 class="doc-h1">Epox: palettes &amp; fonts in real UI</h1>
-  <p class="doc-lead">Step 1 preview for the design brief (<code>docs/design-brief.md</code>). Each column is the same mini page (hero, content section, card, buttons, footer) in one palette. Use the controls to switch the hero between dark and light and to try every font option. Contrast for every text/background pair is computed live below each column (WCAG AA: 4.5:1 body, 3:1 large text). Hover the buttons and links to feel the 100ms Linear-style feedback.</p>
+<main class="page">
+  <span class="label">Epox · brand preview · step 1, round 2</span>
+  <h1 class="doc-h1">Liquid Silver, Helvetica Now, and three wordmarks to choose from</h1>
+  <p class="doc-lead">Your choices applied: palette A, Helvetica Now Display + Text, Suisse Int'l Mono for labels and buttons, brand idea "We find it first", dark hero, no characters (slots kept). Pick one of the three wordmarks below; the liquid-metal video is made from it.</p>
+  <dl class="decisions">
+    <div><dt class="label">Palette</dt><dd>A · Liquid Silver</dd></div>
+    <div><dt class="label">Fonts</dt><dd>Helvetica Now Display / Text · Suisse Int'l Mono</dd></div>
+    <div><dt class="label">Brand idea</dt><dd>We find it first</dd></div>
+    <div><dt class="label">Hero</dt><dd>Dark</dd></div>
+  </dl>
+  <p class="warn" id="fontWarn" hidden style="margin-top:32px"></p>
 
-  <div class="controls" role="group" aria-label="Preview controls">
-    <label>Hero
-      <span style="display:flex;gap:6px">
-        <button type="button" id="heroDark" aria-pressed="true">Dark</button>
-        <button type="button" id="heroLight" aria-pressed="false">Light</button>
-      </span>
-    </label>
-    <label>Headings
-      <select id="fHead"><option value="'Inter Tight', sans-serif">H1 · Inter Tight</option><option value="'Switzer', sans-serif">H2 · Switzer</option><option value="'Geist', sans-serif">(alt) Geist</option></select>
-    </label>
-    <label>Body
-      <select id="fBody"><option value="'Inter', sans-serif">B1 · Inter</option><option value="'Geist', sans-serif">B2 · Geist</option><option value="'Switzer', sans-serif">(alt) Switzer</option></select>
-    </label>
-    <label>Mono labels
-      <select id="fMono"><option value="'Geist Mono', monospace">M1 · Geist Mono</option><option value="'JetBrains Mono', monospace">M2 · JetBrains Mono</option><option value="'IBM Plex Mono', monospace">(alt) IBM Plex Mono</option></select>
-    </label>
-    <label>Editorial serif
-      <select id="fSerif"><option value="'Zodiak', serif">S1 · Zodiak</option><option value="'Fraunces', serif">S2 · Fraunces</option><option value="'Instrument Serif', serif">(alt) Instrument Serif</option></select>
-    </label>
-    <label>Brand idea (hero line)
-      <select id="idea"><option value="1">1 · We find it first</option><option value="2">2 · Built. Launched. Still here.</option><option value="3">3 · Your night shift</option></select>
-    </label>
-  </div>
+  <section class="block" aria-labelledby="wm">
+    <div class="sh"><div><span class="label">/ Logo</span><h2 class="doc-h2" id="wm">Three wordmarks in Helvetica Now Display</h2></div><span class="label">03</span></div>
+    <div class="marks">
+      <article class="mark">
+        <div class="tile light"><img src="../logo/wordmark-1-medium-black.svg" alt="Wordmark option 1: Epox in Medium"></div>
+        <div class="tile dark"><img src="../logo/wordmark-1-medium-white.svg" alt=""></div>
+        <div class="mini-nav"><img src="../logo/wordmark-1-medium-black.svg" alt=""><span>Header size, 22px</span></div>
+        <h3>1 · Epox, Medium</h3>
+        <p>Title case, Medium weight, tracking −4%. The calmest and most "established". Reads like a company name, not a startup.</p>
+      </article>
+      <article class="mark">
+        <div class="tile light"><img src="../logo/wordmark-2-bold-lower-black.svg" alt="Wordmark option 2: epox in Bold lowercase"></div>
+        <div class="tile dark"><img src="../logo/wordmark-2-bold-lower-white.svg" alt=""></div>
+        <div class="mini-nav"><img src="../logo/wordmark-2-bold-lower-black.svg" alt=""><span>Header size, 22px</span></div>
+        <h3>2 · epox, Bold lowercase</h3>
+        <p>Lowercase, Bold, tight −6.5%. Compact and rounded: the best shape for the liquid-metal animation (thick strokes, blob-friendly "e" and "o").</p>
+      </article>
+      <article class="mark">
+        <div class="tile light"><img src="../logo/wordmark-3-light-caps-black.svg" alt="Wordmark option 3: EPOX in Light caps"></div>
+        <div class="tile dark"><img src="../logo/wordmark-3-light-caps-white.svg" alt=""></div>
+        <div class="mini-nav"><img src="../logo/wordmark-3-light-caps-black.svg" alt=""><span>Header size, 22px</span></div>
+        <h3>3 · EPOX, Light caps</h3>
+        <p>Capitals, Light, open +6%. Most "luxury/editorial". Thin strokes look elegant large but get fragile small and in liquid metal.</p>
+      </article>
+    </div>
+  </section>
 
-  <h2 class="doc-h2">1 · Palettes</h2>
-  <p class="doc-note">Black and white do ~90% of the work in all three. The third colour is used only for emphasis: one word in the hero, the "live" status dot, the primary-button hover, the footer accent. Silver (A) is never used as text on white (it fails contrast); on light backgrounds A uses its darker steel tone.</p>
-  <div class="cols" id="cols"></div>
+  <section class="block" aria-labelledby="pal">
+    <div class="sh"><div><span class="label">/ Colour</span><h2 class="doc-h2" id="pal">Liquid Silver: full neutral scale</h2></div><span class="label">11</span></div>
+    <div class="scale" id="scale"></div>
+    <div class="roles">
+      <div><span>Page</span><code>#FFFFFF</code></div><div><span>Ink (dark sections, primary button)</span><code>n-950</code></div>
+      <div><span>Surface (soft panels, tags)</span><code>n-100</code></div><div><span>Hairline</span><code>n-200</code></div>
+      <div><span>Muted text on white (6.2:1)</span><code>n-600</code></div><div><span>Emphasis on white: steel (8.1:1)</span><code>n-700</code></div>
+      <div><span>Muted text on ink (8.3:1)</span><code>n-400</code></div><div><span>Emphasis on ink: silver (11.8:1)</span><code>n-300</code></div>
+      <div><span>Footer / second dark section</span><code>n-900</code></div><div><span>Large text only on white (3.7:1)</span><code>n-500</code></div>
+    </div>
+    <p class="note" style="margin-top:24px">Rule: on white, text uses n-600 to n-950 (n-500 only for text ≥ 24px). On ink, text uses n-50 to n-500. Silver (n-300) is never text on white. The metal gradient exists only inside the liquid-metal logo video.</p>
+  </section>
 
-  <h2 class="doc-h2">2 · Fonts: free alternatives next to the originals</h2>
-  <p class="doc-note">Left: crop of the original font from <code>research/raw/</code>. Right: two free candidates per role (+ one alternate), set with our own words at similar size. All are free: Google Fonts (Inter, Inter Tight, Geist, Geist Mono, JetBrains Mono, IBM Plex Mono, Fraunces, Instrument Serif) or Fontshare (Switzer, Zodiak).</p>
-  <div id="fonts"></div>
-</div>
-
-<script>
-const IDEAS = {
-  1: { kicker: 'EPOX · FAISALABAD · SINCE 2019', h: 'We find the problem <em>before</em> you do.', p: 'Epox builds web, mobile and AI software. Most of our clients first hear from us with a fix for something they hadn\'t spotted yet.' },
-  2: { kicker: 'EPOX · FAISALABAD · SINCE 2019', h: 'Built. Launched. <em>Still here.</em>', p: 'We design, build and ship software, then stay on to run its marketing and maintenance. Every product we\'ve launched is still live.' },
-  3: { kicker: 'EPOX · FAISALABAD · UTC+5', h: 'Your <em>night shift</em> in Faisalabad.', p: 'While your team sleeps, ours ships. Wake up to working builds, clear updates and fewer open tickets.' },
-};
-const SWATCH_KEYS = [['ink','Ink'],['paper','Paper'],['surface','Surface'],['muted','Muted'],['accentOnLight','Emph. light'],['accentOnDark','Emph. dark']];
-
-function colHTML(key, p) {
-  const metal = key === 'A' ? 'linear-gradient(90deg,#E9EBEE,#A7ACB3 45%,#6E737A 70%,#C4C8CE)' : 'transparent';
-  const sw = SWATCH_KEYS.map(([k,l]) => `<div class="sw" style="background:${p[k]};color:${contrast(p[k],'#0A0A0A')>contrast(p[k],'#FFFFFF')?'#0A0A0A':'#FFFFFF'}">${l}<br>${p[k]}</div>`).join('');
-  const rows = pairs(p).map(([n,f,b,min]) => { const r = contrast(f,b); return `<tr><td><span class="chip" style="background:${f}"></span><span class="chip" style="background:${b}"></span> ${n}</td><td>${r.toFixed(2)}:1 <span class="${r>=min?'pass':'fail'}">${r>=min?'AA ✓':'FAIL'}</span></td></tr>`; }).join('');
-  const style = Object.entries(p).filter(([k,v]) => typeof v === 'string' && v.startsWith('#')).map(([k,v]) => `--${k}:${v}`).join(';') + `;--metal:${metal}`;
-  return `<section aria-label="Palette ${key}">
-    <div class="col-title"><h3>${key} · ${p.name}</h3><span>${p.mood}</span></div>
-    <div class="swatches">${sw}</div>
-    <div class="mini" style="${style}">
+  <section class="block" aria-labelledby="ui">
+    <div class="sh"><div><span class="label">/ Real UI</span><h2 class="doc-h2" id="ui">The system on a real page</h2></div></div>
+    <div class="ui">
       <div class="hero">
-        <div class="nav"><span class="wordmark">Epox</span><ul><li>Services</li><li>Work</li><li>How we work</li><li>About</li></ul></div>
-        <div class="kicker idea-k"></div>
-        <h1 class="idea-h"></h1>
-        <p class="idea-p"></p>
-        <div class="btns"><button class="btn btn-primary">Let's talk</button><button class="btn btn-secondary">See our work</button></div>
+        <div class="nav"><img src="../logo/wordmark-1-medium-white.svg" alt="Epox" class="wm-white"><ul><li>Services</li><li>Work</li><li>How we work</li><li>About</li><li>Let's talk</li></ul></div>
+        <div class="label">Epox · Faisalabad · Since 2019</div>
+        <h1 class="display">We find the problem <span class="em">before you do.</span></h1>
+        <p class="lead">Epox builds web, mobile and AI software. Most of our clients first hear from us with a fix for something they hadn't spotted yet.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-primary-dark">Let's talk →</button><button class="btn btn-secondary-dark">See our work</button></div>
+        <div class="ph">[ASSET: liquid-metal logo loop · 16:9]</div>
       </div>
       <div class="content">
-        <div class="sh"><div><div class="kicker">/ Services</div><h2>Seven ways we can help</h2></div><span class="count">07</span></div>
-        <div class="row"><span class="n">S/01</span><div><h3>Mobile apps</h3><p>iOS and Android apps people keep opening after week one.</p></div><div class="tags"><span class="tag">iOS</span><span class="tag">Android</span><span class="tag">Cross-platform</span></div></div>
-        <div class="row"><span class="n">S/02</span><div><h3>Business software</h3><p>Systems that replace spreadsheets and manual steps.</p></div><div class="tags"><span class="tag">ERP</span><span class="tag">CRM</span><span class="tag">Automation</span></div></div>
+        <div class="sh"><div><span class="label">/ Services</span><h2>Seven ways we can help</h2></div><span class="label">07</span></div>
+        <div class="row"><span class="label">S/01</span><div><h3>Web &amp; SaaS development</h3><p>Websites, web apps and SaaS products built to scale.</p><div class="tags"><span class="tag">Company sites</span><span class="tag">E-commerce</span><span class="tag">SaaS</span></div></div><button class="btn btn-secondary">Explore</button></div>
+        <div class="row"><span class="label">S/02</span><div><h3>Mobile apps</h3><p>iOS and Android apps people keep opening after week one.</p><div class="tags"><span class="tag">iOS</span><span class="tag">Android</span><span class="tag">Cross-platform</span></div></div><button class="btn btn-secondary">Explore</button></div>
       </div>
-      <div class="card-wrap">
+      <div class="cases">
+        <div class="sh"><div><span class="label">/ Work</span><h2 class="doc-h2" style="margin:12px 0 0">Two products, both still live</h2></div><span class="label">02</span></div>
         <article class="card">
-          <div class="kicker">Case 002 · PropTech · Europe</div>
-          <h3>Apps that settle rental disputes before they start</h3>
-          <p>Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out.</p>
-          <dl class="facts"><div><dt>Client</dt><dd>[PLACEHOLDER: client descriptor]</dd></div><div><dt>Platforms</dt><dd>iOS · Android · Web</dd></div><div><dt>Engagement</dt><dd>Build + marketing &amp; maintenance</dd></div><div><dt>Status</dt><dd class="live">Live</dd></div></dl>
-          <a class="link" href="#" onclick="return false">Read the case study</a>
-          <div class="card-btns"><button class="btn btn-primary">Let's talk</button><button class="btn btn-secondary">All work</button></div>
+          <div class="media">[ASSET: case 002 hero · 16:10]</div>
+          <div class="body">
+            <span class="label">Case 002 · PropTech · Europe</span>
+            <h3>Apps that settle rental disputes before they start</h3>
+            <p>Tenants photograph the property at move-in into a tamper-proof record, then both sides compare it side by side at move-out.</p>
+            <dl class="facts"><div><dt class="label">Client</dt><dd>[PLACEHOLDER: client descriptor]</dd></div><div><dt class="label">Platforms</dt><dd>iOS · Android · Web</dd></div><div><dt class="label">Engagement</dt><dd>Build, marketing, maintenance</dd></div><div><dt class="label">Status</dt><dd class="live">Live</dd></div></dl>
+            <button class="btn btn-primary">Read the case →</button>
+          </div>
         </article>
       </div>
       <footer class="foot">
-        <p class="big">Have a problem worth solving? <b>Let's talk.</b></p>
-        <div class="cols3"><div><strong>Services</strong><span>Web &amp; SaaS</span><span>Mobile apps</span><span>AI solutions</span></div><div><strong>Company</strong><span>Work</span><span>How we work</span><span>About</span></div><div><strong>Contact</strong><span>[PLACEHOLDER: email]</span><span>Faisalabad, Pakistan</span></div></div>
-        <small><span>© 2026 Epox</span><span>Since 2019</span></small>
+        <p class="big">Have a problem worth solving? <span>Let's talk.</span></p>
+        <button class="btn btn-primary-dark">Let's talk →</button>
+        <div class="trust"><span class="label">Since 2019</span><span class="label">2 products live</span><span class="label">NDA on request</span><span class="label">Faisalabad, PK · UTC+5</span></div>
+        <small><img src="../logo/wordmark-1-medium-white.svg" alt="Epox" class="wm-white"><span class="label">© 2026 Epox</span></small>
       </footer>
     </div>
-    <table class="contrast"><tbody>${rows}</tbody></table>
-  </section>`;
-}
-document.getElementById('cols').innerHTML = Object.entries(PALETTES).map(([k,p]) => colHTML(k,p)).join('');
+  </section>
 
-function applyIdea(){ const i = IDEAS[document.getElementById('idea').value];
-  document.querySelectorAll('.idea-k').forEach(e=>e.textContent=i.kicker);
-  document.querySelectorAll('.idea-h').forEach(e=>e.innerHTML=i.h);
-  document.querySelectorAll('.idea-p').forEach(e=>e.textContent=i.p); }
-applyIdea();
-document.getElementById('idea').addEventListener('change', applyIdea);
-const setHero = light => { document.querySelectorAll('.mini').forEach(m => m.classList.toggle('light-hero', light));
-  document.getElementById('heroLight').setAttribute('aria-pressed', light); document.getElementById('heroDark').setAttribute('aria-pressed', !light); };
-document.getElementById('heroDark').onclick = () => setHero(false);
-document.getElementById('heroLight').onclick = () => setHero(true);
-[['fHead','--f-head'],['fBody','--f-body'],['fMono','--f-mono'],['fSerif','--f-serif']].forEach(([id,v]) =>
-  document.getElementById(id).addEventListener('change', e => document.documentElement.style.setProperty(v, e.target.value)));
-
-// ---------- font comparison ----------
-const ROLES = [
-  { role: 'Headings', why: 'Large, tight, confident sans. Originals: Helvetica Now Display (Webisoft), Inter Display-style weights (Linear).',
-    orig: [['ref/webisoft-heading.png','Helvetica Now Display 500 · Webisoft'],['ref/webisoft-heading-caps.png','Helvetica Now Display caps · Webisoft'],['ref/linear-heading.png','Inter Variable 510 · Linear']],
-    cands: [['H1 · Inter Tight 500','Google Fonts',"'Inter Tight'",500,'-0.035em'],['H2 · Switzer 500','Fontshare',"'Switzer'",500,'-0.03em'],['alt · Geist 500','Google Fonts',"'Geist'",500,'-0.035em']],
-    text: 'Seven ways we can help', size: 44, dark: false },
-  { role: 'Body', why: 'Calm, very readable text at 16–22px. Originals: Helvetica Now Text (Webisoft), Inter (Linear), NB International Pro (Hello Monday).',
-    orig: [['ref/webisoft-body.png','Helvetica Now Text · Webisoft'],['ref/linear-body.png','Inter · Linear (on dark)'],['ref/hellomonday-body.png','NB International Pro · Hello Monday']],
-    cands: [['B1 · Inter 400','Google Fonts',"'Inter'",400,'-0.005em'],['B2 · Geist 400','Google Fonts',"'Geist'",400,'-0.005em'],['alt · Switzer 400','Fontshare',"'Switzer'",400,'0']],
-    text: 'Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out. No more arguments over the deposit.', size: 19, dark: false },
-  { role: 'Mono labels & numbers', why: 'Small caps-style labels, counters, tags: never body text. Originals: Suisse Intl Mono (Webisoft), Berkeley Mono (Linear).',
-    orig: [['ref/webisoft-mono.png','Suisse Intl Mono · Webisoft'],['ref/webisoft-mono-row.png','Suisse Intl Mono labels + counter · Webisoft']],
-    cands: [['M1 · Geist Mono 500','Google Fonts',"'Geist Mono'",500,'0.04em'],['M2 · JetBrains Mono 500','Google Fonts',"'JetBrains Mono'",500,'0.03em'],['alt · IBM Plex Mono 500','Google Fonts',"'IBM Plex Mono'",500,'0.03em']],
-    text: '/ SERVICES  ·  S/01  ·  CASE 002  ·  SINCE 2019  ·  07', size: 13, dark: false, upper: true },
-  { role: 'Editorial serif (optional)', why: 'Only for big editorial moments: one hero word, footer line, roll-call names. Original: Clarendon BT Light (Hello Monday).',
-    orig: [['ref/hellomonday-serif.png','Clarendon BT Light · Hello Monday']],
-    cands: [['S1 · Zodiak Light','Fontshare',"'Zodiak'",300,'-0.01em'],['S2 · Fraunces Light','Google Fonts',"'Fraunces'",300,'-0.01em'],['alt · Instrument Serif','Google Fonts',"'Instrument Serif'",400,'-0.01em']],
-    text: 'Mobile apps', size: 64, dark: false },
-];
-document.getElementById('fonts').innerHTML = ROLES.map(r => `
-  <div class="role">
-    <div><h3>${r.role}</h3><p class="why">${r.why}</p>
-      <div class="orig" style="margin-top:14px">${r.orig.map(([src,l]) => `<div class="lab" style="margin-top:10px">Original · <b>${l}</b></div><img src="${src}" alt="Reference crop: ${l}">`).join('')}</div></div>
-    ${r.cands.map(([l,src,fam,w,ls]) => `<div class="cand"><div class="lab"><b>${l}</b> · ${src}</div>
-      <div class="sample" style="font-family:${fam};font-weight:${w};font-size:${r.size}px;line-height:${r.size>30?1.02:1.5};letter-spacing:${ls};${r.upper?'text-transform:uppercase;':''}text-wrap:balance">${r.text}</div>
-      <div class="sample dark-sample" style="font-family:${fam};font-weight:${w};font-size:${Math.round(r.size*0.75)}px;line-height:${r.size>30?1.05:1.5};letter-spacing:${ls};${r.upper?'text-transform:uppercase;':''}text-wrap:balance">${r.text}</div></div>`).join('')}
-  </div>`).join('');
+  <section class="block" aria-labelledby="type">
+    <div class="sh"><div><span class="label">/ Type</span><h2 class="doc-h2" id="type">Type scale</h2></div></div>
+    <div class="spec">
+      <div><span class="label">display · Now Display 500</span><span style="font:500 clamp(56px,8vw,140px)/0.92 var(--font-display);letter-spacing:-0.045em">Found it.</span></div>
+      <div><span class="label">h1 · Now Display 500</span><span style="font:500 clamp(44px,6vw,96px)/0.98 var(--font-display);letter-spacing:-0.04em;text-wrap:balance">A nutrition app with a real nutritionist inside</span></div>
+      <div><span class="label">h2 · Now Display 500</span><span style="font:500 clamp(32px,3.6vw,64px)/1.02 var(--font-display);letter-spacing:-0.03em">You'll always know what's happening</span></div>
+      <div><span class="label">h3 · Now Display 500</span><span style="font:500 clamp(22px,1.8vw,32px)/1.15 var(--font-display);letter-spacing:-0.02em">Business software</span></div>
+      <div><span class="label">lead · Now Text 400</span><span style="font:400 clamp(19px,1.5vw,24px)/1.45 var(--font-text);max-width:52ch">We design, build and launch software, then stay on to keep it running and growing.</span></div>
+      <div><span class="label">body · Now Text 400 · 17px</span><span style="max-width:64ch">Tenants and landlords photograph the property at move-in into a tamper-proof record, then compare it side by side at move-out. No more arguments over the deposit.</span></div>
+      <div><span class="label">label / button · Suisse Int'l Mono 500</span><span class="label" style="color:var(--text);font-size:12px">/ Services · S/01 · Case 002 · Since 2019 · Let's talk →</span></div>
+    </div>
+  </section>
+</main>
+<script>
+const S = [['50','#F7F8F9'],['100','#F3F4F5'],['200','#E2E4E7'],['300','#C4C8CE'],['400','#A3A8AF'],['500','#80868E'],['600','#5C6168'],['700','#4B5058'],['800','#2A2D31'],['900','#141516'],['950','#0A0A0A']];
+function lum(h){const c=h.slice(1).match(/../g).map(x=>{const v=parseInt(x,16)/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+const cr=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+.05)/(y+.05)};
+document.getElementById('scale').innerHTML = S.map(([k,v]) => { const dark = lum(v) < 0.25; const fg = dark ? '#FFFFFF' : '#0A0A0A';
+  return `<div class="chip" style="background:${v};color:${fg};${k==='50'?'border:1px solid #E2E4E7;':''}"><span>n-${k}</span><span>${v}<br>W ${cr(v,'#FFFFFF').toFixed(1)} · I ${cr(v,'#0A0A0A').toFixed(1)}</span></div>`; }).join('');
+// tell the viewer when licensed fonts are missing (e.g. viewing the public repo)
+document.fonts.ready.then(() => {
+  const miss = [['Helvetica Now Display','500'],['Helvetica Now Text','400'],['Suisse Intl Mono','500']].filter(([f,w]) => ![...document.fonts].some(ff => ff.family.replace(/"/g,'') === f && ff.status === 'loaded'));
+  if (miss.length) { const el = document.getElementById('fontWarn'); el.hidden = false; el.textContent = 'Not loaded, showing free fallback: ' + miss.map(m=>m[0]).join(', '); }
+});
 </script>
 </body>
 </html>
