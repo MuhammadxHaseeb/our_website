@@ -1,8 +1,9 @@
 # CLAUDE.md: Project memory
 
 ## Project overview
-- **Who we are:** a software house in Pakistan (name, city, target clients, services: TODO, see `our-company.md`).
-- **Current phase:** RESEARCH ONLY → next: company interview. No page design or website code until the user says so.
+- **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; offers all kinds of software services (owner picks focus services from the catalogue in `our-company.md`).
+- **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach; Clutch/PSEB-style badges don't matter to the owner.
+- **Current phase:** RESEARCH done → company interview in progress. No page design or website code until the user says so.
 - **End goal:** design and build our own company website using this research plus `our-company.md`.
 
 ## Research status
@@ -52,7 +53,8 @@ Overview and comparison: [research/overview.md](research/overview.md)
 - [ ] Add competitor sites when the user sends them (Services & pricing focus)
 
 ## Open questions
-- Company name, city, target clients and services were placeholders in the brief → interview.
+- Owner to tick services + mark 2–3 ★ in `our-company.md` catalogue (57 items, 9 groups).
+- Interview round 2 pending: portfolio/proof, team & contact person, pricing models, brand assets.
 - **Direct competitors** for Services & pricing: please send links. Suggestions to approve: arbisoft.com, 10pearls.com, devsinc.com, tkxel.com (Pakistan); netguru.com, simform.com (big offshore houses with visible engagement models).
 - **Suggested new sites (not researched until approved):**
   - Corporate look: anduril.com (Awwwards technology; defence-grade corporate restraint), stripe.com (enterprise trust at scale), epam.com (global IT services corporate).
