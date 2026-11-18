@@ -1,5 +1,12 @@
 # CLAUDE.md: Project memory
 
+## ▶ Resume here (last updated 2026-11-19)
+- **Where we are:** Step 2 is done. `/styleguide` is a **demo of the design system** (tokens, components, motion) built from real Epox content. **No real pages exist yet**; `/` is a temporary dark hero only.
+- **Last owner feedback:** pure black on big sections was "way too strong" → switched all dark sections to graphite (`#1A1B1E` + raised `#232428` / `#2C2E33`). Owner hasn't confirmed the new tone yet. **Ask first: "Is the graphite right, lighter or darker?"**
+- **Next:** once the owner approves the styleguide, start **Step 3**, building pages one at a time in this order: **home** → services (+ /services/mobile-apps) → work (+ 2 case studies, MDX) → how-we-work → about → contact (wire **Resend**) → privacy + 404. For each page: say which assets it needs, build desktop + mobile, screenshot with Playwright, record a scroll video (`scripts/record.js`), check the Design rules + Lighthouse 90+, show the owner, wait for feedback, commit.
+- **To run:** start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide (live demo at `#demo`).
+- **Still waiting on the owner:** liquid-metal logo video (from `docs/logo/epox-wordmark-white.svg`), app screenshots/recordings, contact email/WhatsApp/booking link, client descriptors, durations, results.
+
 ## Project overview
 - **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; 7 service areas (see `our-company.md`).
 - **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach, then get a reply / call.
