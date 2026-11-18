@@ -76,7 +76,8 @@ Full neutral scale (contrast vs white / vs ink n-950):
 | n-900 | `#141516` | 18.3 | 1.1 | `darkAlt`: footer / second dark section |
 | n-950 | `#0A0A0A` | 19.8 | 1.0 | `ink`: dark sections, text, primary button |
 
-Plus `paper #FFFFFF` and `onDark #F5F6F7`. **Rules:** on white, text uses n-600…n-950 (n-500 only ≥ 24px); on ink, text uses n-50…n-500; silver never as text on white; the metal gradient exists only inside the liquid-metal logo video.
+Plus `paper #FFFFFF` and `onDark #F5F6F7`.
+**Dark surfaces (graphite, 2026-11-19):** large dark areas never use pure ink. Section `dark-bg #1A1B1E` (text 15.9:1, muted 7.2:1, silver 10.3:1) · inset `#1E1F22` · raised panel/menu `#232428` · card `#2C2E33` (muted 5.7:1) · hairline `#34373C`. Ink `#0A0A0A` stays for text and the primary button on light. Roll-call inactive names use n-500 on graphite (4.7:1). **Rules:** on white, text uses n-600…n-950 (n-500 only ≥ 24px); on ink, text uses n-50…n-500; silver never as text on white; the metal gradient exists only inside the liquid-metal logo video.
 
 <details><summary>Original three proposals (for the record)</summary>
 

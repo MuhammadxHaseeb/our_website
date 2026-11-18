@@ -15,7 +15,8 @@ const SCALE: [string, string][] = [['50', '#F7F8F9'], ['100', '#F3F4F5'], ['200'
 const PAIRS: [string, string, string][] = [
   ['Body text on white', '#0A0A0A', '#FFFFFF'], ['Muted text on white', '#5C6168', '#FFFFFF'], ['Muted text on surface', '#5C6168', '#F3F4F5'],
   ['Steel emphasis on white', '#4B5058', '#FFFFFF'], ['Text on ink', '#F5F6F7', '#0A0A0A'], ['Muted on ink', '#A3A8AF', '#0A0A0A'],
-  ['Silver emphasis on ink', '#C4C8CE', '#0A0A0A'], ['Muted on footer (n-900)', '#A3A8AF', '#141516'], ['Error on ink', '#FF9A92', '#0A0A0A'], ['Error on white', '#B3261E', '#FFFFFF'],
+  ['Silver emphasis on ink', '#C4C8CE', '#0A0A0A'], ['Text on graphite section', '#F5F6F7', '#1A1B1E'], ['Muted on graphite section', '#A3A8AF', '#1A1B1E'],
+  ['Silver on graphite section', '#C4C8CE', '#1A1B1E'], ['Muted on raised card', '#A3A8AF', '#2C2E33'], ['Error on graphite', '#FF9A92', '#1A1B1E'], ['Error on white', '#B3261E', '#FFFFFF'],
 ];
 const TYPE = [
   ['display', 't-display', 'Found it.'], ['h1', 't-h1', 'A nutrition app with a real nutritionist inside'], ['h2', 't-h2', 'You\'ll always know what\'s happening'],

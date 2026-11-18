@@ -17,6 +17,10 @@
   --color-steel: var(--accent-on-light);
   --color-silver: var(--accent-on-dark);
   --color-dark-alt: var(--dark-alt);
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-inset: var(--dark-inset);
+  --color-dark-raised: var(--dark-raised);
+  --color-dark-raised-2: var(--dark-raised-2);
   --color-n-50: var(--n-50); --color-n-100: var(--n-100); --color-n-200: var(--n-200); --color-n-300: var(--n-300);
   --color-n-400: var(--n-400); --color-n-500: var(--n-500); --color-n-600: var(--n-600); --color-n-700: var(--n-700);
   --color-n-800: var(--n-800); --color-n-900: var(--n-900); --color-n-950: var(--n-950);
@@ -53,7 +57,7 @@
   .container-x { width: 100%; max-width: calc(var(--max) + 2 * var(--margin)); margin-inline: auto; padding-inline: var(--margin); }
   .section { padding-block: var(--section-y); }
   .section-tight { padding-block: var(--section-y-tight); }
-  .dark { background: var(--ink); color: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark); }
+  .dark { background: var(--dark-bg); color: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark); }
   .dark-alt { background: var(--dark-alt); color: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark); }
   .soft { background: var(--surface); }
 

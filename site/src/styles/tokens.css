@@ -26,10 +26,16 @@
   --muted: var(--n-600);
   --on-dark: #F5F6F7;
   --muted-on-dark: var(--n-400);
-  --line-on-dark: var(--n-800);
+  --line-on-dark: #34373C;
+
+  /* ---------- dark surfaces (graphite): softer than ink for large areas ---------- */
+  --dark-bg: #1A1B1E;       /* dark sections: text 15.9:1, muted 7.2:1, silver 10.3:1 */
+  --dark-inset: #1E1F22;    /* recessed areas inside panels */
+  --dark-raised: #232428;   /* panels, menus on dark */
+  --dark-raised-2: #2C2E33; /* cards inside panels: muted 5.7:1 */
   --accent-on-light: var(--n-700);
   --accent-on-dark: var(--n-300);
-  --dark-alt: var(--n-900);
+  --dark-alt: var(--dark-bg); /* footer matches dark sections; separated by a hairline */
   --focus: #3B82F6; /* focus ring only (functional, not decoration) */
   --success: #1F7A45;
   --error: #B3261E;

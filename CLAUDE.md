@@ -40,6 +40,7 @@
 | 2026-11-18 | **Dark** home hero | Owner's pick |
 | 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |
 | 2026-11-18 | Contact form → **Resend** to owner's inbox (wire at /contact) | Owner accepted recommendation |
+| 2026-11-19 | Dark sections use **graphite** surfaces, not pure black: section `#1A1B1E`, inset `#1E1F22`, raised panel `#232428`, card `#2C2E33`, hairline `#34373C`; footer matches sections. Pure ink `#0A0A0A` only for text/primary buttons | Owner: black background "way too strong" |
 | 2026-11-19 | Free font weights trimmed to those in use (Inter Tight 300/500, Inter 400/500, Geist Mono 500), all preloaded | CLS 0.065 → 0 on mobile Lighthouse |
 | 2026-11-19 | Dimmed states use AA-large colours: roll-call inactive n-600 on ink, statement unrevealed n-500 on white | Lighthouse colour-contrast; design rule |
 | 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |

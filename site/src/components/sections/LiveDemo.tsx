@@ -45,14 +45,14 @@ export function LiveDemo() {
   return (
     <div ref={ref} className="demo grid gap-[var(--gutter)] lg:grid-cols-[1.4fr_1fr]" aria-label="Example of a week working with Epox: a problem is found, fixed, tested and reported" role="img">
       {/* board */}
-      <div className="rounded-[var(--r-card)] border border-line-on-dark bg-n-900 p-[var(--r-card-pad)]">
+      <div className="rounded-[var(--r-card)] border border-line-on-dark bg-dark-raised p-[var(--r-card-pad)]">
         <div className="flex items-center justify-between px-3 py-2"><span className="t-label muted">Project board</span><span className="t-label muted">Sprint 6</span></div>
         <div className="grid grid-cols-3 gap-[var(--r-card-pad)]">
           {['To do', 'In progress', 'Done'].map((c, i) => (
-            <div key={c} className="min-h-[220px] rounded-[var(--r-inner)] bg-n-950 p-3">
+            <div key={c} className="min-h-[220px] rounded-[var(--r-inner)] bg-dark-inset p-3">
               <p className="t-label muted">{c}</p>
               {i === col && (
-                <div key={col} className="demo-card mt-3 rounded-[6px] border border-line-on-dark bg-n-900 p-3">
+                <div key={col} className="demo-card mt-3 rounded-[6px] border border-line-on-dark bg-dark-raised-2 p-3">
                   <p className="t-label" style={{ color: 'var(--muted-on-dark)' }}>EPX-214</p>
                   <p className="t-small mt-1.5">Checkout fails on mobile Safari</p>
                   {step === 0 && <p className="t-label mt-3" style={{ color: 'var(--accent-on-dark)' }}>Found: before your users did</p>}
@@ -66,7 +66,7 @@ export function LiveDemo() {
       </div>
       {/* checks + update */}
       <div className="grid gap-[var(--gutter)]">
-        <div className="rounded-[var(--r-card)] border border-line-on-dark bg-n-900 p-5">
+        <div className="rounded-[var(--r-card)] border border-line-on-dark bg-dark-raised p-5">
           <p className="t-label muted">Checks</p>
           <ul className="mt-4 grid gap-3">
             {checks.map(c => {
@@ -82,7 +82,7 @@ export function LiveDemo() {
             })}
           </ul>
         </div>
-        <div className="rounded-[var(--r-card)] border border-line-on-dark bg-n-900 p-5">
+        <div className="rounded-[var(--r-card)] border border-line-on-dark bg-dark-raised p-5">
           <p className="t-label muted">Weekly update · Friday</p>
           <p className="t-small mt-4 min-h-[4.5em]">
             {step >= 5 ? UPDATE.slice(0, typed) : ''}

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: 'Epox', type: 'website' },
 };
 
-export const viewport: Viewport = { themeColor: '#0A0A0A', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#1A1B1E', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
