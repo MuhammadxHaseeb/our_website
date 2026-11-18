@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Geist_Mono, Inter, Inter_Tight } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-fonts={FONT_SET} className={`${interTight.variable} ${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
+        <Script id="motion-boot" strategy="beforeInteractive">{motionBootScript}</Script>
         {FONT_SET === 'licensed' && <link rel="preload" href="/fonts/licensed/HelveticaNowDisplay-Medium.woff2" as="font" type="font/woff2" crossOrigin="" />}
       </head>
       <body>

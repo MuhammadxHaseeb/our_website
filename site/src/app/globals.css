@@ -84,12 +84,9 @@
   .link:hover { text-decoration-color: currentColor; }
 
   /* ------------------------------------------------------------ reveal (L4) */
-  html.js:not([data-motion="reduced"]) [data-reveal] {
-    opacity: 0; transform: translateY(var(--rise));
-    transition: opacity var(--dur-enter) var(--ease-out-quint), transform var(--dur-enter) var(--ease-out-quint);
-    transition-delay: calc(var(--i, 0) * var(--stagger));
-  }
-  html.js:not([data-motion="reduced"]) [data-reveal].is-in { opacity: 1; transform: none; }
+  /* hidden until app/template.tsx plays the entrance (Web Animations, fill: forwards).
+     [data-in] forces visible (used by review/screenshot tooling). */
+  html.js:not([data-motion="reduced"]) [data-reveal]:not([data-in]) { opacity: 0; transform: translateY(var(--rise)); }
 
   /* page enter (H2, template.tsx) */
   .page-enter { animation: page-enter 600ms var(--ease-out-quint) both; }
