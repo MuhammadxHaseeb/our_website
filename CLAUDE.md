@@ -2,7 +2,7 @@
 
 ## ▶ Resume here (last updated 2026-11-19)
 - **Where we are:** Step 2 is done. `/styleguide` is a **demo of the design system** (tokens, components, motion) built from real Epox content. **No real pages exist yet**; `/` is a temporary dark hero only.
-- **Last owner feedback:** pure black on big sections was "way too strong" → switched all dark sections to graphite (`#1A1B1E` + raised `#232428` / `#2C2E33`). Owner hasn't confirmed the new tone yet. **Ask first: "Is the graphite right, lighter or darker?"**
+- **Last owner feedback (2026-11-19):** (1) wants a **light, easy-to-read palette**: white background with cards, no graphite/dark sections → done: whole site is light first (see decisions log), styleguide + temp home updated, a11y 100. (2) Felt the styleguide demo is **"quite static"** and asked whether the site will have animations/effects → answered: motion spec is built and running (Linear-style UI motion + Hello Monday-style scroll moments), but the biggest moments (hero intro, liquid-metal logo, case image hovers, page transitions between real pages, characters) need real pages/assets. Owner chose **bolder** → added hero intro (H3), word-by-word title rise (H13), hero media expand on scroll (H14), media unveil (H15), magnetic buttons (L10); brief §4.2b. Prod Lighthouse mobile unchanged (home 97, styleguide 95, CLS 0, a11y 100). Frames + video: `docs/review/step2-motion/`. **Ask first: do the light palette and the bolder motion feel right?** Then commit and start Step 3.
 - **Next:** once the owner approves the styleguide, start **Step 3**, building pages one at a time in this order: **home** → services (+ /services/mobile-apps) → work (+ 2 case studies, MDX) → how-we-work → about → contact (wire **Resend**) → privacy + 404. For each page: say which assets it needs, build desktop + mobile, screenshot with Playwright, record a scroll video (`scripts/record.js`), check the Design rules + Lighthouse 90+, show the owner, wait for feedback, commit.
 - **To run:** start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide (live demo at `#demo`).
 - **Still waiting on the owner:** liquid-metal logo video (from `docs/logo/epox-wordmark-white.svg`), app screenshots/recordings, contact email/WhatsApp/booking link, client descriptors, durations, results.
@@ -44,17 +44,20 @@
 | 2026-11-18 | Font licensing: owner takes responsibility | Owner: "don't worry" |
 | 2026-11-18 | **Two font sets + switch**: `free` default (Inter Tight / Inter / Geist Mono), `licensed` optional (Helvetica Now Display / Text, local files only). Switch = `data-fonts` on `<html>`; site setting `NEXT_PUBLIC_FONT_SET` | Public repo can't carry Monotype files; owner wants Helvetica available locally |
 | 2026-11-18 | Brand idea **"We find it first."** (+ live-status dot as proof device) | Matches outbound sales model |
-| 2026-11-18 | **Dark** home hero | Owner's pick |
+| 2026-11-18 | ~~**Dark** home hero~~ (superseded 2026-11-19: light first) | Owner's pick |
 | 2026-11-18 | **No characters at launch**; `CharacterSlot` kept in layouts | Owner has no art yet |
 | 2026-11-18 | Contact form → **Resend** to owner's inbox (wire at /contact) | Owner accepted recommendation |
-| 2026-11-19 | Dark sections use **graphite** surfaces, not pure black: section `#1A1B1E`, inset `#1E1F22`, raised panel `#232428`, card `#2C2E33`, hairline `#34373C`; footer matches sections. Pure ink `#0A0A0A` only for text/primary buttons | Owner: black background "way too strong" |
+| 2026-11-19 | **Light first**: every page section is white (`--paper`) or soft band (n-100); cards n-50 on white / white on soft; emphasis steel n-700; dimmed large text n-500. Dark tone kept only for media tiles. Home hero is now **light** (supersedes "Dark home hero"). Components use context tokens `--card / --card-inset / --card-raised / --emph / --dim` | Owner: dark sections hard to read; clients must read and focus easily |
+| 2026-11-19 | ~~Dark sections use graphite~~ (superseded same day by light first). Dark sections use **graphite** surfaces, not pure black: section `#1A1B1E`, inset `#1E1F22`, raised panel `#232428`, card `#2C2E33`, hairline `#34373C`; footer matches sections. Pure ink `#0A0A0A` only for text/primary buttons | Owner: black background "way too strong" |
 | 2026-11-19 | Free font weights trimmed to those in use (Inter Tight 300/500, Inter 400/500, Geist Mono 500), all preloaded | CLS 0.065 → 0 on mobile Lighthouse |
 | 2026-11-19 | Dimmed states use AA-large colours: roll-call inactive n-600 on ink, statement unrevealed n-500 on white | Lighthouse colour-contrast; design rule |
+| 2026-11-19 | **Bolder motion**: H3 hero intro (word masks), H13 title rise, H14 media expand, H15 media unveil, L10 magnetic buttons, on top of the spec; same guardrails | Owner: styleguide felt "quite static"; chose "Bolder" |
 | 2026-11-18 | Stack: Next.js App Router + React 19 + TS + Tailwind + MDX + GSAP/ScrollTrigger + Lenis; R3F v9 only for rare WebGL; liquid-metal logo as video, not live shader; no liquid-glass-js | Owner's brief |
 
 ## Built so far (site/)
 - Tokens (palette A scale, type scale, spacing, radius, motion) + font switch (`NEXT_PUBLIC_FONT_SET`).
-- Layout: Header (morphing mega-menu, mobile sheet, hide-on-scroll, tone follows `data-header-tone`), Footer, MotionProvider (Lenis lazy, reveal observer), page-enter template (skipped on first load for LCP).
+- Layout: Header (morphing mega-menu, mobile sheet, hide-on-scroll, tone follows `data-header-tone`; all light now), Footer (soft band), MotionProvider (Lenis lazy, reveal observer), page-enter template (skipped on first load for LCP).
+- Motion components: RiseText (H3/H13), ExpandOnScroll (H14); unveil (H15) via `data-unveil`, magnetic (L10) via `Button magnetic` / `data-magnetic`; all played from `app/template.tsx` + `MotionProvider`.
 - Components: Logo, Button, ArrowLink, Label, Tag/Tags, Live, AssetPlaceholder, Ph/Val, CharacterSlot, SectionHeader, FactTable, ServiceRows (stacking), CaseCard, TrustStrip, EngagementModels, ProcessSteps, Faq, StatsScoreboard/CountUp, RollCall, StatementReveal (GSAP), LiveDemo, ContactBlock, ContactForm (+ /api/contact stub, 501 until Resend).
 - Pages: `/styleguide` (noindex), temporary `/` (dark hero only).
 - Known: Link prefetch 404s (best-practices 96) until Step 3 pages exist.

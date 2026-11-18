@@ -32,7 +32,7 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
 export function CaseCard({ c, size = 'lg' }: { c: CaseStudy; size?: 'lg' | 'md' }) {
   return (
     <article className={`case-card group grid rounded-[var(--r-card)] bg-paper p-[var(--r-card-pad)] ${size === 'lg' ? 'lg:grid-cols-[1.15fr_1fr]' : ''}`} data-reveal>
-      <Link href={`/work/${c.slug}`} className="media-hover block" tabIndex={-1} aria-hidden>
+      <Link href={`/work/${c.slug}`} className="media-hover block" tabIndex={-1} aria-hidden data-unveil>
         <AssetPlaceholder name={c.asset} ratio="16 / 10" />
       </Link>
       <div className="flex flex-col p-6 md:p-10">

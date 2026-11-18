@@ -8,15 +8,19 @@ import { ContactBlock } from '@/components/sections/ContactBlock';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { alsoServices, cases, industries, services, stats } from '@/lib/content';
 import { contrast } from '@/lib/contrast';
+import { RiseText } from '@/components/motion/RiseText';
+import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 
 export const metadata: Metadata = { title: 'Styleguide', robots: { index: false, follow: false } };
 
 const SCALE: [string, string][] = [['50', '#F7F8F9'], ['100', '#F3F4F5'], ['200', '#E2E4E7'], ['300', '#C4C8CE'], ['400', '#A3A8AF'], ['500', '#80868E'], ['600', '#5C6168'], ['700', '#4B5058'], ['800', '#2A2D31'], ['900', '#141516'], ['950', '#0A0A0A']];
+// light-first: white page (paper), soft-grey bands (surface n-100), cards n-50 on white / white on soft
 const PAIRS: [string, string, string][] = [
-  ['Body text on white', '#0A0A0A', '#FFFFFF'], ['Muted text on white', '#5C6168', '#FFFFFF'], ['Muted text on surface', '#5C6168', '#F3F4F5'],
-  ['Steel emphasis on white', '#4B5058', '#FFFFFF'], ['Text on ink', '#F5F6F7', '#0A0A0A'], ['Muted on ink', '#A3A8AF', '#0A0A0A'],
-  ['Silver emphasis on ink', '#C4C8CE', '#0A0A0A'], ['Text on graphite section', '#F5F6F7', '#1A1B1E'], ['Muted on graphite section', '#A3A8AF', '#1A1B1E'],
-  ['Silver on graphite section', '#C4C8CE', '#1A1B1E'], ['Muted on raised card', '#A3A8AF', '#2C2E33'], ['Error on graphite', '#FF9A92', '#1A1B1E'], ['Error on white', '#B3261E', '#FFFFFF'],
+  ['Body text on white', '#0A0A0A', '#FFFFFF'], ['Body text on soft band', '#0A0A0A', '#F3F4F5'], ['Body text on card', '#0A0A0A', '#F7F8F9'],
+  ['Muted text on white', '#5C6168', '#FFFFFF'], ['Muted text on soft band', '#5C6168', '#F3F4F5'], ['Muted text on card', '#5C6168', '#F7F8F9'],
+  ['Steel emphasis on white', '#4B5058', '#FFFFFF'], ['Steel emphasis on soft band', '#4B5058', '#F3F4F5'],
+  ['Dimmed large text on white', '#80868E', '#FFFFFF'], ['Dimmed large text on soft band', '#80868E', '#F3F4F5'],
+  ['Button text on ink', '#FFFFFF', '#0A0A0A'], ['Button text on steel (hover)', '#FFFFFF', '#4B5058'], ['Error on white', '#B3261E', '#FFFFFF'],
 ];
 const TYPE = [
   ['display', 't-display', 'Found it.'], ['h1', 't-h1', 'A nutrition app with a real nutritionist inside'], ['h2', 't-h2', 'You\'ll always know what\'s happening'],
@@ -34,8 +38,13 @@ const MOTION = [
   ['L6', 'Accordion', '240ms ease-out-quint', '§ FAQ', 'Linear'],
   ['L7', 'Count-up numbers', '1200ms ease-out-expo', '§ Scoreboard', 'Linear'],
   ['L8', 'Form states', '100–240ms', '§ Contact', 'Linear'],
+  ['L10', 'Magnetic buttons (lean toward the cursor)', '500ms ease-out-quint spring-back', 'Hero buttons (mouse only)', 'Bolder pass'],
   ['H1', 'Lenis smooth scroll', 'lerp 0.1, mouse/trackpad only', 'Whole page (desktop)', 'Hello Monday'],
   ['H2', 'Page transition (enter)', '600ms ease-out-quint', 'Navigate via header', 'Hello Monday'],
+  ['H3', 'Hero intro: headline words rise out of masks, then lead + buttons', '1000ms ease-out-quint, 70ms per word', 'Reload this page', 'Hello Monday'],
+  ['H13', 'Section titles: words rise one by one', '1000ms, 60ms per word, once', 'Every section title', 'Bolder pass'],
+  ['H14', 'Hero media opens to full width while scrolling', 'scrubbed (clip-path)', 'Hero logo placeholder (≥768px)', 'Bolder pass'],
+  ['H15', 'Media wipes up + settles from zoom', '1100ms / 1400ms ease-out-quint', '§ Case cards', 'Bolder pass'],
   ['H6', 'Statement reveal (GSAP ScrollTrigger scrub)', 'scrubbed', '§ Statement', 'Hello Monday'],
   ['H7', 'Stacking service rows (sticky)', 'CSS sticky', '§ Service rows (≥1024px)', 'Webisoft'],
   ['H8', 'Roll-call lights at screen centre', '400ms', '§ Roll-call', 'Hello Monday'],
@@ -56,18 +65,18 @@ function Block({ id, label, title, children, tone, count }: { id: string; label:
 export default function Styleguide() {
   return (
     <>
-      {/* hero: dark, as on the home page */}
-      <section className="dark" data-header-tone="dark">
+      {/* hero: light, as on the home page */}
+      <section>
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-10)]">
-          <p className="t-label muted">Epox · Styleguide · Step 2</p>
-          <h1 className="t-display mt-8" style={{ maxWidth: '11ch' }}>We find the problem <span className="emph">before you do.</span></h1>
-          <p className="t-lead muted mt-10" style={{ maxWidth: '44ch' }}>Every token, component and motion effect in one place, built from <code className="t-label">docs/design-brief.md</code>. Review this before pages are built.</p>
-          <div className="mt-12 flex flex-wrap gap-3"><Button href="#contact" arrow size="lg">Let&apos;s talk</Button><Button href="#cases" variant="secondary" size="lg">See our work</Button></div>
-          <div className="mt-[var(--space-9)]"><AssetPlaceholder name="liquid-metal logo loop · 16:9 · WebM + MP4 + poster" ratio="16 / 9" /></div>
+          <p className="t-label muted hero-after" style={{ '--d': '0ms' } as React.CSSProperties}>Epox · Styleguide · Step 2</p>
+          <RiseText as="h1" on="load" className="t-display mt-8" style={{ maxWidth: '11ch' }} parts={['We find the problem', { t: 'before you do.', emph: true }]} />
+          <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '44ch', '--d': '650ms' } as React.CSSProperties}>Every token, component and motion effect in one place, built from <code className="t-label">docs/design-brief.md</code>. Review this before pages are built.</p>
+          <div className="mt-12 flex flex-wrap gap-3 hero-after" style={{ '--d': '800ms' } as React.CSSProperties}><Button href="#contact" arrow size="lg" magnetic>Let&apos;s talk</Button><Button href="#cases" variant="secondary" size="lg" magnetic>See our work</Button></div>
+          <ExpandOnScroll className="mt-[var(--space-9)]"><AssetPlaceholder name="liquid-metal logo loop · 16:9 · WebM + MP4 + poster" ratio="16 / 9" /></ExpandOnScroll>
         </div>
       </section>
 
-      <Block id="colour" label="Colour" title="Liquid Silver" count="11">
+      <Block id="colour" label="Colour" title="Liquid Silver, light first" count="11">
         <ol className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-11">
           {SCALE.map(([k, v]) => (
             <li key={k} className="flex aspect-[1/1.2] flex-col justify-between rounded-[var(--r-inner)] p-3 t-label" style={{ background: v, color: contrast(v, '#FFFFFF') > 4.5 ? '#FFFFFF' : '#0A0A0A', boxShadow: k === '50' ? 'inset 0 0 0 1px var(--line)' : undefined }}>
@@ -121,13 +130,13 @@ export default function Styleguide() {
           <div className="grid aspect-[16/9] place-items-center rounded-[var(--r-card)] bg-surface"><Logo className="h-16 w-auto md:h-24" /></div>
           <div className="dark grid aspect-[16/9] place-items-center rounded-[var(--r-card)]"><Logo className="h-16 w-auto md:h-24" /></div>
         </div>
-        <p className="mt-4 t-small muted">Helvetica Now Display Bold, outlined, −6.5%. Colour follows <code className="t-label">currentColor</code>. Minimum height 18px.</p>
+        <p className="mt-4 t-small muted">Helvetica Now Display Bold, outlined, −6.5%. Colour follows <code className="t-label">currentColor</code>. Minimum height 18px. The dark tile is only for media (logo video, photos); pages are light.</p>
       </Block>
 
       <Block id="buttons" label="Actions" title="Buttons and links">
         <div className="grid gap-12 md:grid-cols-2">
           <div className="flex flex-wrap items-center gap-3"><Button arrow>Let&apos;s talk</Button><Button variant="secondary">See our work</Button><Button size="lg" arrow>Let&apos;s talk</Button><Button disabled>Disabled</Button></div>
-          <div className="dark flex flex-wrap items-center gap-3 rounded-[var(--r-card)] p-8"><Button arrow>Let&apos;s talk</Button><Button variant="secondary">See our work</Button></div>
+          <div className="flex flex-wrap items-center gap-3 rounded-[var(--r-card)] bg-card p-8"><Button arrow>Let&apos;s talk</Button><Button variant="secondary">See our work</Button></div>
           <div className="flex flex-wrap items-center gap-8"><ArrowLink href="#buttons">Read the case</ArrowLink><a href="#buttons" className="link">Inline text link</a></div>
         </div>
       </Block>
@@ -164,12 +173,12 @@ export default function Styleguide() {
         <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
       </Block>
 
-      <Block id="demo" label="Process" title="You'll always know what's happening" tone="dark">
+      <Block id="demo" label="Process" title="You'll always know what's happening">
         <LiveDemo />
         <div className="mt-[var(--space-9)]"><ProcessSteps /></div>
       </Block>
 
-      <section id="rollcall" className="dark section" data-header-tone="dark">
+      <section id="rollcall" className="soft section">
         <div className="container-x">
           <SectionHeader label="Built for" title="Industries we've shipped in" count="02" />
           <RollCall items={industries} />
@@ -196,13 +205,13 @@ export default function Styleguide() {
         ]} />
       </Block>
 
-      <Block id="trust" label="Trust" title="Trust strip">
+      <Block id="trust" label="Trust" title="Trust strip" tone="soft">
         <TrustStrip />
       </Block>
 
       <ContactBlock />
 
-      <Block id="form-states" label="Form states" title="Success and error states" tone="dark">
+      <Block id="form-states" label="Form states" title="Success and error states" tone="soft">
         <div className="grid gap-16 md:grid-cols-2"><ContactForm forceState="success" /><ContactForm forceState="error" /></div>
       </Block>
 

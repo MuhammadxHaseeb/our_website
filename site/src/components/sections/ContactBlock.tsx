@@ -2,6 +2,7 @@ import { ContactForm } from './ContactForm';
 import { TrustStrip } from './blocks';
 import { Val } from '@/components/ui/primitives';
 import { company } from '@/lib/content';
+import { RiseText } from '@/components/motion/RiseText';
 
 const next = [
   { n: '01', t: 'A person reads it', d: 'Not a sales queue. Someone who builds software reads every message.' },
@@ -9,15 +10,15 @@ const next = [
   { n: '03', t: 'Scope, timeline, cost', d: 'After a short call, under NDA if you need it.' },
 ];
 
-/** Contact block (Webisoft pattern): headline + what happens next + form + book a call + trust strip. Dark. */
-export function ContactBlock({ title = <>Have a problem worth solving? <span className="emph">Let&apos;s talk.</span></> }: { title?: React.ReactNode }) {
+/** Contact block (Webisoft pattern): headline + what happens next + form + book a call + trust strip. */
+export function ContactBlock() {
   return (
-    <section className="dark section" data-header-tone="dark" aria-labelledby="contact-title">
+    <section className="section" aria-labelledby="contact-title">
       <div className="container-x">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           <div className="lg:col-span-5">
             <p className="t-label muted">/ Contact</p>
-            <h2 id="contact-title" className="t-h1 mt-6" style={{ maxWidth: '12ch' }}>{title}</h2>
+            <RiseText as="h2" id="contact-title" className="t-h1 mt-6" style={{ maxWidth: '12ch' }} parts={['Have a problem worth solving?', { t: "Let's talk.", emph: true }]} />
             <ol className="mt-12 grid gap-6">
               {next.map(s => (
                 <li key={s.n} className="grid grid-cols-[3rem_1fr] border-t border-line pt-5">

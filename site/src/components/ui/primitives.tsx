@@ -1,17 +1,19 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import type { ComponentProps, ReactNode } from 'react';
+import { RiseText } from '@/components/motion/RiseText';
 
 /* ------------------------------------------------------------------ Button */
 type BtnProps = {
-  href?: string; variant?: 'primary' | 'secondary'; size?: 'md' | 'lg'; arrow?: boolean; children: ReactNode; className?: string;
+  href?: string; variant?: 'primary' | 'secondary'; size?: 'md' | 'lg'; arrow?: boolean; magnetic?: boolean; children: ReactNode; className?: string;
 } & Omit<ComponentProps<'button'>, 'className' | 'children'>;
 
-export function Button({ href, variant = 'primary', size = 'md', arrow = false, children, className = '', ...rest }: BtnProps) {
+export function Button({ href, variant = 'primary', size = 'md', arrow = false, magnetic = false, children, className = '', ...rest }: BtnProps) {
   const cls = `btn ${variant === 'secondary' ? 'btn-secondary' : ''} ${size === 'lg' ? 'btn-lg' : ''} ${className}`;
   const inner = (<>{children}{arrow && <ArrowRight className="icon icon-arrow" strokeWidth={1.5} aria-hidden />}</>);
-  if (href) return <Link href={href} className={cls}>{inner}</Link>;
-  return <button type="button" className={cls} {...rest}>{inner}</button>;
+  const mag = magnetic ? { 'data-magnetic': '' } : {};
+  if (href) return <Link href={href} className={cls} {...mag}>{inner}</Link>;
+  return <button type="button" className={cls} {...mag} {...rest}>{inner}</button>;
 }
 
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
@@ -60,7 +62,9 @@ export function SectionHeader({ label, title, count, action, id, as: As = 'h2' }
     <header className="sh">
       <Label>/ {label}</Label>
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <As id={id} className={As === 'h1' ? 't-h1' : 't-h2'} style={{ maxWidth: '18ch' }}>{title}</As>
+        {typeof title === 'string'
+          ? <RiseText parts={[title]} as={As} id={id} className={As === 'h1' ? 't-h1' : 't-h2'} style={{ maxWidth: '18ch' }} />
+          : <As id={id} className={As === 'h1' ? 't-h1' : 't-h2'} style={{ maxWidth: '18ch' }}>{title}</As>}
         {action}
       </div>
       {count && <span className="t-label muted sh-count" aria-label={`${Number(count)} items`}>{count}</span>}

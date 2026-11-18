@@ -30,18 +30,19 @@
   .arrow-link span { background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat; transition: background-size var(--dur-ui) var(--ease-out-quint); padding-bottom: 2px; }
   .arrow-link:hover span { background-size: 100% 1px; }
 
-  .link-quiet { color: inherit; text-decoration: none; opacity: .82; transition: opacity var(--dur-fast) var(--ease-out-quad); }
-  .link-quiet:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  /* no opacity dimming: it stacks with muted text and drops below AA on soft bands */
+  .link-quiet { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; text-decoration-thickness: 1px;
+    transition: text-decoration-color var(--dur-fast) var(--ease-out-quad); }
+  .link-quiet:hover { text-decoration-color: currentColor; }
 
   /* ---------------- tags ---------------- */
-  .tag { display: inline-flex; align-items: center; padding: 6px 9px; border-radius: var(--r-tag); background: var(--surface); color: var(--text);
+  /* tint of the text colour: readable on white, soft bands, cards and dark alike */
+  .tag { display: inline-flex; align-items: center; padding: 6px 9px; border-radius: var(--r-tag); background: color-mix(in srgb, currentColor 7%, transparent); color: inherit;
     font: 500 0.6875rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
-  .dark .tag, .dark-alt .tag { background: var(--dark-raised-2); color: var(--on-dark); }
 
   /* ---------------- live dot ---------------- */
   .live { display: inline-flex; align-items: center; gap: var(--space-2); }
-  .live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-on-light); box-shadow: 0 0 0 0 transparent; }
-  .dark .live::before, .dark-alt .live::before { background: var(--accent-on-dark); }
+  .live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--emph); }
   html:not([data-motion="reduced"]) .live::before { animation: live-pulse 2.4s var(--ease-in-out-cubic) infinite; }
   @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
@@ -69,7 +70,8 @@
   .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-4); border-radius: var(--r-pill); border: 1px solid var(--line); cursor: pointer;
     font: 400 var(--fs-small)/1 var(--font-text); transition: border-color var(--dur-fast) var(--ease-out-quad), background-color var(--dur-fast) var(--ease-out-quad), color var(--dur-fast) var(--ease-out-quad); }
   .chip:hover { border-color: currentColor; }
-  .chip-input:checked + .chip { background: var(--on-dark); color: var(--ink); border-color: var(--on-dark); }
+  .chip-input:checked + .chip { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  :is(.dark, .dark-alt) .chip-input:checked + .chip { background: var(--on-dark); color: var(--ink); border-color: var(--on-dark); }
   .chip-input:focus-visible + .chip { outline: 2px solid var(--focus); outline-offset: 2px; }
   .field-error { color: var(--error);
   }
@@ -108,7 +110,7 @@
   .nav-link[aria-expanded="true"] .icon { transform: rotate(180deg); }
 
   .mega { position: absolute; top: calc(100% - 4px); left: 0; transform-origin: top left;
-    background: var(--dark-raised); color: var(--on-dark); border: 1px solid var(--line-on-dark); border-radius: var(--r-card); overflow: hidden;
+    background: var(--paper); color: var(--text); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden;
     width: var(--mega-w, 640px); height: var(--mega-h, auto);
     transition: width var(--dur-ui) var(--ease-out-quint), height var(--dur-ui) var(--ease-out-quint), opacity var(--dur-menu) var(--ease-out-quad), transform var(--dur-menu) var(--ease-out-quad), left var(--dur-ui) var(--ease-out-quint); }
   .mega[data-open="false"] { opacity: 0; transform: scale(.98) translateY(-4px); pointer-events: none; visibility: hidden;
@@ -116,9 +118,9 @@
   .mega-panel { position: absolute; top: 0; left: 0; padding: var(--space-5); transition: opacity var(--dur-menu) var(--ease-out-quad); }
   .mega-panel[data-active="false"] { opacity: 0; pointer-events: none; }
   .mega-item { display: grid; gap: 4px; padding: var(--space-3); border-radius: var(--r-input); text-decoration: none; color: inherit; transition: background-color var(--dur-fast) var(--ease-out-quad); }
-  .mega-item:hover, .mega-item:focus-visible { background: var(--dark-raised-2); }
+  .mega-item:hover, .mega-item:focus-visible { background: var(--n-100); }
 
-  .sheet { position: fixed; inset: 0; z-index: 60; background: var(--dark-bg); color: var(--on-dark); display: flex; flex-direction: column; overflow-y: auto;
+  .sheet { position: fixed; inset: 0; z-index: 60; background: var(--paper); color: var(--text); display: flex; flex-direction: column; overflow-y: auto;
     transition: opacity var(--dur-ui) var(--ease-out-quint), transform var(--dur-ui) var(--ease-out-quint), visibility 0s; }
   .sheet[data-open="false"] { opacity: 0; transform: translateY(-12px); visibility: hidden; pointer-events: none; transition: opacity var(--dur-menu) var(--ease-out-quad), transform var(--dur-menu) var(--ease-out-quad), visibility 0s linear var(--dur-menu); }
 
@@ -139,13 +141,28 @@
   }
 
   /* ---------------- roll-call (H8) ---------------- */
-  /* inactive = n-500 on graphite (4.7:1, passes AA for large text) */
-  .roll-item { color: var(--n-500); transition: color var(--dur-media) var(--ease-out-quad); }
+  /* inactive = --dim (n-500 on white 3.7:1 / on surface 3.4:1: AA large) */
+  .roll-item { color: var(--dim); transition: color var(--dur-media) var(--ease-out-quad); }
   .roll-item .roll-meta { opacity: 0; transform: translateY(8px); transition: opacity var(--dur-media) var(--ease-out-quint), transform var(--dur-media) var(--ease-out-quint); }
-  .roll-item[data-active="true"] { color: var(--on-dark); }
+  .roll-item[data-active="true"] { color: var(--text); }
   .roll-item[data-active="true"] .roll-meta { opacity: 1; transform: none; }
-  html[data-motion="reduced"] .roll-item { color: var(--on-dark); }
+  html[data-motion="reduced"] .roll-item { color: var(--text); }
   html[data-motion="reduced"] .roll-item .roll-meta { opacity: 1; transform: none; }
+
+  /* ---------------- rise text (H3 hero intro on load, H13 title rise on view) ---------------- */
+  /* each word sits in its own mask; padding keeps descenders inside the mask at tight line-heights */
+  .rw { display: inline-block; overflow: hidden; vertical-align: top; padding-block: 0.04em 0.14em; margin-block: -0.04em -0.14em; }
+  .rw > span { display: inline-block; }
+  html:not([data-motion="reduced"]) .rise-load .rw > span { animation: rise-in var(--dur-hero) var(--ease-out-quint) both; animation-delay: calc(80ms + var(--w) * 70ms); }
+  @keyframes rise-in { from { transform: translateY(110%); } to { transform: none; } }
+  /* hero supporting lines follow the headline */
+  html:not([data-motion="reduced"]) .hero-after { animation: hero-after var(--dur-enter) var(--ease-out-quint) both; animation-delay: var(--d, 500ms); }
+  @keyframes hero-after { from { opacity: 0; transform: translateY(var(--rise)); } to { opacity: 1; transform: none; } }
+
+  /* ---------------- magnetic buttons (L10): JS sets `translate`, separate from the press `transform` ---------------- */
+  .btn[data-magnetic] { transition-property: background-color, color, border-color, transform, translate;
+    transition-duration: var(--dur-fast), var(--dur-fast), var(--dur-fast), var(--dur-press), 500ms;
+    transition-timing-function: var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quint); }
 
   /* ---------------- live demo (L5) ---------------- */
   .demo-card { animation: demo-in 600ms var(--ease-out-quint) both; }
@@ -156,8 +173,8 @@
   html[data-motion="reduced"] .demo-card, html[data-motion="reduced"] .demo-spin, html[data-motion="reduced"] .demo-caret { animation: none; }
 
   /* ---------------- statement reveal (H6) ---------------- */
-  /* unrevealed = n-500 on white (3.7:1, passes AA for large text) */
-  .statement .w { color: var(--n-500); transition: color 200ms linear; }
+  /* unrevealed = --dim (n-500 on white 3.7:1, AA large) */
+  .statement .w { color: var(--dim); transition: color 200ms linear; }
   .statement .w.on { color: var(--text); }
   html[data-motion="reduced"] .statement .w, html:not(.js) .statement .w { color: var(--text); }
 }

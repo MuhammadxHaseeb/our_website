@@ -28,6 +28,15 @@
   --muted-on-dark: var(--n-400);
   --line-on-dark: #34373C;
 
+  /* ---------- light-first context tokens (default = white page) ----------
+     .soft and .dark (globals.css) override these, so components read one name everywhere */
+  --card: var(--n-50);          /* cards on white */
+  --card-inset: var(--n-100);   /* recessed areas inside cards */
+  --card-raised: var(--paper);  /* item on top of an inset (ticket, chip) */
+  --emph: var(--accent-on-light);
+  --hover-fill: var(--n-100);
+  --dim: var(--n-500);          /* not-yet-active large text (roll-call, statement): 3.7:1 on white, AA large */
+
   /* ---------- dark surfaces (graphite): softer than ink for large areas ---------- */
   --dark-bg: #1A1B1E;       /* dark sections: text 15.9:1, muted 7.2:1, silver 10.3:1 */
   --dark-inset: #1E1F22;    /* recessed areas inside panels */

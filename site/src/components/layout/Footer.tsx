@@ -6,8 +6,8 @@ import { company, services } from '@/lib/content';
 export function Footer() {
   const year = 2026;
   return (
-    <footer className="dark-alt" data-header-tone="dark">
-      <div className="container-x border-t border-line-on-dark pt-[var(--space-10)] pb-8">
+    <footer className="soft">
+      <div className="container-x border-t border-line pt-[var(--space-10)] pb-8">
         <div className="grid gap-12 md:grid-cols-12">
           <nav aria-label="Services" className="md:col-span-5">
             <p className="t-label muted">Services</p>
@@ -32,7 +32,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-[var(--space-10)] flex flex-col gap-6 border-t border-line-on-dark pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-[var(--space-10)] flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/" aria-label="Epox home"><Logo className="h-[26px] w-auto" /></Link>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3 t-label muted">
             <Live>2 products live</Live>

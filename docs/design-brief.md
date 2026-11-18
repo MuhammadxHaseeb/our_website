@@ -105,16 +105,30 @@ All pairs below pass WCAG AA (computed in `docs/preview/palettes.js`; the previe
 
 </details>
 
-### 3.2 Light and dark sections
-| Section | Tone | Why |
-|---|---|---|
-| Header | follows the section under it (dark on dark hero, light elsewhere); frosted when stuck (`backdrop-filter`) | stays legible |
-| Home hero | **Dark (chosen)** | liquid-metal logo and live demo read best on ink; dark hero = Linear calm; light hero = Webisoft/Hello Monday openness |
-| Services, work, about content | Light (`paper`) | white space = premium |
-| Live "how we work" demo | Dark (`ink`) | UI demos read like a real app |
-| Roll-call | Dark (`ink`) | grey → white "light up" effect needs dark |
-| Engagement models | Light (`surface`) | calm, comparable |
-| Contact block + footer | Dark (`darkAlt`) | strong close, trust strip on dark |
+### 3.2 Light and dark sections: **light first (owner, 2026-11-19)**
+Owner: dark/graphite sections were hard to read; clients should read and focus easily. Every page section is now light. Dark tone stays in the system only for media tiles (logo video, photos).
+
+| Surface | Token | Value | Used for |
+|---|---|---|---|
+| Page | `--paper` | `#FFFFFF` | default section background |
+| Soft band | `--surface` (`.soft`) | n-100 `#F3F4F5` | alternate sections, footer |
+| Card on white | `--card` | n-50 `#F7F8F9` | cards, demo board |
+| Card on soft band | `--card` inside `.soft` | `#FFFFFF` | case cards, models |
+| Inset in a card | `--card-inset` | n-100 on white / n-50 on soft | board columns |
+| Item on an inset | `--card-raised` | `#FFFFFF` + hairline | tickets |
+| Emphasis | `--emph` | steel n-700 `#4B5058` | "before you do.", live dot |
+| Dimmed large text | `--dim` | n-500 `#80868E` (3.7:1, AA large) | roll-call inactive, statement unrevealed |
+
+| Section | Tone |
+|---|---|
+| Header, mega-menu, mobile sheet | light (white menu with hairline) |
+| Home hero | **light** (was dark; superseded) |
+| Services, work, about content | white / soft bands alternating |
+| Live "how we work" demo | white section, cards in n-50 |
+| Roll-call | soft band, grey → ink |
+| Contact block | white; footer soft band |
+
+Components read context tokens (`--card`, `--emph`, `--dim`, `--muted`, `--line`), so `.soft` and `.dark` re-tint them without per-component overrides.
 
 ### 3.3 Typography: **two font sets with one switch**
 - **`free` (default, used for the public repo and any deploy unless switched):** **Inter Tight** (headings) · **Inter** (body) · **Geist Mono** (labels, numbers, buttons). All OFL; self-hosted woff2 in the build.
@@ -192,6 +206,19 @@ Durations: `--dur-fast: 100ms` · `--dur-menu: 180ms` · `--dur-ui: 240ms` · `-
 | H10 | Optional **WebGL ripple** on case images (R3F, lazy, desktop + capable GPU only) | /work grid only | 700 ms | static (H9 only) | static |
 | H11 | Parallax on large case media (yPercent 6–10) | case pages | scrubbed | off | off |
 | H12 | Services chapter focus: active chapter 100% opacity, others 25% | /services | 400 ms ease-out | off | off |
+
+### 4.2b Bolder pass (owner, 2026-11-19: "Bolder")
+Owner found the styleguide too static and chose **bolder** motion. Added on top of 4.1/4.2, same guardrails (reduced motion off, transform/clip only, Lighthouse 90+):
+
+| # | Effect | Where | Duration / easing | Mobile | Reduced motion |
+|---|---|---|---|---|---|
+| H3 | **Hero intro (built)**: every headline word rises out of its own mask (70 ms stagger), then label, lead and buttons fade up. CSS only, no JS, never opacity on the headline | home hero, page heroes | 1000 ms ease-out-quint | same | static |
+| H13 | **Title rise**: section titles rise word by word when they enter the screen (`RiseText`, word spans, never characters) | every section title | 1000 ms, 60 ms per word, once | same | visible |
+| H14 | **Media expand**: large hero media starts inset with big corners and opens to full width as you scroll (clip-path scrub) | hero media (logo video), case heroes | scrubbed | off | full width |
+| H15 | **Media unveil**: images wipe up from the bottom while settling from 1.18× zoom | case cards, case pages | 1100 / 1400 ms ease-out-quint | same | visible |
+| L10 | **Magnetic buttons**: primary buttons lean toward the cursor, spring back on leave (`translate`, separate from the press scale) | hero + key CTAs | 500 ms ease-out-quint | off (touch) | off |
+
+Still to come with real pages/assets: full page-transition curtain (H2), liquid-metal logo loop (H4), case image hover on real images (H9), parallax on case media (H11), characters (H5, later).
 
 ### 4.3 Motion budget per page
 - Max **1 WebGL** context per page (only /work, lazy, desktop); max **1 autoplay video** in view; max **2 scrubbed ScrollTriggers** visible at once.

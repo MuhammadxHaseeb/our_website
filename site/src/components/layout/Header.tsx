@@ -72,7 +72,7 @@ export function Header() {
     const l = getLenis();
     if (sheet) {
       document.body.style.overflow = 'hidden'; l?.stop();
-      window.setTimeout(() => document.querySelector<HTMLAnchorElement>('#sheet a')?.focus(), 60);
+      window.setTimeout(() => document.querySelector<HTMLAnchorElement>('#sheet a')?.focus({ preventScroll: true }), 60);
     } else { document.body.style.overflow = ''; l?.start(); }
   }, [sheet]);
 
@@ -89,7 +89,7 @@ export function Header() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
   return (
-    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-tone={sheet ? 'dark' : tone}>
+    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-tone={sheet ? 'light' : tone}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 btn">Skip to content</a>
       <div className="container-x flex h-[72px] items-center justify-between gap-6">
         <Link href="/" aria-label="Epox home" className="relative z-[61] -m-2 p-2"><Logo className="h-[22px] w-auto" /></Link>
@@ -129,8 +129,8 @@ export function Header() {
                 {services.map(s => (
                   <li key={s.slug}>
                     <Link href={`/services/${s.slug}`} className="mega-item" tabIndex={panel === 'services' ? 0 : -1}>
-                      <span className="flex items-baseline gap-3"><span className="t-label" style={{ color: 'var(--muted-on-dark)' }}>S/{s.n}</span><span className="font-medium">{s.title}</span></span>
-                      <span className="t-small pl-[3.1rem]" style={{ color: 'var(--muted-on-dark)' }}>{s.promise}</span>
+                      <span className="flex items-baseline gap-3"><span className="t-label" style={{ color: 'var(--muted)' }}>S/{s.n}</span><span className="font-medium">{s.title}</span></span>
+                      <span className="t-small pl-[3.1rem]" style={{ color: 'var(--muted)' }}>{s.promise}</span>
                     </Link>
                   </li>
                 ))}
@@ -147,7 +147,7 @@ export function Header() {
                   <li key={c.href}>
                     <Link href={c.href} className="mega-item" tabIndex={panel === 'company' ? 0 : -1}>
                       <span className="font-medium">{c.title}</span>
-                      <span className="t-small" style={{ color: 'var(--muted-on-dark)' }}>{c.text}</span>
+                      <span className="t-small" style={{ color: 'var(--muted)' }}>{c.text}</span>
                     </Link>
                   </li>
                 ))}
@@ -157,7 +157,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={`btn hidden sm:inline-flex ${tone === 'dark' || sheet ? 'btn-on-dark' : ''}`}>Let&apos;s talk</Link>
+          <Link href="/contact" className={`btn hidden sm:inline-flex ${tone === 'dark' && !sheet ? 'btn-on-dark' : ''}`}>Let&apos;s talk</Link>
           <button type="button" className="nav-link relative z-[61] lg:hidden" aria-expanded={sheet} aria-controls="sheet" aria-label={sheet ? 'Close menu' : 'Open menu'} onClick={() => setSheet(!sheet)}>
             {sheet ? <X className="h-6 w-6" strokeWidth={1.5} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.5} aria-hidden />}
           </button>
@@ -167,19 +167,19 @@ export function Header() {
       {/* mobile sheet */}
       <div id="sheet" className="sheet lg:hidden" data-open={sheet} aria-hidden={!sheet} role="dialog" aria-modal="true" aria-label="Menu">
         <div className="container-x flex flex-1 flex-col pt-28 pb-10">
-          <p className="t-label" style={{ color: 'var(--muted-on-dark)' }}>/ Services</p>
+          <p className="t-label" style={{ color: 'var(--muted)' }}>/ Services</p>
           <ul className="mt-4 grid gap-1">
             {services.map(s => (
               <li key={s.slug}><Link href={`/services/${s.slug}`} className="flex items-baseline gap-4 py-2 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>
-                <span className="t-label" style={{ color: 'var(--muted-on-dark)' }}>S/{s.n}</span>{s.title}</Link></li>
+                <span className="t-label" style={{ color: 'var(--muted)' }}>S/{s.n}</span>{s.title}</Link></li>
             ))}
           </ul>
-          <ul className="mt-10 grid gap-1 border-t border-n-800 pt-6">
+          <ul className="mt-10 grid gap-1 border-t border-line pt-6">
             {[{ href: '/work', t: 'Work' }, ...company.map(c => ({ href: c.href, t: c.title }))].map(l => (
               <li key={l.href}><Link href={l.href} className="block py-2 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-lg btn-on-dark mt-auto self-start" tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
+          <Link href="/contact" className="btn btn-lg mt-auto self-start" tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
         </div>
       </div>
     </header>
