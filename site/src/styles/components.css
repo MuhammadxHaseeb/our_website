@@ -6,7 +6,7 @@
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: 44px; padding: 0 var(--space-5); border-radius: var(--r-pill);
     background: var(--btn-bg); color: var(--btn-fg); border: 1px solid var(--btn-bd);
-    font: 500 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label);
+    font: 500 0.75rem/1 var(--font-mono); letter-spacing: var(--tr-label);
     text-decoration: none; cursor: pointer; white-space: nowrap;
     transition: background-color var(--dur-fast) var(--ease-out-quad), color var(--dur-fast) var(--ease-out-quad),
                 border-color var(--dur-fast) var(--ease-out-quad), transform var(--dur-press) var(--ease-out-quad);
@@ -30,7 +30,7 @@
   .btn:hover .icon-arrow { transform: translateX(3px); }
 
   /* text link with arrow */
-  .arrow-link { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 0.75rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label); color: inherit; text-decoration: none; padding-block: var(--space-2); }
+  .arrow-link { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 0.75rem/1 var(--font-mono); letter-spacing: var(--tr-label); color: inherit; text-decoration: none; padding-block: var(--space-2); }
   .arrow-link .icon { width: var(--icon-sm); height: var(--icon-sm); transition: transform var(--dur-ui) var(--ease-out-quint); }
   .arrow-link:hover .icon { transform: translateX(3px); }
   .arrow-link span { background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat; transition: background-size var(--dur-ui) var(--ease-out-quint); padding-bottom: 2px; }
@@ -44,7 +44,7 @@
   /* ---------------- tags ---------------- */
   /* tint of the text colour: readable on white, soft bands, cards and dark alike */
   .tag { display: inline-flex; align-items: center; padding: 6px 9px; border-radius: var(--r-tag); background: color-mix(in srgb, currentColor 7%, transparent); color: inherit;
-    font: 500 0.6875rem/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+    font: 500 0.6875rem/1 var(--font-mono); letter-spacing: 0.01em; }
 
   /* ---------------- live dot ---------------- */
   .live { display: inline-flex; align-items: center; gap: var(--space-2); }
@@ -55,7 +55,7 @@
   /* ---------------- placeholders ---------------- */
   .ph { display: grid; place-items: center; text-align: center; padding: var(--space-5); border: 1px dashed var(--n-500); border-radius: var(--r-inner);
     color: var(--muted); background: repeating-linear-gradient(135deg, transparent 0 12px, color-mix(in srgb, var(--n-500) 8%, transparent) 12px 13px);
-    font: 500 var(--fs-label)/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label); }
+    font: 500 var(--fs-label)/1.4 var(--font-mono); letter-spacing: var(--tr-label); }
   .ph-text { display: inline-block; vertical-align: middle; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.02em; background: color-mix(in srgb, var(--n-500) 14%, transparent); padding: 2px 6px; border-radius: 4px; color: var(--text); overflow-wrap: anywhere; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
   /* ---------------- section header ---------------- */
@@ -64,7 +64,7 @@
 
   /* ---------------- form ---------------- */
   .field { display: grid; gap: var(--space-2); }
-  .field label, .field legend { font: 500 var(--fs-label)/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label); color: var(--muted); }
+  .field label, .field legend { font: 500 var(--fs-label)/1.3 var(--font-mono); letter-spacing: var(--tr-label); color: var(--muted); }
   .input { width: 100%; min-height: 48px; padding: var(--space-3) 0; background: transparent; color: inherit; border: 0; border-bottom: 1px solid var(--line);
     font: 400 var(--fs-body)/1.5 var(--font-text); border-radius: 0; transition: border-color var(--dur-fast) var(--ease-out-quad); }
   .input:hover { border-color: var(--muted); }
