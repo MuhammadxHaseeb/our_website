@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/brand/Logo';
-import { Live, Val } from '@/components/ui/primitives';
+import { Val } from '@/components/ui/primitives';
 import { company, services } from '@/lib/content';
 
 export function Footer() {
@@ -35,8 +35,6 @@ export function Footer() {
         <div className="mt-[var(--space-10)] flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/" aria-label="Epox home"><Logo className="h-[26px] w-auto" /></Link>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3 t-label muted">
-            <Live>2 products live</Live>
-            <span>Since {company.founded}</span>
             <Link href="/privacy" className="link-quiet">Privacy</Link>
             <span>© {year} Epox</span>
           </div>

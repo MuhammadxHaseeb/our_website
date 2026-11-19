@@ -58,7 +58,7 @@ export function ServiceChapters({ items }: { items: Service[] }) {
           return (
             <li key={s.slug} id={s.slug} data-chapter={i} className="chapter border-t border-line py-[var(--space-9)] first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-[var(--space-9)]">
               <p className="t-rollcall muted lg:hidden" aria-hidden>{s.n}</p>
-              <Label as="p" className="mt-6 lg:mt-0"><span className="hidden lg:inline">S/{s.n} · </span>We build</Label>
+              <Label as="p" className="hidden lg:block">S/{s.n}</Label>
               <RiseText as="h2" className="t-h2 mt-4" style={{ maxWidth: '16ch' }} parts={[s.title]} />
               <p className="t-lead mt-6" style={{ maxWidth: '36ch' }}>{s.promise}</p>
               {story && <p className="mt-6 muted" style={{ maxWidth: '58ch' }}>{story.story}</p>}
