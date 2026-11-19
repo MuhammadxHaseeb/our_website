@@ -80,6 +80,23 @@ export const models = [
   { n: '03', title: 'Monthly retainer', best: 'Live products that need to keep improving.', points: ['Ongoing development and fixes', 'Marketing and maintenance', 'A fixed monthly plan, reviewed together'] },
 ];
 
+/** /how-we-work comparison rows (no prices). Same order as `models`. */
+export const modelCompare = {
+  rows: ['Best for', 'Team', 'Timeline', 'You get'] as const,
+  cells: [
+    { team: 'A project lead plus the designers and developers the scope needs', timeline: 'Agreed before we start, delivered in milestones' },
+    { team: 'Epox developers who join your team and work in your tools', timeline: 'Ongoing; scale up or down each month' },
+    { team: 'A small Epox team that already knows your product', timeline: 'Rolling, month to month' },
+  ],
+};
+
+/** /how-we-work communication. Specifics the owner hasn't confirmed are placeholders. */
+export const communication = [
+  { title: 'One project lead', text: 'One person on our side who knows your project and answers your messages.' },
+  { title: 'A written update every week', text: 'What shipped, what is next and what we need from you, in a few lines.', confirm: '[PLACEHOLDER: confirm update cadence]' },
+  { title: 'Your tools or ours', text: 'We work in the tools your team already uses, or set up ours.', confirm: '[PLACEHOLDER: tools, e.g. Slack, Jira, GitHub]' },
+];
+
 export const steps = [
   { n: '01', title: 'Find', text: 'We look at what you run today and name the problem worth solving first.' },
   { n: '02', title: 'Plan', text: 'Scope, timeline and team, agreed before anyone writes code.' },
