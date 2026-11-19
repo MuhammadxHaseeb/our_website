@@ -6,7 +6,7 @@ const components: MDXComponents = {
   h3: (p) => <h3 className="t-h3 mt-12 mb-4" {...p} />,
   p: (p) => <p className="mt-5 max-w-[64ch]" {...p} />,
   ul: (p) => <ul className="mt-5 grid max-w-[64ch] list-disc gap-2 pl-5" {...p} />,
-  ol: (p) => <ol className="mt-5 grid max-w-[64ch] list-decimal gap-2 pl-5" {...p} />,
+  ol: (p) => <ol className="mdx-ol grid max-w-[64ch]" {...p} />, // list style in components.css (case pages restyle it)
   a: (p) => <a className="link" {...p} />,
 };
 

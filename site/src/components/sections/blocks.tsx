@@ -29,7 +29,7 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
 }
 
 /* ------------------------------------------------ Case card (fact row + live dot + media hover H9) */
-export function CaseCard({ c, size = 'lg' }: { c: CaseStudy; size?: 'lg' | 'md' }) {
+export function CaseCard({ c, size = 'lg', headingAs: H = 'h3' }: { c: CaseStudy; size?: 'lg' | 'md'; headingAs?: 'h2' | 'h3' }) {
   return (
     <article className={`case-card group grid rounded-[var(--r-card)] bg-paper p-[var(--r-card-pad)] ${size === 'lg' ? 'lg:grid-cols-[1.15fr_1fr]' : ''}`} data-reveal>
       <Link href={`/work/${c.slug}`} className="media-hover block" tabIndex={-1} aria-hidden data-unveil>
@@ -37,9 +37,9 @@ export function CaseCard({ c, size = 'lg' }: { c: CaseStudy; size?: 'lg' | 'md' 
       </Link>
       <div className="flex flex-col p-6 md:p-10">
         <Label>Case {c.n} · {c.sector}{c.region ? ` · ${c.region}` : ''}</Label>
-        <h3 className="t-h3 mt-4" style={{ fontSize: size === 'lg' ? 'clamp(1.625rem, 1.3rem + 1.1vw, 2.5rem)' : undefined, lineHeight: 1.05 }}>
+        <H className="t-h3 mt-4" style={{ fontSize: size === 'lg' ? 'clamp(1.625rem, 1.3rem + 1.1vw, 2.5rem)' : undefined, lineHeight: 1.05 }}>
           <Link href={`/work/${c.slug}`} className="no-underline"><span className="bullet" aria-hidden>•</span>{c.headline}</Link>
-        </h3>
+        </H>
         <p className="mt-4 max-w-[46ch] muted">{c.summary}</p>
         <div className="mt-8">
           <FactTable facts={[

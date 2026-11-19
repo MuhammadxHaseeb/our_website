@@ -182,6 +182,16 @@
   .related-case:hover { background: var(--card-inset); }
   .chapter { scroll-margin-top: 96px; }
 
+  /* ---------------- case study body (MDX) ---------------- */
+  .mdx-ol { list-style: decimal; padding-left: 1.25rem; margin-top: 1.25rem; gap: var(--space-2); }
+  .case-body > :first-child { margin-top: 0; }
+  .case-body .mdx-ol { list-style: none; padding-left: 0; gap: var(--space-5); counter-reset: step; margin-top: var(--space-7); }
+  .case-body .mdx-ol > li { counter-increment: step; position: relative; padding: var(--space-4) 0 0 3rem; border-top: 1px solid var(--line); }
+  .case-body .mdx-ol > li::before { position: absolute; left: 0; top: var(--space-4); content: counter(step, decimal-leading-zero); font: 500 var(--fs-label)/2.2 var(--font-mono); letter-spacing: var(--tr-label); color: var(--muted); }
+  .case-body strong { font-weight: 500; }
+  .next-case { color: inherit; text-decoration: none; }
+  .next-case:hover .arrow-link span { background-size: 100% 1px; }
+
   /* ---------------- live demo (L5) ---------------- */
   .demo-card { animation: demo-in 600ms var(--ease-out-quint) both; }
   @keyframes demo-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
