@@ -61,7 +61,7 @@
 - Motion components: RiseText (H3/H13), ExpandOnScroll (H14); unveil (H15) via `data-unveil`, magnetic (L10) via `Button magnetic` / `data-magnetic`; all played from `app/template.tsx` + `MotionProvider`.
 - Components: Logo, Button, ArrowLink, Label, Tag/Tags, Live, AssetPlaceholder, Ph/Val, CharacterSlot, SectionHeader, FactTable, ServiceRows (stacking), CaseCard, TrustStrip, EngagementModels, ProcessSteps, Faq, StatsScoreboard/CountUp, RollCall, StatementReveal (GSAP), LiveDemo, ContactBlock, ContactForm (+ /api/contact stub, 501 until Resend).
 - Pages: `/services` (hero, 7 story chapters: sticky rail with rolling chapter number + index on desktop, number per chapter on mobile, related case card; ways to work; contact; copy in `serviceStories` in content.ts), `/styleguide` (noindex), `/` home (hero + proof strip, services, work, process demo, built for, numbers, ways to work, statement, contact).
-- Known: Link prefetch 404s (best-practices 96) until the other Step 3 pages exist. Section counts (07, 02…) hidden below 900px.
+- Known: Link prefetch 404s (best-practices 96) until the other Step 3 pages exist. Section counts dropped from SectionHeader; stacking rows on every screen ≥520px tall (owner commit e20bf93); rental case is 001.
 
 ## Open placeholders & missing assets
 - Content: contact email/WhatsApp/socials; case platforms per project, durations, results; client descriptors; logo; founder/contact (later). Full list: design brief §8 "Content gaps".
