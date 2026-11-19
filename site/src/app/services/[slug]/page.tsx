@@ -85,9 +85,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
               <p className="t-lead muted lg:col-span-6 lg:col-start-7 lg:self-end" style={{ maxWidth: '46ch' }} data-reveal>{f.text}</p>
             </div>
-            <div className="mt-[var(--space-8)] overflow-hidden rounded-[var(--r-card)]" data-unveil>
-              <AssetPlaceholder name={f.asset} ratio="16 / 9" />
-            </div>
+            {f.asset && (
+              <div className="mt-[var(--space-8)] overflow-hidden rounded-[var(--r-card)]" data-unveil>
+                <AssetPlaceholder name={f.asset} ratio="16 / 9" />
+              </div>
+            )}
           </div>
         </section>
       ))}
@@ -102,16 +104,16 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* tech */}
-      <section className="section-tight" aria-labelledby="tech-title">
+      {/* tech (only when there's a list or a note to confirm) */}
+      {(detail.tech.length > 0 || detail.techNote) && <section className="section-tight" aria-labelledby="tech-title">
         <div className="container-x grid gap-6 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           <h2 id="tech-title" className="t-label muted lg:col-span-3 lg:pt-1.5">/ Tech we use</h2>
           <div className="grid gap-4 lg:col-span-9">
-            <Tags items={detail.tech} />
+            {detail.tech.length > 0 && <Tags items={detail.tech} />}
             {detail.techNote && <p><Ph>{detail.techNote}</Ph></p>}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* FAQ (L6) */}
       <section className="section" aria-labelledby="faq-title">
