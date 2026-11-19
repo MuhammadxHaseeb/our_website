@@ -126,16 +126,16 @@
   .mega-item { display: grid; gap: 4px; padding: var(--space-3); border-radius: var(--r-input); text-decoration: none; color: inherit; transition: background-color var(--dur-fast) var(--ease-out-quad); }
   .mega-item:hover, .mega-item:focus-visible { background: var(--n-100); }
 
-  /* Mobile menu: black panel whose S-curved liquid edge sweeps in from the right (~480 ms, ease-out-in), then links rise in.
+  /* Mobile menu: black panel whose S-curved liquid edge sweeps in from the right (900 ms, ease-in-out; owner found the measured ~0.45 s too abrupt), then links rise in.
      Motion measured from the Hello Monday mobile recording (open ≈0.40 s, close ≈0.45 s); closing is the same sweep reversed.
      Both clip-paths have the same 19 points so the browser can interpolate. Reduced motion: plain fade. */
-  .sheet { --sweep: 480ms; position: fixed; inset: 0; z-index: 40; background: var(--dark-bg); color: var(--on-dark); display: flex; flex-direction: column; overflow-y: auto;
+  .sheet { --sweep: 900ms; position: fixed; inset: 0; z-index: 40; background: var(--dark-bg); color: var(--on-dark); display: flex; flex-direction: column; overflow-y: auto;
     clip-path: polygon(-17.0% 0.00%, -11.3% 6.25%, -6.4% 12.50%, -3.1% 18.75%, -2.0% 25.00%, -3.1% 31.25%, -6.4% 37.50%, -11.3% 43.75%, -17.0% 50.00%, -22.7% 56.25%, -27.6% 62.50%, -30.9% 68.75%, -32.0% 75.00%, -30.9% 81.25%, -27.6% 87.50%, -22.7% 93.75%, -17.0% 100.00%, 150% 100%, 150% 0%);
-    transition: clip-path var(--sweep) cubic-bezier(.7, 0, .2, 1), visibility 0s; }
+    transition: clip-path var(--sweep) cubic-bezier(.65, 0, .25, 1), visibility 0s; }
   .sheet[data-open="false"] { clip-path: polygon(115.0% 0.00%, 120.7% 6.25%, 125.6% 12.50%, 128.9% 18.75%, 130.0% 25.00%, 128.9% 31.25%, 125.6% 37.50%, 120.7% 43.75%, 115.0% 50.00%, 109.3% 56.25%, 104.4% 62.50%, 101.1% 68.75%, 100.0% 75.00%, 101.1% 81.25%, 104.4% 87.50%, 109.3% 93.75%, 115.0% 100.00%, 150% 100%, 150% 0%); visibility: hidden; pointer-events: none;
-    transition: clip-path var(--sweep) cubic-bezier(.7, 0, .2, 1), visibility 0s linear var(--sweep); }
-  .sheet .sheet-in { opacity: 0; transform: translateY(14px); transition: opacity 160ms var(--ease-out-quad), transform 160ms var(--ease-out-quad); }
-  .sheet[data-open="true"] .sheet-in { opacity: 1; transform: none; transition: opacity 420ms var(--ease-out-quint) calc(200ms + var(--i, 0) * 45ms), transform 520ms var(--ease-out-quint) calc(200ms + var(--i, 0) * 45ms); }
+    transition: clip-path var(--sweep) cubic-bezier(.65, 0, .25, 1), visibility 0s linear var(--sweep); }
+  .sheet .sheet-in { opacity: 0; transform: translateY(14px); transition: opacity 260ms var(--ease-out-quad), transform 260ms var(--ease-out-quad); }
+  .sheet[data-open="true"] .sheet-in { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out-quint) calc(420ms + var(--i, 0) * 60ms), transform 800ms var(--ease-out-quint) calc(420ms + var(--i, 0) * 60ms); }
   .sheet .t-label { color: color-mix(in srgb, var(--on-dark) 65%, transparent); }
   .sheet .sheet-rule { border-color: color-mix(in srgb, var(--on-dark) 20%, transparent); }
   html[data-motion="reduced"] .sheet { clip-path: none; transition: opacity 120ms linear, visibility 0s; }

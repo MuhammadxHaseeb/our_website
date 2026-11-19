@@ -25,8 +25,8 @@ export function Header() {
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
   const [sheet, setSheet] = useState(false);
-  const [sheetTone, setSheetTone] = useState(false); // lags the close by half the sweep so the logo flips as the panel leaves
-  useEffect(() => { if (sheet) { setSheetTone(true); return; } const t = window.setTimeout(() => setSheetTone(false), 240); return () => window.clearTimeout(t); }, [sheet]);
+  const [sheetTone, setSheetTone] = useState(false); // lags the close by half the 900 ms sweep so the logo flips as the panel leaves
+  useEffect(() => { if (sheet) { setSheetTone(true); return; } const t = window.setTimeout(() => setSheetTone(false), 450); return () => window.clearTimeout(t); }, [sheet]);
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [tone, setTone] = useState<'light' | 'dark'>('light');
