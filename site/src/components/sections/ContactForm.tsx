@@ -38,7 +38,7 @@ export function ContactForm({ forceState }: { forceState?: State }) {
   if (s === 'success') {
     return (
       <div className="grid content-start gap-4" role="status">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-ink text-paper"><Check className="h-5 w-5" strokeWidth={1.5} aria-hidden /></span>
+        <span className="grid h-12 w-12 place-items-center rounded-full bg-coral text-ink"><Check className="h-5 w-5" strokeWidth={1.5} aria-hidden /></span>
         <p className="t-h3">Thanks. We&apos;ll reply within one working day.</p>
         <p className="muted">You&apos;ll hear from a person who has read your message, with a first view on how we&apos;d approach it.</p>
       </div>

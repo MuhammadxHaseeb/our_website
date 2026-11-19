@@ -17,9 +17,15 @@
   .btn-lg { min-height: 52px; padding: 0 var(--space-6); }
   .btn-secondary { --btn-bg: transparent; --btn-fg: var(--text); --btn-bd: var(--line); --btn-bg-hover: transparent; }
   .btn-secondary:hover { border-color: currentColor; }
-  .dark .btn:not(.btn-secondary), .dark-alt .btn:not(.btn-secondary) { --btn-bg: var(--on-dark); --btn-fg: var(--ink); --btn-bg-hover: var(--accent-on-dark); }
-  .dark .btn-secondary, .dark-alt .btn-secondary { --btn-fg: var(--on-dark); --btn-bd: var(--n-600); }
-  .btn-on-dark { --btn-bg: var(--on-dark); --btn-fg: var(--ink); --btn-bg-hover: var(--accent-on-dark); }
+  .dark .btn:not(.btn-secondary), .dark-alt .btn:not(.btn-secondary) { --btn-bg: var(--coral); --btn-fg: var(--ink); --btn-bg-hover: var(--paper); }
+  .dark .btn-secondary, .dark-alt .btn-secondary { --btn-fg: var(--on-dark); --btn-bd: var(--on-dark); }
+  .dark .btn-secondary:hover, .dark-alt .btn-secondary:hover { background: var(--on-dark); color: var(--ink); }
+  .coral .btn:not(.btn-secondary) { --btn-bg: var(--ink); --btn-fg: var(--paper); --btn-bg-hover: var(--paper); }
+  .coral .btn:not(.btn-secondary):hover { color: var(--ink); }
+  .coral .btn-secondary { --btn-fg: var(--ink); --btn-bd: var(--ink); }
+  .coral .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+  .coral .live::before { background: var(--ink); }
+  .btn-on-dark { --btn-bg: var(--coral); --btn-fg: var(--ink); --btn-bg-hover: var(--paper); }
   .btn .icon { width: var(--icon-sm); height: var(--icon-sm); transition: transform var(--dur-ui) var(--ease-out-quint); }
   .btn:hover .icon-arrow { transform: translateX(3px); }
 
@@ -50,7 +56,7 @@
   .ph { display: grid; place-items: center; text-align: center; padding: var(--space-5); border: 1px dashed var(--n-500); border-radius: var(--r-inner);
     color: var(--muted); background: repeating-linear-gradient(135deg, transparent 0 12px, color-mix(in srgb, var(--n-500) 8%, transparent) 12px 13px);
     font: 500 var(--fs-label)/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tr-label); }
-  .ph-text { display: inline-block; vertical-align: middle; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.02em; background: color-mix(in srgb, var(--n-500) 14%, transparent); padding: 2px 6px; border-radius: 4px; color: var(--muted); overflow-wrap: anywhere; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .ph-text { display: inline-block; vertical-align: middle; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.02em; background: color-mix(in srgb, var(--n-500) 14%, transparent); padding: 2px 6px; border-radius: 4px; color: var(--text); overflow-wrap: anywhere; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
   /* ---------------- section header ---------------- */
   .sh { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-8); }
@@ -127,7 +133,10 @@
   /* ---------------- media hover (H9) ---------------- */
   .media-hover { overflow: hidden; border-radius: var(--r-inner); }
   .media-hover > * { transition: transform var(--dur-hover-media) var(--ease-out-quint), clip-path var(--dur-hover-media) var(--ease-out-quint); clip-path: inset(0 round var(--r-inner)); }
+  .case-card { transition: background-color var(--dur-ui) var(--ease-out-quad); }
   @media (hover: hover) and (pointer: fine) {
+    .case-card:hover { background: var(--coral); --muted: var(--ink); --emph: var(--ink); }
+    .case-card:hover .live::before { background: var(--ink); }
     .case-card:hover .media-hover > * { transform: scale(1.03); }
     .case-card .bullet { display: inline-block; width: 0; opacity: 0; overflow: hidden; transition: width var(--dur-ui) var(--ease-out-quint), opacity var(--dur-ui) var(--ease-out-quint); }
     .case-card:hover .bullet { width: .8em; opacity: 1; }

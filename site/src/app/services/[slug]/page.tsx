@@ -43,7 +43,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* hero */}
-      <section aria-labelledby="service-title">
+      <section className="dark" data-header-tone="dark" aria-labelledby="service-title">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>
             <Link href="/services" className="link-quiet">/ Services</Link> · S/{s.n} · {s.title}
@@ -123,7 +123,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <div id="contact" className="border-t border-line"><ContactBlock /></div>
+      <div id="contact"><ContactBlock /></div>
     </>
   );
 }

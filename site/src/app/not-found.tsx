@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: 'Page not found', robots: { index: fa
 /** 404 (design brief §6): the brand idea ("We find it first") as a joke on ourselves. CharacterSlot keeps room for art later. */
 export default function NotFound() {
   return (
-    <section aria-labelledby="nf-title" className="pb-[var(--section-y)]">
+    <section aria-labelledby="nf-title" className="dark min-h-[100svh] pb-[var(--section-y)]" data-header-tone="dark">
       <div className="container-x pt-[calc(72px+var(--space-10))]">
         <CharacterSlot label="404" fallback={<p className="t-label muted">404 · Not found</p>} />
         <RiseText as="h1" on="load" id="nf-title" className="t-display mt-8" style={{ maxWidth: '12ch' }}

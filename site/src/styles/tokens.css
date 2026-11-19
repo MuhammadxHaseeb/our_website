@@ -1,54 +1,61 @@
 /* =====================================================================
    EPOX DESIGN TOKENS: single source of truth (docs/design-brief.md §3–4)
-   Palette A · Liquid Silver. Every component reads from these variables.
+   design-2: Webisoft palette (exact values from research/raw/webisoft/home/styles.json):
+   coral #DE5849 / #C63524, black #000000, white, panels #F0F1F4, borders #E2E3E6, grey ramp.
+   Every component reads from these variables.
    ===================================================================== */
 
 :root {
-  /* ---------- neutral scale (contrast vs #FFF / vs #0A0A0A in brief §3.1) ---------- */
-  --n-50: #F7F8F9;
-  --n-100: #F3F4F5;
-  --n-200: #E2E4E7;
-  --n-300: #C4C8CE; /* silver: emphasis on dark only */
-  --n-400: #A3A8AF;
-  --n-500: #80868E; /* large text only on white */
-  --n-600: #5C6168;
-  --n-700: #4B5058; /* steel: emphasis on white */
-  --n-800: #2A2D31;
-  --n-900: #141516;
-  --n-950: #0A0A0A;
+  /* ---------- neutral scale (Webisoft values only; contrast vs #FFF) ---------- */
+  --n-50: #F0F1F4;  /* panels / soft bands */
+  --n-100: #E2E3E6; /* borders, hover fills, insets */
+  --n-200: #D9D9D9;
+  --n-300: #B4B5B8; /* decoration only (2.1:1) */
+  --n-400: #A7A7A7; /* decoration only (2.4:1) */
+  --n-500: #777777; /* large text only: 4.48:1 white, 3.96:1 panel */
+  --n-600: #6A6A6B;
+  --n-700: #666666; /* secondary text: 5.74:1 white, 5.08:1 panel */
+  --n-800: #10303B; /* deep teal (Webisoft detail colour; not used for UI) */
+  --n-900: #000000;
+  --n-950: #000000;
+
+  /* ---------- brand accent (coral) ---------- */
+  --coral: #DE5849;      /* backgrounds (hero, footer, card hover), graphics, LARGE text only (3.75:1) */
+  --coral-dark: #C63524; /* small text + hovers on white (5.34:1) and panels (4.72:1) */
 
   /* ---------- semantic colours ---------- */
-  --ink: var(--n-950);
+  --ink: #000000;
   --paper: #FFFFFF;
-  --surface: var(--n-100);
-  --line: var(--n-200);
-  --text: var(--n-950);
-  --muted: var(--n-600);
-  --on-dark: #F5F6F7;
-  --muted-on-dark: var(--n-400);
-  --line-on-dark: #34373C;
+  --surface: var(--n-50);
+  --line: var(--n-100);
+  --text: #000000;
+  --muted: var(--n-700);
+  --on-dark: #FFFFFF;
+  --muted-on-dark: var(--n-300); /* 10.3:1 on black */
+  --line-on-dark: var(--n-700);
 
-  /* ---------- light-first context tokens (default = white page) ----------
-     .soft and .dark (globals.css) override these, so components read one name everywhere */
-  --card: var(--n-50);          /* cards on white */
+  /* ---------- context tokens (default = white page) ----------
+     .soft, .coral and .dark (globals.css) override these, so components read one name everywhere */
+  --card: var(--n-50);          /* Webisoft grey panels on white */
   --card-inset: var(--n-100);   /* recessed areas inside cards */
   --card-raised: var(--paper);  /* item on top of an inset (ticket, chip) */
-  --emph: var(--accent-on-light);
+  --emph: var(--coral);         /* headline emphasis (large text) + live dot */
   --hover-fill: var(--n-100);
-  --dim: var(--n-500);          /* not-yet-active large text (roll-call, statement): 3.7:1 on white, AA large */
+  --dim: var(--n-500);          /* not-yet-active large text (roll-call, statement) */
+  --kicker: var(--coral-dark);  /* small section labels (5.34:1 white, 4.72:1 panel) */
 
-  /* ---------- dark surfaces (graphite): softer than ink for large areas ---------- */
-  --dark-bg: #1A1B1E;       /* dark sections: text 15.9:1, muted 7.2:1, silver 10.3:1 */
-  --dark-inset: #1E1F22;    /* recessed areas inside panels */
-  --dark-raised: #232428;   /* panels, menus on dark */
-  --dark-raised-2: #2C2E33; /* cards inside panels: muted 5.7:1 */
-  --accent-on-light: var(--n-700);
-  --accent-on-dark: var(--n-300);
-  --dark-alt: var(--dark-bg); /* footer matches dark sections; separated by a hairline */
+  /* ---------- dark (Webisoft uses pure black) ---------- */
+  --dark-bg: #000000;
+  --dark-inset: #000000;
+  --dark-raised: #000000;
+  --dark-raised-2: var(--n-800);
+  --accent-on-light: var(--coral-dark);
+  --accent-on-dark: var(--coral);   /* 5.6:1 on black */
+  --dark-alt: #000000;
   --focus: #3B82F6; /* focus ring only (functional, not decoration) */
   --success: #1F7A45;
-  --error: #B3261E;
-  --error-on-dark: #FF9A92;
+  --error: var(--coral-dark);
+  --error-on-dark: var(--coral);
 
   /* ---------- fonts (set by data-fonts on <html>) ---------- */
   --font-display: var(--font-inter-tight), 'Helvetica Neue', Arial, sans-serif;

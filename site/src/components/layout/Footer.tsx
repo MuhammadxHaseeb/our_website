@@ -6,7 +6,7 @@ import { company, services } from '@/lib/content';
 export function Footer() {
   const year = 2026;
   return (
-    <footer className="soft">
+    <footer className="coral">
       <div className="container-x border-t border-line pt-[var(--space-10)] pb-8">
         <div className="grid gap-12 md:grid-cols-12">
           <nav aria-label="Services" className="md:col-span-5">

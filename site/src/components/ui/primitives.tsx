@@ -60,7 +60,7 @@ export function SectionHeader({ label, title, action, id, as: As = 'h2' }:
   { label: string; title: ReactNode; action?: ReactNode; id?: string; as?: 'h1' | 'h2' }) {
   return (
     <header className="sh">
-      <Label>/ {label}</Label>
+      <Label className="kicker">/ {label}</Label>
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         {typeof title === 'string'
           ? <RiseText parts={[title]} as={As} id={id} className={As === 'h1' ? 't-h1' : 't-h2'} style={{ maxWidth: '18ch' }} />

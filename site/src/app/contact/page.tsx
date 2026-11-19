@@ -26,7 +26,7 @@ export default function ContactPage() {
 
         <div className="mt-[var(--space-9)] grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           {/* form: the main feature */}
-          <div className="order-1 lg:order-2 lg:col-span-7 lg:col-start-6 hero-after" style={d(700)}>
+          <div className="order-1 rounded-[var(--r-card)] bg-card p-6 sm:p-10 lg:order-2 lg:col-span-7 lg:col-start-6 hero-after" style={d(700)}>
             <ContactForm />
           </div>
 

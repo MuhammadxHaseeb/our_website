@@ -19,7 +19,7 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 export default function WorkPage() {
   return (
     <>
-      <section aria-labelledby="work-hero">
+      <section className="dark" data-header-tone="dark" aria-labelledby="work-hero">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ Work</p>
           <RiseText as="h1" on="load" id="work-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
@@ -30,13 +30,13 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="pb-[var(--section-y)]" aria-label="Case studies">
+      <section className="py-[var(--section-y)]" aria-label="Case studies">
         <div className="container-x grid gap-[var(--gutter)]">
           {cases.map(c => <CaseCard key={c.slug} c={c} headingAs="h2" />)}
         </div>
       </section>
 
-      <div className="border-t border-line"><ContactBlock /></div>
+      <ContactBlock />
     </>
   );
 }

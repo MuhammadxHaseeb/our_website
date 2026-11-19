@@ -13,14 +13,14 @@ import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 
 export const metadata: Metadata = { title: 'Styleguide', robots: { index: false, follow: false } };
 
-const SCALE: [string, string][] = [['50', '#F7F8F9'], ['100', '#F3F4F5'], ['200', '#E2E4E7'], ['300', '#C4C8CE'], ['400', '#A3A8AF'], ['500', '#80868E'], ['600', '#5C6168'], ['700', '#4B5058'], ['800', '#2A2D31'], ['900', '#141516'], ['950', '#0A0A0A']];
+const SCALE: [string, string][] = [['coral', '#DE5849'], ['coral-dark', '#C63524'], ['50', '#F0F1F4'], ['100', '#E2E3E6'], ['200', '#D9D9D9'], ['300', '#B4B5B8'], ['400', '#A7A7A7'], ['500', '#777777'], ['700', '#666666'], ['800', '#10303B'], ['950', '#000000']];
 // light-first: white page (paper), soft-grey bands (surface n-100), cards n-50 on white / white on soft
 const PAIRS: [string, string, string][] = [
-  ['Body text on white', '#0A0A0A', '#FFFFFF'], ['Body text on soft band', '#0A0A0A', '#F3F4F5'], ['Body text on card', '#0A0A0A', '#F7F8F9'],
-  ['Muted text on white', '#5C6168', '#FFFFFF'], ['Muted text on soft band', '#5C6168', '#F3F4F5'], ['Muted text on card', '#5C6168', '#F7F8F9'],
-  ['Steel emphasis on white', '#4B5058', '#FFFFFF'], ['Steel emphasis on soft band', '#4B5058', '#F3F4F5'],
-  ['Dimmed large text on white', '#80868E', '#FFFFFF'], ['Dimmed large text on soft band', '#80868E', '#F3F4F5'],
-  ['Button text on ink', '#FFFFFF', '#0A0A0A'], ['Button text on steel (hover)', '#FFFFFF', '#4B5058'], ['Error on white', '#B3261E', '#FFFFFF'],
+  ['Body text on white', '#000000', '#FFFFFF'], ['Body text on panel', '#000000', '#F0F1F4'], ['Body text on coral', '#000000', '#DE5849'],
+  ['Muted text on white', '#666666', '#FFFFFF'], ['Muted text on panel', '#666666', '#F0F1F4'],
+  ['Coral headline emphasis on white (large)', '#DE5849', '#FFFFFF'], ['Coral-dark small text on white', '#C63524', '#FFFFFF'], ['Coral-dark small text on panel', '#C63524', '#F0F1F4'],
+  ['White emphasis on coral (large)', '#FFFFFF', '#DE5849'], ['Dimmed large text on white', '#777777', '#FFFFFF'], ['Dimmed large text on panel', '#777777', '#F0F1F4'],
+  ['Button text on black', '#FFFFFF', '#000000'], ['Button text on coral-dark (hover)', '#FFFFFF', '#C63524'],
 ];
 const TYPE = [
   ['display', 't-display', 'Found it.'], ['h1', 't-h1', 'A nutrition app with a real nutritionist inside'], ['h2', 't-h2', 'You\'ll always know what\'s happening'],
@@ -65,8 +65,8 @@ function Block({ id, label, title, children, tone }: { id: string; label: string
 export default function Styleguide() {
   return (
     <>
-      {/* hero: light, as on the home page */}
-      <section>
+      {/* hero: coral, as on the home page */}
+      <section className="coral">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-10)]">
           <p className="t-label muted hero-after" style={{ '--d': '0ms' } as React.CSSProperties}>Epox · Styleguide · Step 2</p>
           <RiseText as="h1" on="load" className="t-display mt-8" style={{ maxWidth: '11ch' }} parts={['We find the problem', { t: 'before you do.', emph: true }]} />
@@ -76,11 +76,11 @@ export default function Styleguide() {
         </div>
       </section>
 
-      <Block id="colour" label="Colour" title="Liquid Silver, light first">
+      <Block id="colour" label="Colour" title="Coral, black and white">
         <ol className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-11">
           {SCALE.map(([k, v]) => (
             <li key={k} className="flex aspect-[1/1.2] flex-col justify-between rounded-[var(--r-inner)] p-3 t-label" style={{ background: v, color: contrast(v, '#FFFFFF') > 4.5 ? '#FFFFFF' : '#0A0A0A', boxShadow: k === '50' ? 'inset 0 0 0 1px var(--line)' : undefined }}>
-              <span>n-{k}</span><span>{v}</span>
+              <span>{k.startsWith('coral') ? k : `n-${k}`}</span><span>{v}</span>
             </li>
           ))}
         </ol>

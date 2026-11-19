@@ -25,7 +25,7 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section aria-labelledby="about-hero">
+      <section className="dark" data-header-tone="dark" aria-labelledby="about-hero">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ About</p>
           <RiseText as="h1" on="load" id="about-hero" className="t-h1 mt-8" style={{ maxWidth: '16ch' }}
@@ -55,7 +55,7 @@ export default function AboutPage() {
       </section>
 
       {/* principles */}
-      <section className="section soft" aria-labelledby="principles-title">
+      <section className="section dark" data-header-tone="dark" aria-labelledby="principles-title">
         <div className="container-x">
           <SectionHeader id="principles-title" label="How we think" title="Four things we don't compromise on" />
           <ol className="grid gap-x-[var(--gutter)] gap-y-12 md:grid-cols-2">
@@ -87,7 +87,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div id="contact" className="border-t border-line"><ContactBlock /></div>
+      <div id="contact"><ContactBlock /></div>
     </>
   );
 }

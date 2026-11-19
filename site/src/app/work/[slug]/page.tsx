@@ -44,7 +44,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   return (
     <>
       {/* hero */}
-      <section aria-labelledby="case-title">
+      <section className="dark" data-header-tone="dark" aria-labelledby="case-title">
         <div className="container-x pt-[calc(72px+var(--space-10))]">
           <p className="t-label muted hero-after flex flex-wrap items-center gap-x-3 gap-y-1" style={d(0)}>
             <Link href="/work" className="link-quiet">/ Work</Link>

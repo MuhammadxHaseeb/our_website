@@ -13,7 +13,7 @@ export const nextSteps = [
 /** Contact block (Webisoft pattern): headline + what happens next + form + book a call + trust strip. */
 export function ContactBlock() {
   return (
-    <section className="section" aria-labelledby="contact-title">
+    <section className="section dark" data-header-tone="dark" aria-labelledby="contact-title">
       <div className="container-x">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           <div className="lg:col-span-5">

@@ -27,7 +27,7 @@ function cell(i: number, row: (typeof modelCompare.rows)[number]) {
 export default function HowWeWorkPage() {
   return (
     <>
-      <section aria-labelledby="hww-hero">
+      <section className="dark" data-header-tone="dark" aria-labelledby="hww-hero">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ How we work</p>
           <RiseText as="h1" on="load" id="hww-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
@@ -102,7 +102,7 @@ export default function HowWeWorkPage() {
       </section>
 
       {/* communication */}
-      <section className="section soft" aria-labelledby="comms-title">
+      <section className="section dark" data-header-tone="dark" aria-labelledby="comms-title">
         <div className="container-x">
           <SectionHeader id="comms-title" label="Communication" title="A different time zone, never out of reach" />
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
@@ -140,7 +140,7 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      <div id="contact" className="border-t border-line"><ContactBlock /></div>
+      <div id="contact"><ContactBlock /></div>
     </>
   );
 }

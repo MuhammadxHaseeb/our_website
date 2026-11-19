@@ -18,7 +18,7 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 export default function ServicesPage() {
   return (
     <>
-      <section aria-labelledby="services-hero">
+      <section className="dark" data-header-tone="dark" aria-labelledby="services-hero">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ Services</p>
           <RiseText as="h1" on="load" id="services-hero" className="t-h1 mt-8" style={{ maxWidth: '14ch' }}
@@ -29,7 +29,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="pb-[var(--section-y)]" aria-label="Service areas">
+      <section className="py-[var(--section-y)]" aria-label="Service areas">
         <div className="container-x"><ServiceChapters items={services} /></div>
       </section>
 

@@ -55,8 +55,8 @@ export function LiveDemo() {
                 <div key={col} className="demo-card mt-3 rounded-[6px] border border-line bg-card-raised p-3">
                   <p className="t-label" style={{ color: 'var(--muted)' }}>EPX-214</p>
                   <p className="t-small mt-1.5">Checkout fails on mobile Safari</p>
-                  {step === 0 && <p className="t-label mt-3" style={{ color: 'var(--emph)' }}>Found: before your users did</p>}
-                  {step >= 4 && <p className="t-label mt-3 flex items-center gap-1.5" style={{ color: 'var(--emph)' }}><Check className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />Shipped</p>}
+                  {step === 0 && <p className="t-label mt-3" style={{ color: 'var(--accent-on-light)' }}>Found: before your users did</p>}
+                  {step >= 4 && <p className="t-label mt-3 flex items-center gap-1.5" style={{ color: 'var(--accent-on-light)' }}><Check className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />Shipped</p>}
                 </div>
               )}
               {i !== col && <div className="mt-3 h-[58px] rounded-[6px] border border-dashed border-line opacity-40" />}
@@ -73,7 +73,7 @@ export function LiveDemo() {
               const state = step >= c.at ? 'pass' : step >= 2 ? 'run' : 'wait';
               return (
                 <li key={c.name} className="t-small flex items-center gap-3">
-                  {state === 'pass' ? <Check className="h-4 w-4" style={{ color: 'var(--emph)' }} strokeWidth={1.5} aria-hidden />
+                  {state === 'pass' ? <Check className="h-4 w-4" style={{ color: 'var(--accent-on-light)' }} strokeWidth={1.5} aria-hidden />
                     : state === 'run' ? <Loader className="demo-spin h-4 w-4 muted" strokeWidth={1.5} aria-hidden />
                     : <CircleDashed className="h-4 w-4 muted" strokeWidth={1.5} aria-hidden />}
                   <span className={state === 'pass' ? '' : 'muted'}>{c.name}</span>

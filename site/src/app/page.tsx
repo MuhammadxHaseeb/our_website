@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       {/* 1 · Hero (H3 intro, H14 media expand, L10 magnetic CTAs) */}
-      <section aria-labelledby="hero-title">
+      <section className="coral" aria-labelledby="hero-title">
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>Epox · {company.city} · Since {company.founded}</p>
           <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '11ch' }}
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
 
       {/* 6 · Built for (H8 roll-call) */}
-      <section className="section soft" aria-labelledby="industries-title">
+      <section className="section dark" data-header-tone="dark" aria-labelledby="industries-title">
         <div className="container-x">
           <SectionHeader id="industries-title" label="Built for" title="Industries we've shipped in" />
           <RollCall items={industries} />
@@ -110,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* 10 · Contact block (+ footer from layout) */}
-      <div id="contact" className="border-t border-line"><ContactBlock /></div>
+      <div id="contact"><ContactBlock /></div>
     </>
   );
 }

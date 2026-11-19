@@ -14,6 +14,8 @@
   --color-on-dark: var(--on-dark);
   --color-muted-on-dark: var(--muted-on-dark);
   --color-line-on-dark: var(--line-on-dark);
+  --color-coral: var(--coral);
+  --color-coral-dark: var(--coral-dark);
   --color-steel: var(--accent-on-light);
   --color-silver: var(--accent-on-dark);
   --color-dark-alt: var(--dark-alt);
@@ -48,7 +50,7 @@
   }
   h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
   p { text-wrap: pretty; }
-  ::selection { background: var(--n-300); color: var(--ink); }
+  ::selection { background: var(--coral); color: var(--ink); }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
   img, video { display: block; max-width: 100%; height: auto; }
   html.lenis, html.lenis body { height: auto; }
@@ -63,8 +65,11 @@
   /* light-first: pages are white (paper) and soft-grey bands (surface); dark stays available for media tiles */
   .soft { background: var(--surface); --card: var(--paper); --card-inset: var(--n-50); --card-raised: var(--paper); --hover-fill: var(--n-50); }
   .dark, .dark-alt { color: var(--on-dark); --text: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark);
-    --card: var(--dark-raised); --card-inset: var(--dark-inset); --card-raised: var(--dark-raised-2); --emph: var(--accent-on-dark); --hover-fill: var(--dark-raised-2); --dim: var(--n-600); }
+    --card: var(--dark-raised); --card-inset: var(--dark-inset); --card-raised: var(--dark-raised-2); --emph: var(--accent-on-dark); --hover-fill: var(--dark-raised-2); --dim: var(--n-600); --kicker: var(--coral); }
   .dark { background: var(--dark-bg); }
+  /* coral sections (Webisoft hero + footer): black text 5.6:1; white emphasis only on large text (3.75:1) */
+  .coral { background: var(--coral); color: var(--ink); --text: var(--ink); --muted: var(--ink); --line: var(--ink); --dim: var(--ink);
+    --emph: var(--paper); --card: var(--paper); --card-inset: var(--n-50); --hover-fill: var(--coral-dark); --kicker: var(--ink); }
   .dark-alt { background: var(--dark-alt); }
 
   .t-display { font: 500 var(--fs-display)/var(--lh-display) var(--font-display); letter-spacing: var(--tr-display); text-wrap: balance; }
@@ -79,6 +84,7 @@
   .t-num { font-variant-numeric: tabular-nums; }
   .muted { color: var(--muted); }
   .emph { color: var(--emph); }
+  .t-label.kicker { color: var(--kicker); }
 
   /* ------------------------------------------------------------ links */
   .link {
