@@ -15,6 +15,34 @@ export type Service = {
   n: string; slug: string; title: string; promise: string; tags: string[];
 };
 
+/** /services story chapters: one opinionated paragraph per area (built only from the owner's ticked catalogue) + related case. */
+export const serviceStories: Record<string, { story: string; related?: string }> = {
+  'web-saas-development': {
+    story: 'Most web projects stall because version one tries to do everything. We ship the part your customers use first, on a stack the next developer will understand (React, Next.js, Node, Python, Laravel), then grow it from there: portals, stores, full SaaS products.',
+    related: 'rental-inspection-app',
+  },
+  'mobile-apps': {
+    story: 'An app gets judged in its first week. If it is slow, confusing or crashes, it gets deleted. We build for iOS and Android, native or cross-platform with Flutter or React Native, and keep watching after launch so week two is better than week one.',
+    related: 'nutrition-coaching-app',
+  },
+  'business-software': {
+    story: 'If your team copies numbers from one spreadsheet into another, that is the first thing we would point at. We build ERP and CRM systems (custom, Odoo, ERPNext, Salesforce, HubSpot), dashboards and internal tools, connected to the payments and accounting you already use.',
+  },
+  'ai-solutions': {
+    story: "We don't add a chatbot because everyone else has one. We find the step in your work that eats the most hours and put AI there: an LLM inside your product, an agent that answers customers, or an automation fed by your own data.",
+  },
+  'ui-ux-branding': {
+    story: 'Good design is why someone finishes signing up. We watch how people use your product, design the screens and the system behind them, and give the brand one look from the logo to the app icon, with motion where it helps.',
+  },
+  'cloud-devops': {
+    story: "Shipping a change shouldn't feel risky. We set up or move your product to AWS, Google Cloud or Azure, and build pipelines that test every change before it reaches your users.",
+  },
+  'launch-growth-support': {
+    story: 'Launch is where many teams hand over the keys and leave. We stay: testing, fixing, updating and marketing the product. We also take over projects another team left half-finished.',
+    related: 'rental-inspection-app',
+  },
+};
+
 export const services: Service[] = [
   { n: '01', slug: 'web-saas-development', title: 'Web & SaaS development', promise: 'Websites, web apps and SaaS products built to scale.', tags: ['Company sites', 'E-commerce', 'Web portals', 'SaaS', 'Custom web apps'] },
   { n: '02', slug: 'mobile-apps', title: 'Mobile apps', promise: 'iOS and Android apps people keep opening after week one.', tags: ['iOS', 'Android', 'Cross-platform'] },

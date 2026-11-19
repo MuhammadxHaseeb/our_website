@@ -1,7 +1,7 @@
 # CLAUDE.md: Project memory
 
 ## ▶ Resume here (last updated 2026-11-19)
-- **Where we are:** Step 2 approved (c97c488). **Step 3: home page `/` built and pushed** (2866da8); owner is connecting Vercel so changes show live.
+- **Where we are:** Step 2 approved (c97c488). **Step 3: home `/` built and pushed** (2866da8). **`/services` approved and pushed** (story chapters with sticky number rail). Next: `/services/mobile-apps`. Owner is connecting Vercel.
 - **Last owner feedback (2026-11-19):** (1) wants a **light, easy-to-read palette**: white background with cards, no graphite/dark sections → done: whole site is light first (see decisions log), styleguide + temp home updated, a11y 100. (2) Felt the styleguide demo is **"quite static"** and asked whether the site will have animations/effects → answered: motion spec is built and running (Linear-style UI motion + Hello Monday-style scroll moments), but the biggest moments (hero intro, liquid-metal logo, case image hovers, page transitions between real pages, characters) need real pages/assets. Owner chose **bolder** → added hero intro (H3), word-by-word title rise (H13), hero media expand on scroll (H14), media unveil (H15), magnetic buttons (L10); brief §4.2b. Prod Lighthouse mobile unchanged (home 97, styleguide 95, CLS 0, a11y 100). Frames + video: `docs/review/step2-motion/`. Owner approved both ("commit this"). **Ask first: feedback on the home page?** Open question: logo video background must change from ink to white (or stay as a dark media tile) now that the hero is light.
 - **Next:** owner reviews home → fix feedback → commit → **services** (+ /services/mobile-apps) → work (+ 2 case studies, MDX) → how-we-work → about → contact (wire **Resend**) → privacy + 404. For each page: say which assets it needs, build desktop + mobile, screenshot with Playwright, record a scroll video, check the Design rules + Lighthouse 90+, show the owner, wait for feedback, commit.
 - **To run:** start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide (live demo at `#demo`).
@@ -10,7 +10,7 @@
 ## Project overview
 - **Who we are:** **Epox**, software house in Faisalabad, Pakistan, founded 2019. Serves anyone; 7 service areas (see `our-company.md`).
 - **How Epox sells:** **outbound**: finds a business's problem and reaches out with the fix. Site's job = confirm credibility fast for prospects arriving from cold outreach, then get a reply / call.
-- **Current phase:** **DESIGN & BUILD.** Step 1 ✅ · **Step 2 (setup + /styleguide) built, waiting for owner review** → Step 3 pages.
+- **Current phase:** **DESIGN & BUILD.** Step 1 ✅ · Step 2 ✅ · **Step 3 pages: home + services built, 8 pages to go.**
 - **Site:** `site/` (Next.js 16 · React 19 · TS · Tailwind v4 · MDX · GSAP/ScrollTrigger + Lenis lazy). Run: start "site" in the Browser pane (`.claude/launch.json`) or `npm --prefix site run dev` → http://localhost:3000/styleguide. Tokens: `site/src/styles/tokens.css`. See `site/README.md`.
 - **Key docs:** `docs/design-brief.md` (direction, tokens, motion, sitemap, pages, components) · `docs/assets-needed.md` (asset checklist) · `docs/preview/index.html` (palettes + fonts in real UI) · `research/overview.md` · `our-company.md`.
 
@@ -18,8 +18,8 @@
 | Step | Status |
 |---|---|
 | 1. Design brief, assets list, preview page | ✅ approved |
-| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ✅ built · awaiting owner review · Lighthouse mobile: home 97/100/96/100, styleguide 95/100/96/(SEO 60 = noindex by design) · CLS 0 · no overflow at 360/390px · reduced motion + keyboard menu tested · review shots `docs/review/step2/` |
-| 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ **home built, awaiting owner review** · prod Lighthouse mobile 95–96 / 100 / 96 / 100 (LCP 0.9 s, CLS 0), desktop 100 · no overflow 390/1440 · shots + scroll video `docs/review/step3-home/` |
+| 2. Setup: site/ (Next.js + TS + Tailwind + MDX + GSAP/Lenis), tokens, /styleguide | ✅ approved 2026-11-19 (light first + bolder motion, c97c488) · Lighthouse mobile: home 97/100/96/100, styleguide 95/100/96/(SEO 60 = noindex by design) · CLS 0 · no overflow at 360/390px · reduced motion + keyboard menu tested · review shots `docs/review/step2/` |
+| 3. Layout → home → services (+1 detail) → work (+2 cases) → about → contact → rest | ⏳ **home ✅ pushed · services ✅ pushed** (prod Lighthouse mobile 100/100/96/100, LCP 0.8 s, CLS 0; `docs/review/step3-services/`) · home: prod Lighthouse mobile 95–96 / 100 / 96 / 100 (LCP 0.9 s, CLS 0), desktop 100 · no overflow 390/1440 · shots + scroll video `docs/review/step3-home/` |
 
 ## Waiting on the owner
 - Liquid-metal logo video, made from `docs/logo/epox-wordmark-white.svg`.
@@ -60,7 +60,7 @@
 - Layout: Header (morphing mega-menu, mobile sheet, hide-on-scroll, tone follows `data-header-tone`; all light now), Footer (soft band), MotionProvider (Lenis lazy, reveal observer), page-enter template (skipped on first load for LCP).
 - Motion components: RiseText (H3/H13), ExpandOnScroll (H14); unveil (H15) via `data-unveil`, magnetic (L10) via `Button magnetic` / `data-magnetic`; all played from `app/template.tsx` + `MotionProvider`.
 - Components: Logo, Button, ArrowLink, Label, Tag/Tags, Live, AssetPlaceholder, Ph/Val, CharacterSlot, SectionHeader, FactTable, ServiceRows (stacking), CaseCard, TrustStrip, EngagementModels, ProcessSteps, Faq, StatsScoreboard/CountUp, RollCall, StatementReveal (GSAP), LiveDemo, ContactBlock, ContactForm (+ /api/contact stub, 501 until Resend).
-- Pages: `/styleguide` (noindex), `/` home (hero + proof strip, services, work, process demo, built for, numbers, ways to work, statement, contact).
+- Pages: `/services` (hero, 7 story chapters: sticky rail with rolling chapter number + index on desktop, number per chapter on mobile, related case card; ways to work; contact; copy in `serviceStories` in content.ts), `/styleguide` (noindex), `/` home (hero + proof strip, services, work, process demo, built for, numbers, ways to work, statement, contact).
 - Known: Link prefetch 404s (best-practices 96) until the other Step 3 pages exist. Section counts (07, 02…) hidden below 900px.
 
 ## Open placeholders & missing assets
