@@ -23,6 +23,7 @@
 | 8 | **/product client roll-call:** giant serif client names turn grey→white at screen centre, revealing project count, one-line story and an image | scroll | bold, confident | low |
 | 9 | **Footer hover label swap** ("Want to say hi?" → "Copy e-mail") | hover | tiny delight + useful | trivial |
 | 10 | **Right-edge black wavy tab with ≡** opens the menu (visible in `services/desktop-full.png`, top right) | click | quirky, on-brand | low |
+| 10b | **Menu drawer (mobile, measured from `videos/home-mobile.webm`, frames at 25 fps):** full-screen black panel; its **left edge is an S-curve (one sine period, ~30% of screen width)** that sweeps in from the right in **≈0.40 s** (brightness curve = ease-out), links (serif, white, centred) fade in as the edge passes; the close is the **same sweep reversed, ≈0.45 s**, revealing the page; header logo/× flip to white on black | click | the most on-brand moment in the site; CSS `clip-path` polygon is enough, no WebGL | low |
 | 11 | Header hides on scroll down; "N days until Monday" countdown widget | scroll / live | personality | trivial |
 
 Videos: `home-desktop.webm` (0:00–0:03 preloader, 0:03–0:15 word carousel, then grid hovers), `work-desktop.webm` (grid + hover waves), `services-desktop.webm` (chapter fades + sticky illustrations), `product-desktop.webm` (roll-call), `work-aurorasolar-desktop.webm` (case study modules). Timestamps per hover in `videos/*.events.json`.

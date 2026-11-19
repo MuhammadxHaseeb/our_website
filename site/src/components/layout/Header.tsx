@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/brand/Logo';
 import { services } from '@/lib/content';
@@ -24,6 +25,8 @@ export function Header() {
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
   const [sheet, setSheet] = useState(false);
+  const [sheetTone, setSheetTone] = useState(false); // lags the close by half the sweep so the logo flips as the panel leaves
+  useEffect(() => { if (sheet) { setSheetTone(true); return; } const t = window.setTimeout(() => setSheetTone(false), 240); return () => window.clearTimeout(t); }, [sheet]);
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [tone, setTone] = useState<'light' | 'dark'>('light');
@@ -89,7 +92,8 @@ export function Header() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
   return (
-    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-tone={sheet ? 'light' : tone}>
+    <>
+    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-sheet={sheetTone} data-tone={sheetTone ? 'dark' : tone}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 btn">Skip to content</a>
       <div className="container-x flex h-[72px] items-center justify-between gap-6">
         <Link href="/" aria-label="Epox home" className="relative z-[61] -m-2 p-2"><Logo className="h-[22px] w-auto" /></Link>
@@ -157,31 +161,32 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={`btn hidden sm:inline-flex ${tone === 'dark' && !sheet ? 'btn-on-dark' : ''}`}>Let&apos;s talk</Link>
+          <Link href="/contact" className={`btn hidden sm:inline-flex ${tone === 'dark' || sheetTone ? 'btn-on-dark' : ''}`}>Let&apos;s talk</Link>
           <button type="button" className="nav-link relative z-[61] lg:hidden" aria-expanded={sheet} aria-controls="sheet" aria-label={sheet ? 'Close menu' : 'Open menu'} onClick={() => setSheet(!sheet)}>
             {sheet ? <X className="h-6 w-6" strokeWidth={1.5} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.5} aria-hidden />}
           </button>
         </div>
       </div>
 
-      {/* mobile sheet */}
+    </header>
+      {/* mobile menu: sits outside <header> so the header's backdrop-filter can't clip it; header is z-50 above it */}
       <div id="sheet" className="sheet lg:hidden" data-open={sheet} aria-hidden={!sheet} role="dialog" aria-modal="true" aria-label="Menu">
-        <div className="container-x flex flex-1 flex-col pt-28 pb-10">
-          <p className="t-label" style={{ color: 'var(--muted)' }}>/ Services</p>
+        <div className="container-x flex flex-1 flex-col pt-24 pb-8">
+          <p className="t-label sheet-in" style={{ '--i': 0 } as CSSProperties}>/ Services</p>
           <ul className="mt-4 grid gap-1">
-            {services.map(s => (
-              <li key={s.slug}><Link href={`/services/${s.slug}`} className="flex items-baseline gap-4 py-2 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>
-                <span className="t-label" style={{ color: 'var(--muted)' }}>S/{s.n}</span>{s.title}</Link></li>
+            {services.map((s, i) => (
+              <li key={s.slug} className="sheet-in" style={{ '--i': i + 1 } as CSSProperties}><Link href={`/services/${s.slug}`} className="flex items-baseline gap-4 py-1 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>
+                <span className="t-label">S/{s.n}</span>{s.title}</Link></li>
             ))}
           </ul>
-          <ul className="mt-10 grid gap-1 border-t border-line pt-6">
-            {[{ href: '/work', t: 'Work' }, ...company.map(c => ({ href: c.href, t: c.title }))].map(l => (
-              <li key={l.href}><Link href={l.href} className="block py-2 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
+          <ul className="sheet-rule mt-6 grid gap-0 border-t pt-4">
+            {[{ href: '/work', t: 'Work' }, ...company.map(c => ({ href: c.href, t: c.title }))].map((l, i) => (
+              <li key={l.href} className="sheet-in" style={{ '--i': services.length + 1 + i } as CSSProperties}><Link href={l.href} className="block py-1.5 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-lg mt-auto self-start" tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
+          <Link href="/contact" className="btn btn-lg btn-on-dark sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
         </div>
       </div>
-    </header>
+    </>
   );
 }
