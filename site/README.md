@@ -21,4 +21,15 @@ npm run build && npm start
 - `src/components/`: `brand/` (Logo) · `ui/primitives.tsx` (Button, Label, Tag, Live, SectionHeader, FactTable, AssetPlaceholder, Ph, CharacterSlot) · `sections/` (ServiceRows, CaseCard, EngagementModels, ProcessSteps, Faq, TrustStrip, StatsScoreboard, RollCall, StatementReveal, LiveDemo, ContactBlock, ContactForm) · `layout/` (Header, Footer) · `motion/` (MotionProvider).
 - `src/lib/content.ts`: real content from `our-company.md`; gaps are `[PLACEHOLDER: …]`.
 - `src/lib/motion.ts`: lazy GSAP/ScrollTrigger/Lenis loader; smooth scroll only on fine pointers; everything off under reduced motion.
-- `src/app/api/contact/route.ts`: contact endpoint (Resend wiring at the contact-page step; until then it answers 501 honestly).
+- `src/app/api/contact/route.ts`: contact endpoint → Resend → owner's inbox (honeypot + minimum fill time against spam).
+
+## Contact form settings (Resend)
+Set these in **Vercel → Project → Settings → Environment Variables** (and in `site/.env.local` for local runs; `.env*` is git-ignored):
+
+| Name | Required | Value |
+|---|---|---|
+| `RESEND_API_KEY` | yes | resend.com → API Keys → Create (permission: Sending access) |
+| `CONTACT_TO` | yes | inbox that receives messages; several = comma-separated |
+| `CONTACT_FROM` | no | e.g. `Epox website <hello@your-domain>` once the domain is verified in Resend. Without it, Resend's test sender is used, which only delivers to the email you signed up to Resend with. |
+
+Without `RESEND_API_KEY` / `CONTACT_TO` the form shows "Our form isn't connected yet" and nothing is sent. Redeploy after adding variables.

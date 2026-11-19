@@ -1,21 +1,25 @@
 'use client';
 import { ArrowRight, Check } from 'lucide-react';
-import { useId, useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useId, useRef, useState } from 'react';
 
 type State = 'idle' | 'sending' | 'success' | 'error';
 const TOPICS = ['New project', 'Existing product', 'Dedicated developers', 'Other'];
 
-/** Contact form (L8): inline validation, sending / success / error states. Posts to /api/contact (Resend, wired at the /contact step). */
+/** Contact form (L8): inline validation, sending / success / error states. Posts to /api/contact → Resend → owner's inbox. */
 export function ContactForm({ forceState }: { forceState?: State }) {
   const id = useId();
   const [state, setState] = useState<State>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState('');
   const s = forceState ?? state;
+  const mountedAt = useRef(0); // spam check: time spent on the form
+  useEffect(() => { mountedAt.current = Date.now(); }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    data.elapsed = String(Date.now() - mountedAt.current);
     const errs: Record<string, string> = {};
     if (!data.name?.trim()) errs.name = 'Please add your name.';
     if (!/^\S+@\S+\.\S+$/.test(data.email ?? '')) errs.email = 'Please add a valid email.';
@@ -67,6 +71,7 @@ export function ContactForm({ forceState }: { forceState?: State }) {
         </button>
         <p className="t-small muted">NDA available on request.</p>
       </div>
+      <p className="t-small muted -mt-2">We only use your details to reply to you. <Link href="/privacy" className="link">Privacy</Link></p>
       <p id={`${id}-status`} role="alert" className={s === 'error' ? 'field-error' : 'sr-only'}>
         {s === 'error' ? (msg || 'Something went wrong. Please email us instead.') : ''}
       </p>

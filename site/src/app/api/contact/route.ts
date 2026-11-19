@@ -1,11 +1,59 @@
-// Contact endpoint. Resend wiring happens at the /contact page step (owner decision: Resend → owner's inbox).
-// Until then it validates and answers honestly that delivery isn't connected yet.
+// Contact endpoint → Resend (owner decision) → owner's inbox.
+// Settings (Vercel → Project → Settings → Environment Variables, or site/.env.local for local runs):
+//   RESEND_API_KEY   required. From resend.com → API Keys.
+//   CONTACT_TO       required. Inbox that receives messages (comma-separate several).
+//   CONTACT_FROM     optional. Verified sender, e.g. "Epox website <hello@your-domain>".
+//                    Default uses Resend's test sender, which can only deliver to the Resend account's own email.
+// Spam: honeypot field + minimum fill time. Bots get a fake success so they don't retry.
+
+const TOPICS = ['New project', 'Existing product', 'Dedicated developers', 'Other'];
+const MIN_FILL_MS = 2500;
+
+const esc = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+const clean = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
+
 export async function POST(req: Request) {
-  const data = await req.json().catch(() => null) as Record<string, string> | null;
-  if (!data) return Response.json({ error: 'Invalid request.' }, { status: 400 });
-  if (data.website) return Response.json({ ok: true }); // honeypot: pretend success for bots
-  if (!data.name || !/^\S+@\S+\.\S+$/.test(data.email ?? '') || (data.message ?? '').trim().length < 10) {
+  const data = await req.json().catch(() => null) as Record<string, unknown> | null;
+  if (!data || typeof data !== 'object') return Response.json({ error: 'Invalid request.' }, { status: 400 });
+
+  // bots: honeypot filled, or submitted faster than a person can type
+  if (clean(data.website, 200) || Number(data.elapsed ?? 0) < MIN_FILL_MS) return Response.json({ ok: true });
+
+  const name = clean(data.name, 120);
+  const email = clean(data.email, 200);
+  const company = clean(data.company, 200);
+  const message = clean(data.message, 5000);
+  const topic = TOPICS.includes(clean(data.topic, 40)) ? clean(data.topic, 40) : 'Other';
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || message.length < 10) {
     return Response.json({ error: 'Please fill in your name, a valid email and a short message.' }, { status: 422 });
   }
-  return Response.json({ error: 'The form isn\'t connected yet (Resend is wired at the contact-page step). Please email us instead.' }, { status: 501 });
+
+  const key = process.env.RESEND_API_KEY;
+  const to = process.env.CONTACT_TO?.split(',').map(s => s.trim()).filter(Boolean);
+  if (!key || !to?.length) {
+    console.error('[contact] RESEND_API_KEY or CONTACT_TO is not set; message not sent.');
+    return Response.json({ error: 'Our form isn\'t connected yet, so this message wasn\'t sent. Please try again soon.' }, { status: 503 });
+  }
+
+  const subject = `Website: ${topic} · ${name}${company ? ` (${company})` : ''}`;
+  const rows: [string, string][] = [['Topic', topic], ['Name', name], ['Email', email], ['Company', company || '—']];
+  const text = `${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\n${message}`;
+  const html = `<table cellpadding="4">${rows.map(([k, v]) => `<tr><td><b>${k}</b></td><td>${esc(v)}</td></tr>`).join('')}</table>`
+    + `<p style="white-space:pre-wrap">${esc(message)}</p>`;
+
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: process.env.CONTACT_FROM || 'Epox website <onboarding@resend.dev>', to, reply_to: email, subject, text, html }),
+    });
+    if (!r.ok) {
+      console.error('[contact] Resend error', r.status, await r.text().catch(() => ''));
+      return Response.json({ error: 'We couldn\'t send your message just now. Please try again in a minute.' }, { status: 502 });
+    }
+    return Response.json({ ok: true });
+  } catch (e) {
+    console.error('[contact] network error', e);
+    return Response.json({ error: 'We couldn\'t send your message just now. Please try again in a minute.' }, { status: 502 });
+  }
 }

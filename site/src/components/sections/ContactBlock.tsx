@@ -4,7 +4,7 @@ import { Val } from '@/components/ui/primitives';
 import { company } from '@/lib/content';
 import { RiseText } from '@/components/motion/RiseText';
 
-const next = [
+export const nextSteps = [
   { n: '01', t: 'A person reads it', d: 'Not a sales queue. Someone who builds software reads every message.' },
   { n: '02', t: 'You get a first view', d: 'How we would approach your problem, and a time to talk.' },
   { n: '03', t: 'Scope, timeline, cost', d: 'After a short call, under NDA if you need it.' },
@@ -20,7 +20,7 @@ export function ContactBlock() {
             <p className="t-label muted">/ Contact</p>
             <RiseText as="h2" id="contact-title" className="t-h1 mt-6" style={{ maxWidth: '12ch' }} parts={['Have a problem worth solving?', { t: "Let's talk.", emph: true }]} />
             <ol className="mt-12 grid gap-6">
-              {next.map(s => (
+              {nextSteps.map(s => (
                 <li key={s.n} className="grid grid-cols-[3rem_1fr] border-t border-line pt-5">
                   <span className="t-label muted">{s.n}</span>
                   <span><span className="block font-medium">{s.t}</span><span className="mt-1 block t-small muted">{s.d}</span></span>
