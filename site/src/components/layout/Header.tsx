@@ -5,7 +5,7 @@ import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/brand/Logo';
-import { BtnLabel, ServiceIcon } from '@/components/ui/primitives';
+import { BtnLabel } from '@/components/ui/primitives';
 import { services } from '@/lib/content';
 import { getLenis } from '@/lib/motion';
 
@@ -130,26 +130,29 @@ export function Header() {
                 setPanel(null); next?.focus();
               }
             }}>
-            {/* Services: a compact list (icon + name) and a preview of the hovered / focused area on the right */}
-            <div ref={panelRefs.services} className="mega-panel w-[720px]" data-active={panel === 'services'} aria-hidden={panel !== 'services'}>
-              <div className="grid grid-cols-[300px_1fr] gap-4">
-                <ul className="grid gap-0.5">
-                  {services.map((s, i) => (
-                    <li key={s.slug}>
-                      <Link href={`/services/${s.slug}`} className="mega-row" data-on={svc === i} tabIndex={panel === 'services' ? 0 : -1}
-                        onMouseEnter={() => setSvc(i)} onFocus={() => setSvc(i)}>
-                        <ServiceIcon slug={s.slug} /><span>{s.title}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mega-preview" aria-hidden>
-                  <div key={svc} className="mega-preview-in">
-                    <p className="t-h3">{services[svc].title}</p>
-                    <p className="mt-3 t-small muted" style={{ maxWidth: '30ch' }}>{services[svc].promise}</p>
-                    <ul className="mt-5 flex flex-wrap gap-1.5">{services[svc].tags.slice(0, 4).map(t => <li key={t} className="tag">{t}</li>)}</ul>
+            {/* Services: a typographic index (foil bar marks the active area) + the area's big foil number and promise */}
+            <div ref={panelRefs.services} className="mega-panel w-[760px]" data-active={panel === 'services'} aria-hidden={panel !== 'services'}>
+              <div className="grid grid-cols-[minmax(300px,1fr)_340px] gap-6">
+                <div className="mega-index py-2" style={{ '--row': svc, '--row-h': '46px' } as CSSProperties}>
+                  <span className="mega-marker" aria-hidden />
+                  <ul>
+                    {services.map((s, i) => (
+                      <li key={s.slug}>
+                        <Link href={`/services/${s.slug}`} className="mega-row" data-on={svc === i} tabIndex={panel === 'services' ? 0 : -1}
+                          onMouseEnter={() => setSvc(i)} onFocus={() => setSvc(i)}>{s.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mega-preview" data-theme="dark">
+                  <div key={svc} className="mega-preview-in" aria-hidden>
+                    <p className="mega-num foil-text">{services[svc].n}</p>
+                    <p className="mt-6 t-lead" style={{ maxWidth: '24ch' }}>{services[svc].promise}</p>
                   </div>
-                  <Link href="/services" className="arrow-link mt-auto" tabIndex={panel === 'services' ? 0 : -1}><span>All services</span><ArrowRight className="icon" strokeWidth={1.9} aria-hidden /></Link>
+                  <div className="mt-auto flex flex-col gap-1">
+                    <Link href={`/services/${services[svc].slug}`} className="arrow-link" tabIndex={-1} aria-hidden><span>Explore {services[svc].title}</span><ArrowRight className="icon" strokeWidth={1.9} /></Link>
+                    <Link href="/services" className="arrow-link muted" tabIndex={panel === 'services' ? 0 : -1}><span>All services</span><ArrowRight className="icon" strokeWidth={1.9} aria-hidden /></Link>
+                  </div>
                 </div>
               </div>
             </div>

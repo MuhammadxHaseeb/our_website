@@ -119,6 +119,10 @@ export function BrandDefs() {
         <linearGradient id="ep-foil" x1="0" y1="0" x2="1" y2="1">
           {STOPS.map(([o, c]) => <stop key={o} offset={o} stopColor={c} />)}
         </linearGradient>
+        {/* service icons: 24×24 line icons stroked with the foil (user space, so straight lines still get the gradient) */}
+        <linearGradient id="ep-foil-icon" gradientUnits="userSpaceOnUse" x1="2" y1="2" x2="22" y2="22">
+          {STOPS.map(([o, c]) => <stop key={o} offset={o} stopColor={c} />)}
+        </linearGradient>
         <pattern id="ep-grain-word" patternUnits="userSpaceOnUse" width="9.19" height="9.19" patternTransform="rotate(-35)">
           <rect width="2.48" height="9.19" fill="#FFFFFF" fillOpacity="0.22" />
         </pattern>
