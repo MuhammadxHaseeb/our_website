@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { ArrowLink, AssetPlaceholder, FactTable, Label, Live, ServiceIcon, Tags, Val } from '@/components/ui/primitives';
+import { ArrowLink, AssetPlaceholder, FactTable, Label, Live, Tags, Val } from '@/components/ui/primitives';
 import type { CaseStudy, Service } from '@/lib/content';
 import { models, steps, trust } from '@/lib/content';
 
@@ -11,14 +11,15 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
     <ol className={stacking ? 'stack-rows' : undefined}>
       {items.map((s, i) => (
         <li key={s.slug} className="stack-row border-t border-line" style={{ '--i': i } as React.CSSProperties}>
-          <Link href={`/services/${s.slug}`} className="svc-row group grid grid-cols-[3.5rem_1fr] gap-x-3 py-4 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3 md:py-8" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
-            <span className="md:col-span-3"><ServiceIcon slug={s.slug} /></span>
+          <Link href={`/services/${s.slug}`} className="svc-row group grid grid-cols-[3.75rem_1fr] gap-x-3 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
+            {/* the big foil number, same as /services; it and the title fill the pinned strip exactly */}
+            <span className="svc-num foil-text md:col-span-3" aria-hidden>{s.n}</span>
             <span className="md:col-span-8">
-              <span className="svc-title t-h3 block pt-2 md:pt-1.5">{s.title}</span>
+              <span className="svc-title t-h3 block">{s.title}</span>
               <span className="mt-2 block max-w-[52ch] muted">{s.promise}</span>
               <span className="mt-4 block"><Tags items={s.tags} /></span>
             </span>
-            <span className="hidden md:col-span-1 md:flex md:justify-end md:pt-2" aria-hidden>
+            <span className="hidden md:col-span-1 md:flex md:justify-end" aria-hidden>
               <span className="arrow-link"><span>Explore</span></span>
             </span>
           </Link>

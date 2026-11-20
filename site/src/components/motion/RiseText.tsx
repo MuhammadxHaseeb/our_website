@@ -10,9 +10,9 @@ type Part = string | { t: string; emph?: boolean; hl?: boolean };
  * Reduced motion: words are simply visible.
  *
  * { hl }: the "Found scan" (hero only, one key word). After the words rise, a thin foil scan line sweeps once across
- * the headline; the key word lights up in foil as it is passed and a small azure "Found" badge clicks in beside it:
- * the brand's promise ("we find the problem before you do") acted out in about a second. The badge is the layout's
- * one azure spot. Reduced motion: word already lit, badge shown, no scan.
+ * the headline; the key word lights up in foil as it is passed and four azure viewfinder corners lock onto it:
+ * the brand's promise ("we find the problem before you do") acted out in about a second, without adding words to the
+ * sentence. The corners are the layout's one azure spot. Reduced motion: word lit and framed, no scan.
  * { emph }: a quieter second half of a headline, set in text-muted.
  */
 export function RiseText({ parts, as: As = 'h2', on = 'view', className = '', style, id }:
@@ -39,7 +39,7 @@ export function RiseText({ parts, as: As = 'h2', on = 'view', className = '', st
       {groups.map((g, gi) => (
         <Fragment key={gi}>
           {g.cls === 'hl'
-            ? <span className="hl">{renderWords(g.words, true)}{scan && <span className="found-badge" aria-hidden>Found</span>}</span>
+            ? <span className="hl">{renderWords(g.words, true)}</span>
             : g.cls ? <span className={g.cls}>{renderWords(g.words)}</span> : renderWords(g.words)}
           {gi < groups.length - 1 ? ' ' : null}
         </Fragment>

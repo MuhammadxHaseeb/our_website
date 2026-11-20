@@ -193,12 +193,23 @@
   /* ---------------- stacking service rows (H7) ---------------- */
   /* every screen size. Each row pins a strip of --stack-step tall (label + title); the next row slides over it.
      Phones: tighter strip, no "Explore" column. Very short screens (landscape phones) fall back to a plain list. */
-  .stack-rows { --stack-top: 64px; --stack-step: 56px; }
-  @media (min-width: 768px) { .stack-rows { --stack-top: 88px; --stack-step: clamp(56px, 8vh, 72px); } }
+  /* the strip each row keeps on screen = its top padding + one title line (+ a little air), so pinned titles are never cut */
+  .stack-rows { --stack-top: 64px; --row-pt: 14px; --row-pb: 20px; --stack-step: calc(var(--row-pt) + var(--fs-h3) * 1.25 + 12px); }
+  @media (min-width: 768px) { .stack-rows { --stack-top: 88px; --row-pt: 22px; --row-pb: 36px; } }
+  .svc-row { padding-block: var(--row-pt, 16px) var(--row-pb, 32px); }
   @media (min-height: 520px) {
     html:not([data-motion="reduced"]) .stack-rows .stack-row { position: sticky; top: calc(var(--stack-top) + var(--i) * var(--stack-step)); background: var(--bg); }
   }
-  .svc-row:hover .svc-title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  /* brand touches: foil number in the left column; on hover a slanted foil bar (a piece of the E) slides in before the title */
+  .svc-num { font: 500 calc(var(--fs-h3) * 1.25)/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .svc-title { position: relative; transition: transform var(--dur-ui) var(--ease-out-quint); }
+  .svc-title::before { content: ''; position: absolute; left: -0.9em; top: 0.18em; width: 0.55em; height: 0.8em; background: var(--foil);
+    clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%); transform: scaleX(0); transform-origin: right center; transition: transform var(--dur-ui) var(--ease-out-quint); }
+  @media (hover: hover) and (pointer: fine) {
+    .svc-row:hover .svc-title, .svc-row:focus-visible .svc-title { transform: translateX(0.9em); }
+    .svc-row:hover .svc-title::before, .svc-row:focus-visible .svc-title::before { transform: scaleX(1); }
+  }
+  html[data-motion="reduced"] .svc-title, html[data-motion="reduced"] .svc-title::before { transition: none; }
 
   /* ---------------- roll-call (H8) ---------------- */
   /* inactive = --dim (line-strong: 4.1:1 on Black, 3.6:1 on Paper: AA large) */
@@ -215,7 +226,7 @@
   .rw > span { display: inline-block; }
   html:not([data-motion="reduced"]) .rise-load .rw > span { animation: rise-in var(--dur-hero) var(--ease-out-quint) both; animation-delay: calc(80ms + var(--w) * 70ms); }
   @keyframes rise-in { from { transform: translateY(110%); } to { transform: none; } }
-  /* Found scan: a thin foil line sweeps across the headline once; the key word lights up as it is passed, then the badge clicks in */
+  /* Found scan: a thin foil line sweeps across the headline once; the key word lights up as it is passed, then the corners lock on */
   .found-scan { position: relative; }
   .scan-line { position: absolute; top: -0.06em; bottom: -0.06em; left: 0; width: 2px; pointer-events: none; opacity: 0;
     background: linear-gradient(180deg, transparent, var(--foil-mint) 20%, var(--foil-sky) 80%, transparent);
@@ -224,8 +235,9 @@
   @keyframes scan-sweep { 0% { left: 0; opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
   html:not([data-motion="reduced"]) .found-scan .hl .lit { animation: word-lit 420ms var(--ease-out-quad) calc(var(--scan-at) + 380ms) both; }
   @keyframes word-lit { from { -webkit-text-fill-color: var(--text); } to { -webkit-text-fill-color: transparent; } }
-  html:not([data-motion="reduced"]) .found-scan .found-badge { animation: badge-in 520ms cubic-bezier(.34, 1.56, .64, 1) calc(var(--scan-at) + 760ms) both; }
-  @keyframes badge-in { from { opacity: 0; transform: translateY(0.15em) scale(.7); } to { opacity: 1; transform: none; } }
+  /* the corners start wide and snap onto the word, like a viewfinder locking on */
+  html:not([data-motion="reduced"]) .found-scan .hl::after { animation: lock-on 560ms var(--ease-out-quint) calc(var(--scan-at) + 640ms) both; }
+  @keyframes lock-on { from { opacity: 0; transform: scale(1.35); } 40% { opacity: 1; } to { opacity: 1; transform: none; } }
 
   /* hero supporting lines follow the headline */
   html:not([data-motion="reduced"]) .hero-after { animation: hero-after var(--dur-enter) var(--ease-out-quint) both; animation-delay: var(--d, 500ms); }
@@ -241,8 +253,11 @@
   html[data-motion="reduced"] .chapter-num-track { transition: none; }
   .chapter-index { display: block; padding: 6px 0; color: var(--muted); text-decoration: none;
     transition: color var(--dur-ui) var(--ease-out-quad); }
-  .chapter-index:hover, .chapter-index[aria-current="true"] { color: var(--text); }
-  .chapter-index[aria-current="true"] span:last-child { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
+  .chapter-index:hover { color: var(--text); }
+  /* the area in view: azure (brand accent for the one highlighted item; 5.9:1 on Black), semibold, nudged in */
+  .chapter-index { transition: color var(--dur-ui) var(--ease-out-quad), transform var(--dur-ui) var(--ease-out-quint); }
+  .chapter-index[aria-current="true"] { color: var(--azure); font-weight: 600; transform: translateX(6px); }
+  html[data-motion="reduced"] .chapter-index { transform: none; }
   .related-case { color: inherit; text-decoration: none; transition: background-color var(--dur-ui) var(--ease-out-quad); }
   .related-case:hover { background: var(--card-raised); }
   .chapter { scroll-margin-top: 96px; }

@@ -87,8 +87,16 @@
   /* Found scan (RiseText { hl }): the key word lit in foil + an azure "Found" badge; the scan line itself is in components.css */
   .hl { white-space: nowrap; }
   .hl .lit { background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
-  .found-badge { display: inline-block; margin-left: 0.7em; vertical-align: 2.7em; padding: 0.6em 0.8em 0.55em; border-radius: var(--r-sm);
-    background: var(--azure); color: var(--on-accent); font: 700 max(10px, 0.15em)/1 var(--font-text); letter-spacing: 0.16em; text-transform: uppercase; }
+  /* lock-on frame: four azure corners around the found word (drawn as 8 gradient strokes, outside the text flow) */
+  .hl { position: relative; padding-inline: 0.16em; margin-inline: 0.02em; }
+  .hl::after { content: ''; position: absolute; inset: 0.24em 0 0.02em; pointer-events: none;
+    --c: var(--azure); --l: 0.22em; --t: max(2px, 0.03em);
+    background:
+      linear-gradient(var(--c), var(--c)) top left / var(--l) var(--t), linear-gradient(var(--c), var(--c)) top left / var(--t) var(--l),
+      linear-gradient(var(--c), var(--c)) top right / var(--l) var(--t), linear-gradient(var(--c), var(--c)) top right / var(--t) var(--l),
+      linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--t), linear-gradient(var(--c), var(--c)) bottom left / var(--t) var(--l),
+      linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--t), linear-gradient(var(--c), var(--c)) bottom right / var(--t) var(--l);
+    background-repeat: no-repeat; }
 
   /* ------------------------------------------------------------ links */
   .link {
