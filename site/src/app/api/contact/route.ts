@@ -2,7 +2,7 @@
 // Settings (Vercel → Project → Settings → Environment Variables, or site/.env.local for local runs):
 //   RESEND_API_KEY   required. From resend.com → API Keys.
 //   CONTACT_TO       required. Inbox that receives messages (comma-separate several).
-//   CONTACT_FROM     optional. Verified sender, e.g. "Epox website <hello@your-domain>".
+//   CONTACT_FROM     optional. Verified sender, e.g. "epox website <hello@your-domain>".
 //                    Default uses Resend's test sender, which can only deliver to the Resend account's own email.
 // Spam: honeypot field + minimum fill time. Bots get a fake success so they don't retry.
 
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: process.env.CONTACT_FROM || 'Epox website <onboarding@resend.dev>', to, reply_to: email, subject, text, html }),
+      body: JSON.stringify({ from: process.env.CONTACT_FROM || 'epox website <onboarding@resend.dev>', to, reply_to: email, subject, text, html }),
     });
     if (!r.ok) {
       console.error('[contact] Resend error', r.status, await r.text().catch(() => ''));

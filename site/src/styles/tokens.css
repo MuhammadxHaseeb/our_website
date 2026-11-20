@@ -1,92 +1,74 @@
 /* =====================================================================
-   EPOX DESIGN TOKENS: single source of truth (docs/design-brief.md §3–4)
-   design-2: Webisoft palette (exact values from research/raw/webisoft/home/styles.json):
-   coral #DE5849 / #C63524, black #000000, white, panels #F0F1F4, borders #E2E3E6, grey ramp.
+   EPOX DESIGN TOKENS: single source of truth.
+   Ice Mint brand system (assets/epox — Ice Mint brand system/tokens.css, README.md):
+   black ground, ice-blue → mint holographic foil (logo, foil bars, service icons only),
+   Space Grotesk headlines, Inter text, two off-guard colours used once per layout
+   (saffron = the one action you most want clicked, azure = one highlighted word or badge).
    Every component reads from these variables.
    ===================================================================== */
 
 :root {
-  /* ---------- neutral scale (Webisoft values only; contrast vs #FFF) ---------- */
-  --n-50: #F0F1F4;  /* panels / soft bands */
-  --n-100: #E2E3E6; /* borders, hover fills, insets */
-  --n-200: #D9D9D9;
-  --n-300: #B4B5B8; /* decoration only (2.1:1) */
-  --n-400: #A7A7A7; /* decoration only (2.4:1) */
-  --n-500: #777777; /* large text only: 4.48:1 white, 3.96:1 panel */
-  --n-600: #6A6A6B;
-  --n-700: #666666; /* secondary text: 5.74:1 white, 5.08:1 panel */
-  --n-800: #10303B; /* deep teal (Webisoft detail colour; not used for UI) */
-  --n-900: #000000;
-  --n-950: #000000;
+  /* ---------- brand (same in every theme) ---------- */
+  --brand-black: #0B0C0F;  /* the brand ground: hero bands, footer, app icon. Foil only ever sits on this */
+  --brand-paper: #F3F5F8;  /* the light ground: long reading, forms, documents */
+  --foil-sky: #BFE3FF;
+  --foil-glow: #E2FFF4;
+  --foil-blue: #8FC9FF;
+  --foil-mint: #7FF5D0;    /* also the stroke of icons on brand-black tiles */
+  --foil-ice: #E4FBFF;
+  --foil-seafoam: #A8F0E0;
+  --foil-flat: #B9EDEA;    /* one flat stand-in for the foil: tiny UI marks (live dot, check icons) */
+  --foil: linear-gradient(115deg, var(--foil-sky) 0%, var(--foil-glow) 20%, var(--foil-blue) 40%, var(--foil-mint) 58%, var(--foil-ice) 78%, var(--foil-seafoam) 100%);
+  --saffron: #FFC21A;      /* off-guard: the main call to action, once per layout. Never a background */
+  --azure: #1E8CFF;        /* off-guard: one highlighted word or badge, once per layout. Never a background */
+  --on-accent: #0B0C0F;    /* text on saffron (12:1) and azure (5.8:1) */
+  --focus: var(--azure);   /* focus ring: 2px, offset 2px */
 
-  /* ---------- brand accent (coral) ---------- */
-  --coral: #DE5849;      /* backgrounds (hero, footer, card hover), graphics, LARGE text only (3.75:1) */
-  --coral-dark: #C63524; /* small text + hovers on white (5.34:1) and panels (4.72:1) */
+  /* ---------- Black theme (the default) ---------- */
+  --bg: #0B0C0F;
+  --surface: #16181D;         /* cards, inputs, panels on bg */
+  --surface-raised: #1C1F25;  /* menus, dialogs, anything above surface */
+  --text: #F2F5F9;            /* 18:1 on bg */
+  --text-muted: #A9B0BC;      /* 9:1 on bg, 8:1 on surface */
+  --line: #2A2F37;            /* hairlines and card outlines (decorative) */
+  --line-strong: #6B7380;     /* edges a person must see: inputs, outline buttons (4.1:1 on bg) */
+  --action: #F2F5F9;          /* primary button: inverts the ground */
+  --on-action: #0B0C0F;
+  --mark: var(--foil-flat);   /* tiny UI marks: live dot, check icons */
+  --error: #FF7A6E;           /* functional, not brand: form errors (7.7:1 on bg) */
 
-  /* ---------- semantic colours ---------- */
-  --ink: #000000;
-  --paper: #FFFFFF;
-  --surface: var(--n-50);
-  --line: var(--n-100);
-  --text: #000000;
-  --muted: var(--n-700);
-  --on-dark: #FFFFFF;
-  --muted-on-dark: var(--n-300); /* 10.3:1 on black */
-  --line-on-dark: var(--n-700);
+  /* ---------- fonts (brand files, self-hosted via next/font/local in app/layout.tsx) ---------- */
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-text: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-text); /* the brand has no mono: labels, numbers and tags use Inter (tabular numbers) */
 
-  /* ---------- context tokens (default = white page) ----------
-     .soft, .coral and .dark (globals.css) override these, so components read one name everywhere */
-  --card: var(--n-50);          /* Webisoft grey panels on white */
-  --card-inset: var(--n-100);   /* recessed areas inside cards */
-  --card-raised: var(--paper);  /* item on top of an inset (ticket, chip) */
-  --emph: var(--coral);         /* headline emphasis (large text) + live dot */
-  --hover-fill: var(--n-100);
-  --dim: var(--n-500);          /* not-yet-active large text (roll-call, statement) */
-  --kicker: var(--coral-dark);  /* small section labels (5.34:1 white, 4.72:1 panel) */
-
-  /* ---------- dark (Webisoft uses pure black) ---------- */
-  --dark-bg: #000000;
-  --dark-inset: #000000;
-  --dark-raised: #000000;
-  --dark-raised-2: var(--n-800);
-  --accent-on-light: var(--coral-dark);
-  --accent-on-dark: var(--coral);   /* 5.6:1 on black */
-  --dark-alt: #000000;
-  --focus: #3B82F6; /* focus ring only (functional, not decoration) */
-  --success: #1F7A45;
-  --error: var(--coral-dark);
-  --error-on-dark: var(--coral);
-
-  /* ---------- fonts (set by data-fonts on <html>) ---------- */
-  --font-display: var(--font-inter-tight), 'Helvetica Neue', Arial, sans-serif;
-  --font-text: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
-
-  /* ---------- type scale (fluid 360 → 1920) ---------- */
-  --fs-display: clamp(3.5rem, 2.2rem + 6.4vw, 10.5rem);   /* 56 → 168 */
-  --fs-h1: clamp(2.75rem, 1.9rem + 4.2vw, 6.5rem);        /* 44 → 104 */
-  --fs-h2: clamp(2rem, 1.5rem + 2.4vw, 4rem);             /* 32 → 64 */
-  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 2rem);         /* 22 → 32 */
-  --fs-rollcall: clamp(3rem, 1.8rem + 6vw, 9.5rem);       /* 48 → 152 */
-  --fs-lead: clamp(1.1875rem, 1.1rem + 0.45vw, 1.5rem);   /* 19 → 24 */
-  --fs-body: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);     /* 16 → 17 */
+  /* ---------- type scale (fluid 360 → 1920). Brand sizes (46 / 40 / 22) are the floor on phones ---------- */
+  --fs-display: clamp(2.875rem, 1.9rem + 4.4vw, 7.5rem);  /* 46 → 120 */
+  --fs-h1: clamp(2.5rem, 1.8rem + 3.2vw, 5.5rem);         /* 40 → 88 */
+  --fs-h2: clamp(2rem, 1.6rem + 1.8vw, 3.5rem);           /* 32 → 56 */
+  --fs-h3: clamp(1.375rem, 1.25rem + 0.45vw, 1.75rem);    /* 22 → 28 */
+  --fs-rollcall: clamp(2.75rem, 1.7rem + 4.8vw, 7.5rem);  /* 44 → 120 */
+  --fs-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem); /* 18 → 22 */
+  --fs-body: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);     /* 16 → 17 (brand: paragraphs 15px or larger) */
   --fs-small: 0.875rem;                                   /* 14 */
-  --fs-label: 0.71875rem;                                 /* 11.5 */
+  --fs-label: 0.6875rem;                                  /* 11: brand label, capitals, wide tracking */
+  --fs-button: 0.875rem;                                  /* 14: brand button */
 
-  --lh-display: 0.92;
-  --lh-h1: 0.98;
-  --lh-h2: 1.02;
-  --lh-h3: 1.15;
-  --lh-lead: 1.45;
+  --lh-display: 1.0;
+  --lh-h1: 1.04;
+  --lh-h2: 1.1;
+  --lh-h3: 1.25;
+  --lh-lead: 1.5;
   --lh-body: 1.6;
 
-  --tr-display: -0.045em;
-  --tr-h1: -0.04em;
-  --tr-h2: -0.03em;
-  --tr-h3: -0.02em;
-  --tr-label: 0.01em;
+  --tr-display: -0.02em;  /* brand: slightly tight */
+  --tr-h1: -0.02em;
+  --tr-h2: -0.02em;
+  --tr-h3: -0.01em;
+  --tr-label: 0.22em;     /* brand label */
+  --tr-tagline: 0.32em;   /* "software house" under the wordmark */
 
-  /* ---------- spacing (4-based) ---------- */
+  /* ---------- spacing (brand 4 · 8 · 12 · 16 · 24 · 32 · 48 · 56, plus larger section steps for the web) ---------- */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -94,22 +76,24 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
+  --space-7b: 56px;  /* brand space-14: hero inset */
   --space-8: 64px;
   --space-9: 96px;
   --space-10: 128px;
   --space-11: 192px;
-  --section-y: clamp(72px, 4rem + 6vw, 192px);
-  --section-y-tight: clamp(56px, 3rem + 4vw, 128px);
+  --section-y: clamp(72px, 4rem + 6vw, 176px);
+  --section-y-tight: clamp(56px, 3rem + 4vw, 112px);
   --gutter: clamp(16px, 1rem + 0.5vw, 24px);
-  --margin: clamp(20px, 4vw, 64px);
+  --margin: clamp(20px, 4vw, 56px);
   --max: 1440px;
 
-  /* ---------- radius (nested rule: inner = outer − padding) ---------- */
-  --r-card: 16px;
+  /* ---------- radius (brand: pill for buttons, chips, inputs; 14 for cards; 8 for highlights and badges) ---------- */
+  --r-card: 14px;
   --r-card-pad: 8px;
-  --r-inner: calc(var(--r-card) - var(--r-card-pad)); /* 8px */
-  --r-input: 10px;
-  --r-tag: 6px;
+  --r-inner: calc(var(--r-card) - var(--r-card-pad)); /* 6px: nested rule */
+  --r-input: 999px;
+  --r-tag: 999px;
+  --r-sm: 8px;
   --r-pill: 999px;
 
   /* ---------- motion ---------- */
@@ -129,17 +113,60 @@
   --stagger: 60ms;
   --rise: 16px;
 
-  /* ---------- icons ---------- */
+  /* ---------- icons (brand: 24px grid, 1.9 stroke, round caps and joins, no fills) ---------- */
   --icon-sm: 16px;
   --icon-md: 20px;
   --icon-lg: 24px;
-  --icon-stroke: 1.5;
+  --icon-stroke: 1.9;
+}
+
+/* ---------- Paper theme: long reading, forms and card bands (.soft, .paper) ---------- */
+.soft, .paper, [data-theme="light"] {
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --text: #0B0C0F;
+  --text-muted: #535B68;   /* 6.5:1 on paper */
+  --line: #D8DDE5;
+  --line-strong: #7A8391;  /* 3.6:1 on paper */
+  --action: #0B0C0F;
+  --on-action: #F2F5F9;
+  --mark: var(--text);     /* foil-flat would vanish on paper */
+  --error: #B42318;        /* 6:1 on paper */
+}
+
+/* ---------- Black theme, explicitly (heroes, bands, footer; also resets a dark band inside paper) ---------- */
+.dark, .hero, [data-theme="dark"] {
+  --bg: #0B0C0F;
+  --surface: #16181D;
+  --surface-raised: #1C1F25;
+  --text: #F2F5F9;
+  --text-muted: #A9B0BC;
+  --line: #2A2F37;
+  --line-strong: #6B7380;
+  --action: #F2F5F9;
+  --on-action: #0B0C0F;
+  --mark: var(--foil-flat);
+  --error: #FF7A6E;
+}
+
+/* ---------- context aliases: re-declared on every theme root so they follow that theme's values ---------- */
+:root, .soft, .paper, .dark, .hero, [data-theme] {
+  --muted: var(--text-muted);
+  --card: var(--surface);             /* cards on the section ground */
+  --card-inset: var(--bg);            /* recessed areas inside cards */
+  --card-raised: var(--surface-raised);
+  --hover-fill: color-mix(in srgb, var(--text) 6%, transparent);
+  --dim: var(--line-strong);          /* not-yet-active large text (roll-call, statement): AA large in both themes */
+  --kicker: var(--text-muted);        /* section labels */
+  --emph: var(--text-muted);          /* second half of a headline (the hero uses the azure highlight instead) */
 }
 
 /* ---------- font sets ---------- */
+/* optional local Helvetica Now (NEXT_PUBLIC_FONT_SET=licensed). Not part of Ice Mint: the brand fonts are the default. */
 :root[data-fonts="licensed"] {
-  --font-display: 'Helvetica Now Display', var(--font-inter-tight), 'Helvetica Neue', Arial, sans-serif;
-  --font-text: 'Helvetica Now Text', var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Helvetica Now Display', var(--font-space-grotesk), system-ui, sans-serif;
+  --font-text: 'Helvetica Now Text', var(--font-inter), system-ui, sans-serif;
 }
 
 /* ---------- motion: mobile + reduced ---------- */

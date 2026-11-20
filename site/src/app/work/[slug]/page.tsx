@@ -9,6 +9,7 @@ import { caseMdxComponents } from '@/components/sections/caseMdx';
 import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 import { RiseText } from '@/components/motion/RiseText';
 import { cases } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 // Case stories: one MDX file per project in src/content/work. Facts for cards + fact table stay in lib/content.ts.
 // Adding a project = one entry in `cases` + one MDX file + one line here.
@@ -44,7 +45,8 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   return (
     <>
       {/* hero */}
-      <section className="dark" data-header-tone="dark" aria-labelledby="case-title">
+      <section className="hero" aria-labelledby="case-title">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))]">
           <p className="t-label muted hero-after flex flex-wrap items-center gap-x-3 gap-y-1" style={d(0)}>
             <Link href="/work" className="link-quiet">/ Work</Link>
@@ -59,6 +61,8 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
+      {/* facts + story + tech: long reading, so it sits on Paper (brand) */}
+      <div className="paper">
       {/* fact table */}
       <section className="section-tight" aria-label="Project facts">
         <div className="container-x">
@@ -67,7 +71,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             { k: 'Sector', v: c.region ? `${c.sector} · ${c.region}` : c.sector },
             { k: 'Platforms', v: c.platforms },
             { k: 'Engagement', v: c.engagement },
-            { k: 'Status', v: <Live>{c.status}, run by Epox</Live> },
+            { k: 'Status', v: <Live>{c.status}, run by epox</Live> },
             { k: 'Duration', v: <Val v={c.duration} /> },
           ]} />
         </div>
@@ -85,10 +89,11 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
           <p className="lg:col-span-7 lg:col-start-6"><Ph>[PLACEHOLDER: tech stack for this project]</Ph></p>
         </div>
       </section>
+      </div>
 
       {/* next case */}
       {next.slug !== c.slug && (
-        <section className="soft" aria-label="Next case">
+        <section className="section-tight !py-0" aria-label="Next case">
           <Link href={`/work/${next.slug}`} className="next-case container-x grid gap-4 py-[var(--section-y-tight)]">
             <span className="t-label muted">Next case · {next.n} · {next.sector}</span>
             <span className="t-h1" style={{ maxWidth: '16ch' }}>{next.headline}</span>

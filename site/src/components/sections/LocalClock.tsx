@@ -27,7 +27,7 @@ export function LocalClock() {
   return (
     <div className="grid gap-3">
       <Live>Faisalabad now</Live>
-      <p className="t-num" style={{ font: '300 clamp(4rem, 2.6rem + 5vw, 8rem)/0.9 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
+      <p className="t-num" style={{ font: '500 clamp(4rem, 2.6rem + 5vw, 8rem)/0.95 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
         <time dateTime={now?.toISOString()}>{time}</time>
       </p>
       <p className="t-label muted min-h-[1.3em]" aria-live="off">{gap ? `UTC+5 · ${gap}` : 'UTC+5'}</p>

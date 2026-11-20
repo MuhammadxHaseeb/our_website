@@ -8,6 +8,7 @@ import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { cases, services } from '@/lib/content';
 import { serviceDetails } from '@/lib/serviceDetails';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 // Only areas with written content are prebuilt; any other slug hits notFound() below until its copy is added to serviceDetails.
 // Content pages: known slugs are prerendered at build; a blocking render is fine for anything else (it 404s).
@@ -43,7 +44,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* hero */}
-      <section className="dark" data-header-tone="dark" aria-labelledby="service-title">
+      <section className="hero" aria-labelledby="service-title">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>
             <Link href="/services" className="link-quiet">/ Services</Link> · S/{s.n} · {s.title}
@@ -52,7 +54,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
             <p className="t-lead muted hero-after lg:col-span-6" style={{ maxWidth: '46ch', ...d(600) }}>{detail.lead}</p>
             <div className="hero-after lg:col-span-6 lg:flex lg:justify-end" style={d(750)}>
-              <Button href="#contact" size="lg" arrow magnetic>{detail.cta}</Button>
+              <Button href="#contact" size="lg" variant="accent" arrow magnetic>{detail.cta}</Button>
             </div>
           </div>
         </div>

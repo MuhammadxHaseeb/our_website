@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { ArrowLink, AssetPlaceholder, FactTable, Label, Live, Tags, Val } from '@/components/ui/primitives';
+import { ArrowLink, AssetPlaceholder, FactTable, Label, Live, ServiceIcon, Tags, Val } from '@/components/ui/primitives';
 import type { CaseStudy, Service } from '@/lib/content';
 import { models, steps, trust } from '@/lib/content';
 
@@ -11,10 +11,13 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
     <ol className={stacking ? 'stack-rows' : undefined}>
       {items.map((s, i) => (
         <li key={s.slug} className="stack-row border-t border-line" style={{ '--i': i } as React.CSSProperties}>
-          <Link href={`/services/${s.slug}`} className="group grid grid-cols-[2.75rem_1fr] gap-x-3 py-4 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3 md:py-8" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
-            <span className="t-label muted pt-1.5 md:col-span-3 md:pt-2">S/{s.n}</span>
+          <Link href={`/services/${s.slug}`} className="svc-row group grid grid-cols-[3.5rem_1fr] gap-x-3 py-4 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3 md:py-8" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
+            <span className="flex items-center gap-4 md:col-span-3 md:items-start">
+              <ServiceIcon slug={s.slug} />
+              <span className="t-label muted hidden md:inline md:pt-3.5">S/{s.n}</span>
+            </span>
             <span className="md:col-span-8">
-              <span className="t-h3 block transition-colors duration-100 group-hover:text-[var(--accent-on-light)]">{s.title}</span>
+              <span className="svc-title t-h3 block pt-2 md:pt-1.5">{s.title}</span>
               <span className="mt-2 block max-w-[52ch] muted">{s.promise}</span>
               <span className="mt-4 block"><Tags items={s.tags} /></span>
             </span>
@@ -31,7 +34,7 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
 /* ------------------------------------------------ Case card (fact row + live dot + media hover H9) */
 export function CaseCard({ c, size = 'lg', headingAs: H = 'h3' }: { c: CaseStudy; size?: 'lg' | 'md'; headingAs?: 'h2' | 'h3' }) {
   return (
-    <article className={`case-card group grid rounded-[var(--r-card)] bg-paper p-[var(--r-card-pad)] ${size === 'lg' ? 'lg:grid-cols-[1.15fr_1fr]' : ''}`} data-reveal>
+    <article className={`case-card group grid rounded-[var(--r-card)] bg-card p-[var(--r-card-pad)] ${size === 'lg' ? 'lg:grid-cols-[1.15fr_1fr]' : ''}`} data-reveal>
       <Link href={`/work/${c.slug}`} className="media-hover block" tabIndex={-1} aria-hidden data-unveil>
         <AssetPlaceholder name={c.asset} ratio="16 / 10" />
       </Link>
@@ -58,7 +61,7 @@ export function CaseCard({ c, size = 'lg', headingAs: H = 'h3' }: { c: CaseStudy
 /* ------------------------------------------------ Trust strip */
 export function TrustStrip({ items = trust }: { items?: string[] }) {
   return (
-    <ul className="flex flex-wrap gap-x-10 gap-y-3 border-t border-line pt-6" aria-label="Why teams trust Epox">
+    <ul className="flex flex-wrap gap-x-10 gap-y-3 border-t border-line pt-6" aria-label="Why teams trust epox">
       {items.map((t, i) => <li key={t} className="t-label muted">{i === 1 ? <Live>{t}</Live> : t}</li>)}
     </ul>
   );
@@ -69,7 +72,7 @@ export function EngagementModels() {
   return (
     <ol className="grid gap-[var(--gutter)] md:grid-cols-3">
       {models.map((m, i) => (
-        <li key={m.n} className="flex flex-col rounded-[var(--r-card)] bg-paper p-8" data-reveal style={{ '--i': i } as React.CSSProperties}>
+        <li key={m.n} className="card-o flex flex-col rounded-[var(--r-card)] p-8" data-reveal style={{ '--i': i } as React.CSSProperties}>
           <span className="t-label muted">M/{m.n}</span>
           <h3 className="t-h3 mt-6">{m.title}</h3>
           <p className="mt-3 muted">Best for: {m.best}</p>
@@ -104,7 +107,7 @@ export function Faq({ items }: { items: { q: string; a: ReactNode }[] }) {
     <div>
       {items.map(i => (
         <details key={i.q} className="acc">
-          <summary>{i.q}<Plus className="icon" strokeWidth={1.5} aria-hidden /></summary>
+          <summary>{i.q}<Plus className="icon" strokeWidth={1.9} aria-hidden /></summary>
           <div className="acc-body">{i.a}</div>
         </details>
       ))}

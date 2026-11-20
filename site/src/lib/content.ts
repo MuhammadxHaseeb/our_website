@@ -1,7 +1,7 @@
 // Real content from our-company.md. Gaps are marked [PLACEHOLDER: …] and tracked in CLAUDE.md.
 
 export const company = {
-  name: 'Epox',
+  name: 'epox',
   city: 'Faisalabad',
   country: 'Pakistan',
   founded: 2019,
@@ -85,8 +85,8 @@ export const modelCompare = {
   rows: ['Best for', 'Team', 'Timeline', 'You get'] as const,
   cells: [
     { team: 'A project lead plus the designers and developers the scope needs', timeline: 'Agreed before we start, delivered in milestones' },
-    { team: 'Epox developers who join your team and work in your tools', timeline: 'Ongoing; scale up or down each month' },
-    { team: 'A small Epox team that already knows your product', timeline: 'Rolling, month to month' },
+    { team: 'epox developers who join your team and work in your tools', timeline: 'Ongoing; scale up or down each month' },
+    { team: 'A small epox team that already knows your product', timeline: 'Rolling, month to month' },
   ],
 };
 

@@ -4,10 +4,11 @@ import { CaseCard } from '@/components/sections/blocks';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { cases } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'Products Epox built and still runs: a rental inspection app for European tenants and landlords, and a nutrition app with a real nutritionist inside.',
+  description: 'Products epox built and still runs: a rental inspection app for European tenants and landlords, and a nutrition app with a real nutritionist inside.',
 };
 
 const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
@@ -19,11 +20,12 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 export default function WorkPage() {
   return (
     <>
-      <section className="dark" data-header-tone="dark" aria-labelledby="work-hero">
+      <section className="hero" aria-labelledby="work-hero">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ Work</p>
           <RiseText as="h1" on="load" id="work-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
-            parts={['Products we built', { t: 'and still run.', emph: true }]} />
+            parts={['Products we built and', { t: 'still run.', hl: true }]} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
             Both are live today, and we still market and maintain them. Client names stay private.
           </p>

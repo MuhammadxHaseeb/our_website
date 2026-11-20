@@ -18,8 +18,8 @@ const company = [
 
 /**
  * Header (L2 + L3): morphing mega-menu on desktop (one panel resizes between Services and Company),
- * full-screen sheet on mobile, hide-on-scroll-down, frosted when stuck. Tone follows the section below
- * via data-header-tone="dark" on that section.
+ * full-screen sheet on mobile, hide-on-scroll-down, frosted when stuck. Theme follows the section below:
+ * Black by default, light over Paper bands (.soft / .paper). The header carries data-theme, so tokens do the rest.
  */
 export function Header() {
   const pathname = usePathname();
@@ -29,7 +29,7 @@ export function Header() {
   useEffect(() => { if (sheet) { setSheetTone(true); return; } const t = window.setTimeout(() => setSheetTone(false), 450); return () => window.clearTimeout(t); }, [sheet]);
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [tone, setTone] = useState<'light' | 'dark'>('light');
+  const [tone, setTone] = useState<'light' | 'dark'>('dark');
   const megaRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const workRef = useRef<HTMLAnchorElement>(null);
@@ -48,10 +48,9 @@ export function Header() {
       setStuck(y > 8);
       setHidden(y > 240 && y > lastY.current && !panel && !sheet);
       lastY.current = y;
-      // probe the page *under* the fixed header
+      // probe the page *under* the fixed header: Black is the default ground, Paper bands switch the header to light
       const probe = document.elementsFromPoint(window.innerWidth / 2, 40).find(el => !headerRef.current?.contains(el));
-      const darkSection = probe?.closest('[data-header-tone]');
-      setTone(darkSection?.getAttribute('data-header-tone') === 'dark' ? 'dark' : 'light');
+      setTone(probe?.closest('.soft, .paper, [data-theme="light"]') ? 'light' : 'dark');
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -93,10 +92,11 @@ export function Header() {
 
   return (
     <>
-    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-sheet={sheetTone} data-tone={sheetTone ? 'dark' : tone}>
+    <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-sheet={sheetTone} data-theme={sheetTone ? 'dark' : tone}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 btn">Skip to content</a>
       <div className="container-x flex h-[72px] items-center justify-between gap-6">
-        <Link href="/" aria-label="Epox home" className="relative z-[61] -m-2 p-2"><Logo className="h-[22px] w-auto" /></Link>
+        {/* foil on Black, plain ink on Paper (brand rule: foil never on a light ground) */}
+        <Link href="/" aria-label="epox home" className="relative z-[61] -m-2 p-2"><Logo className="h-[26px] w-auto" foil={sheetTone || tone === 'dark'} /></Link>
 
         <nav aria-label="Main" className="relative hidden items-center gap-1 lg:flex" onMouseLeave={scheduleClose}>
           {(['services', 'company'] as const).map(p => (
@@ -110,7 +110,7 @@ export function Header() {
                   if (first) { e.preventDefault(); first.focus(); }
                 }
               }}>
-              {p === 'services' ? 'Services' : 'Company'}<ChevronDown className="icon" strokeWidth={1.5} aria-hidden />
+              {p === 'services' ? 'Services' : 'Company'}<ChevronDown className="icon" strokeWidth={1.9} aria-hidden />
             </button>
           ))}
           <Link ref={workRef} href="/work" className="nav-link" aria-current={isActive('/work') ? 'page' : undefined} onMouseEnter={scheduleClose}>Work</Link>
@@ -140,7 +140,7 @@ export function Header() {
                 ))}
                 <li className="flex items-end">
                   <Link href="/services" className="mega-item w-full" tabIndex={panel === 'services' ? 0 : -1}>
-                    <span className="flex items-center gap-2 font-medium">All services <ArrowRight className="h-4 w-4" strokeWidth={1.5} aria-hidden /></span>
+                    <span className="flex items-center gap-2 font-medium">All services <ArrowRight className="h-4 w-4" strokeWidth={1.9} aria-hidden /></span>
                   </Link>
                 </li>
               </ul>
@@ -161,16 +161,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={`btn hidden sm:inline-flex ${tone === 'dark' || sheetTone ? 'btn-on-dark' : ''}`}>Let&apos;s talk</Link>
+          <Link href="/contact" className="btn hidden sm:inline-flex">Let&apos;s talk</Link>
           <button type="button" className="nav-link relative z-[61] lg:hidden" aria-expanded={sheet} aria-controls="sheet" aria-label={sheet ? 'Close menu' : 'Open menu'} onClick={() => setSheet(!sheet)}>
-            {sheet ? <X className="h-6 w-6" strokeWidth={1.5} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.5} aria-hidden />}
+            {sheet ? <X className="h-6 w-6" strokeWidth={1.9} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.9} aria-hidden />}
           </button>
         </div>
       </div>
 
     </header>
       {/* mobile menu: sits outside <header> so the header's backdrop-filter can't clip it; header is z-50 above it */}
-      <div id="sheet" className="sheet lg:hidden" data-open={sheet} aria-hidden={!sheet} role="dialog" aria-modal="true" aria-label="Menu">
+      <div id="sheet" className="sheet lg:hidden" data-theme="dark" data-open={sheet} aria-hidden={!sheet} role="dialog" aria-modal="true" aria-label="Menu">
         <div className="container-x flex flex-1 flex-col pt-24 pb-8">
           <p className="t-label sheet-in" style={{ '--i': 0 } as CSSProperties}>/ Services</p>
           <ul className="mt-4 grid gap-1">
@@ -184,7 +184,7 @@ export function Header() {
               <li key={l.href} className="sheet-in" style={{ '--i': services.length + 1 + i } as CSSProperties}><Link href={l.href} className="block py-1.5 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-lg btn-on-dark sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
+          <Link href="/contact" className="btn btn-lg btn-accent sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
         </div>
       </div>
     </>

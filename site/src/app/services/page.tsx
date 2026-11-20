@@ -6,10 +6,11 @@ import { ServiceChapters } from '@/components/sections/ServiceChapters';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { alsoServices, services } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: 'Seven areas Epox builds in: web & SaaS, mobile apps, business software, AI, UI/UX & branding, cloud & DevOps, and launch, growth & support.',
+  description: 'Seven areas epox builds in: web & SaaS, mobile apps, business software, AI, UI/UX & branding, cloud & DevOps, and launch, growth & support.',
 };
 
 const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
@@ -18,11 +19,12 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 export default function ServicesPage() {
   return (
     <>
-      <section className="dark" data-header-tone="dark" aria-labelledby="services-hero">
+      <section className="hero" aria-labelledby="services-hero">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ Services</p>
           <RiseText as="h1" on="load" id="services-hero" className="t-h1 mt-8" style={{ maxWidth: '14ch' }}
-            parts={['Seven areas,', { t: 'one team that stays after launch.', emph: true }]} />
+            parts={['Seven areas, one team that', { t: 'stays', hl: true }, 'after launch.']} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
             Whatever you need built probably fits in one of these. If it doesn&apos;t, ask: we also build {alsoServices.map(a => a.toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' and $1')}.
           </p>

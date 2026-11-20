@@ -5,30 +5,25 @@
 
 /* Tailwind utilities generated from the tokens (no one-off values) */
 @theme inline {
-  --color-ink: var(--ink);
-  --color-paper: var(--paper);
+  --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-text: var(--text);
   --color-muted: var(--muted);
-  --color-on-dark: var(--on-dark);
-  --color-muted-on-dark: var(--muted-on-dark);
-  --color-line-on-dark: var(--line-on-dark);
-  --color-coral: var(--coral);
-  --color-coral-dark: var(--coral-dark);
-  --color-steel: var(--accent-on-light);
-  --color-silver: var(--accent-on-dark);
-  --color-dark-alt: var(--dark-alt);
-  --color-dark-bg: var(--dark-bg);
-  --color-dark-inset: var(--dark-inset);
-  --color-dark-raised: var(--dark-raised);
-  --color-dark-raised-2: var(--dark-raised-2);
+  --color-action: var(--action);
+  --color-on-action: var(--on-action);
   --color-card: var(--card);
   --color-card-inset: var(--card-inset);
   --color-card-raised: var(--card-raised);
-  --color-n-50: var(--n-50); --color-n-100: var(--n-100); --color-n-200: var(--n-200); --color-n-300: var(--n-300);
-  --color-n-400: var(--n-400); --color-n-500: var(--n-500); --color-n-600: var(--n-600); --color-n-700: var(--n-700);
-  --color-n-800: var(--n-800); --color-n-900: var(--n-900); --color-n-950: var(--n-950);
+  --color-brand-black: var(--brand-black);
+  --color-brand-paper: var(--brand-paper);
+  --color-foil-flat: var(--foil-flat);
+  --color-foil-mint: var(--foil-mint);
+  --color-saffron: var(--saffron);
+  --color-azure: var(--azure);
+  --color-on-accent: var(--on-accent);
   --font-display: var(--font-display);
   --font-text: var(--font-text);
   --font-mono: var(--font-mono);
@@ -36,22 +31,23 @@
   --radius-inner: var(--r-inner);
   --radius-input: var(--r-input);
   --radius-tag: var(--r-tag);
+  --radius-sm: var(--r-sm);
   --ease-out-quint: var(--ease-out-quint);
   --ease-out-quad: var(--ease-out-quad);
 }
 
 /* ------------------------------------------------------------------ base */
 @layer base {
-  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
+  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; background: var(--bg); }
   body {
-    background: var(--paper); color: var(--text);
+    background: var(--bg); color: var(--text);
     font: 400 var(--fs-body)/var(--lh-body) var(--font-text);
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; }
   p { text-wrap: pretty; }
-  ::selection { background: var(--coral); color: var(--ink); }
-  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--foil-flat); color: var(--on-accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
   img, video { display: block; max-width: 100%; height: auto; }
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -62,34 +58,36 @@
   .container-x { width: 100%; max-width: calc(var(--max) + 2 * var(--margin)); margin-inline: auto; padding-inline: var(--margin); }
   .section { padding-block: var(--section-y); }
   .section-tight { padding-block: var(--section-y-tight); }
-  /* light-first: pages are white (paper) and soft-grey bands (surface); dark stays available for media tiles */
-  .soft { background: var(--surface); --card: var(--paper); --card-inset: var(--n-50); --card-raised: var(--paper); --hover-fill: var(--n-50); }
-  .dark, .dark-alt { color: var(--on-dark); --text: var(--on-dark); --muted: var(--muted-on-dark); --line: var(--line-on-dark);
-    --card: var(--dark-raised); --card-inset: var(--dark-inset); --card-raised: var(--dark-raised-2); --emph: var(--accent-on-dark); --hover-fill: var(--dark-raised-2); --dim: var(--n-600); --kicker: var(--coral); }
-  .dark { background: var(--dark-bg); }
-  /* coral sections (Webisoft hero + footer): black text 5.6:1; white emphasis only on large text (3.75:1) */
-  .coral { background: var(--coral); color: var(--ink); --text: var(--ink); --muted: var(--ink); --line: var(--ink); --dim: var(--ink);
-    --emph: var(--paper); --card: var(--paper); --card-inset: var(--n-50); --hover-fill: var(--coral-dark); --kicker: var(--ink); }
-  .dark-alt { background: var(--dark-alt); }
 
-  .t-display { font: 500 var(--fs-display)/var(--lh-display) var(--font-display); letter-spacing: var(--tr-display); text-wrap: balance; }
-  .t-h1 { font: 500 var(--fs-h1)/var(--lh-h1) var(--font-display); letter-spacing: var(--tr-h1); text-wrap: balance; }
-  .t-h2 { font: 500 var(--fs-h2)/var(--lh-h2) var(--font-display); letter-spacing: var(--tr-h2); text-wrap: balance; }
-  .t-h3 { font: 500 var(--fs-h3)/var(--lh-h3) var(--font-display); letter-spacing: var(--tr-h3); text-wrap: balance; }
-  .t-rollcall { font: 300 var(--fs-rollcall)/0.95 var(--font-display); letter-spacing: var(--tr-h1); }
-  .t-lead { font: 400 var(--fs-lead)/var(--lh-lead) var(--font-text); letter-spacing: -0.01em; text-wrap: pretty; }
+  /* Surfaces (Ice Mint): Black is the default ground. .soft / .paper = Paper bands for cards, long reading and forms.
+     .dark / .hero = Black, explicitly. Theme values live in tokens.css; these only paint the ground. */
+  .soft, .paper, .dark, .hero { background: var(--bg); color: var(--text); }
+  .hero { position: relative; overflow: hidden; }
+  /* Black sections that follow each other are kept apart by a hairline (the brand takes edges from line, not shadows) */
+  :is(.section, .section-tight):not(.soft):not(.paper) { box-shadow: inset 0 1px 0 var(--line); }
+
+  .t-display { font: 700 var(--fs-display)/var(--lh-display) var(--font-display); letter-spacing: var(--tr-display); text-wrap: balance; }
+  .t-h1 { font: 700 var(--fs-h1)/var(--lh-h1) var(--font-display); letter-spacing: var(--tr-h1); text-wrap: balance; }
+  .t-h2 { font: 700 var(--fs-h2)/var(--lh-h2) var(--font-display); letter-spacing: var(--tr-h2); text-wrap: balance; }
+  .t-h3 { font: 700 var(--fs-h3)/var(--lh-h3) var(--font-display); letter-spacing: var(--tr-h3); text-wrap: balance; }
+  .t-rollcall { font: 500 var(--fs-rollcall)/1 var(--font-display); letter-spacing: var(--tr-h1); }
+  .t-lead { font: 400 var(--fs-lead)/var(--lh-lead) var(--font-text); letter-spacing: -0.005em; text-wrap: pretty; }
   .t-body { font: 400 var(--fs-body)/var(--lh-body) var(--font-text); }
   .t-small { font: 400 var(--fs-small)/1.5 var(--font-text); }
-  .t-label { font: 500 var(--fs-label)/1.3 var(--font-mono); letter-spacing: var(--tr-label); font-variant-numeric: tabular-nums; }
+  /* brand label: Inter Bold 11px, capitals, wide tracking */
+  .t-label { font: 700 var(--fs-label)/1.4 var(--font-text); letter-spacing: var(--tr-label); text-transform: uppercase; font-variant-numeric: tabular-nums; }
+  .t-tagline { font: 600 var(--fs-small)/1.4 var(--font-text); letter-spacing: var(--tr-tagline); }
   .t-num { font-variant-numeric: tabular-nums; }
   .muted { color: var(--muted); }
   .emph { color: var(--emph); }
   .t-label.kicker { color: var(--kicker); }
+  /* azure highlight (brand .ep-highlight): one per layout, on the hero headline's key phrase */
+  .hl { background: var(--azure); color: var(--on-accent); padding: 0 0.16em; border-radius: var(--r-sm); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
   /* ------------------------------------------------------------ links */
   .link {
     color: inherit; text-decoration: underline; text-underline-offset: 4px;
-    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
     transition: text-decoration-color var(--dur-fast) var(--ease-out-quad);
   }
   .link:hover { text-decoration-color: currentColor; }

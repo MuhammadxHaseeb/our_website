@@ -29,7 +29,7 @@ export function StatsScoreboard({ stats }: { stats: { value: number | null; labe
       {stats.map(s => (
         <div key={s.label} className="flex flex-col-reverse justify-end border-t border-line pt-6">
           <dt className="t-label muted mt-5">{s.label.startsWith('[') ? <Ph>{s.label}</Ph> : s.label}</dt>
-          <dd className="t-num" style={{ font: '300 clamp(3.5rem, 2.4rem + 4.5vw, 8rem)/0.9 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
+          <dd className="t-num" style={{ font: '500 clamp(3.5rem, 2.4rem + 4.5vw, 8rem)/0.95 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
             {s.value === null ? <Ph>[PLACEHOLDER]</Ph> : <CountUp to={s.value} raw={s.raw} />}
           </dd>
         </div>

@@ -6,10 +6,11 @@ import { LocalClock } from '@/components/sections/LocalClock';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { company, stats } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Epox is a software house in Faisalabad, Pakistan, building since 2019. We find what is holding a business back, reach out with the fix, build it and stay to keep it running.',
+  description: 'epox is a software house in Faisalabad, Pakistan, building since 2019. We find what is holding a business back, reach out with the fix, build it and stay to keep it running.',
 };
 
 const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
@@ -25,11 +26,12 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="dark" data-header-tone="dark" aria-labelledby="about-hero">
+      <section className="hero" aria-labelledby="about-hero">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ About</p>
           <RiseText as="h1" on="load" id="about-hero" className="t-h1 mt-8" style={{ maxWidth: '16ch' }}
-            parts={[`A software house from ${company.city},`, { t: `building since ${company.founded}.`, emph: true }]} />
+            parts={[`A software house from ${company.city}, building`, { t: `since ${company.founded}.`, hl: true }]} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
             We don&apos;t wait for briefs. We look at a business, find what&apos;s holding it back and reach out with the fix. Then we build it, and stay to keep it running.
           </p>
@@ -55,7 +57,7 @@ export default function AboutPage() {
       </section>
 
       {/* principles */}
-      <section className="section dark" data-header-tone="dark" aria-labelledby="principles-title">
+      <section className="section dark" aria-labelledby="principles-title">
         <div className="container-x">
           <SectionHeader id="principles-title" label="How we think" title="Four things we don't compromise on" />
           <ol className="grid gap-x-[var(--gutter)] gap-y-12 md:grid-cols-2">

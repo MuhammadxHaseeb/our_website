@@ -1,16 +1,17 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Bot, Cloud, Globe, LayoutDashboard, PenTool, Rocket, Smartphone, type LucideIcon } from 'lucide-react';
 import type { ComponentProps, ReactNode } from 'react';
 import { RiseText } from '@/components/motion/RiseText';
 
 /* ------------------------------------------------------------------ Button */
+/** Brand buttons: primary (inverted ground), secondary (outline), accent (saffron: once per layout, for the one action you most want clicked). */
 type BtnProps = {
-  href?: string; variant?: 'primary' | 'secondary'; size?: 'md' | 'lg'; arrow?: boolean; magnetic?: boolean; children: ReactNode; className?: string;
+  href?: string; variant?: 'primary' | 'secondary' | 'accent'; size?: 'md' | 'lg'; arrow?: boolean; magnetic?: boolean; children: ReactNode; className?: string;
 } & Omit<ComponentProps<'button'>, 'className' | 'children'>;
 
 export function Button({ href, variant = 'primary', size = 'md', arrow = false, magnetic = false, children, className = '', ...rest }: BtnProps) {
-  const cls = `btn ${variant === 'secondary' ? 'btn-secondary' : ''} ${size === 'lg' ? 'btn-lg' : ''} ${className}`;
-  const inner = (<>{children}{arrow && <ArrowRight className="icon icon-arrow" strokeWidth={1.5} aria-hidden />}</>);
+  const cls = `btn ${variant === 'secondary' ? 'btn-secondary' : variant === 'accent' ? 'btn-accent' : ''} ${size === 'lg' ? 'btn-lg' : ''} ${className}`;
+  const inner = (<>{children}{arrow && <ArrowRight className="icon icon-arrow" strokeWidth={1.9} aria-hidden />}</>);
   const mag = magnetic ? { 'data-magnetic': '' } : {};
   if (href) return <Link href={href} className={cls} {...mag}>{inner}</Link>;
   return <button type="button" className={cls} {...mag} {...rest}>{inner}</button>;
@@ -18,7 +19,7 @@ export function Button({ href, variant = 'primary', size = 'md', arrow = false, 
 
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <Link href={href} className="arrow-link"><span>{children}</span><ArrowRight className="icon" strokeWidth={1.5} aria-hidden /></Link>
+    <Link href={href} className="arrow-link"><span>{children}</span><ArrowRight className="icon" strokeWidth={1.9} aria-hidden /></Link>
   );
 }
 
@@ -53,6 +54,17 @@ export const Val = ({ v }: { v: string }) => (v.startsWith('[PLACEHOLDER') ? <Ph
 export function CharacterSlot({ art, fallback = null, label }: { art?: ReactNode; fallback?: ReactNode; label: string }) {
   if (art) return <div data-character={label}>{art}</div>;
   return fallback ? <div data-character-slot={label}>{fallback}</div> : null;
+}
+
+/* ------------------------------------------------------------------ Service icon (brand ServiceCard tile) */
+/** 44px brand-black tile with a 24px foil-mint line icon (1.9 stroke): the one place the foil colour appears in the UI. */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  'web-saas-development': Globe, 'mobile-apps': Smartphone, 'business-software': LayoutDashboard, 'ai-solutions': Bot,
+  'ui-ux-branding': PenTool, 'cloud-devops': Cloud, 'launch-growth-support': Rocket,
+};
+export function ServiceIcon({ slug }: { slug: string }) {
+  const Icon = SERVICE_ICONS[slug] ?? Globe;
+  return <span className="svc-icon" aria-hidden><Icon strokeWidth={1.9} /></span>;
 }
 
 /* ------------------------------------------------------------------ Section header */

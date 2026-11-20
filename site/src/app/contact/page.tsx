@@ -6,10 +6,11 @@ import { nextSteps } from '@/components/sections/ContactBlock';
 import { TrustStrip } from '@/components/sections/blocks';
 import { RiseText } from '@/components/motion/RiseText';
 import { company } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Tell Epox the problem and we will tell you how we would fix it. A person reads every message and replies within one working day.',
+  description: 'Tell epox the problem and we will tell you how we would fix it. A person reads every message and replies within one working day.',
 };
 
 const isPh = (v: string) => v.startsWith('[PLACEHOLDER');
@@ -18,15 +19,16 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 /** /contact (design brief §6): hero → form (main feature) + what happens next + direct contacts → trust strip. */
 export default function ContactPage() {
   return (
-    <section aria-labelledby="contact-hero" className="pb-[var(--section-y)]">
+    <section aria-labelledby="contact-hero" className="hero pb-[var(--section-y)]">
+      <FoilBars className="hero-bars hero-bars--page" />
       <div className="container-x pt-[calc(72px+var(--space-10))]">
         <p className="t-label muted hero-after" style={d(0)}>/ Contact</p>
         <RiseText as="h1" on="load" id="contact-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
-          parts={['Tell us the problem.', { t: "We'll tell you how we'd fix it.", emph: true }]} />
+          parts={["Tell us the problem. We'll tell you how we'd", { t: 'fix it.', hl: true }]} />
 
         <div className="mt-[var(--space-9)] grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           {/* form: the main feature */}
-          <div className="order-1 rounded-[var(--r-card)] bg-card p-6 sm:p-10 lg:order-2 lg:col-span-7 lg:col-start-6 hero-after" style={d(700)}>
+          <div className="paper order-1 rounded-[var(--r-card)] p-6 sm:p-10 lg:order-2 lg:col-span-7 lg:col-start-6 hero-after" style={d(700)}>
             <ContactForm />
           </div>
 

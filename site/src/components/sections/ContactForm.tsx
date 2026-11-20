@@ -7,7 +7,8 @@ type State = 'idle' | 'sending' | 'success' | 'error';
 const TOPICS = ['New project', 'Existing product', 'Dedicated developers', 'Other'];
 
 /** Contact form (L8): inline validation, sending / success / error states. Posts to /api/contact → Resend → owner's inbox. */
-export function ContactForm({ forceState }: { forceState?: State }) {
+/** accent: the submit button is the layout's saffron action (contact page); off where another saffron button leads. */
+export function ContactForm({ forceState, accent = true }: { forceState?: State; accent?: boolean }) {
   const id = useId();
   const [state, setState] = useState<State>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -38,7 +39,7 @@ export function ContactForm({ forceState }: { forceState?: State }) {
   if (s === 'success') {
     return (
       <div className="grid content-start gap-4" role="status">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-coral text-ink"><Check className="h-5 w-5" strokeWidth={1.5} aria-hidden /></span>
+        <span className="grid h-12 w-12 place-items-center rounded-full bg-action text-on-action"><Check className="h-5 w-5" strokeWidth={1.9} aria-hidden /></span>
         <p className="t-h3">Thanks. We&apos;ll reply within one working day.</p>
         <p className="muted">You&apos;ll hear from a person who has read your message, with a first view on how we&apos;d approach it.</p>
       </div>
@@ -66,8 +67,8 @@ export function ContactForm({ forceState }: { forceState?: State }) {
       <Field id={`${id}-msg`} name="message" label="What do you want to improve?" textarea error={errors.message} />
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden /> {/* honeypot */}
       <div className="flex flex-wrap items-center gap-6">
-        <button type="submit" className="btn btn-lg" disabled={s === 'sending'} aria-busy={s === 'sending'}>
-          {s === 'sending' ? <><span className="spinner" aria-hidden />Sending…</> : <>Send<ArrowRight className="icon icon-arrow" strokeWidth={1.5} aria-hidden /></>}
+        <button type="submit" className={`btn btn-lg ${accent ? 'btn-accent' : ''}`} disabled={s === 'sending'} aria-busy={s === 'sending'}>
+          {s === 'sending' ? <><span className="spinner" aria-hidden />Sending…</> : <>Send<ArrowRight className="icon icon-arrow" strokeWidth={1.9} aria-hidden /></>}
         </button>
         <p className="t-small muted">NDA available on request.</p>
       </div>

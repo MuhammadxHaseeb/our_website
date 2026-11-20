@@ -7,10 +7,11 @@ import { LocalClock } from '@/components/sections/LocalClock';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { communication, modelCompare, models } from '@/lib/content';
+import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
   title: 'How we work',
-  description: 'Three ways to work with Epox (fixed project, dedicated developers, monthly retainer), the four steps every project goes through, and how we keep you updated from Faisalabad, UTC+5.',
+  description: 'Three ways to work with epox (fixed project, dedicated developers, monthly retainer), the four steps every project goes through, and how we keep you updated from Faisalabad, UTC+5.',
 };
 
 const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
@@ -27,11 +28,12 @@ function cell(i: number, row: (typeof modelCompare.rows)[number]) {
 export default function HowWeWorkPage() {
   return (
     <>
-      <section className="dark" data-header-tone="dark" aria-labelledby="hww-hero">
+      <section className="hero" aria-labelledby="hww-hero">
+        <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>/ How we work</p>
           <RiseText as="h1" on="load" id="hww-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
-            parts={['Pick how we work together.', { t: 'Then see every week of it.', emph: true }]} />
+            parts={['Pick how we work together. Then see', { t: 'every week', hl: true }, 'of it.']} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
             Three ways to hire us, four steps every project goes through, and the updates you get along the way. The price is agreed on a short call.
           </p>
@@ -50,7 +52,7 @@ export default function HowWeWorkPage() {
                 <tr>
                   <th scope="col" className="w-[18%]"><span className="sr-only">Compare</span></th>
                   {models.map(m => (
-                    <th key={m.n} scope="col" className="rounded-t-[var(--r-card)] bg-paper px-8 pt-8 pb-6 text-left align-top font-normal">
+                    <th key={m.n} scope="col" className="rounded-t-[var(--r-card)] bg-card px-8 pt-8 pb-6 text-left align-top font-normal">
                       <span className="t-label muted block">M/{m.n}</span>
                       <span className="t-h3 mt-5 block">{m.title}</span>
                     </th>
@@ -62,13 +64,13 @@ export default function HowWeWorkPage() {
                   <tr key={row}>
                     <th scope="row" className="border-t border-line py-5 text-left align-top t-label muted font-medium">{row}</th>
                     {models.map((m, i) => (
-                      <td key={m.n} className="bg-paper px-8 pb-5 align-top"><div className="border-t border-line pt-5 t-small">{cell(i, row)}</div></td>
+                      <td key={m.n} className="bg-card px-8 pb-5 align-top"><div className="border-t border-line pt-5 t-small">{cell(i, row)}</div></td>
                     ))}
                   </tr>
                 ))}
                 <tr>
                   <td />
-                  {models.map(m => <td key={m.n} className="rounded-b-[var(--r-card)] bg-paper px-8 pt-4 pb-8"><ArrowLink href="#contact">Let&apos;s talk</ArrowLink></td>)}
+                  {models.map(m => <td key={m.n} className="rounded-b-[var(--r-card)] bg-card px-8 pt-4 pb-8"><ArrowLink href="#contact">Let&apos;s talk</ArrowLink></td>)}
                 </tr>
               </tbody>
             </table>
@@ -76,7 +78,7 @@ export default function HowWeWorkPage() {
 
           <ol className="grid gap-[var(--gutter)] md:grid-cols-2 lg:hidden">
             {models.map((m, i) => (
-              <li key={m.n} className="rounded-[var(--r-card)] bg-paper p-8" data-reveal style={{ '--i': i } as CSSProperties}>
+              <li key={m.n} className="card-o rounded-[var(--r-card)] p-8" data-reveal style={{ '--i': i } as CSSProperties}>
                 <span className="t-label muted">M/{m.n}</span>
                 <h3 className="t-h3 mt-5">{m.title}</h3>
                 <dl className="mt-6 grid gap-5">
@@ -102,7 +104,7 @@ export default function HowWeWorkPage() {
       </section>
 
       {/* communication */}
-      <section className="section dark" data-header-tone="dark" aria-labelledby="comms-title">
+      <section className="section dark" aria-labelledby="comms-title">
         <div className="container-x">
           <SectionHeader id="comms-title" label="Communication" title="A different time zone, never out of reach" />
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-[var(--gutter)]">
