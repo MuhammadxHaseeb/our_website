@@ -3,7 +3,8 @@
  * that run off an edge of the layout. Black grounds only. Decorative (aria-hidden).
  * Foil gradient + grain come from <BrandDefs /> (app/layout.tsx).
  */
-const BARS = '169.2,39 336,39 336,59.8 189.5,59.8 182.2,85.8 336,85.8 336,106.6 177,106.6 169.7,132.6 336,132.6 336,153.4 138,153.4';
+// Right ends extended past the viewBox (x 336 → 1336) so the bars keep running to the screen edge on any width; .hero clips them.
+const BARS = '169.2,39 1336,39 1336,59.8 189.5,59.8 182.2,85.8 1336,85.8 1336,106.6 177,106.6 169.7,132.6 1336,132.6 1336,153.4 138,153.4';
 
 export function FoilBars({ className = '' }: { className?: string }) {
   return (
@@ -26,7 +27,7 @@ export function BrandDefs() {
         <linearGradient id="ep-foil" x1="0" y1="0" x2="1" y2="1">
           {stops.map(([o, c]) => <stop key={o} offset={o} stopColor={c} />)}
         </linearGradient>
-        <linearGradient id="ep-foil-bars" gradientUnits="userSpaceOnUse" x1="138" y1="9.3" x2="336" y2="193">
+        <linearGradient id="ep-foil-bars" gradientUnits="userSpaceOnUse" x1="138" y1="9.3" x2="336" y2="193" spreadMethod="reflect">
           {stops.map(([o, c]) => <stop key={o} offset={o} stopColor={c} />)}
         </linearGradient>
         <pattern id="ep-grain-word" patternUnits="userSpaceOnUse" width="9.19" height="9.19" patternTransform="rotate(-35)">

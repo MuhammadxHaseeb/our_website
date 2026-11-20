@@ -1,29 +1,52 @@
 /* Component styles: every value comes from tokens.css (Ice Mint). Theme-aware through the semantic tokens,
    so the same markup works on Black and Paper grounds without per-theme overrides. */
 @layer components {
-  /* ---------------- buttons (L1 · brand .ep-btn) ---------------- */
+  /* ---------------- buttons (L1 · brand .ep-btn) + L10 reward ---------------- */
   /* primary = inverted ground (off-white on Black, black on Paper) · secondary = outline (line-strong)
-     accent = saffron: the ONE action you most want clicked in a layout */
+     accent = saffron: the ONE action you most want clicked in a layout.
+     Reward instead of drift: hover = a fill sweeps in from the left, the label rolls up to a fresh copy, the arrow
+     loops out and back; press = a quick squeeze that springs back; click = a ring pops outward (data-pop, MotionProvider). */
   .btn {
     --btn-bg: var(--action); --btn-fg: var(--on-action); --btn-bd: transparent;
-    --btn-bg-hover: color-mix(in srgb, var(--action) 84%, var(--bg));
+    --btn-fill: color-mix(in srgb, var(--action) 78%, var(--bg)); --btn-fg-hover: var(--btn-fg); --btn-ring: var(--action);
+    position: relative; isolation: isolate; overflow: hidden;
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: 44px; padding: 0 20px; border: 0; border-radius: var(--r-pill);
     background: var(--btn-bg); color: var(--btn-fg); box-shadow: inset 0 0 0 1.5px var(--btn-bd);
     font: 700 var(--fs-button)/1.2 var(--font-text); letter-spacing: 0;
     text-decoration: none; cursor: pointer; white-space: nowrap;
-    transition: background-color var(--dur-fast) var(--ease-out-quad), color var(--dur-fast) var(--ease-out-quad),
-                box-shadow var(--dur-fast) var(--ease-out-quad), transform var(--dur-press) var(--ease-out-quad);
+    transition: color 260ms var(--ease-out-quad) 60ms, box-shadow var(--dur-fast) var(--ease-out-quad),
+                transform 520ms cubic-bezier(.34, 1.56, .64, 1);
   }
-  .btn:hover { background: var(--btn-bg-hover); }
-  .btn:active { transform: scale(.98); }
+  .btn::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--btn-fill);
+    transform: scaleX(0); transform-origin: left center; transition: transform 520ms var(--ease-out-quint); }
+  .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+  .btn:hover, .btn:focus-visible { color: var(--btn-fg-hover); }
+  .btn:active { transform: scale(.95); transition-duration: 260ms, var(--dur-fast), 90ms; transition-timing-function: var(--ease-out-quad); }
   .btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+  .btn[disabled]::before { display: none; }
   .btn-lg { min-height: 52px; padding: 0 28px; font-size: 0.9375rem; }
-  .btn-secondary { --btn-bg: transparent; --btn-fg: var(--text); --btn-bd: var(--line-strong); --btn-bg-hover: var(--hover-fill); }
-  .btn-secondary:hover { --btn-bd: var(--text); }
-  .btn-accent { --btn-bg: var(--saffron); --btn-fg: var(--on-accent); --btn-bg-hover: color-mix(in srgb, var(--saffron) 80%, #FFFFFF); }
-  .btn .icon { width: var(--icon-sm); height: var(--icon-sm); transition: transform var(--dur-ui) var(--ease-out-quint); }
-  .btn:hover .icon-arrow { transform: translateX(3px); }
+  .btn-secondary { --btn-bg: transparent; --btn-fg: var(--text); --btn-bd: var(--line-strong); --btn-fill: var(--text); --btn-fg-hover: var(--bg); --btn-ring: var(--text); }
+  .btn-accent { --btn-bg: var(--saffron); --btn-fg: var(--on-accent); --btn-fill: color-mix(in srgb, var(--saffron) 55%, #FFFFFF); --btn-ring: var(--saffron); }
+  /* label roll: two copies stacked in a one-line mask */
+  .btn-roll { display: inline-grid; overflow: hidden; line-height: 1.2; }
+  .btn-roll > span { grid-area: 1 / 1; transition: transform 460ms var(--ease-out-quint); }
+  .btn-roll > span + span { transform: translateY(105%); }
+  .btn:hover .btn-roll > span:first-child, .btn:focus-visible .btn-roll > span:first-child { transform: translateY(-105%); }
+  .btn:hover .btn-roll > span + span, .btn:focus-visible .btn-roll > span + span { transform: none; }
+  /* arrow: slides out to the right and comes back in from the left */
+  .btn .icon { width: var(--icon-sm); height: var(--icon-sm); }
+  .btn-arrow { display: inline-flex; overflow: hidden; }
+  .btn:hover .btn-arrow .icon, .btn:focus-visible .btn-arrow .icon { animation: arrow-loop 560ms var(--ease-out-quint); }
+  @keyframes arrow-loop { 0% { transform: none; } 38% { transform: translateX(140%); } 38.1% { transform: translateX(-140%); } 100% { transform: none; } }
+  /* click confirmation: a ring pops outward from the button (outline is not clipped by overflow) */
+  .btn[data-pop] { animation: btn-pop 560ms var(--ease-out-quint); }
+  @keyframes btn-pop { from { outline: 2px solid var(--btn-ring); outline-offset: 0; } to { outline: 2px solid transparent; outline-offset: 12px; } }
+  html[data-motion="reduced"] .btn::before { transition: none; }
+  html[data-motion="reduced"] .btn-roll > span + span { display: none; }
+  html[data-motion="reduced"] .btn-roll > span:first-child { transform: none !important; }
+  html[data-motion="reduced"] .btn .icon, html[data-motion="reduced"] .btn[data-pop] { animation: none; }
+  html[data-motion="reduced"] .btn:active { transform: none; }
 
   /* text link with arrow (brand "strong link": Inter Bold 14) */
   .arrow-link { display: inline-flex; align-items: center; gap: var(--space-2); font: 700 var(--fs-button)/1.2 var(--font-text); color: inherit; text-decoration: none; padding-block: var(--space-2); }
@@ -49,14 +72,19 @@
 
   /* ---------------- brand device: foil bars + service icon tiles ---------------- */
   .foil-bars { display: block; height: auto; pointer-events: none; }
-  .hero-bars { position: absolute; z-index: 0; right: calc(-1 * var(--bars-off, 18vw)); top: var(--bars-top, 84px); width: var(--bars-w, 62vw); }
+  /* Anchored to the content's right edge (not the screen's), so on wide and ultrawide monitors the bars stay next to
+     the content; the bars themselves are long and simply run on to the screen edge (clipped by .hero). */
+  .hero-bars { position: absolute; z-index: 0; top: var(--bars-top, 84px); width: var(--bars-w, 62vw); overflow: visible;
+    left: calc(50% + min(var(--max), 100% - 2 * var(--margin)) / 2 - var(--bars-w) * 0.62); }
   /* phones: the bars sit in the hero's top padding (label starts at 72 + 128px), never behind text */
-  .hero-bars--home { --bars-w: 54vw; --bars-off: 16vw; --bars-top: 76px; }
-  .hero-bars--page { --bars-w: 40vw; --bars-off: 12vw; --bars-top: 80px; }
+  .hero-bars--home { --bars-w: 54vw; --bars-top: 76px; }
+  .hero-bars--page { --bars-w: 40vw; --bars-top: 80px; }
   @media (min-width: 768px) {
-    .hero-bars--home { --bars-w: min(42vw, 700px); --bars-off: 9vw; --bars-top: 128px; }
-    .hero-bars--page { --bars-w: min(30vw, 460px); --bars-off: 6vw; --bars-top: 120px; }
+    .hero-bars--home { --bars-w: min(42vw, 700px); --bars-top: 128px; }
+    .hero-bars--page { --bars-w: min(30vw, 460px); --bars-top: 120px; }
   }
+  @media (min-width: 1920px) { .hero-bars--home { --bars-w: 780px; --bars-top: 140px; } .hero-bars--page { --bars-w: 520px; } }
+  @media (min-width: 2400px) { .hero-bars--home { --bars-w: 900px; --bars-top: 160px; } .hero-bars--page { --bars-w: 600px; --bars-top: 136px; } }
   .hero > .container-x { position: relative; z-index: 1; }
   html:not([data-motion="reduced"]) .hero-bars { animation: bars-in 1400ms var(--ease-out-quint) both 120ms; }
   @keyframes bars-in { from { opacity: 0; transform: translateX(10%); } to { opacity: 1; transform: none; } }
@@ -199,11 +227,6 @@
   /* hero supporting lines follow the headline */
   html:not([data-motion="reduced"]) .hero-after { animation: hero-after var(--dur-enter) var(--ease-out-quint) both; animation-delay: var(--d, 500ms); }
   @keyframes hero-after { from { opacity: 0; transform: translateY(var(--rise)); } to { opacity: 1; transform: none; } }
-
-  /* ---------------- magnetic buttons (L10): JS sets `translate`, separate from the press `transform` ---------------- */
-  .btn[data-magnetic] { transition-property: background-color, color, box-shadow, transform, translate;
-    transition-duration: var(--dur-fast), var(--dur-fast), var(--dur-fast), var(--dur-press), 500ms;
-    transition-timing-function: var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quad), var(--ease-out-quint); }
 
   /* ---------------- service chapters (/services, H5 slot + H12 focus) ---------------- */
   /* big chapter number rolls to the active chapter inside a 1-line mask */

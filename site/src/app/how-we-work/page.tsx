@@ -35,7 +35,7 @@ export default function HowWeWorkPage() {
           <RiseText as="h1" on="load" id="hww-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
             parts={['Pick how we work together. Then see', { t: 'every week', hl: true }, 'of it.']} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
-            Three ways to hire us, four steps every project goes through, and the updates you get along the way. The price is agreed on a short call.
+            Three ways to hire us, four steps every project goes through, and the updates you get along the way.
           </p>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default function HowWeWorkPage() {
               </li>
             ))}
           </ol>
-          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call, under NDA if you need it.</p>
+          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call.</p>
         </div>
       </section>
 
@@ -135,7 +135,6 @@ export default function HowWeWorkPage() {
           <Faq items={[
             { q: 'Do you work under NDA?', a: 'Yes. We can sign yours or send ours before you share anything.' },
             { q: 'Who owns the code?', a: <>You do. <Ph>[PLACEHOLDER: confirm ownership and handover terms]</Ph></> },
-            { q: 'How do you price?', a: 'Fixed project, dedicated developers or a monthly retainer. We agree on the model and the number on a short call.' },
             { q: 'How do payments work?', a: <Ph>[PLACEHOLDER: payment terms, e.g. milestones for fixed projects, monthly for developers and retainers]</Ph> },
             { q: 'Do you work with clients outside Pakistan?', a: 'Yes. We work with anyone who needs it. One of the two apps in our work runs for tenants and landlords across Europe.' },
           ]} />

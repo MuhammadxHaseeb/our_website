@@ -1,5 +1,4 @@
 import { ContactForm } from './ContactForm';
-import { TrustStrip } from './blocks';
 import { Val } from '@/components/ui/primitives';
 import { company } from '@/lib/content';
 import { RiseText } from '@/components/motion/RiseText';
@@ -35,7 +34,6 @@ export function ContactBlock() {
             <ContactForm />
           </div>
         </div>
-        <div className="mt-[var(--space-10)]"><TrustStrip /></div>
       </div>
     </section>
   );

@@ -6,15 +6,24 @@ import { RiseText } from '@/components/motion/RiseText';
 /* ------------------------------------------------------------------ Button */
 /** Brand buttons: primary (inverted ground), secondary (outline), accent (saffron: once per layout, for the one action you most want clicked). */
 type BtnProps = {
-  href?: string; variant?: 'primary' | 'secondary' | 'accent'; size?: 'md' | 'lg'; arrow?: boolean; magnetic?: boolean; children: ReactNode; className?: string;
+  href?: string; variant?: 'primary' | 'secondary' | 'accent'; size?: 'md' | 'lg'; arrow?: boolean; children: ReactNode; className?: string;
 } & Omit<ComponentProps<'button'>, 'className' | 'children'>;
 
-export function Button({ href, variant = 'primary', size = 'md', arrow = false, magnetic = false, children, className = '', ...rest }: BtnProps) {
+/** Button content with the hover reward markup: rolling label (second copy hidden from screen readers) + looping arrow. */
+export function BtnLabel({ children, arrow = false }: { children: ReactNode; arrow?: boolean }) {
+  return (
+    <>
+      <span className="btn-roll"><span>{children}</span><span aria-hidden>{children}</span></span>
+      {arrow && <span className="btn-arrow" aria-hidden><ArrowRight className="icon" strokeWidth={1.9} /></span>}
+    </>
+  );
+}
+
+export function Button({ href, variant = 'primary', size = 'md', arrow = false, children, className = '', ...rest }: BtnProps) {
   const cls = `btn ${variant === 'secondary' ? 'btn-secondary' : variant === 'accent' ? 'btn-accent' : ''} ${size === 'lg' ? 'btn-lg' : ''} ${className}`;
-  const inner = (<>{children}{arrow && <ArrowRight className="icon icon-arrow" strokeWidth={1.9} aria-hidden />}</>);
-  const mag = magnetic ? { 'data-magnetic': '' } : {};
-  if (href) return <Link href={href} className={cls} {...mag}>{inner}</Link>;
-  return <button type="button" className={cls} {...mag} {...rest}>{inner}</button>;
+  const inner = <BtnLabel arrow={arrow}>{children}</BtnLabel>;
+  if (href) return <Link href={href} className={cls}>{inner}</Link>;
+  return <button type="button" className={cls} {...rest}>{inner}</button>;
 }
 
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {

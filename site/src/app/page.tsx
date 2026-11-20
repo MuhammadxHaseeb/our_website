@@ -2,13 +2,13 @@ import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { ArrowLink, AssetPlaceholder, Button, Label, Live, SectionHeader } from '@/components/ui/primitives';
 import { CaseCard, EngagementModels, ProcessSteps, ServiceRows } from '@/components/sections/blocks';
-import { RollCall, StatementReveal, StatsScoreboard } from '@/components/sections/interactive';
+import { RollCall, StatementReveal } from '@/components/sections/interactive';
 import { LiveDemo } from '@/components/sections/LiveDemo';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 import { FoilBars } from '@/components/brand/FoilBars';
-import { alsoServices, cases, company, industries, services, stats } from '@/lib/content';
+import { alsoServices, cases, company, industries, services } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: { absolute: 'epox: we find the problem before you do' },
@@ -21,12 +21,12 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 export default function Home() {
   return (
     <>
-      {/* 1 · Hero (H3 intro, H14 media expand, L10 magnetic CTAs) */}
+      {/* 1 · Hero (H3 intro, H14 media expand, L10 CTAs) */}
       {/* Black hero band with the brand device: foil bars running off the right edge. Saffron = this layout's one main action, azure = its one highlight. */}
       <section className="hero" aria-labelledby="hero-title">
         <FoilBars className="hero-bars hero-bars--home" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
-          <p className="t-label muted hero-after" style={d(0)}><span className="normal-case">epox</span> · {company.city} · Since {company.founded}</p>
+          <p className="t-label muted hero-after" style={d(0)}><span className="normal-case">epox</span> · Software house · {company.city}</p>
           <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '11ch' }}
             parts={['We find the problem', { t: 'before', hl: true }, 'you do.']} />
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
@@ -34,8 +34,8 @@ export default function Home() {
               We build web, mobile and AI software, then stay to keep it running. If we reached out to you, we&apos;ve already found something worth fixing.
             </p>
             <div className="flex flex-wrap gap-3 hero-after lg:col-span-6 lg:justify-end" style={d(800)}>
-              <Button href="/contact" size="lg" variant="accent" arrow magnetic>Let&apos;s talk</Button>
-              <Button href="/work" size="lg" variant="secondary" magnetic>See our work</Button>
+              <Button href="/contact" size="lg" variant="accent" arrow>Let&apos;s talk</Button>
+              <Button href="/work" size="lg" variant="secondary">See our work</Button>
             </div>
           </div>
           <ExpandOnScroll className="mt-[var(--space-9)]">
@@ -85,20 +85,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7 · Numbers (L7 count-up) */}
-      <section className="section" aria-labelledby="numbers-title">
-        <div className="container-x">
-          <SectionHeader id="numbers-title" label="Numbers" title="The short version" />
-          <StatsScoreboard stats={stats} />
-        </div>
-      </section>
-
+      {/* Numbers live on /about only: the hero proof strip already says since 2019 · 2 products live */}
       {/* 8 · Ways to work with us (no prices) */}
       <section className="section soft" aria-labelledby="models-title">
         <div className="container-x">
           <SectionHeader id="models-title" label="Ways to work" title="Three ways to work with us" />
           <EngagementModels />
-          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call, under NDA if you need it.</p>
+          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call.</p>
         </div>
       </section>
 

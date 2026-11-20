@@ -50,8 +50,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         <div className="container-x pt-[calc(72px+var(--space-10))]">
           <p className="t-label muted hero-after flex flex-wrap items-center gap-x-3 gap-y-1" style={d(0)}>
             <Link href="/work" className="link-quiet">/ Work</Link>
-            <span>Case {c.n} · {c.sector}{c.region ? ` · ${c.region}` : ''}</span>
-            <Live>{c.status}</Live>
+            <span>Case {c.n}</span>{/* sector, region and status are in the fact table right below */}
           </p>
           <RiseText as="h1" on="load" id="case-title" className="t-h1 mt-8" style={{ maxWidth: '16ch' }} parts={[c.headline]} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '48ch', ...d(600) }}>{c.summary}</p>

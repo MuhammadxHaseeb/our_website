@@ -42,7 +42,7 @@ const MOTION = [
   ['L6', 'Accordion', '240ms ease-out-quint', '§ FAQ', 'Linear'],
   ['L7', 'Count-up numbers', '1200ms ease-out-expo', '§ Scoreboard', 'Linear'],
   ['L8', 'Form states', '100–240ms', '§ Contact', 'Linear'],
-  ['L10', 'Magnetic buttons (lean toward the cursor)', '500ms ease-out-quint spring-back', 'Hero buttons (mouse only)', 'Bolder pass'],
+  ['L10', 'Button reward: fill sweep, label roll, arrow loop, spring press, ring on click', '460–560ms ease-out-quint, press spring', 'Any button', 'Ice Mint pass'],
   ['H1', 'Lenis smooth scroll', 'lerp 0.1, mouse/trackpad only', 'Whole page (desktop)', 'Hello Monday'],
   ['H2', 'Page transition (enter)', '600ms ease-out-quint', 'Navigate via header', 'Hello Monday'],
   ['H3', 'Hero intro: headline words rise out of masks, then lead + buttons', '1000ms ease-out-quint, 70ms per word', 'Reload this page', 'Hello Monday'],
@@ -76,7 +76,7 @@ export default function Styleguide() {
           <p className="t-label muted hero-after" style={{ '--d': '0ms' } as React.CSSProperties}><span className="normal-case">epox</span> · Styleguide · Ice Mint</p>
           <RiseText as="h1" on="load" className="t-display mt-8" style={{ maxWidth: '11ch' }} parts={['We find the problem', { t: 'before', hl: true }, 'you do.']} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '44ch', '--d': '650ms' } as React.CSSProperties}>Every token, component and motion effect in one place, themed with the Ice Mint brand system (<code className="t-small">assets/epox — Ice Mint brand system</code>).</p>
-          <div className="mt-12 flex flex-wrap gap-3 hero-after" style={{ '--d': '800ms' } as React.CSSProperties}><Button href="#contact" variant="accent" arrow size="lg" magnetic>Let&apos;s talk</Button><Button href="#cases" variant="secondary" size="lg" magnetic>See our work</Button></div>
+          <div className="mt-12 flex flex-wrap gap-3 hero-after" style={{ '--d': '800ms' } as React.CSSProperties}><Button href="#contact" variant="accent" arrow size="lg">Let&apos;s talk</Button><Button href="#cases" variant="secondary" size="lg">See our work</Button></div>
           <ExpandOnScroll className="mt-[var(--space-9)]"><AssetPlaceholder name="liquid-metal logo loop · 16:9 · WebM + MP4 + poster" ratio="16 / 9" /></ExpandOnScroll>
         </div>
       </section>

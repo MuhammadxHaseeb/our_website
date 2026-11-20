@@ -16,24 +16,15 @@ export function MotionProvider() {
     mq.addEventListener('change', sync);
     whenIdle(() => { startLenis(); });
 
-    // L10 magnetic buttons: [data-magnetic] leans toward the cursor (mouse/trackpad only, not reduced motion)
-    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    let cur: HTMLElement | null = null;
-    const release = () => { if (cur) cur.style.translate = ''; cur = null; };
-    const move = (e: PointerEvent) => {
-      if (document.documentElement.dataset.motion === 'reduced') return release();
-      const el = (e.target as Element | null)?.closest?.<HTMLElement>('[data-magnetic]') ?? null;
-      if (el !== cur) release();
-      if (!el) return;
-      cur = el;
-      const r = el.getBoundingClientRect();
-      el.style.translate = `${((e.clientX - r.left - r.width / 2) * 0.3).toFixed(1)}px ${((e.clientY - r.top - r.height / 2) * 0.45).toFixed(1)}px`;
+    // L10 button reward: on click, a ring pops outward from the button (CSS .btn[data-pop]); replaces the old magnetic drift
+    const pop = (e: MouseEvent) => {
+      const el = (e.target as Element | null)?.closest?.<HTMLElement>('.btn');
+      if (!el || el.matches('[disabled]')) return;
+      el.removeAttribute('data-pop'); void el.offsetWidth; el.setAttribute('data-pop', '');
+      window.setTimeout(() => el.removeAttribute('data-pop'), 600);
     };
-    if (fine) { document.addEventListener('pointermove', move, { passive: true }); document.documentElement.addEventListener('pointerleave', release); }
-    return () => {
-      mq.removeEventListener('change', sync);
-      document.removeEventListener('pointermove', move); document.documentElement.removeEventListener('pointerleave', release);
-    };
+    document.addEventListener('click', pop);
+    return () => { mq.removeEventListener('change', sync); document.removeEventListener('click', pop); };
   }, []);
   return null;
 }

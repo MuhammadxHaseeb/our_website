@@ -29,9 +29,9 @@
   --surface: #16181D;         /* cards, inputs, panels on bg */
   --surface-raised: #1C1F25;  /* menus, dialogs, anything above surface */
   --text: #F2F5F9;            /* 18:1 on bg */
-  --text-muted: #A9B0BC;      /* 9:1 on bg, 8:1 on surface */
-  --line: #2A2F37;            /* hairlines and card outlines (decorative) */
-  --line-strong: #6B7380;     /* edges a person must see: inputs, outline buttons (4.1:1 on bg) */
+  --text-muted: #B9C0CB;      /* 10.8:1 on bg, 9.6:1 on surface (lifted from the brand's #A9B0BC for small labels) */
+  --line: #3F4652;            /* hairlines, card outlines, chips: 2.1:1 on bg (brand #2A2F37 was 1.45:1, near invisible) */
+  --line-strong: #808897;     /* edges a person must see: inputs, outline buttons; dimmed large text (5.3:1 on bg) */
   --action: #F2F5F9;          /* primary button: inverts the ground */
   --on-action: #0B0C0F;
   --mark: var(--foil-flat);   /* tiny UI marks: live dot, check icons */
@@ -126,9 +126,9 @@
   --surface: #FFFFFF;
   --surface-raised: #FFFFFF;
   --text: #0B0C0F;
-  --text-muted: #535B68;   /* 6.5:1 on paper */
-  --line: #D8DDE5;
-  --line-strong: #7A8391;  /* 3.6:1 on paper */
+  --text-muted: #464D59;   /* 8:1 on paper, 8.8:1 on white */
+  --line: #B4BCC8;         /* 1.8:1 on paper, 1.9:1 on white cards (brand #D8DDE5 was 1.25:1) */
+  --line-strong: #69717E;  /* 4.7:1 on paper */
   --action: #0B0C0F;
   --on-action: #F2F5F9;
   --mark: var(--text);     /* foil-flat would vanish on paper */
@@ -141,9 +141,9 @@
   --surface: #16181D;
   --surface-raised: #1C1F25;
   --text: #F2F5F9;
-  --text-muted: #A9B0BC;
-  --line: #2A2F37;
-  --line-strong: #6B7380;
+  --text-muted: #B9C0CB;
+  --line: #3F4652;
+  --line-strong: #808897;
   --action: #F2F5F9;
   --on-action: #0B0C0F;
   --mark: var(--foil-flat);
@@ -157,7 +157,7 @@
   --card-inset: var(--bg);            /* recessed areas inside cards */
   --card-raised: var(--surface-raised);
   --hover-fill: color-mix(in srgb, var(--text) 6%, transparent);
-  --dim: var(--line-strong);          /* not-yet-active large text (roll-call, statement): AA large in both themes */
+  --dim: var(--line-strong);          /* not-yet-active large text (roll-call, statement): 4.7–5.3:1, AA even at body size */
   --kicker: var(--text-muted);        /* section labels */
   --emph: var(--text-muted);          /* second half of a headline (the hero uses the azure highlight instead) */
 }
@@ -168,6 +168,11 @@
   --font-display: 'Helvetica Now Display', var(--font-space-grotesk), system-ui, sans-serif;
   --font-text: 'Helvetica Now Text', var(--font-inter), system-ui, sans-serif;
 }
+
+/* ---------- large and ultrawide monitors: wider content, larger type in steps (rem-based sizes follow html font-size) ---------- */
+@media (min-width: 1920px) { :root { --max: 1600px; --margin: 64px; } }
+@media (min-width: 2400px) { :root { --max: 1840px; --margin: 80px; } }
+@media (min-width: 3200px) { :root { --max: 2080px; --margin: 96px; } }
 
 /* ---------- motion: mobile + reduced ---------- */
 @media (max-width: 767px) {

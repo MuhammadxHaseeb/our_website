@@ -39,7 +39,7 @@ export default function ServicesPage() {
         <div className="container-x">
           <SectionHeader id="models-title" label="Ways to work" title="Three ways to work with us" />
           <EngagementModels />
-          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call, under NDA if you need it.</p>
+          <p className="mt-8 t-small muted">No price list: we agree the model and the number on a short call.</p>
         </div>
       </section>
 

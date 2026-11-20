@@ -39,6 +39,9 @@
 /* ------------------------------------------------------------------ base */
 @layer base {
   html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; background: var(--bg); }
+  /* 1440p+ / ultrawide: type steps up so lines stay readable from further away (container widens in tokens.css) */
+  @media (min-width: 2400px) { html { font-size: 112.5%; } }
+  @media (min-width: 3200px) { html { font-size: 125%; } }
   body {
     background: var(--bg); color: var(--text);
     font: 400 var(--fs-body)/var(--lh-body) var(--font-text);

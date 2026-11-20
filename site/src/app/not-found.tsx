@@ -19,7 +19,7 @@ export default function NotFound() {
           We usually find problems before our clients do. This one is ours. The link may be old, or the page may have moved.
         </p>
         <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Button href="/" size="lg" arrow magnetic>Back to the home page</Button>
+          <Button href="/" size="lg" arrow>Back to the home page</Button>
           <ArrowLink href="/work">See our work</ArrowLink>
           <ArrowLink href="/services">Services</ArrowLink>
         </div>

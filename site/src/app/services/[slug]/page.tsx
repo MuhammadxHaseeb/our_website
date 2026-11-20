@@ -54,7 +54,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
             <p className="t-lead muted hero-after lg:col-span-6" style={{ maxWidth: '46ch', ...d(600) }}>{detail.lead}</p>
             <div className="hero-after lg:col-span-6 lg:flex lg:justify-end" style={d(750)}>
-              <Button href="#contact" size="lg" variant="accent" arrow magnetic>{detail.cta}</Button>
+              <Button href="#contact" size="lg" variant="accent" arrow>{detail.cta}</Button>
             </div>
           </div>
         </div>

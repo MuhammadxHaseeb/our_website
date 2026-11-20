@@ -117,4 +117,5 @@ export const industries = [
   { name: '[PLACEHOLDER: industry]', count: 0, line: '[PLACEHOLDER: one-line outcome]' },
 ];
 
-export const trust = ['Since 2019', '2 products live', 'NDA on request', 'Faisalabad, PK · UTC+5'];
+/** Contact page trust strip: only facts not already on that page (NDA and location are said elsewhere there). */
+export const trust = ['Building since 2019', '2 products live, run by us', 'A reply within one working day'];

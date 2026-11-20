@@ -5,6 +5,7 @@ import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/brand/Logo';
+import { BtnLabel } from '@/components/ui/primitives';
 import { services } from '@/lib/content';
 import { getLenis } from '@/lib/motion';
 
@@ -161,7 +162,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className="btn hidden sm:inline-flex">Let&apos;s talk</Link>
+          <Link href="/contact" className="btn hidden sm:inline-flex"><BtnLabel>Let&apos;s talk</BtnLabel></Link>
           <button type="button" className="nav-link relative z-[61] lg:hidden" aria-expanded={sheet} aria-controls="sheet" aria-label={sheet ? 'Close menu' : 'Open menu'} onClick={() => setSheet(!sheet)}>
             {sheet ? <X className="h-6 w-6" strokeWidth={1.9} aria-hidden /> : <Menu className="h-6 w-6" strokeWidth={1.9} aria-hidden />}
           </button>
@@ -184,7 +185,7 @@ export function Header() {
               <li key={l.href} className="sheet-in" style={{ '--i': services.length + 1 + i } as CSSProperties}><Link href={l.href} className="block py-1.5 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-lg btn-accent sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}>Let&apos;s talk</Link>
+          <Link href="/contact" className="btn btn-lg btn-accent sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}><BtnLabel arrow>Let&apos;s talk</BtnLabel></Link>
         </div>
       </div>
     </>

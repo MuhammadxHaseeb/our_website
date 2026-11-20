@@ -1,6 +1,7 @@
 'use client';
-import { ArrowRight, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Link from 'next/link';
+import { BtnLabel } from '@/components/ui/primitives';
 import { useEffect, useId, useRef, useState } from 'react';
 
 type State = 'idle' | 'sending' | 'success' | 'error';
@@ -68,10 +69,9 @@ export function ContactForm({ forceState, accent = true }: { forceState?: State;
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden /> {/* honeypot */}
       <div className="flex flex-wrap items-center gap-6">
         <button type="submit" className={`btn btn-lg ${accent ? 'btn-accent' : ''}`} disabled={s === 'sending'} aria-busy={s === 'sending'}>
-          {s === 'sending' ? <><span className="spinner" aria-hidden />Sending…</> : <>Send<ArrowRight className="icon icon-arrow" strokeWidth={1.9} aria-hidden /></>}
+          {s === 'sending' ? <><span className="spinner" aria-hidden />Sending…</> : <BtnLabel arrow>Send</BtnLabel>}
         </button>
-        <p className="t-small muted">NDA available on request.</p>
-      </div>
+              </div>
       <p className="t-small muted -mt-2">We only use your details to reply to you. <Link href="/privacy" className="link">Privacy</Link></p>
       <p id={`${id}-status`} role="alert" className={s === 'error' ? 'field-error' : 'sr-only'}>
         {s === 'error' ? (msg || 'Something went wrong. Please email us instead.') : ''}
