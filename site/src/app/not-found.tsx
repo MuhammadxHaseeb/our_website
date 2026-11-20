@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: 'Page not found', robots: { index: fa
 export default function NotFound() {
   return (
     <section aria-labelledby="nf-title" className="hero min-h-[100svh] pb-[var(--section-y)]">
-        <FoilBars className="hero-bars hero-bars--page" />
+        <FoilBars mode="scatter" className="hero-bars hero-bars--home" />
       <div className="container-x pt-[calc(72px+var(--space-10))]">
         <CharacterSlot label="404" fallback={<p className="t-label muted">404 · Not found</p>} />
         <RiseText as="h1" on="load" id="nf-title" className="t-display mt-8" style={{ maxWidth: '12ch' }}
@@ -23,6 +23,7 @@ export default function NotFound() {
           <ArrowLink href="/work">See our work</ArrowLink>
           <ArrowLink href="/services">Services</ArrowLink>
         </div>
+        <p className="hover-only mt-10 t-small muted">The E fell apart too. Bring your cursor close and it puts itself back together.</p>
         <p className="mt-16 t-small muted">Expected something here? <Link href="/contact" className="link">Tell us</Link> and we&apos;ll fix it.</p>
       </div>
     </section>

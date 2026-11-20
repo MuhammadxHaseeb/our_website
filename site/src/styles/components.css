@@ -45,7 +45,7 @@
 
   /* ---------------- live dot (a tiny UI mark: foil-flat on Black, ink on Paper) ---------------- */
   .live { display: inline-flex; align-items: center; gap: var(--space-2); }
-  .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--mark); flex: none; }
+  .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--live-dot); flex: none; }
   html:not([data-motion="reduced"]) .live::before { animation: live-pulse 2.4s var(--ease-in-out-cubic) infinite; }
   @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
@@ -77,6 +77,15 @@
     background: var(--foil) 0 0 / 300% 100%; transform: translateX(-50vw) skewX(-15.3deg); }
   .page-wipe.run { visibility: visible; animation: page-wipe 760ms var(--ease-in-out-cubic) forwards; }
   @keyframes page-wipe { from { transform: translateX(-50vw) skewX(-15.3deg); background-position: 0 0; } to { transform: translateX(140vw) skewX(-15.3deg); background-position: 100% 0; } }
+  /* form sent: a black tile where the bars fly in and lock into the E */
+  .sent-tile { position: relative; overflow: hidden; aspect-ratio: 16 / 7; max-width: 520px; border-radius: var(--r-card); background: var(--brand-black); box-shadow: inset 0 0 0 1px var(--line); }
+  .sent-bars { position: absolute; top: 50%; left: 14%; width: 62%; overflow: visible; transform: translateY(-50%); }
+  /* reading progress: a hairline across the top of the screen; foil over Black, ink over Paper */
+  .read-bar { position: fixed; z-index: 55; inset: 0 0 auto 0; height: 2px; pointer-events: none; transform-origin: left center; transform: scaleX(var(--read, 0));
+    background: var(--foil) var(--foil-pos) / 300% 300%; }
+  .read-bar[data-theme="light"] { background: var(--text); }
+  .hover-only { display: none; }
+  @media (hover: hover) and (pointer: fine) { .hover-only { display: block; } }
   /* brand ServiceCard icon tile: always brand-black with a foil-mint line icon (the one place foil colour is in the UI) */
   .svc-icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--brand-black); box-shadow: inset 0 0 0 1px var(--line); color: var(--foil-mint); }
   .svc-icon svg { width: var(--icon-lg); height: var(--icon-lg); fill: none; stroke: url(#ep-foil-icon); stroke-width: var(--icon-stroke); stroke-linecap: round; stroke-linejoin: round; }
@@ -246,8 +255,8 @@
   html:not([data-motion="reduced"]) .found-scan .hl .lit { animation: word-lit 420ms var(--ease-out-quad) calc(var(--scan-at) + 380ms) both; }
   @keyframes word-lit { from { -webkit-text-fill-color: var(--text); } to { -webkit-text-fill-color: transparent; } }
   /* the corners start wide and snap onto the word, like a viewfinder locking on */
-  html:not([data-motion="reduced"]) .found-scan .hl::after { animation: lock-on 560ms var(--ease-out-quint) calc(var(--scan-at) + 640ms) both; }
-  @keyframes lock-on { from { opacity: 0; transform: scale(1.35); } 40% { opacity: 1; } to { opacity: 1; transform: none; } }
+  html:not([data-motion="reduced"]) .found-scan .hl::after, html:not([data-motion="reduced"]) .found-scan .hl::before { animation: lock-on 560ms var(--ease-out-quint) calc(var(--scan-at) + 640ms) both; }
+  @keyframes lock-on { from { opacity: 0; transform: scale(1.35); } 40% { opacity: 1; } to { transform: none; } }
 
   /* hero supporting lines follow the headline */
   html:not([data-motion="reduced"]) .hero-after { animation: hero-after var(--dur-enter) var(--ease-out-quint) both; animation-delay: var(--d, 500ms); }

@@ -11,6 +11,9 @@ import { onLight } from '@/lib/light';
  *  · Depth (mode "split", heroes): the E is three layers; as the hero scrolls away they slide apart at different speeds.
  *  · Assemble (mode "assemble", footer): the layers arrive apart and snap back into the E as the footer comes into view,
  *    so the page opens and closes on the whole mark.
+ *  · Enter (mode "enter", form sent): the layers fly in from the right and lock into the E once, on mount.
+ *  · Scatter (mode "scatter", 404): the layers lie scattered; the closer the light (cursor) gets, the more they pull
+ *    back together into the E.
  * Runs only while on screen and moving. Reduced motion: static and whole.
  * Bars' right ends are extended past the viewBox (x 336 → 1336) so they run to the screen edge on any width; the section clips them.
  */
@@ -22,9 +25,12 @@ const SLICES = [
   '147.22,119.6 173.35,119.6 169.7,132.6 1336,132.6 1336,153.4 138,153.4',
 ];
 const DEPTH = [10, 24, 40]; // user units each layer travels right (top layer least)
+// 404 scatter: offset (user units) and tilt (deg) of each layer when fully scattered; pivot near its visible left end
+const SCATTER = [{ x: -26, y: -16, r: -7, cy: 56 }, { x: 22, y: 8, r: 5, cy: 96 }, { x: -12, y: 24, r: -4, cy: 136 }];
+type Mode = 'split' | 'assemble' | 'enter' | 'scatter';
 export const FOIL_STOPS: [string, string][] = [['0', '#BFE3FF'], ['0.2', '#E2FFF4'], ['0.4', '#8FC9FF'], ['0.58', '#7FF5D0'], ['0.78', '#E4FBFF'], ['1', '#A8F0E0']];
 
-export function FoilBars({ className = '', mode = 'split' }: { className?: string; mode?: 'split' | 'assemble' }) {
+export function FoilBars({ className = '', mode = 'split' }: { className?: string; mode?: Mode }) {
   const id = useId().replace(/[^a-zA-Z0-9]/g, '');
   const svg = useRef<SVGSVGElement>(null);
 
@@ -36,34 +42,46 @@ export function FoilBars({ className = '', mode = 'split' }: { className?: strin
     if (!foil || !sheen) return;
     const layers = Array.from(el.querySelectorAll<SVGGElement>('[data-layer]'));
     const host = el.closest('section, footer') ?? el.parentElement!;
-    const spread = mode === 'assemble' ? 3 : 1;
+    const spread = mode === 'assemble' || mode === 'enter' ? 3 : 1;
     const light = { x: 0.5, y: 0.35 };
     const p = { t: 0, c: 0 }; // separation: target / current (0 = whole E)
     let raf = 0; let visible = true;
 
     const progress = () => {
       const r = host.getBoundingClientRect(); const vh = window.innerHeight;
+      if (mode === 'enter') return 0;
+      if (mode === 'scatter') {
+        // distance from the light (cursor) to the visible part of the bars, in viewport widths
+        const b = el.getBoundingClientRect(); const cx = b.left + b.width * 0.45; const cy = b.top + b.height / 2;
+        const d = Math.hypot(light.x * window.innerWidth - cx, light.y * vh - cy) / window.innerWidth;
+        return Math.min(1, Math.max(0, (d - 0.06) / 0.4));
+      }
       if (mode === 'split') return Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
       // assemble: apart while the footer is entering, whole once its top is in the upper part of the screen
       return Math.min(1, Math.max(0, (r.top - vh * 0.35) / (vh * 0.6)));
     };
     const draw = () => {
       raf = 0;
-      p.c += (p.t - p.c) * 0.16;
+      p.c += (p.t - p.c) * (mode === 'enter' ? 0.075 : 0.16);
       foil.setAttribute('gradientTransform', `translate(${((light.x - 0.5) * 160 + p.c * 120).toFixed(2)} ${((light.y - 0.5) * 50).toFixed(2)})`);
       const r = el.getBoundingClientRect(); const k = 198 / Math.max(1, r.width);
       const sx = 138 + (light.x * window.innerWidth - r.left) * k; const sy = 39 + (light.y * window.innerHeight - r.top) * k;
       sheen.setAttribute('cx', Math.max(110, Math.min(380, sx)).toFixed(1)); sheen.setAttribute('cy', Math.max(20, Math.min(175, sy)).toFixed(1));
-      layers.forEach((g, i) => g.setAttribute('transform', `translate(${(p.c * DEPTH[i] * spread).toFixed(2)} 0)`));
+      layers.forEach((g, i) => {
+        if (mode === 'scatter') {
+          const s = SCATTER[i]; const k = p.c;
+          g.setAttribute('transform', `translate(${(s.x * k).toFixed(2)} ${(s.y * k).toFixed(2)}) rotate(${(s.r * k).toFixed(2)} 190 ${s.cy})`);
+        } else g.setAttribute('transform', `translate(${(p.c * DEPTH[i] * spread).toFixed(2)} 0)`);
+      });
       if (Math.abs(p.t - p.c) > 0.0008 && visible) raf = requestAnimationFrame(draw);
     };
     const kick = () => { if (!raf && visible) raf = requestAnimationFrame(draw); };
     const onScroll = () => { p.t = progress(); kick(); };
-    const off = onLight(l => { light.x = l.x; light.y = l.y; kick(); });
+    const off = onLight(l => { light.x = l.x; light.y = l.y; if (mode === 'scatter') p.t = progress(); kick(); });
     window.addEventListener('scroll', onScroll, { passive: true });
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) onScroll(); });
     io.observe(el);
-    p.t = p.c = progress(); kick();
+    p.t = progress(); p.c = mode === 'enter' || mode === 'scatter' ? 1 : p.t; kick();
     return () => { cancelAnimationFrame(raf); io.disconnect(); off(); window.removeEventListener('scroll', onScroll); };
   }, [id, mode]);
 

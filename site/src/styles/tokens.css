@@ -37,6 +37,7 @@
   --action: #F2F5F9;          /* primary button: inverts the ground */
   --on-action: #0B0C0F;
   --mark: var(--foil-flat);   /* tiny UI marks: live dot, check icons */
+  --live-dot: var(--foil) var(--foil-pos) / 500% 500%; /* the "Live" status dot: a speck of foil that catches the light */
   --error: #FF7A6E;           /* functional, not brand: form errors (7.7:1 on bg) */
 
   /* ---------- fonts (brand files, self-hosted via next/font/local in app/layout.tsx) ---------- */
@@ -134,6 +135,7 @@
   --action: #0B0C0F;
   --on-action: #F2F5F9;
   --mark: var(--text);     /* foil-flat would vanish on paper */
+  --live-dot: var(--text);
   --error: #B42318;        /* 6:1 on paper */
 }
 
@@ -149,6 +151,7 @@
   --action: #F2F5F9;
   --on-action: #0B0C0F;
   --mark: var(--foil-flat);
+  --live-dot: var(--foil) var(--foil-pos) / 500% 500%;
   --error: #FF7A6E;
 }
 

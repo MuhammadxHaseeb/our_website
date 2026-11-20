@@ -1,7 +1,7 @@
 'use client';
-import { Check } from 'lucide-react';
 import Link from 'next/link';
 import { BtnLabel } from '@/components/ui/primitives';
+import { FoilBars } from '@/components/brand/FoilBars';
 import { useEffect, useId, useRef, useState } from 'react';
 
 type State = 'idle' | 'sending' | 'success' | 'error';
@@ -39,10 +39,11 @@ export function ContactForm({ forceState, accent = true }: { forceState?: State;
 
   if (s === 'success') {
     return (
-      <div className="grid content-start gap-4" role="status">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-action text-on-action"><Check className="h-5 w-5" strokeWidth={1.9} aria-hidden /></span>
-        <p className="t-h3">Thanks. We&apos;ll reply within one working day.</p>
-        <p className="muted">You&apos;ll hear from a person who has read your message, with a first view on how we&apos;d approach it.</p>
+      <div className="grid content-start gap-5" role="status">
+        {/* the reward: the three foil bars fly in and lock into the E (black tile, so the foil stays on Black on a Paper panel) */}
+        <div className="sent-tile" data-theme="dark"><FoilBars mode="enter" className="sent-bars" /></div>
+        <p className="t-h3">Got it. We&apos;ll take it from here.</p>
+        <p className="muted">A person who builds software reads every message. You&apos;ll hear back within one working day, with a first view on how we&apos;d approach it.</p>
       </div>
     );
   }

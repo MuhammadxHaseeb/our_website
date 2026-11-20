@@ -87,16 +87,25 @@
   /* Found scan (RiseText { hl }): the key word lit in foil + an azure "Found" badge; the scan line itself is in components.css */
   .hl { white-space: nowrap; }
   .hl .lit { background: var(--foil) var(--foil-pos) / 260% 260%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
-  /* lock-on frame: four azure corners around the found word (drawn as 8 gradient strokes, outside the text flow) */
+  /* lock-on frame: four foil corners around the found word (outside the text flow). ::after = crisp foil strokes that
+     follow the shared light; ::before = the same strokes in pale mint/ice, blurred, as a soft glow behind them. */
   .hl { position: relative; padding-inline: 0.16em; margin-inline: 0.02em; }
-  .hl::after { content: ''; position: absolute; inset: 0.24em 0 0.02em; pointer-events: none;
-    --c: var(--azure); --l: 0.22em; --t: max(2px, 0.03em);
-    background:
-      linear-gradient(var(--c), var(--c)) top left / var(--l) var(--t), linear-gradient(var(--c), var(--c)) top left / var(--t) var(--l),
-      linear-gradient(var(--c), var(--c)) top right / var(--l) var(--t), linear-gradient(var(--c), var(--c)) top right / var(--t) var(--l),
-      linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--t), linear-gradient(var(--c), var(--c)) bottom left / var(--t) var(--l),
-      linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--t), linear-gradient(var(--c), var(--c)) bottom right / var(--t) var(--l);
-    background-repeat: no-repeat; }
+  /* --corners is declared on each pseudo so it picks up that pseudo's own stroke length / thickness */
+  .hl::before, .hl::after { --l: 0.22em; --t: max(2px, 0.03em);
+    --corners: linear-gradient(#000 0 0) top left / var(--l) var(--t), linear-gradient(#000 0 0) top left / var(--t) var(--l),
+      linear-gradient(#000 0 0) top right / var(--l) var(--t), linear-gradient(#000 0 0) top right / var(--t) var(--l),
+      linear-gradient(#000 0 0) bottom left / var(--l) var(--t), linear-gradient(#000 0 0) bottom left / var(--t) var(--l),
+      linear-gradient(#000 0 0) bottom right / var(--l) var(--t), linear-gradient(#000 0 0) bottom right / var(--t) var(--l); }
+  .hl::before, .hl::after { content: ''; position: absolute; inset: 0.24em 0 0.02em; pointer-events: none;
+    -webkit-mask: var(--corners); -webkit-mask-repeat: no-repeat; mask: var(--corners); mask-repeat: no-repeat; }
+  .hl::after { background: var(--foil) var(--foil-pos) / 260% 260%; }
+  /* glow: the strokes painted as plain strips (no mask, so the blur can spread) */
+  .hl::before { -webkit-mask: none; mask: none; --g: var(--foil-mint);
+    background: linear-gradient(var(--g) 0 0) top left / var(--l) var(--t), linear-gradient(var(--g) 0 0) top left / var(--t) var(--l),
+      linear-gradient(var(--g) 0 0) top right / var(--l) var(--t), linear-gradient(var(--g) 0 0) top right / var(--t) var(--l),
+      linear-gradient(var(--g) 0 0) bottom left / var(--l) var(--t), linear-gradient(var(--g) 0 0) bottom left / var(--t) var(--l),
+      linear-gradient(var(--g) 0 0) bottom right / var(--l) var(--t), linear-gradient(var(--g) 0 0) bottom right / var(--t) var(--l);
+    background-repeat: no-repeat; filter: blur(6px); opacity: 0.75; }
 
   /* ------------------------------------------------------------ links */
   .link {

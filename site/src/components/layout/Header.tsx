@@ -34,6 +34,8 @@ export function Header() {
   const [tone, setTone] = useState<'light' | 'dark'>('dark');
   const megaRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const readRef = useRef<HTMLDivElement>(null);
+  const reading = pathname !== '/' && pathname !== '/contact'; // long pages only
   const workRef = useRef<HTMLAnchorElement>(null);
   const panelRefs = { services: useRef<HTMLDivElement>(null), company: useRef<HTMLDivElement>(null) };
   const triggerRefs = { services: useRef<HTMLButtonElement>(null), company: useRef<HTMLButtonElement>(null) };
@@ -53,6 +55,9 @@ export function Header() {
       // probe the page *under* the fixed header: Black is the default ground, Paper bands switch the header to light
       const probe = document.elementsFromPoint(window.innerWidth / 2, 40).find(el => !headerRef.current?.contains(el));
       setTone(probe?.closest('.soft, .paper, [data-theme="light"]') ? 'light' : 'dark');
+      // reading progress (written straight to the DOM, no re-render per scroll frame)
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      readRef.current?.style.setProperty('--read', max > 0 ? (y / max).toFixed(4) : '0');
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -94,6 +99,7 @@ export function Header() {
 
   return (
     <>
+    {reading && <div ref={readRef} className="read-bar" data-theme={sheetTone ? 'dark' : tone} aria-hidden />}
     <header ref={headerRef} className="site-header" data-stuck={stuck} data-hidden={hidden} data-sheet={sheetTone} data-theme={sheetTone ? 'dark' : tone}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 btn">Skip to content</a>
       <div className="container-x flex h-[72px] items-center justify-between gap-6">
