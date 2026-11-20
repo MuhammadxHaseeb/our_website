@@ -86,7 +86,7 @@
   .t-label.kicker { color: var(--kicker); }
   /* Found scan (RiseText { hl }): the key word lit in foil + an azure "Found" badge; the scan line itself is in components.css */
   .hl { white-space: nowrap; }
-  .hl .lit { background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  .hl .lit { background: var(--foil) var(--foil-pos) / 260% 260%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
   /* lock-on frame: four azure corners around the found word (drawn as 8 gradient strokes, outside the text flow) */
   .hl { position: relative; padding-inline: 0.16em; margin-inline: 0.02em; }
   .hl::after { content: ''; position: absolute; inset: 0.24em 0 0.02em; pointer-events: none;
@@ -111,7 +111,7 @@
      [data-in] forces visible (used by review/screenshot tooling). */
   html.js:not([data-motion="reduced"]) [data-reveal]:not([data-in]) { opacity: 0; transform: translateY(var(--rise)); }
   html.js:not([data-motion="reduced"]) [data-rise]:not([data-in]) .rw > span { transform: translateY(110%); }
-  html.js:not([data-motion="reduced"]) [data-unveil]:not([data-in]) { clip-path: inset(100% 0% 0% 0%); }
+  html.js:not([data-motion="reduced"]) [data-unveil]:not([data-in]) { clip-path: polygon(0 0, 0% 0, -17% 100%, 0 100%); }
 
   /* page enter (H2, template.tsx) */
   .page-enter { animation: page-enter 600ms var(--ease-out-quint) both; }

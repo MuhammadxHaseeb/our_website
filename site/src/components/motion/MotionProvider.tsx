@@ -1,6 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { startLenis, whenIdle } from '@/lib/motion';
+import { startLight } from '@/lib/light';
 
 /** Inline in <head>: sets html.js + data-motion before first paint (no reveal flash, reduced motion respected). */
 export const motionBootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)d.dataset.motion='reduced';}catch(e){}})();`;
@@ -15,6 +16,7 @@ export function MotionProvider() {
     const sync = () => { if (mq.matches) document.documentElement.dataset.motion = 'reduced'; else delete document.documentElement.dataset.motion; };
     mq.addEventListener('change', sync);
     whenIdle(() => { startLenis(); });
+    startLight(); // the one light every foil surface follows (lib/light)
 
     return () => mq.removeEventListener('change', sync);
   }, []);

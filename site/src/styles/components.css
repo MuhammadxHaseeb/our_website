@@ -67,6 +67,16 @@
   .hero > .container-x { position: relative; z-index: 1; }
   html:not([data-motion="reduced"]) .hero-bars { animation: bars-in 1400ms var(--ease-out-quint) both 120ms; }
   @keyframes bars-in { from { opacity: 0; transform: translateX(10%); } to { opacity: 1; transform: none; } }
+  /* footer sign-off: the bars arrive apart and lock back into the E (FoilBars mode="assemble") */
+  .footer-bars { position: absolute; z-index: 0; top: calc(var(--space-9) + 8px); width: var(--fb-w); overflow: visible; --fb-w: 56vw;
+    left: calc(50% + min(var(--max), 100% - 2 * var(--margin)) / 2 - var(--fb-w) * 0.62); }
+  @media (min-width: 768px) { .footer-bars { --fb-w: min(40vw, 600px); } }
+  @media (min-width: 1920px) { .footer-bars { --fb-w: 660px; } }
+  /* page change: one foil bar at the E's slant sweeps across */
+  .page-wipe { position: fixed; z-index: 70; top: -10vh; bottom: -10vh; left: 0; width: 26vw; pointer-events: none; visibility: hidden;
+    background: var(--foil) 0 0 / 300% 100%; transform: translateX(-50vw) skewX(-15.3deg); }
+  .page-wipe.run { visibility: visible; animation: page-wipe 760ms var(--ease-in-out-cubic) forwards; }
+  @keyframes page-wipe { from { transform: translateX(-50vw) skewX(-15.3deg); background-position: 0 0; } to { transform: translateX(140vw) skewX(-15.3deg); background-position: 100% 0; } }
   /* brand ServiceCard icon tile: always brand-black with a foil-mint line icon (the one place foil colour is in the UI) */
   .svc-icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--brand-black); box-shadow: inset 0 0 0 1px var(--line); color: var(--foil-mint); }
   .svc-icon svg { width: var(--icon-lg); height: var(--icon-lg); fill: none; stroke: url(#ep-foil-icon); stroke-width: var(--icon-stroke); stroke-linecap: round; stroke-linejoin: round; }
@@ -144,7 +154,7 @@
   /* services menu: a typographic index on the left; the active name is marked by a slanted foil bar (a piece of the
      brand's E device) that slides between rows. Right: the area's big foil number, its promise and a link. */
   .mega-index { position: relative; display: grid; padding-left: 28px; }
-  .mega-marker { position: absolute; left: 4px; top: var(--space-2); width: 16px; height: 22px; background: var(--foil); clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%);
+  .mega-marker { position: absolute; left: 4px; top: var(--space-2); width: 16px; height: 22px; background: var(--foil) var(--foil-pos) / 400% 400%; clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%);
     transform: translateY(calc(var(--row, 0) * var(--row-h) + (var(--row-h) - 22px) / 2)); transition: transform 360ms var(--ease-out-quint); }
   .mega-row { display: flex; align-items: center; height: var(--row-h); color: var(--muted); text-decoration: none;
     font: 600 1.0625rem/1.2 var(--font-display); letter-spacing: -0.01em; transition: color var(--dur-fast) var(--ease-out-quad), transform 300ms var(--ease-out-quint); }
@@ -203,7 +213,7 @@
   /* brand touches: foil number in the left column; on hover a slanted foil bar (a piece of the E) slides in before the title */
   .svc-num { font: 500 calc(var(--fs-h3) * 1.25)/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .svc-title { position: relative; transition: transform var(--dur-ui) var(--ease-out-quint); }
-  .svc-title::before { content: ''; position: absolute; left: -0.9em; top: 0.18em; width: 0.55em; height: 0.8em; background: var(--foil);
+  .svc-title::before { content: ''; position: absolute; left: -0.9em; top: 0.18em; width: 0.55em; height: 0.8em; background: var(--foil) var(--foil-pos) / 400% 400%;
     clip-path: polygon(28% 0, 100% 0, 72% 100%, 0 100%); transform: scaleX(0); transform-origin: right center; transition: transform var(--dur-ui) var(--ease-out-quint); }
   @media (hover: hover) and (pointer: fine) {
     .svc-row:hover .svc-title, .svc-row:focus-visible .svc-title { transform: translateX(0.9em); }
@@ -244,7 +254,7 @@
   @keyframes hero-after { from { opacity: 0; transform: translateY(var(--rise)); } to { opacity: 1; transform: none; } }
 
   /* holographic foil on text: only the big service numbers (owner's call; the brand book otherwise keeps foil off text) */
-  .foil-text { background: var(--foil); background-size: 100% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  .foil-text { background: var(--foil); background-size: 260% 260%; background-position: var(--foil-pos); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
   /* ---------------- service chapters (/services, H5 slot + H12 focus) ---------------- */
   /* big chapter number rolls to the active chapter inside a 1-line mask */
   .chapter-num { height: 1em; overflow: hidden; font: 500 clamp(7rem, 4rem + 7vw, 12rem)/1 var(--font-display); letter-spacing: var(--tr-display); font-variant-numeric: tabular-nums; }

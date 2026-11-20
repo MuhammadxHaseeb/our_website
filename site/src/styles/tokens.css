@@ -18,6 +18,8 @@
   --foil-ice: #E4FBFF;
   --foil-seafoam: #A8F0E0;
   --foil-flat: #B9EDEA;    /* one flat stand-in for the foil: tiny UI marks (live dot, check icons) */
+  /* where the shared light falls (lib/light writes --lx / --ly); CSS foil uses an oversized gradient and slides it */
+  --foil-pos: calc(var(--lx, 0.5) * 100%) calc(var(--ly, 0.35) * 100%);
   --foil: linear-gradient(115deg, var(--foil-sky) 0%, var(--foil-glow) 20%, var(--foil-blue) 40%, var(--foil-mint) 58%, var(--foil-ice) 78%, var(--foil-seafoam) 100%);
   --saffron: #FFC21A;      /* off-guard: the main call to action, once per layout. Never a background */
   --azure: #1E8CFF;        /* off-guard: one highlighted word or badge, once per layout. Never a background */

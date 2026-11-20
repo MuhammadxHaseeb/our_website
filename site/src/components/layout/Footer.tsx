@@ -1,14 +1,21 @@
 import Link from 'next/link';
 import { Logo } from '@/components/brand/Logo';
+import { FoilBars } from '@/components/brand/FoilBars';
 import { Val } from '@/components/ui/primitives';
 import { company, services } from '@/lib/content';
 
-/** Footer: brand-black ground with the foil lockup (brand rule: foil only on Black). */
+/** Footer: brand-black ground. Opens with a sign-off band (foil lockup + the bars locking back into the E), then links. */
 export function Footer() {
   const year = 2026;
   return (
-    <footer className="dark" data-theme="dark">
-      <div className="container-x border-t border-line pt-[var(--space-10)] pb-8">
+    <footer className="dark relative overflow-hidden" data-theme="dark">
+      <FoilBars mode="assemble" className="footer-bars" />
+      <div className="container-x relative z-[1] border-t border-line pt-[var(--space-9)]">
+        <div className="flex min-h-[clamp(150px,24vw,360px)] items-end">
+          <Link href="/" aria-label="epox home" className="block"><Logo lockup foil className="h-[64px] w-auto md:h-[104px]" /></Link>
+        </div>
+      </div>
+      <div className="container-x relative z-[1] pt-[var(--space-9)] pb-8">
         <div className="grid gap-12 md:grid-cols-12">
           <nav aria-label="Services" className="md:col-span-5">
             <p className="t-label muted">Services</p>
@@ -33,8 +40,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-[var(--space-10)] flex flex-col gap-8 border-t border-line pt-10 sm:flex-row sm:items-end sm:justify-between">
-          <Link href="/" aria-label="epox home" className="block"><Logo lockup foil className="h-[64px] w-auto md:h-[88px]" /></Link>
+        <div className="mt-[var(--space-9)] flex border-t border-line pt-8">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3 t-label muted">
             <Link href="/privacy" className="link-quiet">Privacy</Link>
             <span>© {year} <span className="normal-case">epox</span></span>{/* labels are capitals; the name never is */}

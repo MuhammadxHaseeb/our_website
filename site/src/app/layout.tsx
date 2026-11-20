@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { BrandDefs } from '@/components/brand/FoilBars';
 import { MotionProvider, motionBootScript } from '@/components/motion/MotionProvider';
+import { PageWipe } from '@/components/motion/PageWipe';
 
 // Ice Mint brand fonts, self-hosted from the brand system's files (app/fonts). Both families are in the hero
 // (headline, lead, labels, buttons), so the faces used there are preloaded to avoid layout shift on swap.
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <BrandDefs />
         <MotionProvider />
+        <PageWipe />
         <Header />
         <main id="main">{children}</main>
         <Footer />

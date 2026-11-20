@@ -31,8 +31,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
         return;
       }
       if (el.hasAttribute('data-unveil')) {
-        // media wipes up from the bottom while the image settles from a slight zoom
-        el.animate([{ clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)' }], { duration: dur * 1.4, delay: 120, easing: ease, fill: 'forwards' });
+        // the reveal edge is slanted at the foil E's angle and travels left to right
+        el.animate([{ clipPath: 'polygon(0 0, 0% 0, -17% 100%, 0 100%)' }, { clipPath: 'polygon(0 0, 117% 0, 100% 100%, 0 100%)' }], { duration: dur * 1.5, delay: 120, easing: ease, fill: 'forwards' });
         (el.firstElementChild as HTMLElement | null)?.animate([{ scale: '1.18' }, { scale: '1' }], { duration: dur * 1.8, delay: 120, easing: ease });
         return;
       }
@@ -41,10 +41,16 @@ export default function Template({ children }: { children: React.ReactNode }) {
         { duration: dur, delay: i * stagger, easing: ease, fill: 'forwards' });
     };
     if (!('IntersectionObserver' in window)) { els.forEach(reveal); return; }
+    // Chrome's IntersectionObserver honours the target's own clip-path, so a fully clipped [data-unveil] element is never
+    // "visible": observe its (unclipped) parent instead and reveal the element itself.
+    const targetOf = new Map<Element, HTMLElement>();
     const io = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) { reveal(e.target as HTMLElement); io.unobserve(e.target); }
+      for (const e of entries) if (e.isIntersecting) { reveal(targetOf.get(e.target) ?? (e.target as HTMLElement)); io.unobserve(e.target); }
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-    els.forEach(e => io.observe(e));
+    els.forEach(e => {
+      const watch = e.hasAttribute('data-unveil') && e.parentElement ? e.parentElement : e;
+      targetOf.set(watch, e); io.observe(watch);
+    });
     return () => io.disconnect();
   }, []);
 
