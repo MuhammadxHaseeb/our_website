@@ -5,7 +5,7 @@ import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/brand/Logo';
-import { BtnLabel } from '@/components/ui/primitives';
+import { BtnLabel, ServiceIcon } from '@/components/ui/primitives';
 import { services } from '@/lib/content';
 import { getLenis } from '@/lib/motion';
 
@@ -25,6 +25,7 @@ const company = [
 export function Header() {
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
+  const [svc, setSvc] = useState(0); // service previewed in the mega-menu
   const [sheet, setSheet] = useState(false);
   const [sheetTone, setSheetTone] = useState(false); // lags the close by half the 900 ms sweep so the logo flips as the panel leaves
   useEffect(() => { if (sheet) { setSheetTone(true); return; } const t = window.setTimeout(() => setSheetTone(false), 450); return () => window.clearTimeout(t); }, [sheet]);
@@ -129,22 +130,28 @@ export function Header() {
                 setPanel(null); next?.focus();
               }
             }}>
-            <div ref={panelRefs.services} className="mega-panel w-[680px]" data-active={panel === 'services'} aria-hidden={panel !== 'services'}>
-              <ul className="grid grid-cols-2 gap-1">
-                {services.map(s => (
-                  <li key={s.slug}>
-                    <Link href={`/services/${s.slug}`} className="mega-item" tabIndex={panel === 'services' ? 0 : -1}>
-                      <span className="flex items-baseline gap-3"><span className="t-label" style={{ color: 'var(--muted)' }}>S/{s.n}</span><span className="font-medium">{s.title}</span></span>
-                      <span className="t-small pl-[3.1rem]" style={{ color: 'var(--muted)' }}>{s.promise}</span>
-                    </Link>
-                  </li>
-                ))}
-                <li className="flex items-end">
-                  <Link href="/services" className="mega-item w-full" tabIndex={panel === 'services' ? 0 : -1}>
-                    <span className="flex items-center gap-2 font-medium">All services <ArrowRight className="h-4 w-4" strokeWidth={1.9} aria-hidden /></span>
-                  </Link>
-                </li>
-              </ul>
+            {/* Services: a compact list (icon + name) and a preview of the hovered / focused area on the right */}
+            <div ref={panelRefs.services} className="mega-panel w-[720px]" data-active={panel === 'services'} aria-hidden={panel !== 'services'}>
+              <div className="grid grid-cols-[300px_1fr] gap-4">
+                <ul className="grid gap-0.5">
+                  {services.map((s, i) => (
+                    <li key={s.slug}>
+                      <Link href={`/services/${s.slug}`} className="mega-row" data-on={svc === i} tabIndex={panel === 'services' ? 0 : -1}
+                        onMouseEnter={() => setSvc(i)} onFocus={() => setSvc(i)}>
+                        <ServiceIcon slug={s.slug} /><span>{s.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mega-preview" aria-hidden>
+                  <div key={svc} className="mega-preview-in">
+                    <p className="t-h3">{services[svc].title}</p>
+                    <p className="mt-3 t-small muted" style={{ maxWidth: '30ch' }}>{services[svc].promise}</p>
+                    <ul className="mt-5 flex flex-wrap gap-1.5">{services[svc].tags.slice(0, 4).map(t => <li key={t} className="tag">{t}</li>)}</ul>
+                  </div>
+                  <Link href="/services" className="arrow-link mt-auto" tabIndex={panel === 'services' ? 0 : -1}><span>All services</span><ArrowRight className="icon" strokeWidth={1.9} aria-hidden /></Link>
+                </div>
+              </div>
             </div>
             <div ref={panelRefs.company} className="mega-panel w-[420px]" data-active={panel === 'company'} aria-hidden={panel !== 'company'}>
               <ul className="grid gap-1">
@@ -173,11 +180,10 @@ export function Header() {
       {/* mobile menu: sits outside <header> so the header's backdrop-filter can't clip it; header is z-50 above it */}
       <div id="sheet" className="sheet lg:hidden" data-theme="dark" data-open={sheet} aria-hidden={!sheet} role="dialog" aria-modal="true" aria-label="Menu">
         <div className="container-x flex flex-1 flex-col pt-24 pb-8">
-          <p className="t-label sheet-in" style={{ '--i': 0 } as CSSProperties}>/ Services</p>
+          <p className="t-label sheet-in" style={{ '--i': 0 } as CSSProperties}>Services</p>
           <ul className="mt-4 grid gap-1">
             {services.map((s, i) => (
-              <li key={s.slug} className="sheet-in" style={{ '--i': i + 1 } as CSSProperties}><Link href={`/services/${s.slug}`} className="flex items-baseline gap-4 py-1 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>
-                <span className="t-label">S/{s.n}</span>{s.title}</Link></li>
+              <li key={s.slug} className="sheet-in" style={{ '--i': i + 1 } as CSSProperties}><Link href={`/services/${s.slug}`} className="block py-1 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{s.title}</Link></li>
             ))}
           </ul>
           <ul className="sheet-rule mt-6 grid gap-0 border-t pt-4">

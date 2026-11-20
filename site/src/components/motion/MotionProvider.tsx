@@ -16,15 +16,7 @@ export function MotionProvider() {
     mq.addEventListener('change', sync);
     whenIdle(() => { startLenis(); });
 
-    // L10 button reward: on click, a ring pops outward from the button (CSS .btn[data-pop]); replaces the old magnetic drift
-    const pop = (e: MouseEvent) => {
-      const el = (e.target as Element | null)?.closest?.<HTMLElement>('.btn');
-      if (!el || el.matches('[disabled]')) return;
-      el.removeAttribute('data-pop'); void el.offsetWidth; el.setAttribute('data-pop', '');
-      window.setTimeout(() => el.removeAttribute('data-pop'), 600);
-    };
-    document.addEventListener('click', pop);
-    return () => { mq.removeEventListener('change', sync); document.removeEventListener('click', pop); };
+    return () => mq.removeEventListener('change', sync);
   }, []);
   return null;
 }

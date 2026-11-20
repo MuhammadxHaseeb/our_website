@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { ArrowLink, Label, Ph, SectionHeader } from '@/components/ui/primitives';
 import { Faq, ProcessSteps } from '@/components/sections/blocks';
-import { LiveDemo } from '@/components/sections/LiveDemo';
 import { LocalClock } from '@/components/sections/LocalClock';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
@@ -97,9 +96,8 @@ export default function HowWeWorkPage() {
       {/* process */}
       <section className="section" aria-labelledby="process-title">
         <div className="container-x">
-          <SectionHeader id="process-title" label="Process" title="You'll always know what's happening" />
-          <div data-reveal><LiveDemo /></div>
-          <div className="mt-[var(--space-9)]"><ProcessSteps /></div>
+          <SectionHeader id="process-title" label="Process" title="Four steps, every project" />
+          <ProcessSteps />
         </div>
       </section>
 

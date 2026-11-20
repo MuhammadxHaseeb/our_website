@@ -4,7 +4,6 @@ import { ArrowLink, AssetPlaceholder, Button, CharacterSlot, FactTable, Label, L
 import { FoilBars } from '@/components/brand/FoilBars';
 import { CaseCard, EngagementModels, Faq, ProcessSteps, ServiceRows, TrustStrip } from '@/components/sections/blocks';
 import { RollCall, StatementReveal, StatsScoreboard } from '@/components/sections/interactive';
-import { LiveDemo } from '@/components/sections/LiveDemo';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { alsoServices, cases, industries, services, stats } from '@/lib/content';
@@ -38,11 +37,10 @@ const MOTION = [
   ['L2', 'Mega-menu open + morph', '180ms / 240ms ease-out-quint', 'Header: hover Services, then Company', 'Linear'],
   ['L3', 'Header hide on scroll / frosted', '240ms ease-out-quint', 'Scroll this page', 'Linear'],
   ['L4', 'Section entrance (fade + rise 16px, stagger 60ms)', '800ms ease-out-quint', 'Every section here', 'Linear'],
-  ['L5', 'Live process demo', '6–10s loop, steps 600ms', '§ Live demo', 'Linear'],
   ['L6', 'Accordion', '240ms ease-out-quint', '§ FAQ', 'Linear'],
   ['L7', 'Count-up numbers', '1200ms ease-out-expo', '§ Scoreboard', 'Linear'],
   ['L8', 'Form states', '100–240ms', '§ Contact', 'Linear'],
-  ['L10', 'Button reward: fill sweep, label roll, arrow loop, spring press, ring on click', '460–560ms ease-out-quint, press spring', 'Any button', 'Ice Mint pass'],
+  ['L10', 'Button hover: soft colour change, arrow nudge 3px, small press', '180ms ease-out-quad', 'Any button', 'Ice Mint pass'],
   ['H1', 'Lenis smooth scroll', 'lerp 0.1, mouse/trackpad only', 'Whole page (desktop)', 'Hello Monday'],
   ['H2', 'Page transition (enter)', '600ms ease-out-quint', 'Navigate via header', 'Hello Monday'],
   ['H3', 'Hero intro: headline words rise out of masks, then lead + buttons', '1000ms ease-out-quint, 70ms per word', 'Reload this page', 'Hello Monday'],
@@ -181,9 +179,8 @@ export default function Styleguide() {
         <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
       </Block>
 
-      <Block id="demo" label="Process" title="You'll always know what's happening">
-        <LiveDemo />
-        <div className="mt-[var(--space-9)]"><ProcessSteps /></div>
+      <Block id="demo" label="Process" title="Four steps, every project">
+        <ProcessSteps />
       </Block>
 
       <section id="rollcall" className="section">

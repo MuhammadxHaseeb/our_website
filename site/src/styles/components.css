@@ -1,52 +1,31 @@
 /* Component styles: every value comes from tokens.css (Ice Mint). Theme-aware through the semantic tokens,
    so the same markup works on Black and Paper grounds without per-theme overrides. */
 @layer components {
-  /* ---------------- buttons (L1 · brand .ep-btn) + L10 reward ---------------- */
+  /* ---------------- buttons (L1 · brand .ep-btn) ---------------- */
   /* primary = inverted ground (off-white on Black, black on Paper) · secondary = outline (line-strong)
      accent = saffron: the ONE action you most want clicked in a layout.
-     Reward instead of drift: hover = a fill sweeps in from the left, the label rolls up to a fresh copy, the arrow
-     loops out and back; press = a quick squeeze that springs back; click = a ring pops outward (data-pop, MotionProvider). */
+     Motion kept quiet: hover = a soft colour change + the arrow nudges 3px; press = a small squeeze. */
   .btn {
     --btn-bg: var(--action); --btn-fg: var(--on-action); --btn-bd: transparent;
-    --btn-fill: color-mix(in srgb, var(--action) 78%, var(--bg)); --btn-fg-hover: var(--btn-fg); --btn-ring: var(--action);
-    position: relative; isolation: isolate; overflow: hidden;
+    --btn-bg-hover: color-mix(in srgb, var(--action) 84%, var(--bg)); --btn-fg-hover: var(--btn-fg);
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: 44px; padding: 0 20px; border: 0; border-radius: var(--r-pill);
     background: var(--btn-bg); color: var(--btn-fg); box-shadow: inset 0 0 0 1.5px var(--btn-bd);
     font: 700 var(--fs-button)/1.2 var(--font-text); letter-spacing: 0;
     text-decoration: none; cursor: pointer; white-space: nowrap;
-    transition: color 260ms var(--ease-out-quad) 60ms, box-shadow var(--dur-fast) var(--ease-out-quad),
-                transform 520ms cubic-bezier(.34, 1.56, .64, 1);
+    transition: background-color 180ms var(--ease-out-quad), color 180ms var(--ease-out-quad),
+                box-shadow 180ms var(--ease-out-quad), transform 160ms var(--ease-out-quad);
   }
-  .btn::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--btn-fill);
-    transform: scaleX(0); transform-origin: left center; transition: transform 520ms var(--ease-out-quint); }
-  .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
-  .btn:hover, .btn:focus-visible { color: var(--btn-fg-hover); }
-  .btn:active { transform: scale(.95); transition-duration: 260ms, var(--dur-fast), 90ms; transition-timing-function: var(--ease-out-quad); }
+  .btn:hover, .btn:focus-visible { background: var(--btn-bg-hover); color: var(--btn-fg-hover); }
+  .btn:active { transform: scale(.98); }
   .btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
-  .btn[disabled]::before { display: none; }
   .btn-lg { min-height: 52px; padding: 0 28px; font-size: 0.9375rem; }
-  .btn-secondary { --btn-bg: transparent; --btn-fg: var(--text); --btn-bd: var(--line-strong); --btn-fill: var(--text); --btn-fg-hover: var(--bg); --btn-ring: var(--text); }
-  .btn-accent { --btn-bg: var(--saffron); --btn-fg: var(--on-accent); --btn-fill: color-mix(in srgb, var(--saffron) 55%, #FFFFFF); --btn-ring: var(--saffron); }
-  /* label roll: two copies stacked in a one-line mask */
-  .btn-roll { display: inline-grid; overflow: hidden; line-height: 1.2; }
-  .btn-roll > span { grid-area: 1 / 1; transition: transform 460ms var(--ease-out-quint); }
-  .btn-roll > span + span { transform: translateY(105%); }
-  .btn:hover .btn-roll > span:first-child, .btn:focus-visible .btn-roll > span:first-child { transform: translateY(-105%); }
-  .btn:hover .btn-roll > span + span, .btn:focus-visible .btn-roll > span + span { transform: none; }
-  /* arrow: slides out to the right and comes back in from the left */
-  .btn .icon { width: var(--icon-sm); height: var(--icon-sm); }
-  .btn-arrow { display: inline-flex; overflow: hidden; }
-  .btn:hover .btn-arrow .icon, .btn:focus-visible .btn-arrow .icon { animation: arrow-loop 560ms var(--ease-out-quint); }
-  @keyframes arrow-loop { 0% { transform: none; } 38% { transform: translateX(140%); } 38.1% { transform: translateX(-140%); } 100% { transform: none; } }
-  /* click confirmation: a ring pops outward from the button (outline is not clipped by overflow) */
-  .btn[data-pop] { animation: btn-pop 560ms var(--ease-out-quint); }
-  @keyframes btn-pop { from { outline: 2px solid var(--btn-ring); outline-offset: 0; } to { outline: 2px solid transparent; outline-offset: 12px; } }
-  html[data-motion="reduced"] .btn::before { transition: none; }
-  html[data-motion="reduced"] .btn-roll > span + span { display: none; }
-  html[data-motion="reduced"] .btn-roll > span:first-child { transform: none !important; }
-  html[data-motion="reduced"] .btn .icon, html[data-motion="reduced"] .btn[data-pop] { animation: none; }
-  html[data-motion="reduced"] .btn:active { transform: none; }
+  .btn-secondary { --btn-bg: transparent; --btn-fg: var(--text); --btn-bd: var(--line-strong); --btn-bg-hover: var(--hover-fill); }
+  .btn-secondary:hover, .btn-secondary:focus-visible { --btn-bd: var(--text); }
+  .btn-accent { --btn-bg: var(--saffron); --btn-fg: var(--on-accent); --btn-bg-hover: color-mix(in srgb, var(--saffron) 82%, #FFFFFF); }
+  .btn .icon { width: var(--icon-sm); height: var(--icon-sm); transition: transform var(--dur-ui) var(--ease-out-quint); }
+  .btn:hover .icon, .btn:focus-visible .icon { transform: translateX(3px); }
+  html[data-motion="reduced"] .btn:active, html[data-motion="reduced"] .btn:hover .icon { transform: none; }
 
   /* text link with arrow (brand "strong link": Inter Bold 14) */
   .arrow-link { display: inline-flex; align-items: center; gap: var(--space-2); font: 700 var(--fs-button)/1.2 var(--font-text); color: inherit; text-decoration: none; padding-block: var(--space-2); }
@@ -162,6 +141,16 @@
   .mega-panel[data-active="false"] { opacity: 0; pointer-events: none; }
   .mega-item { display: grid; gap: 4px; padding: var(--space-3); border-radius: var(--r-inner); text-decoration: none; color: inherit; transition: background-color var(--dur-fast) var(--ease-out-quad); }
   .mega-item:hover, .mega-item:focus-visible { background: var(--hover-fill); }
+  /* services menu: compact rows + live preview */
+  .mega-row { display: flex; align-items: center; gap: var(--space-3); padding: 6px var(--space-3) 6px 6px; border-radius: var(--r-card); color: var(--muted); text-decoration: none; font-weight: 500;
+    transition: background-color var(--dur-fast) var(--ease-out-quad), color var(--dur-fast) var(--ease-out-quad); }
+  .mega-row .svc-icon { width: 36px; height: 36px; border-radius: 10px; }
+  .mega-row .svc-icon svg { width: 18px; height: 18px; }
+  .mega-row[data-on="true"] { background: var(--hover-fill); color: var(--text); }
+  .mega-preview { display: flex; flex-direction: column; min-height: 100%; padding: var(--space-5); border-radius: var(--r-card); background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
+  .mega-preview-in { animation: preview-in 320ms var(--ease-out-quint) both; padding-bottom: var(--space-6); }
+  @keyframes preview-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  html[data-motion="reduced"] .mega-preview-in { animation: none; }
 
   /* Mobile menu: a raised panel whose S-curved liquid edge sweeps in from the right (900 ms, ease-in-out; owner found the measured ~0.45 s too abrupt), then links rise in.
      Motion measured from the Hello Monday mobile recording (open ≈0.40 s, close ≈0.45 s); closing is the same sweep reversed.
@@ -221,9 +210,11 @@
   .rw > span { display: inline-block; }
   html:not([data-motion="reduced"]) .rise-load .rw > span { animation: rise-in var(--dur-hero) var(--ease-out-quint) both; animation-delay: calc(80ms + var(--w) * 70ms); }
   @keyframes rise-in { from { transform: translateY(110%); } to { transform: none; } }
-  /* the azure highlight fades in behind the words once they have risen */
-  html:not([data-motion="reduced"]) .rise-load .hl { animation: hl-in 500ms var(--ease-out-quad) both; animation-delay: calc(80ms + var(--w0, 3) * 70ms + 500ms); }
-  @keyframes hl-in { from { background-color: transparent; color: var(--text); } }
+  /* the azure block wipes in from the left behind the word once the headline has risen; the word turns ink as it passes */
+  html:not([data-motion="reduced"]) .rise-load .hl::before { transform-origin: left center; animation: hl-wipe 640ms var(--ease-out-quint) both; animation-delay: calc(80ms + var(--w0, 3) * 70ms + 450ms); }
+  html:not([data-motion="reduced"]) .rise-load .hl { animation: hl-ink 320ms var(--ease-out-quad) both; animation-delay: calc(80ms + var(--w0, 3) * 70ms + 600ms); }
+  @keyframes hl-wipe { from { transform: scaleX(0); } }
+  @keyframes hl-ink { from { color: var(--text); } }
   /* hero supporting lines follow the headline */
   html:not([data-motion="reduced"]) .hero-after { animation: hero-after var(--dur-enter) var(--ease-out-quint) both; animation-delay: var(--d, 500ms); }
   @keyframes hero-after { from { opacity: 0; transform: translateY(var(--rise)); } to { opacity: 1; transform: none; } }
@@ -251,14 +242,6 @@
   .case-body strong { font-weight: 600; }
   .next-case { color: inherit; text-decoration: none; }
   .next-case:hover .arrow-link span { background-size: 100% 1.5px; }
-
-  /* ---------------- live demo (L5) ---------------- */
-  .demo-card { animation: demo-in 600ms var(--ease-out-quint) both; }
-  @keyframes demo-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
-  .demo-spin { animation: spin 900ms linear infinite; }
-  .demo-caret { display: inline-block; width: 1px; height: 1em; margin-left: 2px; vertical-align: -0.15em; background: currentColor; animation: caret 1s steps(1) infinite; }
-  @keyframes caret { 50% { opacity: 0; } }
-  html[data-motion="reduced"] .demo-card, html[data-motion="reduced"] .demo-spin, html[data-motion="reduced"] .demo-caret { animation: none; }
 
   /* ---------------- statement reveal (H6) ---------------- */
   /* unrevealed = --dim (AA large in both themes) */

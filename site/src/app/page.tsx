@@ -1,9 +1,8 @@
 import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { ArrowLink, AssetPlaceholder, Button, Label, Live, SectionHeader } from '@/components/ui/primitives';
-import { CaseCard, EngagementModels, ProcessSteps, ServiceRows } from '@/components/sections/blocks';
+import { CaseCard, EngagementModels, ServiceRows } from '@/components/sections/blocks';
 import { RollCall, StatementReveal } from '@/components/sections/interactive';
-import { LiveDemo } from '@/components/sections/LiveDemo';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
@@ -65,15 +64,6 @@ export default function Home() {
         <div className="container-x">
           <SectionHeader id="work-title" label="Work" title="Two products, both still live" action={<ArrowLink href="/work">All work</ArrowLink>} />
           <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
-        </div>
-      </section>
-
-      {/* 5 · How we work (L5 live demo) */}
-      <section className="section" aria-labelledby="process-title">
-        <div className="container-x">
-          <SectionHeader id="process-title" label="Process" title="You'll always know what's happening" action={<ArrowLink href="/how-we-work">How we work</ArrowLink>} />
-          <div data-reveal><LiveDemo /></div>
-          <div className="mt-[var(--space-9)]"><ProcessSteps /></div>
         </div>
       </section>
 

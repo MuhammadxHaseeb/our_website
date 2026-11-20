@@ -9,14 +9,9 @@ type BtnProps = {
   href?: string; variant?: 'primary' | 'secondary' | 'accent'; size?: 'md' | 'lg'; arrow?: boolean; children: ReactNode; className?: string;
 } & Omit<ComponentProps<'button'>, 'className' | 'children'>;
 
-/** Button content with the hover reward markup: rolling label (second copy hidden from screen readers) + looping arrow. */
+/** Button content: label + optional arrow (nudges on hover). */
 export function BtnLabel({ children, arrow = false }: { children: ReactNode; arrow?: boolean }) {
-  return (
-    <>
-      <span className="btn-roll"><span>{children}</span><span aria-hidden>{children}</span></span>
-      {arrow && <span className="btn-arrow" aria-hidden><ArrowRight className="icon" strokeWidth={1.9} /></span>}
-    </>
-  );
+  return <>{children}{arrow && <ArrowRight className="icon" strokeWidth={1.9} aria-hidden />}</>;
 }
 
 export function Button({ href, variant = 'primary', size = 'md', arrow = false, children, className = '', ...rest }: BtnProps) {
