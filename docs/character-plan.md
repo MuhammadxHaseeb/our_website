@@ -30,6 +30,7 @@ Inline SVG + GSAP (already bundled). Per scene: white silhouette + black ink + s
 Tool: `scripts/trace-scenes.py SHEET.png OUT_DIR` traces a 2x2 sheet of scenes into those SVG layers and fits the circles (tested on the first hero set: ~30 KB raw / ~10 KB gz per scene).
 
 ## Art source
+Reference sheet in the repo: `docs/characters/character-sheet-v1.png` (front, 3/4, side + 4 expressions for both). It shows the **first look** (Finder in a white lab coat). When attaching it to ChatGPT, add: "Finder wears a black blazer over a white tee, not the lab coat." Not served on the site (outside `site/`).
 Owner generates reference images in ChatGPT with the prompts below; we trace/redraw them as our own SVG (the AI images themselves are not shipped as the final art). Owner takes responsibility for the licence of what they generate.
 
 ## Status of the art
