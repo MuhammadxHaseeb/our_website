@@ -48,7 +48,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <FoilBars className="hero-bars hero-bars--page" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}>
-            <Link href="/services" className="link-quiet">/ Services</Link> · S/{s.n} · {s.title}
+            <Link href="/services" className="link-quiet">/ Services</Link> · {s.title}
           </p>
           <RiseText as="h1" on="load" id="service-title" className="t-h1 mt-8" style={{ maxWidth: '16ch' }} parts={[detail.headline]} />
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">

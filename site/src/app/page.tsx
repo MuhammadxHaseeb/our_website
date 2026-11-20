@@ -26,7 +26,7 @@ export default function Home() {
         <FoilBars className="hero-bars hero-bars--home" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
           <p className="t-label muted hero-after" style={d(0)}><span className="normal-case">epox</span> · Software house · {company.city}</p>
-          <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '11ch' }}
+          <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '12.5ch' }}
             parts={['We find the problem', { t: 'before', hl: true }, 'you do.']} />
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
             <p className="t-lead muted hero-after lg:col-span-6" style={{ maxWidth: '44ch', ...d(650) }}>

@@ -14,7 +14,7 @@ export default function NotFound() {
       <div className="container-x pt-[calc(72px+var(--space-10))]">
         <CharacterSlot label="404" fallback={<p className="t-label muted">404 · Not found</p>} />
         <RiseText as="h1" on="load" id="nf-title" className="t-display mt-8" style={{ maxWidth: '12ch' }}
-          parts={[{ t: 'Found:', hl: true }, "a page that doesn't exist."]} />
+          parts={["Found: a page that doesn't exist."]} />
         <p className="t-lead muted mt-10" style={{ maxWidth: '40ch' }}>
           We usually find problems before our clients do. This one is ours. The link may be old, or the page may have moved.
         </p>

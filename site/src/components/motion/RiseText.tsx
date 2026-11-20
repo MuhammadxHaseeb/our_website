@@ -8,8 +8,12 @@ type Part = string | { t: string; emph?: boolean; hl?: boolean };
  *  · on="load": CSS animation on first paint (hero). Transform only, never opacity, so LCP is not delayed.
  *  · on="view": hidden by CSS until app/template.tsx plays it with Web Animations when it scrolls into view.
  * Reduced motion: words are simply visible.
- * Ice Mint emphasis: { hl } = the azure highlight, for ONE key word in a hero (the layout's one azure spot);
- * { emph } = a quieter second half of a headline, set in text-muted.
+ *
+ * { hl }: the "Found scan" (hero only, one key word). After the words rise, a thin foil scan line sweeps once across
+ * the headline; the key word lights up in foil as it is passed and a small azure "Found" badge clicks in beside it:
+ * the brand's promise ("we find the problem before you do") acted out in about a second. The badge is the layout's
+ * one azure spot. Reduced motion: word already lit, badge shown, no scan.
+ * { emph }: a quieter second half of a headline, set in text-muted.
  */
 export function RiseText({ parts, as: As = 'h2', on = 'view', className = '', style, id }:
   { parts: Part[]; as?: 'h1' | 'h2' | 'h3' | 'p'; on?: 'load' | 'view'; className?: string; style?: CSSProperties; id?: string }) {
@@ -21,22 +25,26 @@ export function RiseText({ parts, as: As = 'h2', on = 'view', className = '', st
     return { cls, words };
   });
   const total = w;
-  const renderWords = (ws: { x: string; i: number }[]) => ws.map(({ x, i }, k) => (
+  const scan = on === 'load' && groups.some(g => g.cls === 'hl');
+  const renderWords = (ws: { x: string; i: number }[], lit = false) => ws.map(({ x, i }, k) => (
     <Fragment key={i}>
-      <span className="rw"><span style={{ '--w': i } as CSSProperties}>{x}</span></span>
+      <span className="rw"><span className={lit ? 'lit' : undefined} style={{ '--w': i } as CSSProperties}>{x}</span></span>
       {k < ws.length - 1 ? ' ' : null}
     </Fragment>
   ));
+  // scan starts once the last word has risen (same timing as the .rise-load word animation)
+  const scanStyle = scan ? ({ '--scan-at': `${80 + total * 70 + 650}ms` } as CSSProperties) : undefined;
   return (
-    <As id={id} className={`${className} ${on === 'load' ? 'rise-load' : ''}`} style={style} data-rise={on === 'view' ? '' : undefined}>
+    <As id={id} className={`${className} ${on === 'load' ? 'rise-load' : ''} ${scan ? 'found-scan' : ''}`} style={{ ...style, ...scanStyle }} data-rise={on === 'view' ? '' : undefined}>
       {groups.map((g, gi) => (
         <Fragment key={gi}>
-          {g.cls
-            ? <span className={g.cls} style={{ '--w0': total } as CSSProperties}>{renderWords(g.words)}</span>
-            : renderWords(g.words)}
+          {g.cls === 'hl'
+            ? <span className="hl">{renderWords(g.words, true)}{scan && <span className="found-badge" aria-hidden>Found</span>}</span>
+            : g.cls ? <span className={g.cls}>{renderWords(g.words)}</span> : renderWords(g.words)}
           {gi < groups.length - 1 ? ' ' : null}
         </Fragment>
       ))}
+      {scan && <span className="scan-line" aria-hidden />}
     </As>
   );
 }

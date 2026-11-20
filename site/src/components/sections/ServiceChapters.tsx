@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { ArrowLink, CharacterSlot, Label, Live, Tags } from '@/components/ui/primitives';
+import { ArrowLink, CharacterSlot, Live, Tags } from '@/components/ui/primitives';
 import { RiseText } from '@/components/motion/RiseText';
 import { cases, serviceStories, type Service } from '@/lib/content';
 
@@ -34,7 +34,7 @@ export function ServiceChapters({ items }: { items: Service[] }) {
           <CharacterSlot label="services-rail" fallback={
             <div className="chapter-num" aria-hidden>
               <span className="chapter-num-track" style={{ '--n': active } as CSSProperties}>
-                {items.map(s => <span key={s.n}>{s.n}</span>)}
+                {items.map(s => <span key={s.n} className="foil-text">{s.n}</span>)}
               </span>
             </div>
           } />
@@ -42,7 +42,7 @@ export function ServiceChapters({ items }: { items: Service[] }) {
             {items.map((s, i) => (
               <li key={s.slug}>
                 <a href={`#${s.slug}`} className="chapter-index" aria-current={active === i ? 'true' : undefined}>
-                  <span className="t-label">S/{s.n}</span><span>{s.title}</span>
+                  {s.title}
                 </a>
               </li>
             ))}
@@ -57,9 +57,8 @@ export function ServiceChapters({ items }: { items: Service[] }) {
           const related = story?.related ? cases.find(c => c.slug === story.related) : undefined;
           return (
             <li key={s.slug} id={s.slug} data-chapter={i} className="chapter border-t border-line py-[var(--space-9)] first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-[var(--space-9)]">
-              <p className="t-rollcall muted lg:hidden" aria-hidden>{s.n}</p>
-              <Label as="p" className="hidden lg:block">S/{s.n}</Label>
-              <RiseText as="h2" className="t-h2 mt-4" style={{ maxWidth: '16ch' }} parts={[s.title]} />
+              <p className="t-rollcall foil-text lg:hidden" aria-hidden>{s.n}</p>
+              <RiseText as="h2" className="t-h2 mt-4 lg:mt-0" style={{ maxWidth: '16ch' }} parts={[s.title]} />
               <p className="t-lead mt-6" style={{ maxWidth: '36ch' }}>{s.promise}</p>
               {story && <p className="mt-6 muted" style={{ maxWidth: '58ch' }}>{story.story}</p>}
               <div className="mt-8"><Tags items={s.tags} /></div>

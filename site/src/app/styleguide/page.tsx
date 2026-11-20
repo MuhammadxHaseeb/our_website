@@ -29,7 +29,7 @@ const TYPE = [
   ['display', 't-display', 'Found it.'], ['h1', 't-h1', 'A nutrition app with a real nutritionist inside'], ['h2', 't-h2', 'You\'ll always know what\'s happening'],
   ['h3', 't-h3', 'Business software'], ['rollcall', 't-rollcall', 'PropTech'], ['lead', 't-lead', 'We design, build and launch software, then stay on to keep it running and growing.'],
   ['body', 't-body', 'Tenants photograph the property at move-in into a tamper-proof record, then both sides compare it side by side at move-out. No more arguments over the deposit.'],
-  ['small', 't-small', 'NDA available on request.'], ['label', 't-label', '/ Services · S/01 · Case 002 · Since 2019'], ['tagline', 't-tagline', 'software house'],
+  ['small', 't-small', 'NDA available on request.'], ['label', 't-label', '/ Services · Case 002 · Since 2019'], ['tagline', 't-tagline', 'software house'],
 ];
 const SPACE = [4, 8, 12, 16, 24, 32, 48, 56, 64, 96, 128, 192];
 const MOTION = [
