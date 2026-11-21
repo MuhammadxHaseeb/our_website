@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Logo } from '@/components/brand/Logo';
 import { FoilBars } from '@/components/brand/FoilBars';
+import { Logo } from '@/components/brand/Logo';
 import { Val } from '@/components/ui/primitives';
 import { company, services } from '@/lib/content';
 

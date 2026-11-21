@@ -1,12 +1,13 @@
 import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
-import { ArrowLink, AssetPlaceholder, Button, Label, Live, SectionHeader } from '@/components/ui/primitives';
+import { ArrowLink, Button, Label, Live, SectionHeader } from '@/components/ui/primitives';
 import { CaseCard, EngagementModels, ServiceRows } from '@/components/sections/blocks';
 import { RollCall, StatementReveal } from '@/components/sections/interactive';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
 import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 import { FoilBars } from '@/components/brand/FoilBars';
+import { LiquidLogo } from '@/components/brand/LiquidLogo';
 import { alsoServices, cases, company, industries, services } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export default function Home() {
             </div>
           </div>
           <ExpandOnScroll className="mt-[var(--space-9)]">
-            <AssetPlaceholder name="liquid-metal logo loop · 16:9 (4:5 on mobile) · WebM + MP4 + poster" ratio="16 / 9" />
+            <LiquidLogo variant="hero" />
           </ExpandOnScroll>
 
           {/* 2 · Proof strip */}

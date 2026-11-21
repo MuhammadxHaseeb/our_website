@@ -1,0 +1,106 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>epox liquid metal renderer</title>
+<style>html,body{margin:0;background:#0B0C0F}canvas{display:block}</style></head>
+<body>
+<canvas id="gl"></canvas>
+<script>
+/*
+ * epox liquid-metal logo: our own shader (no third-party art or code).
+ * The Ice Mint wordmark is rasterised, blurred into a bevel height field, then shaded as liquid chrome:
+ * a looping noise field warps the surface and its ripples, a studio environment (dark base, bright horizon band,
+ * soft key light) is reflected, and the reflections are tinted with the six Ice Mint foil stops.
+ * Time is an angle on a circle, so frame N wraps seamlessly to frame 0.
+ * Driven by scripts/liquid-logo/render.js: window.setup(opts) then window.frame(i) → PNG data URL.
+ */
+const VERT = `attribute vec2 p; varying vec2 vUv; void main(){ vUv = p*0.5+0.5; vUv.y = 1.0 - vUv.y; gl_Position = vec4(p,0.,1.); }`;
+const FRAG = `
+precision highp float;
+varying vec2 vUv;
+uniform sampler2D uH; uniform vec2 uRes; uniform float uA; uniform vec3 uBg; uniform float uK;
+vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;} vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}
+float snoise(vec2 v){ const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+  vec2 i=floor(v+dot(v,C.yy)); vec2 x0=v-i+dot(i,C.xx); vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);
+  vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1; i=mod289(i);
+  vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+  vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0); m=m*m; m=m*m;
+  vec3 x=2.0*fract(p*C.www)-1.0; vec3 h=abs(x)-0.5; vec3 ox=floor(x+0.5); vec3 a0=x-ox;
+  m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);
+  vec3 g; g.x=a0.x*x0.x+h.x*x0.y; g.yz=a0.yz*x12.xz+h.yz*x12.yw; return 130.0*dot(m,g); }
+// Ice Mint foil stops: sky, glow, blue, mint, ice, seafoam
+vec3 foil(float t){ t=fract(t);
+  vec3 c0=vec3(0.749,0.890,1.000), c1=vec3(0.886,1.000,0.957), c2=vec3(0.561,0.788,1.000), c3=vec3(0.498,0.961,0.816), c4=vec3(0.894,0.984,1.000), c5=vec3(0.659,0.941,0.878);
+  float s=t*5.0; if(s<1.0) return mix(c0,c1,s); if(s<2.0) return mix(c1,c2,s-1.0); if(s<3.0) return mix(c2,c3,s-2.0); if(s<4.0) return mix(c3,c4,s-3.0); return mix(c4,c5,s-4.0); }
+float height(vec2 uv){ vec4 t=texture2D(uH,uv); return t.r*0.62 + t.g*0.38; }
+float ripple(vec2 q, vec2 c){ return snoise(q*1.5 + c*1.0)*0.6 + snoise(q*3.1 - c.yx*1.2 + 3.1)*0.14; }
+void main(){
+  vec2 asp = vec2(uRes.x/uRes.y, 1.0);
+  vec2 c = vec2(cos(uA), sin(uA));
+  vec2 q = vUv*asp*2.6*uK; // uK keeps ripples the same size relative to the letters in every format
+  // slow liquid flow: the surface drifts inside the letters (looping)
+  vec2 warp = vec2(snoise(q + c*0.8), snoise(q*1.6 + 7.3 - c.yx*0.8)) * 0.0042;
+  vec2 u = vUv + warp;
+  // the letter outline stays exactly the brand file (no distortion); only the metal surface inside moves
+  float m = texture2D(uH, vUv).b;
+  vec2 e = 1.5/uRes;
+  float hx = height(u+vec2(e.x,0.)) - height(u-vec2(e.x,0.));
+  float hy = height(u+vec2(0.,e.y)) - height(u-vec2(0.,e.y));
+  vec2 dq = vec2(0.02, 0.0);
+  float rx = ripple(q+dq.xy, c) - ripple(q-dq.xy, c);
+  float ry = ripple(q+dq.yx, c) - ripple(q-dq.yx, c);
+  vec3 N = normalize(vec3(-hx*7.5 - rx*0.42, -hy*7.5 - ry*0.42, 1.0));
+  vec3 V = vec3(0.,0.,1.);
+  vec3 R = reflect(-V, N);
+  // studio environment: dark floor, bright horizon band that sways, darker sky
+  float sway = 0.18*sin(R.x*2.4 + uA) + 0.06*snoise(R.xy*2.0 + c);
+  float band = exp(-pow((R.y - 0.12 + sway)*5.5, 2.0));
+  float band2 = 0.55*exp(-pow((R.y + 0.45 - sway*0.6)*7.0, 2.0));
+  float base = mix(0.06, 0.34, smoothstep(-0.9, 0.9, R.y));
+  float lum = base + band*1.05 + band2;
+  vec3 L = normalize(vec3(-0.45 + 0.25*c.x, 0.55 + 0.15*c.y, 0.75));
+  float spec = pow(max(dot(R, L), 0.0), 60.0);
+  float fres = pow(1.0 - clamp(N.z, 0.0, 1.0), 2.2);
+  vec3 tint = foil(R.x*0.35 + R.y*0.25 + 0.15*snoise(q*0.7 + c*0.6) + uA*0.0);
+  vec3 chrome = mix(vec3(lum), tint*lum*1.2, 0.72) + fres*tint*0.6 + spec*vec3(1.0);
+  chrome = clamp(chrome, 0.0, 1.0);
+  gl_FragColor = vec4(mix(uBg, chrome, m), 1.0);
+}`;
+let gl, prog, uA, W, H;
+window.setup = async ({ w, h, path, viewBox, fill, cy = 0.5 }) => {
+  W = w; H = h;
+  const cv = document.getElementById('gl'); cv.width = w; cv.height = h;
+  gl = cv.getContext('webgl', { preserveDrawingBuffer: true, antialias: false });
+  // height field: sharp mask (B) + big bevel blur (R) + small bevel blur (G)
+  const [vx, vy, vw, vh] = viewBox.split(' ').map(Number);
+  const s = (w * fill) / vw; const ox = (w - vw * s) / 2 - vx * s; const oy = h * cy - (vh * s) / 2 - vy * s;
+  const shape = (blur) => {
+    const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d');
+    x.filter = blur ? `blur(${blur}px)` : 'none';
+    x.setTransform(s, 0, 0, s, ox, oy); x.fillStyle = '#fff'; x.fill(new Path2D(path));
+    return x.getImageData(0, 0, w, h).data;
+  };
+  const sharp = shape(0); const big = shape(Math.max(2, vh * s * 0.055)); const small = shape(Math.max(1, vh * s * 0.018));
+  const px = new Uint8Array(w * h * 4);
+  for (let i = 0; i < w * h; i++) { px[i*4] = big[i*4+3]; px[i*4+1] = small[i*4+3]; px[i*4+2] = sharp[i*4+3]; px[i*4+3] = 255; }
+  const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, px);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(prog); gl.useProgram(prog);
+  const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  gl.uniform1i(gl.getUniformLocation(prog, 'uH'), 0); gl.uniform2f(gl.getUniformLocation(prog, 'uRes'), w, h);
+  gl.uniform3f(gl.getUniformLocation(prog, 'uBg'), 11/255, 12/255, 15/255);
+  // letter width in UV*aspect units relative to the 16:9 hero (fill 0.56), so ripple size follows the letters
+  gl.uniform1f(gl.getUniformLocation(prog, 'uK'), (0.56 * 1920 / 1080) / (fill * w / h));
+  uA = gl.getUniformLocation(prog, 'uA'); gl.viewport(0, 0, w, h);
+  return true;
+};
+window.frame = (i, n) => {
+  gl.uniform1f(uA, (i / n) * Math.PI * 2);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  return document.getElementById('gl').toDataURL('image/png');
+};
+</script>
+</body></html>

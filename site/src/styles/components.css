@@ -86,6 +86,19 @@
   .read-bar[data-theme="light"] { background: var(--text); }
   .hover-only { display: none; }
   @media (hover: hover) and (pointer: fine) { .hover-only { display: block; } }
+  /* liquid-metal logo loops (LiquidLogo). The video ground is brand black, same as the page. */
+  .liquid { position: relative; overflow: hidden; background: var(--brand-black); }
+  .liquid-still, .liquid-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* the video sits on the still and fades in once it is actually playing */
+  .liquid-video { position: absolute; inset: 0; opacity: 0; transition: opacity 600ms var(--ease-out-quad); }
+  .liquid-video[data-on] { opacity: 1; }
+  /* live 3D glass logo (GlassLogo) over the still: fades in once its first frame is drawn */
+  .liquid-3d { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms var(--ease-out-quad); }
+  .liquid-3d[data-on] { opacity: 1; }
+  .liquid-3d canvas { display: block; width: 100% !important; height: 100% !important; }
+  .liquid--hero { aspect-ratio: 4 / 5; border-radius: var(--r-card); box-shadow: inset 0 0 0 1px var(--line); }
+  .liquid--hero .liquid-wide { display: none; }
+  @media (min-width: 768px) { .liquid--hero { aspect-ratio: 16 / 9; } .liquid--hero .liquid-wide { display: block; } .liquid--hero .liquid-tall { display: none; } }
   /* brand ServiceCard icon tile: always brand-black with a foil-mint line icon (the one place foil colour is in the UI) */
   .svc-icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--brand-black); box-shadow: inset 0 0 0 1px var(--line); color: var(--foil-mint); }
   .svc-icon svg { width: var(--icon-lg); height: var(--icon-lg); fill: none; stroke: url(#ep-foil-icon); stroke-width: var(--icon-stroke); stroke-linecap: round; stroke-linejoin: round; }
