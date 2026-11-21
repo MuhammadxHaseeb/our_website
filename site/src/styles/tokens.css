@@ -1,9 +1,9 @@
 /* =====================================================================
    EPOX DESIGN TOKENS: single source of truth.
    Ice Mint brand system (assets/epox — Ice Mint brand system/tokens.css, README.md):
-   black ground, ice-blue → mint holographic foil (logo, foil bars, service icons only),
-   Space Grotesk headlines, Inter text, two off-guard colours used once per layout
-   (saffron = the one action you most want clicked, azure = one highlighted word or badge).
+   black ground, ice-blue → mint holographic foil (logo, foil bars, service icons, and the one main button per layout:
+   it replaced the brand's saffron, owner 2026-11-21), Space Grotesk headlines, Inter text,
+   azure for the focus ring and one highlight.
    Every component reads from these variables.
    ===================================================================== */
 
@@ -21,9 +21,8 @@
   /* where the shared light falls (lib/light writes --lx / --ly); CSS foil uses an oversized gradient and slides it */
   --foil-pos: calc(var(--lx, 0.5) * 100%) calc(var(--ly, 0.35) * 100%);
   --foil: linear-gradient(115deg, var(--foil-sky) 0%, var(--foil-glow) 20%, var(--foil-blue) 40%, var(--foil-mint) 58%, var(--foil-ice) 78%, var(--foil-seafoam) 100%);
-  --saffron: #FFC21A;      /* off-guard: the main call to action, once per layout. Never a background */
   --azure: #1E8CFF;        /* off-guard: one highlighted word or badge, once per layout. Never a background */
-  --on-accent: #0B0C0F;    /* text on saffron (12:1) and azure (5.8:1) */
+  --on-accent: #0B0C0F;    /* text on the foil button (11:1 or better) and azure (5.8:1) */
   --focus: var(--azure);   /* focus ring: 2px, offset 2px */
 
   /* ---------- Black theme (the default) ---------- */

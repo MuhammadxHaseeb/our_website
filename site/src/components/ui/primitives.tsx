@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { RiseText } from '@/components/motion/RiseText';
 
 /* ------------------------------------------------------------------ Button */
-/** Brand buttons: primary (inverted ground), secondary (outline), accent (saffron: once per layout, for the one action you most want clicked). */
+/** Brand buttons: primary (inverted ground), secondary (outline), accent (foil: once per layout, for the one action you most want clicked; ink on Paper). */
 type BtnProps = {
   href?: string; variant?: 'primary' | 'secondary' | 'accent'; size?: 'md' | 'lg'; arrow?: boolean; children: ReactNode; className?: string;
 } & Omit<ComponentProps<'button'>, 'className' | 'children'>;

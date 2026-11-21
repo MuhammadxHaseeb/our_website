@@ -16,13 +16,13 @@ export const metadata: Metadata = { title: 'Styleguide', robots: { index: false,
 // Ice Mint (assets/epox — Ice Mint brand system): Black ground by default, Paper for card bands, reading and forms.
 const SCALE: [string, string][] = [
   ['brand-black', '#0B0C0F'], ['surface', '#16181D'], ['raised', '#1C1F25'], ['line', '#2A2F37'], ['line-strong', '#6B7380'], ['text-muted', '#A9B0BC'], ['text', '#F2F5F9'],
-  ['paper', '#F3F5F8'], ['line (paper)', '#D8DDE5'], ['muted (paper)', '#535B68'], ['foil-flat', '#B9EDEA'], ['foil-mint', '#7FF5D0'], ['saffron', '#FFC21A'], ['azure', '#1E8CFF'],
+  ['paper', '#F3F5F8'], ['line (paper)', '#D8DDE5'], ['muted (paper)', '#535B68'], ['foil-flat', '#B9EDEA'], ['foil-mint', '#7FF5D0'], ['azure', '#1E8CFF'],
 ];
 const PAIRS: [string, string, string][] = [
   ['Text on Black', '#F2F5F9', '#0B0C0F'], ['Text on surface', '#F2F5F9', '#16181D'], ['Muted text on Black', '#A9B0BC', '#0B0C0F'], ['Muted text on surface', '#A9B0BC', '#16181D'],
   ['Dimmed large text on Black (line-strong)', '#6B7380', '#0B0C0F'], ['Text on Paper', '#0B0C0F', '#F3F5F8'], ['Muted text on Paper', '#535B68', '#F3F5F8'],
   ['Muted text on white card', '#535B68', '#FFFFFF'], ['Dimmed large text on Paper (line-strong)', '#7A8391', '#F3F5F8'],
-  ['Text on saffron (accent button)', '#0B0C0F', '#FFC21A'], ['Text on azure (highlight)', '#0B0C0F', '#1E8CFF'], ['Primary button on Black', '#0B0C0F', '#F2F5F9'],
+  ['Text on foil (accent button, darkest stop)', '#0B0C0F', '#8FC9FF'], ['Text on azure (highlight)', '#0B0C0F', '#1E8CFF'], ['Primary button on Black', '#0B0C0F', '#F2F5F9'],
   ['Foil-flat mark on Black', '#B9EDEA', '#0B0C0F'], ['Error on Black', '#FF7A6E', '#0B0C0F'], ['Error on Paper', '#B42318', '#F3F5F8'],
 ];
 const TYPE = [

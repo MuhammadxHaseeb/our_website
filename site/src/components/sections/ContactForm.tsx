@@ -8,7 +8,7 @@ type State = 'idle' | 'sending' | 'success' | 'error';
 const TOPICS = ['New project', 'Existing product', 'Dedicated developers', 'Other'];
 
 /** Contact form (L8): inline validation, sending / success / error states. Posts to /api/contact → Resend → owner's inbox. */
-/** accent: the submit button is the layout's saffron action (contact page); off where another saffron button leads. */
+/** accent: the submit button is the layout's main action (contact page); off where another accent button leads. On Paper it renders as ink. */
 export function ContactForm({ forceState, accent = true }: { forceState?: State; accent?: boolean }) {
   const id = useId();
   const [state, setState] = useState<State>('idle');
