@@ -98,8 +98,9 @@ export function hasWebGL2() {
   if (webgl2 === null) { try { webgl2 = !!document.createElement('canvas').getContext('webgl2'); } catch { webgl2 = false; } }
   return webgl2;
 }
-/** inline in <head>, so the pinned layout is there from the first paint: no layout shift */
-export const storyBootScript = `(function(){try{var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(min-height: 560px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
+/** inline in <head>, so the pinned layout is there from the first paint: no layout shift. It also notes the visitor's
+ *  first interaction (window.__epoxActed) for the 3D loader, in case it happens before the page has started up. */
+export const storyBootScript = `(function(){try{['pointermove','pointerdown','touchstart','wheel','scroll','keydown'].forEach(function(k){addEventListener(k,function(){window.__epoxActed=true},{once:true,passive:true})});var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(min-height: 560px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
 
 export function clamp01(v: number) { return Math.min(1, Math.max(0, v)); }
 export const smooth = (v: number) => { const t = clamp01(v); return t * t * (3 - 2 * t); };

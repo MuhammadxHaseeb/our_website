@@ -6,7 +6,8 @@ import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
-import { barsAlpha, camZ, diveAt, F_USER, getAnchor, glowAt, letterAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
+import { cancelIdle, whenIdle } from '@/lib/motion';
+import { barsAlpha, camZ, diveAt, F_USER, getAnchor, getStory, PASS, glowAt, letterAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
 import { FOIL_STOPS, SLICES } from './FoilBars';
 import { WORDMARK_PATH } from './wordmark-path';
 
@@ -48,18 +49,39 @@ function studio(renderer: THREE.WebGLRenderer) {
  * Each letter's geometry is centred on itself; `rest` is where it sits in the word (word centred on 0).
  */
 type Letter = { geo: THREE.BufferGeometry; rest: THREE.Vector3 };
+const EXTRUDE = { depth: 70, curveSegments: 12, bevelEnabled: true, bevelThickness: 16, bevelSize: 9, bevelSegments: 5 };
 function wordmark() {
   const shapes = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${WORDMARK_PATH}"/></svg>`).paths.flatMap(p => SVGLoader.createShapes(p));
-  const geos = shapes.map(s => { const g = new THREE.ExtrudeGeometry(s, { depth: 70, curveSegments: 12, bevelEnabled: true, bevelThickness: 16, bevelSize: 9, bevelSegments: 5 }); g.scale(1, -1, 1); g.computeBoundingBox(); return g; });
+  return wordmarkFrom(shapes.map(s => { const g = new THREE.ExtrudeGeometry(s, EXTRUDE); g.scale(1, -1, 1); g.computeBoundingBox(); return g; }));
+}
+function wordmarkFrom(geos: THREE.BufferGeometry[]) {
   const word = new THREE.Box3(); geos.forEach(g => word.union(g.boundingBox!));
   const wc = new THREE.Vector3(); word.getCenter(wc);
   const letters: Letter[] = geos.map(g => {
     const c = new THREE.Vector3(); g.boundingBox!.getCenter(c);
-    g.translate(-c.x, -c.y, -c.z); g.computeVertexNormals(); g.computeBoundingBox();
+    g.translate(-c.x, -c.y, -c.z); g.computeBoundingBox(); // (ExtrudeGeometry already computed the normals)
     return { geo: g, rest: c.sub(wc) };
   }).sort((a, b) => a.rest.x - b.rest.x);
   const box = word.clone().translate(wc.negate());
   return { letters, box };
+}
+/**
+ * Build the glass letters ahead of mounting, one letter per idle moment (extruding all four at once took ~280 ms on a
+ * phone-speed CPU in one block). LiquidLogo awaits this before it mounts the scene; the scene then reuses the result.
+ */
+let prepared: ReturnType<typeof wordmark> | null = null;
+export function prepareGlass(): Promise<void> {
+  if (prepared) return Promise.resolve();
+  const shapes = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${WORDMARK_PATH}"/></svg>`).paths.flatMap(p => SVGLoader.createShapes(p));
+  const geos: THREE.ExtrudeGeometry[] = [];
+  return new Promise(resolve => {
+    const next = () => whenIdle(() => {
+      const s = shapes[geos.length];
+      if (s) { const g = new THREE.ExtrudeGeometry(s, EXTRUDE); g.scale(1, -1, 1); g.computeBoundingBox(); geos.push(g); next(); return; }
+      prepared = wordmarkFrom(geos); resolve();
+    });
+    next();
+  });
 }
 // where each letter starts before it flies into the word (in word widths) and how it is turned
 const SCATTER = [
@@ -159,7 +181,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const letterRefs = useRef<(THREE.Mesh | null)[]>([]);
   const light = useRef({ x: 0.5, y: 0.4 });
   const first = useRef(true);
-  const mark = useMemo(() => wordmark(), []);
+  const mark = useMemo(() => prepared ?? wordmark(), []);
   const bars = useMemo(() => barsTexture(), []);
   const barsMatB = useMemo(() => new THREE.MeshBasicMaterial({ map: bars, toneMapped: false, alphaTest: 0.3 }), [bars]);
   const glass = useMemo(() => new THREE.MeshPhysicalMaterial({
@@ -169,7 +191,9 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   }), []);
 
   // home scroll story (lib/story)
-  const story = useRef({ on: storyOn(), p: 0 });
+  // c = the progress the scene shows. If the 3D arrives after the visitor is already past the foil (slow phone), the
+  // stage held on flat foil meanwhile (HeroStory), and the scene catches up from the foil moment instead of jumping.
+  const story = useRef({ on: storyOn(), p: getStory(), c: Math.min(getStory(), PASS), catching: getStory() > PASS });
   const tilt = useRef({ x: 0, y: 0 });
   const corners = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
   const last = useRef({ x: 0, y: 0, w: 0, h: 0 });
@@ -183,15 +207,30 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const sky = useRef(new THREE.Color());
 
   useEffect(() => {
-    const env = studio(gl); scene.environment = env; scene.background = new THREE.Color('#0B0C0F');
+    scene.background = new THREE.Color('#0B0C0F');
     const off = onLight(l => { light.current = { x: l.x, y: l.y }; });
     const offStory = onStory(p => { story.current.p = p; story.current.on = storyOn(); });
     const offAnchor = onAnchor(a => { anchor.current = a; });
+    // The studio lighting (PMREM, ~330 ms on a phone-speed CPU) is only needed by the glass, which stays hidden until the
+    // camera is behind the foil, so it is built in its own idle task after the first frame (the bars take over at once).
+    // Then every shader is compiled while the page sits idle: otherwise the glass compiles the first time the word shows,
+    // mid-scroll right behind the foil, and that frame stutters (measured 40 fps there, 66 ms frames).
+    // compile() only takes visible objects, so show everything for the call; the next frame sets visibility again.
+    let env: THREE.Texture | null = null; let cancelled = false;
+    const id = whenIdle(() => {
+      if (cancelled) return;
+      env = studio(gl); scene.environment = env;
+      const all = [word.current, backdrop.current, storyBars.current].filter(Boolean) as THREE.Object3D[];
+      const was = all.map(o => o.visible); all.forEach(o => { o.visible = true; });
+      gl.compileAsync(scene, camera).catch(() => {});
+      all.forEach((o, i) => { o.visible = was[i]; });
+    });
     return () => {
-      off(); offStory(); offAnchor(); env.dispose(); mark.letters.forEach(l => l.geo.dispose()); bars.dispose(); barsMatB.dispose();
-      glass.dispose(); barsGeo.dispose(); barsMat.dispose();
+      cancelled = true; cancelIdle(id);
+      off(); offStory(); offAnchor(); env?.dispose(); mark.letters.forEach(l => l.geo.dispose()); bars.dispose(); barsMatB.dispose();
+      glass.dispose(); barsGeo.dispose(); barsMat.dispose(); prepared = null;
     };
-  }, [gl, scene, mark, bars, barsMatB, glass, barsGeo, barsMat]);
+  }, [gl, scene, camera, mark, bars, barsMatB, glass, barsGeo, barsMat]);
 
   // fit the word to ~60% of the frame width at any aspect (50% in the story, where the canvas fills the whole screen)
   const fit = useMemo(() => {
@@ -214,6 +253,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     const wordW = mark.box.max.x - mark.box.min.x;
 
     const s = story.current; const a = anchor.current;
+    if (s.catching) { s.c += (s.p - s.c) * (1 - Math.exp(-dt * 4)); if (Math.abs(s.p - s.c) < 0.003) s.catching = false; } else s.c = s.p;
     if (!s.on || !a) {
       // the normal hero logo (no story): word in front of its bars, camera at rest
       sb.visible = false; w.visible = true; bd.visible = true; barsMatB.color.setScalar(1); bd.scale.setScalar(1.15);
@@ -223,7 +263,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       w.rotation.set(tilt.current.x, tilt.current.y, 0);
       letterRefs.current.forEach((m, i) => { if (!m) return; m.position.copy(mark.letters[i].rest); m.rotation.set(0, 0, 0); });
     } else {
-      const p = s.p;
+      const p = s.c;
       // place the bars so that from the resting camera they cover exactly the SVG's pixels
       const cam = state.camera as THREE.PerspectiveCamera;
       const wpp = (2 * Z0 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2))) / size.height; // world units per px on z = 0
@@ -281,7 +321,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       });
     }
     // publish where the word sits on screen (canvas px = stage px), so the Found corners lock onto the glass
-    if (s.on && s.p > 0.6 && s.p < 0.95) {
+    if (s.on && s.c > 0.6 && s.c < 0.95) {
       const bb = mark.box; w.updateMatrixWorld();
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       corners.forEach((v, i) => {

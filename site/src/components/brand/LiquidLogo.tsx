@@ -61,9 +61,19 @@ export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: s
     // wait for the page to finish loading, then for an idle moment, so neither the 3D nor the video competes with the first paint.
     // The 3D scene (≈0.5 s of main-thread setup) waits for the visitor's first move, scroll or key press as well:
     // on a desktop that is almost immediate, and the page is fully interactive before any of it runs.
-    const kinds = ['pointermove', 'scroll', 'keydown', 'pointerdown', 'touchstart'] as const;
-    let acted = false; let loaded = false;
-    const go = () => { if (cancelled || !loaded || (use3D && !acted)) return; whenIdle(() => { if (cancelled) return; ready = true; if (use3D && !hasWebGL2()) use3D = false; if (use3D) setGlass(true); sync(); }); };
+    const kinds = ['pointermove', 'scroll', 'wheel', 'keydown', 'pointerdown', 'touchstart'] as const;
+    // an interaction made while the page was still starting up was recorded by the boot script (lib/story), so it counts
+    let acted = !!(window as Window & { __epoxActed?: boolean }).__epoxActed; let loaded = false;
+    // the glass letters are built ahead in idle slices (prepareGlass), so mounting the scene is not one long block
+    const go = () => {
+      if (cancelled || !loaded || (use3D && !acted)) return;
+      whenIdle(() => {
+        if (cancelled) return; ready = true;
+        if (use3D && !hasWebGL2()) use3D = false;
+        if (!use3D) { sync(); return; }
+        import('./GlassLogo').then(m => m.prepareGlass()).then(() => { if (!cancelled) setGlass(true); });
+      });
+    };
     const onAct = () => { if (acted) return; acted = true; kinds.forEach(k => window.removeEventListener(k, onAct)); go(); };
     const start = () => { loaded = true; go(); };
     if (use3D) kinds.forEach(k => window.addEventListener(k, onAct, { passive: true }));

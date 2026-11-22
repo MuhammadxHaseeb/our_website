@@ -47,8 +47,17 @@ export function startLight() {
       target.y = 0.5 + Math.max(-1, Math.min(1, (e.beta - 45) / 30)) * 0.5;
       kick();
     });
+    // While the home scroll story is pinned, the scroll drives the camera, not the light: each light step restyles the
+    // whole page (and the hugely scaled foil bars), which on a phone-speed CPU kept the main thread busy every frame and
+    // starved the 3D loader (measured: 3D ready ~10 s after load instead of ~3 s).
+    let story: Element | null = null;
+    const storyPinned = () => {
+      if (document.documentElement.dataset.story !== 'on') return false;
+      if (!story || !story.isConnected) story = document.querySelector('.story'); // (page changes keep the light running)
+      return !!story && story.getBoundingClientRect().bottom > window.innerHeight + 1;
+    };
     window.addEventListener('scroll', () => {
-      if (tilt) return;
+      if (tilt || storyPinned()) return;
       target.x = 0.5 + Math.sin(window.scrollY / 260) * 0.45;
       target.y = 0.5 + Math.cos(window.scrollY / 410) * 0.3;
       kick();

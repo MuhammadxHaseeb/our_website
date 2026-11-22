@@ -24,7 +24,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     const svg = st.querySelector<SVGSVGElement>('.hero-bars');
     const html = document.documentElement;
     const mq = window.matchMedia('(min-height: 560px)'); // phone turned to landscape and back, window resized
-    let raf = 0; let p = 0; let has3D = false; let glChecked = false;
+    let raf = 0; let p = 0; let has3D = false; let glChecked = false; let waitTimer = 0;
     let a = { left: 0, top: 0, width: 0 };
 
     // where the SVG bars are laid out on the stage (computed values: no transforms, no entrance animation)
@@ -45,6 +45,9 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       el.style.setProperty('--p', p.toFixed(4));
       el.toggleAttribute('data-past', p > 0.12);
       el.toggleAttribute('data-through', p > PASS);
+      // past the foil before the 3D is ready (slow phone): the stage holds on the flat foil colour (CSS) and the scene
+      // catches up from there once it arrives; only if it never does (4 s) does the still stand in
+      if (p > PASS && !has3D && !waitTimer && !el.hasAttribute('data-no3d')) waitTimer = window.setTimeout(() => { if (!has3D) el.setAttribute('data-no3d', ''); }, 4000);
       el.toggleAttribute('data-done', p > 0.995); // all black now: let the stage go, Services is already underneath
       setStory(p);
       // fallback flight until the 3D scene is drawing: the same frames, as a 2D scale of the SVG about F
@@ -67,7 +70,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     const motionObs = new MutationObserver(sync);
     motionObs.observe(html, { attributes: true, attributeFilter: ['data-motion'] });
 
-    const off3D = onStory3D(() => { has3D = true; clearFallback(); el.setAttribute('data-3d', ''); kick(); });
+    const off3D = onStory3D(() => { has3D = true; clearFallback(); el.removeAttribute('data-no3d'); el.setAttribute('data-3d', ''); kick(); });
 
     // the Found corners hug the glass word wherever the 3D scene puts it
     const offBounds = onStoryBounds(b => {
@@ -95,7 +98,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     const checkGL = () => { idle = whenIdle(() => { glChecked = true; sync(); }); };
     if (document.readyState === 'complete') checkGL(); else window.addEventListener('load', checkGL, { once: true });
     return () => {
-      cancelAnimationFrame(raf); cancelIdle(idle); window.removeEventListener('load', checkGL); motionObs.disconnect(); offBounds(); off3D(); resetStory3D();
+      cancelAnimationFrame(raf); cancelIdle(idle); window.clearTimeout(waitTimer); window.removeEventListener('load', checkGL); motionObs.disconnect(); offBounds(); off3D(); resetStory3D();
       window.removeEventListener('scroll', kick); window.removeEventListener('resize', onResize);
       mq.removeEventListener('change', sync); el.removeEventListener('focusin', onFocus);
       reset();

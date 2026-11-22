@@ -111,7 +111,10 @@
   /* the 3D stage fills the screen behind the copy. Before the 3D is drawing it stays hidden (the SVG bars fly instead);
      once the camera is through the foil, the still stands in for the glass if the 3D never came */
   html[data-story="on"] .story .hero-logo { position: absolute; inset: 0; z-index: 0; margin: 0; visibility: hidden; }
-  html[data-story="on"] .story[data-3d] .hero-logo, html[data-story="on"] .story[data-through] .hero-logo { visibility: visible; }
+  html[data-story="on"] .story[data-3d] .hero-logo, html[data-story="on"] .story[data-no3d] .hero-logo { visibility: visible; }
+  /* past the foil before the 3D has arrived: hold on the flat foil colour (the screen was all foil a moment ago, the
+     scene picks up from that same colour when it arrives); data-no3d (4 s, never arrived) shows the still instead */
+  html[data-story="on"] .story[data-through]:not([data-3d]):not([data-no3d]) > .hero { background: #C7F2F2; }
   html[data-story="on"] .story .liquid--hero { aspect-ratio: auto; height: 100%; border-radius: 0; box-shadow: none; }
   html[data-story="on"] .story .liquid-3d { transition: none; opacity: 1; } /* takes over from the SVG on its first frame, no gap */
   html[data-story="on"] .story:not([data-3d]) .liquid-still { transform: scale(calc(0.8 + 0.2 * clamp(0, (var(--p) - 0.55) / 0.32, 1))); }
