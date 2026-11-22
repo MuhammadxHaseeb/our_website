@@ -1,5 +1,16 @@
 # Home hero scroll story: plan (2026-11-22)
 
+> **Revised 2026-11-22 (owner: "what we are doing is fading, Notiune's was a seamless transition"):** the built version
+> is ONE continuous camera flight, no cross-fades and no wipe. Pinned 1.6 screens: the copy scrolls away while the camera
+> flies straight at a point on the middle foil bar until the screen is all foil (p 0 → .42); it passes through, and the
+> space behind is lit in exactly that foil colour (fog in the same colour) and dims to brand black as the camera glides
+> on to the glass wordmark floating 4000 units behind, which turns to face you (.42 → .76); the Found corners lock on
+> (.72 → .8), the proof strip slides up (.74 → .92); then the stage unpins and the page scrolls on into Services.
+> Seamless because the 3D scene draws the hero's foil bars itself, pixel-matched to the SVG (same gradient, sheen, grain),
+> and flying straight at a point on a flat plane equals scaling the picture about that point, so the SVG fallback
+> (scaled about the same point before the 3D is ready) and the 3D camera draw the same frames. Maths in `lib/story.ts`.
+> The table below is the first (faded) version, kept for history.
+
 Idea taken from Notiune (`research/sites/notiune.md`, motion idea 2): one hero object carries a single continuous scroll story (object → logo → proof → wipe into the content). We build **our own version from our own pieces**: the foil bars (the E), the holographic glass wordmark, the Found corners, the proof strip and the slanted foil wipe. We do not use their tube, their circle iris or their timing.
 
 ## The story (desktop, motion allowed)

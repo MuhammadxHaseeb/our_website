@@ -6,7 +6,8 @@ import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
-import { onStory, setStoryBounds, smooth, storyOn } from '@/lib/story';
+import { ARRIVE, barsAlpha, camZ, F_USER, getAnchor, glowAt, LOGO_FROM_Z, LOGO_Z, markStory3D, onAnchor, onStory, PASS, setStoryBounds, smooth, storyOn, VB, Z0 } from '@/lib/story';
+import { FOIL_STOPS, SLICES } from './FoilBars';
 import { WORDMARK_PATH } from './wordmark-path';
 
 /**
@@ -54,10 +55,83 @@ function wordmark() {
 function barsTexture() {
   const cv = document.createElement('canvas'); cv.width = 1024; cv.height = 512; const x = cv.getContext('2d')!;
   const g = x.createLinearGradient(0, 0, 1024, 512); STOPS.forEach((c, i) => g.addColorStop(i / 5, c));
-  x.fillStyle = '#0B0C0F'; x.fillRect(0, 0, 1024, 512); x.fillStyle = g; x.filter = 'blur(5px)';
+  // transparent around the bars, so in the scroll story they sit on the foil glow as well as on black
+  x.fillStyle = g; x.filter = 'blur(5px)';
   ([[150, 70], [120, 210], [90, 350]] as const).forEach(([l, y]) => { x.beginPath(); x.moveTo(l + 40, y); x.lineTo(1024, y); x.lineTo(1024, y + 90); x.lineTo(l, y + 90); x.fill(); });
   const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.MirroredRepeatWrapping;
   return t;
+}
+
+/**
+ * Scroll story: the hero's foil bars rebuilt in 3D, drawn exactly like the SVG (FoilBars): the same six-stop foil
+ * gradient in the same user space (reflected), the same radial sheen and the same −35° grain, composited in sRGB.
+ * Placed on the z = 0 plane so that, from the resting camera, every pixel lands where the SVG's did; the SVG can then
+ * step aside without a visible change, and the camera flies into the real thing.
+ */
+function storyBarsGeometry() {
+  const geos = SLICES.map(s => {
+    const n = s.split(/[ ,]+/).map(Number);
+    const shape = new THREE.Shape();
+    for (let i = 0; i < n.length; i += 2) { if (i === 0) shape.moveTo(n[0], n[1]); else shape.lineTo(n[i], n[i + 1]); }
+    return new THREE.ShapeGeometry(shape);
+  });
+  const geo = mergeGeometries(geos); geos.forEach(g => g.dispose());
+  const pos = geo.getAttribute('position');
+  const vb = new Float32Array(pos.count * 2);
+  for (let i = 0; i < pos.count; i++) { vb[i * 2] = pos.getX(i); vb[i * 2 + 1] = pos.getY(i); }
+  geo.setAttribute('aVB', new THREE.BufferAttribute(vb, 2));
+  return geo;
+}
+const hex = (c: string) => new THREE.Vector3(parseInt(c.slice(1, 3), 16) / 255, parseInt(c.slice(3, 5), 16) / 255, parseInt(c.slice(5, 7), 16) / 255);
+const STOP_V = FOIL_STOPS.map(([o, c]) => ({ o: Number(o), c: hex(c) }));
+/** the bars shader's colour at one user-space point, in sRGB (same maths as the fragment shader below) */
+function foilAt(x: number, y: number, shift: THREE.Vector2, sheen: THREE.Vector2) {
+  const ax = 138, ay = 9.3, dx = 198, dy = 183.7;
+  let t = (((x - shift.x - ax) * dx + (y - shift.y - ay) * dy) / (dx * dx + dy * dy)) % 2; if (t < 0) t += 2; if (t > 1) t = 2 - t;
+  const c = STOP_V[0].c.clone();
+  for (let i = 1; i < STOP_V.length; i++) c.lerp(STOP_V[i].c, Math.min(1, Math.max(0, (t - STOP_V[i - 1].o) / (STOP_V[i].o - STOP_V[i - 1].o))));
+  const r = Math.hypot(x - sheen.x, y - sheen.y) / 78;
+  const s = r < 0.45 ? 0.55 + (0.16 - 0.55) * (r / 0.45) : 0.16 * (1 - Math.min(1, Math.max(0, (r - 0.45) / 0.55)));
+  c.lerp(new THREE.Vector3(1, 1, 1), s);
+  const k = (35 * Math.PI) / 180; const m = ((Math.cos(k) * x - Math.sin(k) * y) % 3 + 3) % 3;
+  if (m < 0.81) c.lerp(new THREE.Vector3(1, 1, 1), 0.22);
+  return c;
+}
+const BRAND_BLACK = new THREE.Color('#0B0C0F');
+function storyBarsMaterial() {
+  return new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, side: THREE.DoubleSide, toneMapped: false,
+    uniforms: {
+      uShift: { value: new THREE.Vector2() }, uSheen: { value: new THREE.Vector2(240, 60) }, uAlpha: { value: 1 },
+      uStops: { value: FOIL_STOPS.map(([, c]) => hex(c)) }, uOff: { value: FOIL_STOPS.map(([o]) => Number(o)) },
+    },
+    vertexShader: /* glsl */`
+      attribute vec2 aVB; varying vec2 vVB;
+      void main() { vVB = aVB; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    // raw sRGB out (no colorspace / tone-mapping chunks), exactly what the SVG paints
+    fragmentShader: /* glsl */`
+      uniform vec2 uShift; uniform vec2 uSheen; uniform float uAlpha; uniform vec3 uStops[6]; uniform float uOff[6];
+      varying vec2 vVB;
+      vec3 foil(float t) {
+        t = mod(t, 2.0); if (t > 1.0) t = 2.0 - t; // spreadMethod="reflect"
+        vec3 c = uStops[0];
+        for (int i = 1; i < 6; i++) { c = mix(c, uStops[i], clamp((t - uOff[i - 1]) / (uOff[i] - uOff[i - 1]), 0.0, 1.0)); }
+        return c;
+      }
+      void main() {
+        vec2 a = vec2(138.0, 9.3); vec2 d = vec2(336.0, 193.0) - a;
+        vec3 c = foil(dot(vVB - uShift - a, d) / dot(d, d));
+        float r = length(vVB - uSheen) / 78.0;
+        float s = r < 0.45 ? mix(0.55, 0.16, r / 0.45) : mix(0.16, 0.0, clamp((r - 0.45) / 0.55, 0.0, 1.0));
+        c = mix(c, vec3(1.0), s);
+        float k = radians(35.0);
+        float gx = cos(k) * vVB.x - sin(k) * vVB.y; // pattern space of rotate(-35)
+        float m = mod(gx, 3.0); float w = fwidth(gx);
+        float g = smoothstep(-w, w, m) * (1.0 - smoothstep(0.81 - w, 0.81 + w, m));
+        c = mix(c, vec3(1.0), 0.22 * g);
+        gl_FragColor = vec4(c, uAlpha);
+      }`,
+  });
 }
 
 function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
@@ -73,22 +147,29 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     clearcoat: 1, clearcoatRoughness: 0.03, attenuationColor: new THREE.Color('#BFE3FF'), attenuationDistance: 900,
   }), []);
 
-  // home scroll story (lib/story): target / current progress, smoothed here so the turn never steps
-  const story = useRef({ on: false, t: 0, c: 0 });
+  // home scroll story (lib/story)
+  const story = useRef({ on: storyOn(), p: 0 });
   const tilt = useRef({ x: 0, y: 0 });
   const box = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
   const last = useRef({ x: 0, y: 0, w: 0, h: 0 });
+  const backdrop = useRef<THREE.Mesh>(null);
+  const storyBars = useRef<THREE.Mesh>(null);
+  const barsGeo = useMemo(() => storyBarsGeometry(), []);
+  const barsMat = useMemo(() => storyBarsMaterial(), []);
+  const anchor = useRef(getAnchor());
+  const F = useRef(new THREE.Vector2()); // world position of the point the camera flies at
+  const glow = useRef(new THREE.Color());
+  const fog = useMemo(() => new THREE.Fog('#0B0C0F', 1000, 100000), []);
 
   useEffect(() => {
     const env = studio(gl); scene.environment = env; scene.background = new THREE.Color('#0B0C0F');
     const off = onLight(l => { light.current = { x: l.x, y: l.y }; });
-    story.current.on = storyOn();
-    const offStory = onStory(p => { story.current.t = p; story.current.on = storyOn(); });
-    story.current.c = story.current.t;
-    return () => { off(); offStory(); env.dispose(); geo.dispose(); bars.dispose(); glass.dispose(); };
-  }, [gl, scene, geo, bars, glass]);
+    const offStory = onStory(p => { story.current.p = p; story.current.on = storyOn(); });
+    const offAnchor = onAnchor(a => { anchor.current = a; });
+    return () => { off(); offStory(); offAnchor(); env.dispose(); geo.dispose(); bars.dispose(); glass.dispose(); barsGeo.dispose(); barsMat.dispose(); };
+  }, [gl, scene, geo, bars, glass, barsGeo, barsMat]);
 
-  // fit the word to ~60% of the frame width at any aspect (~50% when the canvas fills the whole screen in the story)
+  // fit the word to ~60% of the frame width at any aspect (50% in the story, where the canvas fills the whole screen)
   const fit = useMemo(() => {
     const cam = camera as THREE.PerspectiveCamera; const bb = geo.boundingBox!;
     const viewW = 2 * REST_Z * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * (size.width / size.height);
@@ -96,24 +177,62 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   }, [camera, geo, size]);
 
   useFrame((state, dt) => {
-    const m = logo.current; if (!m) return;
+    const m = logo.current; const bd = backdrop.current; const sb = storyBars.current; if (!m || !bd || !sb) return;
     const t = state.clock.elapsedTime;
     // tilt toward the light (cursor), with a slow breathing sway on top
     const ty = (light.current.x - 0.5) * 0.7 + Math.sin(t * 0.35) * 0.08;
     const tx = (light.current.y - 0.5) * 0.35 + Math.cos(t * 0.3) * 0.04 - 0.04;
     const k = 1 - Math.exp(-dt * 3.2);
     tilt.current.y += (ty - tilt.current.y) * k; tilt.current.x += (tx - tilt.current.x) * k;
-    // story pose: the word starts edge-on (a thin sliver of glass) and turns to face the visitor while the camera eases back
-    const s = story.current;
-    if (s.on) s.c += (s.t - s.c) * (1 - Math.exp(-dt * 9)); else s.c = 1;
-    const turn = smooth((s.c - 0.12) / 0.46);
-    const back = smooth((s.c - 0.08) / 0.5);
-    m.rotation.y = tilt.current.y * (0.35 + 0.65 * turn) + (1 - turn) * 1.48;
-    m.rotation.x = tilt.current.x + (1 - turn) * 0.12;
-    state.camera.position.z = REST_Z - (1 - back) * 620;
-    bars.offset.x = (light.current.x - 0.5) * 0.12 + Math.sin(t * 0.2) * 0.02 + (1 - back) * 0.08;
+    bars.offset.x = (light.current.x - 0.5) * 0.12 + Math.sin(t * 0.2) * 0.02;
+
+    const s = story.current; const a = anchor.current;
+    if (!s.on || !a) {
+      // the normal hero logo (no story): word in front of its bars, camera at rest
+      sb.visible = false; m.visible = true; bd.visible = true; scene.fog = null;
+      m.position.set(0, 0, 0); bd.position.set(420, 10, -900);
+      state.camera.position.set(0, 0, REST_Z);
+      m.rotation.set(tilt.current.x, tilt.current.y, 0);
+    } else {
+      // place the bars so that from the resting camera they cover exactly the SVG's pixels
+      const cam = state.camera as THREE.PerspectiveCamera;
+      const wpp = (2 * Z0 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2))) / size.height; // world units per px on z = 0
+      const kpx = a.width / VB.w; // SVG px per user unit
+      sb.scale.set(kpx * wpp, -kpx * wpp, 1);
+      sb.position.set((a.left - VB.x * kpx - size.width / 2) * wpp, -(a.top - VB.y * kpx - size.height / 2) * wpp, 0);
+      F.current.set(F_USER.x * sb.scale.x + sb.position.x, F_USER.y * sb.scale.y + sb.position.y);
+      // the flight: straight at F until the plane, then straight on toward the wordmark floating behind it
+      const z = camZ(s.p); const f = z > 0 ? 1 - z / Z0 : 1;
+      cam.position.set(F.current.x * f, F.current.y * f, z);
+      // the bars' foil follows the light exactly as the SVG's does (FoilBars): gradient shift + sheen under the cursor
+      const zoom = z > 1 ? Z0 / z : Z0;
+      const fpx = { x: a.left + (F_USER.x - VB.x) * kpx, y: a.top + (F_USER.y - VB.y) * kpx };
+      const lx = fpx.x + (light.current.x * size.width - fpx.x) / zoom; const ly = fpx.y + (light.current.y * size.height - fpx.y) / zoom;
+      const u = barsMat.uniforms;
+      u.uShift.value.set((light.current.x - 0.5) * 160, (light.current.y - 0.5) * 50);
+      u.uSheen.value.set(Math.max(110, Math.min(380, VB.x + (lx - a.left) / kpx)), Math.max(20, Math.min(175, VB.y + (ly - a.top) / kpx)));
+      u.uAlpha.value = barsAlpha(z);
+      sb.visible = barsAlpha(z) > 0;
+      // through the foil: the space behind is lit in exactly the colour that filled the screen, and dims as we move on
+      const g = glowAt(z);
+      if (g < 1 || z <= 0) {
+        const c = foilAt(F_USER.x, F_USER.y, u.uShift.value, u.uSheen.value);
+        glow.current.setRGB(c.x, c.y, c.z, THREE.SRGBColorSpace).lerp(BRAND_BLACK, 1 - g);
+        (scene.background as THREE.Color).copy(glow.current);
+      } else (scene.background as THREE.Color).copy(BRAND_BLACK);
+      // the wordmark and its bars come out of that light: fog in the same colour that thins as the glow dims
+      fog.color.copy(scene.background as THREE.Color); fog.near = 1000; fog.far = 5200 + (1 - g) * 60000;
+      scene.fog = fog;
+      // the wordmark and its own bars wait behind the foil; they show only once the foil fills the screen
+      m.visible = bd.visible = z < LOGO_FROM_Z;
+      m.position.set(F.current.x, F.current.y, LOGO_Z);
+      bd.position.set(F.current.x + 420, F.current.y + 10, LOGO_Z - 900);
+      // as it arrives the word turns to face you
+      const turn = smooth((s.p - PASS) / (ARRIVE - PASS));
+      m.rotation.set(tilt.current.x + (1 - turn) * 0.1, tilt.current.y * (0.4 + 0.6 * turn) + (1 - turn) * 0.9, 0);
+    }
     // publish where the word sits on screen (canvas px = stage px), so the Found corners lock onto the glass
-    if (s.on && s.c > 0.35) {
+    if (s.on && s.p > 0.6) {
       const bb = geo.boundingBox!; m.updateMatrixWorld();
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       box.forEach((v, i) => {
@@ -124,16 +243,18 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       const b = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }; const l = last.current;
       if (Math.abs(b.x - l.x) + Math.abs(b.y - l.y) + Math.abs(b.w - l.w) + Math.abs(b.h - l.h) > 0.6) { last.current = b; setStoryBounds(b); }
     }
-    if (first.current) { first.current = false; requestAnimationFrame(onFirstFrame); }
+    if (first.current) { first.current = false; requestAnimationFrame(() => { onFirstFrame(); if (s.on && a) markStory3D(); }); }
   });
 
   return (
     <>
-      <mesh position={[420, 10, -900]} scale={1.15}>
+      <mesh ref={backdrop} position={[420, 10, -900]} scale={1.15}>
         <planeGeometry args={[2600, 1300]} />
-        <meshBasicMaterial map={bars} toneMapped={false} />
+        {/* a cut-out, not transparent: the glass only refracts opaque objects (three.js transmission pass) */}
+        <meshBasicMaterial map={bars} toneMapped={false} alphaTest={0.3} />
       </mesh>
       <mesh ref={logo} geometry={geo} material={glass} scale={fit} />
+      <mesh ref={storyBars} geometry={barsGeo} material={barsMat} visible={false} renderOrder={2} frustumCulled={false} />
     </>
   );
 }
@@ -143,8 +264,8 @@ export default function GlassLogo({ onReady, active }: { onReady: () => void; ac
     <Canvas
       className="glass-logo"
       frameloop={active ? 'always' : 'never'}
-      dpr={storyOn() ? [1, 1.25] : [1, 1.5]} /* full-screen canvas in the story: cap the pixel count */
-      camera={{ fov: 28, near: 10, far: 10000, position: [0, 0, REST_Z] }}
+      dpr={[1, 1.5]}
+      camera={{ fov: 28, near: 1, far: 10000, position: [0, 0, REST_Z] }}
       gl={{ antialias: true, powerPreference: 'high-performance', toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15, outputColorSpace: THREE.SRGBColorSpace }}
       aria-hidden
     >

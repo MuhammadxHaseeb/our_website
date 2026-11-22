@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useId, useRef } from 'react';
 import { onLight } from '@/lib/light';
-import { getStory, onStory, storyOn } from '@/lib/story';
+import { onStory, storyOn } from '@/lib/story';
 
 /**
  * The brand device (Ice Mint, assets/Brand device/epox-foil-bars.svg): three foil bars with slanted left ends that run
@@ -20,7 +20,7 @@ import { getStory, onStory, storyOn } from '@/lib/story';
  */
 
 // three slices of the E (bar + its part of the slanted spine), cut in the middle of each gap, overlapping 0.3 units
-const SLICES = [
+export const SLICES = [
   '169.2,39 1336,39 1336,59.8 189.5,59.8 185.76,73.1 159.89,73.1',
   '159.98,72.8 185.85,72.8 182.2,85.8 1336,85.8 1336,106.6 177,106.6 173.27,119.9 147.14,119.9',
   '147.22,119.6 173.35,119.6 169.7,132.6 1336,132.6 1336,153.4 138,153.4',
@@ -58,8 +58,8 @@ export function FoilBars({ className = '', mode = 'split' }: { className?: strin
         const d = Math.hypot(light.x * window.innerWidth - cx, light.y * vh - cy) / window.innerWidth;
         return Math.min(1, Math.max(0, (d - 0.06) / 0.4));
       }
-      // home scroll story: the hero is pinned, so the split follows the story's progress instead of the scroll position
-      if (mode === 'split' && inStory && storyOn()) return Math.min(1, getStory() / 0.25);
+      // home scroll story: the bars stay whole, the camera flies into them (the 3D scene draws the same bars, see GlassLogo)
+      if (mode === 'split' && inStory && storyOn()) return 0;
       if (mode === 'split') return Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
       // assemble: apart while the footer is entering, whole once its top is in the upper part of the screen
       return Math.min(1, Math.max(0, (r.top - vh * 0.35) / (vh * 0.6)));

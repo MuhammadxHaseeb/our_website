@@ -84,31 +84,32 @@
     background: var(--foil) 0 0 / 300% 100%; transform: translateX(-50vw) skewX(-15.3deg); }
   .page-wipe.run { visibility: visible; animation: page-wipe 760ms var(--ease-in-out-cubic) forwards; }
   @keyframes page-wipe { from { transform: translateX(-50vw) skewX(-15.3deg); background-position: 0 0; } to { transform: translateX(140vw) skewX(-15.3deg); background-position: 100% 0; } }
-  /* ---- H16 home hero scroll story (HeroStory; html[data-story] is set before first paint on capable desktops) ----
-     The hero is a sticky stage pinned for 1.2 screens; --p (0 → 1) drives each phase with opacity / transform only. */
-  .story-found, .story-wipe { display: none; }
+  /* ---- H16 home hero scroll story (HeroStory + lib/story; html[data-story] is set before first paint on capable desktops) ----
+     One continuous camera flight while the hero stage is pinned for 1.6 screens: everything moves, nothing cross-fades.
+     The copy scrolls away, the camera flies into the foil bars and through them to the glass wordmark (GlassLogo), the
+     Found corners lock on, the proof strip slides up; then the stage unpins and the page scrolls on into Services. */
+  .story-found { display: none; }
   .hero-logo { margin-top: var(--space-9); } /* not a utility class: utilities sit in a later layer and would beat the story rules */
   .hero-proof > ul { margin-top: var(--space-8); }
-  html[data-story="on"] .story { position: relative; z-index: 1; height: 220svh; pointer-events: none; --p: 0;
-    --a: clamp(0, var(--p) / 0.14, 1);            /* copy steps back, bars split away */
-    --b: clamp(0, (var(--p) - 0.12) / 0.14, 1);   /* glass stage fades in once the copy has gone */
-    --c: clamp(0, (var(--p) - 0.5) / 0.09, 1);    /* Found corners lock onto the word */
-    --s: clamp(0, (var(--p) - 0.56) / 0.2, 1); }  /* proof strip rises */
-  /* the next section slides under the pinned stage, so the exit wipe uncovers it already in place */
-  html[data-story="on"] .story + * { position: relative; z-index: 0; margin-top: -100svh; }
-  html[data-story="on"] .story > .hero { position: sticky; top: 0; height: 100svh; pointer-events: auto; }
+  html[data-story="on"] .story { position: relative; height: 260svh; --p: 0;
+    --c: clamp(0, (var(--p) - 0.72) / 0.08, 1);    /* Found corners lock onto the word */
+    --s: clamp(0, (var(--p) - 0.74) / 0.18, 1); }  /* proof strip slides up */
+  html[data-story="on"] .story > .hero { position: sticky; top: 0; height: 100svh; }
   html[data-story="on"] .story > .hero > .container-x { position: static; }
-  html[data-story="on"] .story .hero-copy { position: relative; z-index: 2; opacity: calc(1 - var(--a)); transform: translateY(calc(var(--a) * -64px)); }
-  html[data-story="on"] .story[data-past] .hero-copy { pointer-events: none; }
-  html[data-story="on"] .story .hero-bars { opacity: calc(1 - var(--a)); }
-  html[data-story="on"] .story .hero-logo { position: absolute; inset: 0; z-index: 0; margin: 0; opacity: var(--b); }
+  /* the copy scrolls away a little faster than the page, so it has left before the screen fills with foil */
+  html[data-story="on"] .story .hero-copy { position: relative; z-index: 2; transform: translate3d(0, calc(var(--p) * -240svh), 0); }
+  /* the 3D stage fills the screen behind the copy. Before the 3D is drawing it stays hidden (the SVG bars fly instead);
+     once the camera is through the foil, the still stands in for the glass if the 3D never came */
+  html[data-story="on"] .story .hero-logo { position: absolute; inset: 0; z-index: 0; margin: 0; visibility: hidden; }
+  html[data-story="on"] .story[data-3d] .hero-logo, html[data-story="on"] .story[data-through] .hero-logo { visibility: visible; }
   html[data-story="on"] .story .liquid--hero { aspect-ratio: auto; height: 100%; border-radius: 0; box-shadow: none; }
-  /* before the live 3D is up (or without WebGL) the still / loop plays a simple version: a slow settle from close up */
-  html[data-story="on"] .story .liquid-still, html[data-story="on"] .story .liquid-video { transform: scale(calc(1.14 - 0.14 * var(--b))); }
+  html[data-story="on"] .story .liquid-3d { transition: none; opacity: 1; } /* takes over from the SVG on its first frame, no gap */
+  html[data-story="on"] .story:not([data-3d]) .liquid-still { transform: scale(calc(0.4 + 0.6 * clamp(0, (var(--p) - 0.42) / 0.34, 1))); }
+  html[data-story="on"] .story[data-3d] .hero-bars { visibility: hidden; }
+  html[data-story="on"] .story .hero-bars { will-change: transform; }
   html[data-story="on"] .story .hero-proof { position: absolute; z-index: 2; inset: auto 0 0 0; margin-inline: auto; max-width: calc(var(--max) + 2 * var(--margin)); padding: 0 var(--margin) var(--space-8);
-    opacity: var(--s); transform: translateY(calc((1 - var(--s)) * 40px)); }
+    transform: translate3d(0, calc((1 - var(--s)) * 60svh), 0); }
   html[data-story="on"] .story .hero-proof > ul { margin-top: 0; }
-  html[data-story="on"] .story:not([data-past]) .hero-proof { visibility: hidden; }
   /* Found corners on the glass word: position published by GlassLogo; the default frames the word in the still */
   html[data-story="on"] .story-found { display: block; position: absolute; z-index: 1; pointer-events: none;
     left: var(--fx, 22%); top: var(--fy, 33%); width: var(--fw, 56%); height: var(--fh, 30%);
@@ -121,9 +122,6 @@
     -webkit-mask: var(--corners); -webkit-mask-repeat: no-repeat; mask: var(--corners); mask-repeat: no-repeat; }
   .story-found::after { background: var(--foil) var(--foil-pos) / 260% 260%; }
   .story-found::before { background: var(--foil-mint); filter: blur(7px); opacity: 0.55; }
-  /* exit: one foil bar at the E angle sweeps across (same look as the page-change wipe); HeroStory moves it */
-  html[data-story="on"] .story-wipe { display: block; position: fixed; z-index: 45; top: -10vh; bottom: -10vh; left: 0; width: 26vw; pointer-events: none; visibility: hidden;
-    background: var(--foil) 0 0 / 300% 100%; will-change: transform; }
   /* form sent: a black tile where the bars fly in and lock into the E */
   .sent-tile { position: relative; overflow: hidden; aspect-ratio: 16 / 7; max-width: 520px; border-radius: var(--r-card); background: var(--brand-black); box-shadow: inset 0 0 0 1px var(--line); }
   .sent-bars { position: absolute; top: 50%; left: 14%; width: 62%; overflow: visible; transform: translateY(-50%); }
