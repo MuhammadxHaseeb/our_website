@@ -7,6 +7,32 @@
 
 ---
 
+## Hero scroll, frame by frame (measured 2026-11-22)
+
+Captured with `node scripts/frames.js notiune https://notiune.xyz/ --to 2700 --step 30 --settle 450` (1440 × 900, one
+frame per 30px) + `python scripts/frames-analyze.py notiune` (per-frame colours, `raw/notiune/frames/analysis.json`,
+contact sheet `raw/notiune/frames/contact-sheet.jpg`). The whole hero story = **~1950px of scroll (2.17 screens)**.
+
+| Scroll px | What happens | Colour (mean / dominant) |
+|---|---|---|
+| 0–150 | Rest; headline, tube, "Click and hold" | paper `#F2F1ED` |
+| 150–300 | Headline fades and lifts; the camera barely moves | paper |
+| 300–540 | Camera speeds up toward the tube, which grows and slides left | paper picks up the tube's tint: `#E8E1E5` → `#CCC1D1` (~20%) |
+| 540–660 | Ground drops to near-black while the band grows | `#967DAD` (570) → `#52326C` (630) → `#1F0F29` (660) |
+| 690–810 | The violet band fills the screen (full at ~750–780), then slides off | violet `#8248C0` |
+| 840–900 | Band gone; dark | `#040108` (dark 89% at 900) |
+| 900–1080 | Dark breathing room; a thin glowing horizon slowly brightens | `#040108` → `#100615` |
+| 1110–1170 | The logo letters fly in from scattered places, rotating, and lock into "notiune" | |
+| 1170–1680 | Logo holds with a slow push-in (~15% bigger); top labels ~1410; stats 6 / 50 / 15 rise ~1470–1500 | `#1A0C24` sky |
+| 1710–1890 | Camera dives into the logo, letters huge, toward the dot of the "i" | |
+| 1890–1950 | The i's dot (a sphere) grows to fill the screen in the next section's ground | `#F2F1ED` full at 1950 |
+| 2010–2040 | Next section's content fades/rises in at ~75% of the screen height, then the page scrolls normally | |
+
+Our version (H16, branch `hero-story`) uses this exact timing with our own pieces: foil E → screen all foil →
+quick drop to black → our bars light up in the dark → glass e·p·o·x fly in and lock → slow push-in with Found corners
++ proof → dive through the hole of the "o" into black (the Services ground) → Services already in place. Side by
+side: `raw/epox-hero/compare-notiune.jpg` (frames: `raw/epox-hero/frames/`).
+
 ## Focus deep dive 1: Motion & 3D
 
 **Stack:** React SPA (Vite, lazy chunk per route incl. a separate `WorkRoom` chunk), three.js (2 canvases on home), Lenis, Tailwind. **Has reduced-motion support** (`motion-reduce:` classes; the sticky hero turns relative). Durations 150/300/500/700/900 ms; expo-out `cubic-bezier(.16,1,.3,1)` for entrances, in-out `(.77,0,.175,1)` for wipes, a small overshoot `(.34,1.35,.64,1)`. From `motion/*.json`: the preloader is an `#intro-door` (letters rise in, then the door slides up 30vh; hidden with reduced motion), `.page-enter` 450 ms `(.23,1,.32,1)`, headline `.line-mask` lines rise over 1 s expo-out, `.roll-a/.roll-b` text roll on link hover, `.product-play` an 11 s alternating loop on the products.

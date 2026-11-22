@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
-import { ARRIVE, barsAlpha, camZ, F_USER, getAnchor, glowAt, LOGO_FROM_Z, LOGO_Z, markStory3D, onAnchor, onStory, PASS, setStoryBounds, smooth, storyOn, VB, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, diveAt, F_USER, getAnchor, glowAt, letterAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
 import { FOIL_STOPS, SLICES } from './FoilBars';
 import { WORDMARK_PATH } from './wordmark-path';
 
@@ -43,13 +43,31 @@ function studio(renderer: THREE.WebGLRenderer) {
   return tex;
 }
 
+/**
+ * The wordmark as separate glass letters (so they can fly in and lock together in the scroll story).
+ * Each letter's geometry is centred on itself; `rest` is where it sits in the word (word centred on 0).
+ */
+type Letter = { geo: THREE.BufferGeometry; rest: THREE.Vector3 };
 function wordmark() {
   const shapes = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${WORDMARK_PATH}"/></svg>`).paths.flatMap(p => SVGLoader.createShapes(p));
-  const geo = mergeGeometries(shapes.map(s => new THREE.ExtrudeGeometry(s, { depth: 70, curveSegments: 12, bevelEnabled: true, bevelThickness: 16, bevelSize: 9, bevelSegments: 5 })));
-  geo.scale(1, -1, 1); geo.computeBoundingBox(); const c = new THREE.Vector3(); geo.boundingBox!.getCenter(c);
-  geo.translate(-c.x, -c.y, -c.z); geo.computeVertexNormals(); geo.computeBoundingBox();
-  return geo;
+  const geos = shapes.map(s => { const g = new THREE.ExtrudeGeometry(s, { depth: 70, curveSegments: 12, bevelEnabled: true, bevelThickness: 16, bevelSize: 9, bevelSegments: 5 }); g.scale(1, -1, 1); g.computeBoundingBox(); return g; });
+  const word = new THREE.Box3(); geos.forEach(g => word.union(g.boundingBox!));
+  const wc = new THREE.Vector3(); word.getCenter(wc);
+  const letters: Letter[] = geos.map(g => {
+    const c = new THREE.Vector3(); g.boundingBox!.getCenter(c);
+    g.translate(-c.x, -c.y, -c.z); g.computeVertexNormals(); g.computeBoundingBox();
+    return { geo: g, rest: c.sub(wc) };
+  }).sort((a, b) => a.rest.x - b.rest.x);
+  const box = word.clone().translate(wc.negate());
+  return { letters, box };
 }
+// where each letter starts before it flies into the word (in word widths) and how it is turned
+const SCATTER = [
+  { x: -0.85, y: 0.55, z: 0.5, rx: 0.9, ry: -1.3, rz: 0.6 },
+  { x: -0.15, y: -0.75, z: 0.8, rx: -1.2, ry: 0.7, rz: -0.5 },
+  { x: 0.3, y: 0.7, z: 0.6, rx: 1.1, ry: 1.0, rz: -0.7 },
+  { x: 0.95, y: -0.45, z: 0.4, rx: -0.8, ry: -1.1, rz: 0.8 },
+];
 
 /** the three foil bars (brand device) as a flat backdrop, foil gradient + grain drawn into a texture */
 function barsTexture() {
@@ -98,6 +116,7 @@ function foilAt(x: number, y: number, shift: THREE.Vector2, sheen: THREE.Vector2
   return c;
 }
 const BRAND_BLACK = new THREE.Color('#0B0C0F');
+const BLACK_SRGB = hex('#0B0C0F');
 function storyBarsMaterial() {
   return new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, side: THREE.DoubleSide, toneMapped: false,
@@ -136,11 +155,13 @@ function storyBarsMaterial() {
 
 function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const { gl, scene, camera, size } = useThree();
-  const logo = useRef<THREE.Mesh>(null);
+  const word = useRef<THREE.Group>(null);
+  const letterRefs = useRef<(THREE.Mesh | null)[]>([]);
   const light = useRef({ x: 0.5, y: 0.4 });
   const first = useRef(true);
-  const geo = useMemo(() => wordmark(), []);
+  const mark = useMemo(() => wordmark(), []);
   const bars = useMemo(() => barsTexture(), []);
+  const barsMatB = useMemo(() => new THREE.MeshBasicMaterial({ map: bars, toneMapped: false, alphaTest: 0.3 }), [bars]);
   const glass = useMemo(() => new THREE.MeshPhysicalMaterial({
     color: '#F2FBFF', metalness: 0, roughness: 0.04, transmission: 1, thickness: 70, ior: 1.45,
     iridescence: 1, iridescenceIOR: 1.35, iridescenceThicknessRange: [150, 700], envMapIntensity: 1.4,
@@ -150,7 +171,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   // home scroll story (lib/story)
   const story = useRef({ on: storyOn(), p: 0 });
   const tilt = useRef({ x: 0, y: 0 });
-  const box = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
+  const corners = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
   const last = useRef({ x: 0, y: 0, w: 0, h: 0 });
   const backdrop = useRef<THREE.Mesh>(null);
   const storyBars = useRef<THREE.Mesh>(null);
@@ -158,26 +179,29 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const barsMat = useMemo(() => storyBarsMaterial(), []);
   const anchor = useRef(getAnchor());
   const F = useRef(new THREE.Vector2()); // world position of the point the camera flies at
-  const glow = useRef(new THREE.Color());
-  const fog = useMemo(() => new THREE.Fog('#0B0C0F', 1000, 100000), []);
+  const O = useRef(new THREE.Vector3()); // world position of the hole of the "o" (the dive goes through it)
+  const sky = useRef(new THREE.Color());
 
   useEffect(() => {
     const env = studio(gl); scene.environment = env; scene.background = new THREE.Color('#0B0C0F');
     const off = onLight(l => { light.current = { x: l.x, y: l.y }; });
     const offStory = onStory(p => { story.current.p = p; story.current.on = storyOn(); });
     const offAnchor = onAnchor(a => { anchor.current = a; });
-    return () => { off(); offStory(); offAnchor(); env.dispose(); geo.dispose(); bars.dispose(); glass.dispose(); barsGeo.dispose(); barsMat.dispose(); };
-  }, [gl, scene, geo, bars, glass, barsGeo, barsMat]);
+    return () => {
+      off(); offStory(); offAnchor(); env.dispose(); mark.letters.forEach(l => l.geo.dispose()); bars.dispose(); barsMatB.dispose();
+      glass.dispose(); barsGeo.dispose(); barsMat.dispose();
+    };
+  }, [gl, scene, mark, bars, barsMatB, glass, barsGeo, barsMat]);
 
   // fit the word to ~60% of the frame width at any aspect (50% in the story, where the canvas fills the whole screen)
   const fit = useMemo(() => {
-    const cam = camera as THREE.PerspectiveCamera; const bb = geo.boundingBox!;
+    const cam = camera as THREE.PerspectiveCamera; const bb = mark.box;
     const viewW = 2 * REST_Z * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * (size.width / size.height);
     return ((storyOn() ? 0.5 : 0.6) * viewW) / (bb.max.x - bb.min.x);
-  }, [camera, geo, size]);
+  }, [camera, mark, size]);
 
   useFrame((state, dt) => {
-    const m = logo.current; const bd = backdrop.current; const sb = storyBars.current; if (!m || !bd || !sb) return;
+    const w = word.current; const bd = backdrop.current; const sb = storyBars.current; if (!w || !bd || !sb) return;
     const t = state.clock.elapsedTime;
     // tilt toward the light (cursor), with a slow breathing sway on top
     const ty = (light.current.x - 0.5) * 0.7 + Math.sin(t * 0.35) * 0.08;
@@ -185,15 +209,19 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     const k = 1 - Math.exp(-dt * 3.2);
     tilt.current.y += (ty - tilt.current.y) * k; tilt.current.x += (tx - tilt.current.x) * k;
     bars.offset.x = (light.current.x - 0.5) * 0.12 + Math.sin(t * 0.2) * 0.02;
+    const wordW = mark.box.max.x - mark.box.min.x;
 
     const s = story.current; const a = anchor.current;
     if (!s.on || !a) {
       // the normal hero logo (no story): word in front of its bars, camera at rest
-      sb.visible = false; m.visible = true; bd.visible = true; scene.fog = null;
-      m.position.set(0, 0, 0); bd.position.set(420, 10, -900);
+      sb.visible = false; w.visible = true; bd.visible = true; barsMatB.color.setScalar(1);
+      (scene.background as THREE.Color).copy(BRAND_BLACK);
+      w.position.set(0, 0, 0); bd.position.set(420, 10, -900);
       state.camera.position.set(0, 0, REST_Z);
-      m.rotation.set(tilt.current.x, tilt.current.y, 0);
+      w.rotation.set(tilt.current.x, tilt.current.y, 0);
+      letterRefs.current.forEach((m, i) => { if (!m) return; m.position.copy(mark.letters[i].rest); m.rotation.set(0, 0, 0); });
     } else {
+      const p = s.p;
       // place the bars so that from the resting camera they cover exactly the SVG's pixels
       const cam = state.camera as THREE.PerspectiveCamera;
       const wpp = (2 * Z0 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2))) / size.height; // world units per px on z = 0
@@ -201,9 +229,20 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       sb.scale.set(kpx * wpp, -kpx * wpp, 1);
       sb.position.set((a.left - VB.x * kpx - size.width / 2) * wpp, -(a.top - VB.y * kpx - size.height / 2) * wpp, 0);
       F.current.set(F_USER.x * sb.scale.x + sb.position.x, F_USER.y * sb.scale.y + sb.position.y);
-      // the flight: straight at F until the plane, then straight on toward the wordmark floating behind it
-      const z = camZ(s.p); const f = z > 0 ? 1 - z / Z0 : 1;
-      cam.position.set(F.current.x * f, F.current.y * f, z);
+
+      // the word floats behind the foil on the flight line; the hole of its "o" is where the dive ends
+      const dive = diveAt(p);
+      w.position.set(F.current.x, F.current.y, LOGO_Z);
+      const calm = 1 - smooth(dive * 1.6); // the word stops tilting as the camera dives at it, so the hole stays on line
+      w.rotation.set(tilt.current.x * calm, tilt.current.y * calm, 0);
+      w.updateMatrixWorld();
+      O.current.copy(mark.letters[Math.min(2, mark.letters.length - 1)].rest).applyMatrix4(w.matrixWorld);
+
+      // the flight: straight at F until the foil, on through the dark to the word, then into the "o"
+      const z = camZ(p); const f = z > 0 ? 1 - z / Z0 : 1;
+      const d = smooth(dive);
+      cam.position.set(F.current.x * f + (O.current.x - F.current.x) * d, F.current.y * f + (O.current.y - F.current.y) * d, z);
+
       // the bars' foil follows the light exactly as the SVG's does (FoilBars): gradient shift + sheen under the cursor
       const zoom = z > 1 ? Z0 / z : Z0;
       const fpx = { x: a.left + (F_USER.x - VB.x) * kpx, y: a.top + (F_USER.y - VB.y) * kpx };
@@ -213,30 +252,35 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       u.uSheen.value.set(Math.max(110, Math.min(380, VB.x + (lx - a.left) / kpx)), Math.max(20, Math.min(175, VB.y + (ly - a.top) / kpx)));
       u.uAlpha.value = barsAlpha(z);
       sb.visible = barsAlpha(z) > 0;
-      // through the foil: the space behind is lit in exactly the colour that filled the screen, and dims as we move on
-      const g = glowAt(z);
-      if (g < 1 || z <= 0) {
-        const c = foilAt(F_USER.x, F_USER.y, u.uShift.value, u.uSheen.value);
-        glow.current.setRGB(c.x, c.y, c.z, THREE.SRGBColorSpace).lerp(BRAND_BLACK, 1 - g);
-        (scene.background as THREE.Color).copy(glow.current);
-      } else (scene.background as THREE.Color).copy(BRAND_BLACK);
-      // the wordmark and its bars come out of that light: fog in the same colour that thins as the glow dims
-      fog.color.copy(scene.background as THREE.Color); fog.near = 1000; fog.far = 5200 + (1 - g) * 60000;
-      scene.fog = fog;
-      // the wordmark and its own bars wait behind the foil; they show only once the foil fills the screen
-      m.visible = bd.visible = z < LOGO_FROM_Z;
-      m.position.set(F.current.x, F.current.y, LOGO_Z);
+
+      // the ground: black, picking up the foil's tint as we near it, the foil's own colour just behind it, then black
+      // (mixed in sRGB, as the eye sees it: a 20% tint looks like 20%, the way Notiune's ground tints)
+      const c = foilAt(F_USER.x, F_USER.y, u.uShift.value, u.uSheen.value);
+      const k2 = z > 0 ? tintAt(p) : glowAt(z);
+      sky.current.setRGB(BLACK_SRGB.x + (c.x - BLACK_SRGB.x) * k2, BLACK_SRGB.y + (c.y - BLACK_SRGB.y) * k2, BLACK_SRGB.z + (c.z - BLACK_SRGB.z) * k2, THREE.SRGBColorSpace);
+      (scene.background as THREE.Color).copy(sky.current);
+
+      // the world behind the foil (our bars behind the word) lights up in the dark, and goes out for the dive
+      const world = worldAt(p);
+      barsMatB.color.setScalar(world);
+      bd.visible = z < 50 && world > 0.002;
       bd.position.set(F.current.x + 420, F.current.y + 10, LOGO_Z - 900);
-      // as it arrives the word turns to face you
-      const turn = smooth((s.p - PASS) / (ARRIVE - PASS));
-      m.rotation.set(tilt.current.x + (1 - turn) * 0.1, tilt.current.y * (0.4 + 0.6 * turn) + (1 - turn) * 0.9, 0);
+
+      // the letters fly in from their own places and lock into the word
+      w.visible = z < 50 && letterAt(p, 0) > 0;
+      letterRefs.current.forEach((m, i) => {
+        if (!m) return;
+        const l = mark.letters[i]; const sc = SCATTER[i % SCATTER.length]; const e = 1 - letterAt(p, i);
+        m.position.set(l.rest.x + sc.x * wordW * e, l.rest.y + sc.y * wordW * e, l.rest.z + sc.z * wordW * e);
+        m.rotation.set(sc.rx * e * 2.2, sc.ry * e * 2.2, sc.rz * e * 2.2);
+      });
     }
     // publish where the word sits on screen (canvas px = stage px), so the Found corners lock onto the glass
-    if (s.on && s.p > 0.6) {
-      const bb = geo.boundingBox!; m.updateMatrixWorld();
+    if (s.on && s.p > 0.6 && s.p < 0.95) {
+      const bb = mark.box; w.updateMatrixWorld();
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-      box.forEach((v, i) => {
-        v.set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z).applyMatrix4(m.matrixWorld).project(state.camera);
+      corners.forEach((v, i) => {
+        v.set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z).applyMatrix4(w.matrixWorld).project(state.camera);
         const px = (v.x + 1) / 2 * size.width; const py = (1 - v.y) / 2 * size.height;
         x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
       });
@@ -248,12 +292,15 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
 
   return (
     <>
-      <mesh ref={backdrop} position={[420, 10, -900]} scale={1.15}>
+      {/* a cut-out, not transparent: the glass only refracts opaque objects (three.js transmission pass) */}
+      <mesh ref={backdrop} position={[420, 10, -900]} scale={1.15} material={barsMatB}>
         <planeGeometry args={[2600, 1300]} />
-        {/* a cut-out, not transparent: the glass only refracts opaque objects (three.js transmission pass) */}
-        <meshBasicMaterial map={bars} toneMapped={false} alphaTest={0.3} />
       </mesh>
-      <mesh ref={logo} geometry={geo} material={glass} scale={fit} />
+      <group ref={word} scale={fit}>
+        {mark.letters.map((l, i) => (
+          <mesh key={i} ref={el => { letterRefs.current[i] = el; }} geometry={l.geo} material={glass} position={l.rest} />
+        ))}
+      </group>
       <mesh ref={storyBars} geometry={barsGeo} material={barsMat} visible={false} renderOrder={2} frustumCulled={false} />
     </>
   );

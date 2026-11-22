@@ -9,6 +9,8 @@
 > Seamless because the 3D scene draws the hero's foil bars itself, pixel-matched to the SVG (same gradient, sheen, grain),
 > and flying straight at a point on a flat plane equals scaling the picture about that point, so the SVG fallback
 > (scaled about the same point before the 3D is ready) and the 3D camera draw the same frames. Maths in `lib/story.ts`.
+> **Third version (same day): timed frame by frame on Notiune's hero** (see `research/sites/notiune.md` § Hero scroll,
+> frame by frame, and `research/raw/epox-hero/compare-notiune.jpg`); the timeline lives in `lib/story.ts`.
 > The table below is the first (faded) version, kept for history.
 
 Idea taken from Notiune (`research/sites/notiune.md`, motion idea 2): one hero object carries a single continuous scroll story (object → logo → proof → wipe into the content). We build **our own version from our own pieces**: the foil bars (the E), the holographic glass wordmark, the Found corners, the proof strip and the slanted foil wipe. We do not use their tube, their circle iris or their timing.

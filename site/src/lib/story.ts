@@ -2,9 +2,10 @@
  * Home hero scroll story (docs/hero-scroll-story-plan.md): one progress value p (0 → 1) while the hero stage is pinned.
  * HeroStory writes it; GlassLogo and FoilBars read it, the way they read the shared light (lib/light).
  *
- * It is ONE continuous camera flight, no cross-fades:
- *   the camera flies straight at a point F on the middle foil bar, so the bars grow until the screen is all foil,
- *   passes through the foil, and keeps going toward the glass wordmark floating behind it; then the page simply scrolls on.
+ * ONE continuous camera flight, timed on Notiune's hero (measured frame by frame):
+ *   the copy lifts away; the camera flies at a point F on the middle foil bar until the screen is all foil, passes
+ *   through, the dark world behind lights up, the glass letters fly in and lock into the word, a slow push-in, then the
+ *   camera dives through the hole of the "o" into black, which is the Services ground, and the page carries on.
  * Flying straight at a point on a flat plane is the same as scaling the picture about that point, so the CSS fallback
  * (SVG bars scaled about F, before the 3D is ready) and the 3D camera draw the same frames and can swap mid-flight.
  *
@@ -16,25 +17,41 @@ export type Bounds = { x: number; y: number; w: number; h: number };
 export type Anchor = { left: number; top: number; width: number; stageW: number; stageH: number };
 
 // ---- the flight ----
+// Timed on Notiune's hero, measured frame by frame (research/raw/notiune/frames, 900px window, story = 1950px of
+// scroll = 2.17 screens): p = scroll / pin length. Our own objects and colours, their choreography.
 export const Z0 = 2300;          // camera distance to the bars plane at rest (the bars' on-screen size = the SVG's)
-export const LOGO_Z = -4000;     // the glass wordmark floats this far behind the bars
-export const PASS = 0.42;        // p at which the camera passes through the bars
-export const ARRIVE = 0.76;      // p at which the wordmark has arrived (camera Z0 in front of it)
+export const PASS = 0.42;        // camera passes through the foil   (theirs: the band fills the screen ~750–820px)
+export const GLIDE_END = 0.55;   // the glide behind the foil settles (theirs: dark breathing room 900–1080px)
+export const GLIDE_Z = -700;
+export const PUSH_Z = -1100;     // slow push-in while the word holds (theirs: 1170–1680px)
+export const DIVE = 0.877;       // dive into the word, through the hole of the "o" (theirs: through the i's dot, 1710–1950px)
+export const LOGO_Z = -3300;     // the glass wordmark, 2600 in front of the camera when it has assembled
+export const DIVE_Z = LOGO_Z - 320;
 export const F_USER = { x: 250, y: 96.2 }; // the point flown at: on the middle bar's centre line (SVG user units)
 export const VB = { x: 138, y: 39, w: 198 }; // FoilBars viewBox origin + width
 
-/** camera z for progress p: accelerates into the bars (z → 0 at PASS), then glides to the wordmark and settles */
+const easeOut3 = (v: number) => 1 - Math.pow(1 - clamp01(v), 3);
+/** camera z for progress p */
 export function camZ(p: number) {
-  if (p <= PASS) { const u = Math.max(0, p) / PASS; return Z0 * (1 - u * u); }
-  const v = clamp01((p - PASS) / (ARRIVE - PASS));
-  return (LOGO_Z + Z0) * (1 - Math.pow(1 - v, 3));
+  if (p <= PASS) { const u = Math.max(0, p) / PASS; return Z0 * (1 - u * u); }              // still at first, then accelerating into the foil
+  if (p <= GLIDE_END) return GLIDE_Z * easeOut3((p - PASS) / (GLIDE_END - PASS));          // through, gliding to a stop in the dark
+  if (p <= DIVE) return GLIDE_Z + (PUSH_Z - GLIDE_Z) * ((p - GLIDE_END) / (DIVE - GLIDE_END)); // slow push-in on the word
+  return PUSH_Z + (DIVE_Z - PUSH_Z) * Math.pow(clamp01((p - DIVE) / (1 - DIVE)), 2.2);   // accelerating dive through the "o"
 }
+export const diveAt = (p: number) => clamp01((p - DIVE) / (1 - DIVE));
 /** the bars plane stays solid until the camera is right at it (by then one flat patch of foil fills the screen) */
 export const barsAlpha = (z: number) => (z > 3 ? 1 : 0);
-/** the logo scene exists only once the foil covers the whole screen */
-export const LOGO_FROM_Z = 100;
-/** behind the foil the space starts lit in the foil's own colour and darkens to brand black as the camera moves on */
-export const glowAt = (z: number) => (z > 0 ? 1 : 1 - smooth(-z / 1500));
+/** behind the foil the space starts in the foil's own colour and drops to black within a short glide (theirs: 870→900px) */
+export const glowAt = (z: number) => (z > 0 ? 1 : 1 - smooth(-z / 260));
+/** before the pass the black ground picks up the foil's tint, then darkens again as the foil fills (theirs: 300→660px) */
+export const tintAt = (p: number) => (p < 0.154 ? 0 : p < 0.277 ? 0.2 * smooth((p - 0.154) / 0.123) : p < PASS ? 0.2 - 0.16 * smooth((p - 0.277) / 0.1) : 0);
+/** the light of the world behind the foil (our bars behind the word): comes up in the dark, goes out for the dive */
+// (peaks at 0.6, so the glass word stays the brightest thing on screen, as Notiune's word is on its dark sky)
+export const worldAt = (p: number) => 0.6 * smooth((p - 0.45) / 0.15) * (1 - smooth((p - 0.95) / 0.045));
+/** each letter flies in from its own place and locks into the word (theirs: 1110→1170px) */
+export const letterAt = (p: number, i: number) => easeOut3((p - 0.52 - i * 0.016) / 0.085);
+/** the copy fades and lifts away before the flight speeds up (theirs: 150→300px) */
+export const copyAt = (p: number) => smooth((p - 0.04) / 0.12);
 
 // ---- store ----
 let p = 0;

@@ -44,8 +44,9 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       const r = el.getBoundingClientRect(); const vh = window.innerHeight;
       p = clamp01(-r.top / Math.max(1, r.height - vh));
       el.style.setProperty('--p', p.toFixed(4));
-      el.toggleAttribute('data-past', p > 0.08);
+      el.toggleAttribute('data-past', p > 0.12);
       el.toggleAttribute('data-through', p > PASS);
+      el.toggleAttribute('data-done', p > 0.995); // all black now: let the stage go, Services is already underneath
       setStory(p);
       // fallback flight until the 3D scene is drawing: the same frames, as a 2D scale of the SVG about F
       if (!has3D && svg) {
