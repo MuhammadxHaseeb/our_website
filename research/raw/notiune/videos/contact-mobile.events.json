@@ -1,0 +1,26 @@
+[
+ {
+  "t": 1.1,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6.1,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 6.2,
+  "what": "open mobile menu"
+ },
+ {
+  "t": 9.2,
+  "what": "close mobile menu"
+ },
+ {
+  "t": 13.1,
+  "what": "scrollY=1394 / 2058"
+ },
+ {
+  "t": 14.5,
+  "what": "reached end"
+ }
+]

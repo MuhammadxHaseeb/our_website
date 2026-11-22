@@ -1,0 +1,218 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Skip to content\nStudio\nStudio\nWork\nWork\n(12)\nServices\nServic",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Your notion,\nbuilt.",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "158.4px",
+      "weight": "540",
+      "lineHeight": "139.392px",
+      "letterSpacing": "-8.712px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h2": {
+      "selector": "h2",
+      "sample": "Notiune is a studio of three",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "14px",
+      "weight": "400",
+      "lineHeight": "19.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "h3": null,
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "Menu",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "15px",
+      "weight": "500",
+      "lineHeight": "23.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "Skip to content",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "Schibsted Grotesk",
+      "weight": 2157
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "16px / 400",
+      "weight": 875
+    },
+    {
+      "value": "17px / 400",
+      "weight": 315
+    },
+    {
+      "value": "14px / 400",
+      "weight": 303
+    },
+    {
+      "value": "19.44px / 400",
+      "weight": 91
+    },
+    {
+      "value": "14px / 500",
+      "weight": 84
+    },
+    {
+      "value": "51.84px / 540",
+      "weight": 69
+    },
+    {
+      "value": "77.76px / 540",
+      "weight": 64
+    },
+    {
+      "value": "25.92px / 400",
+      "weight": 55
+    },
+    {
+      "value": "15px / 400",
+      "weight": 50
+    },
+    {
+      "value": "16px / 500",
+      "weight": 40
+    },
+    {
+      "value": "72px / 540",
+      "weight": 39
+    },
+    {
+      "value": "18px / 540",
+      "weight": 31
+    },
+    {
+      "value": "18px / 400",
+      "weight": 29
+    },
+    {
+      "value": "31.68px / 500",
+      "weight": 28
+    },
+    {
+      "value": "100.8px / 540",
+      "weight": 23
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#121212",
+      "weight": 1135
+    },
+    {
+      "value": "#5a5853",
+      "weight": 540
+    },
+    {
+      "value": "#f1f0ec",
+      "weight": 236
+    },
+    {
+      "value": "#f1f0ec@0.55",
+      "weight": 73
+    },
+    {
+      "value": "#6b6964",
+      "weight": 54
+    },
+    {
+      "value": "#f1f0ec@0.65",
+      "weight": 45
+    },
+    {
+      "value": "#ededea",
+      "weight": 38
+    },
+    {
+      "value": "#ededea@0.7",
+      "weight": 32
+    },
+    {
+      "value": "#6a35b5",
+      "weight": 4
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f1f0ec",
+      "weight": 5766
+    },
+    {
+      "value": "#000000",
+      "weight": 5760
+    },
+    {
+      "value": "#050108",
+      "weight": 1354
+    },
+    {
+      "value": "#0d0912",
+      "weight": 88
+    },
+    {
+      "value": "#ffffff",
+      "weight": 81
+    },
+    {
+      "value": "#121212",
+      "weight": 23
+    },
+    {
+      "value": "#121212@0.1",
+      "weight": 4
+    },
+    {
+      "value": "#ffffff@0.2",
+      "weight": 0
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [],
+  "rootCssVariables": {}
+}

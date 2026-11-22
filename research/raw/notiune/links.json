@@ -1,0 +1,131 @@
+{
+  "homepage": "https://notiune.xyz/",
+  "finalUrl": "https://notiune.xyz/",
+  "title": "Your notion, built | Notiune",
+  "navAndFooterSameDomain": [
+    {
+      "text": "Home",
+      "href": "https://notiune.xyz"
+    },
+    {
+      "text": "Careers",
+      "href": "https://notiune.xyz/studio"
+    },
+    {
+      "text": "Work",
+      "href": "https://notiune.xyz/work"
+    },
+    {
+      "text": "Services",
+      "href": "https://notiune.xyz/services"
+    },
+    {
+      "text": "Journal",
+      "href": "https://notiune.xyz/journal"
+    },
+    {
+      "text": "Contact",
+      "href": "https://notiune.xyz/contact"
+    }
+  ],
+  "nav": [
+    {
+      "text": "Notiune, home",
+      "href": "https://notiune.xyz/"
+    },
+    {
+      "text": "Studio Studio",
+      "href": "https://notiune.xyz/studio"
+    },
+    {
+      "text": "Work Work (12)",
+      "href": "https://notiune.xyz/work"
+    },
+    {
+      "text": "Services Services (5)",
+      "href": "https://notiune.xyz/services"
+    },
+    {
+      "text": "Journal Journal (5)",
+      "href": "https://notiune.xyz/journal"
+    },
+    {
+      "text": "Let’s talk",
+      "href": "https://notiune.xyz/contact"
+    },
+    {
+      "text": "Home",
+      "href": "https://notiune.xyz/"
+    },
+    {
+      "text": "Studio",
+      "href": "https://notiune.xyz/studio"
+    },
+    {
+      "text": "Work",
+      "href": "https://notiune.xyz/work"
+    },
+    {
+      "text": "Services",
+      "href": "https://notiune.xyz/services"
+    },
+    {
+      "text": "Journal",
+      "href": "https://notiune.xyz/journal"
+    },
+    {
+      "text": "Contact",
+      "href": "https://notiune.xyz/contact"
+    },
+    {
+      "text": "Studio",
+      "href": "https://notiune.xyz/studio"
+    },
+    {
+      "text": "Work",
+      "href": "https://notiune.xyz/work"
+    },
+    {
+      "text": "Services",
+      "href": "https://notiune.xyz/services"
+    },
+    {
+      "text": "Journal",
+      "href": "https://notiune.xyz/journal"
+    },
+    {
+      "text": "Contact",
+      "href": "https://notiune.xyz/contact"
+    },
+    {
+      "text": "Careers",
+      "href": "https://notiune.xyz/studio#careers-h"
+    }
+  ],
+  "footer": [
+    {
+      "text": "Studio",
+      "href": "https://notiune.xyz/studio"
+    },
+    {
+      "text": "Work",
+      "href": "https://notiune.xyz/work"
+    },
+    {
+      "text": "Services",
+      "href": "https://notiune.xyz/services"
+    },
+    {
+      "text": "Journal",
+      "href": "https://notiune.xyz/journal"
+    },
+    {
+      "text": "Contact",
+      "href": "https://notiune.xyz/contact"
+    },
+    {
+      "text": "Careers",
+      "href": "https://notiune.xyz/studio#careers-h"
+    }
+  ]
+}

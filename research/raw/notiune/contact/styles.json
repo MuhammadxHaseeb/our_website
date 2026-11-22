@@ -1,0 +1,154 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Skip to content\nStudio\nStudio\nWork\nWork\n(12)\nServices\nServic",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "So what are you making?",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "100.8px",
+      "weight": "540",
+      "lineHeight": "95.76px",
+      "letterSpacing": "-4.536px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h2": null,
+    "h3": null,
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "Menu",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "15px",
+      "weight": "500",
+      "lineHeight": "23.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "Skip to content",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "Schibsted Grotesk",
+      "weight": 592
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "17px / 400",
+      "weight": 226
+    },
+    {
+      "value": "14px / 400",
+      "weight": 149
+    },
+    {
+      "value": "15px / 400",
+      "weight": 96
+    },
+    {
+      "value": "15px / 500",
+      "weight": 64
+    },
+    {
+      "value": "16px / 500",
+      "weight": 24
+    },
+    {
+      "value": "100.8px / 540",
+      "weight": 23
+    },
+    {
+      "value": "11px / 500",
+      "weight": 10
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#121212",
+      "weight": 221
+    },
+    {
+      "value": "#5a5853",
+      "weight": 174
+    },
+    {
+      "value": "#6b6964",
+      "weight": 76
+    },
+    {
+      "value": "#f1f0ec@0.55",
+      "weight": 73
+    },
+    {
+      "value": "#f1f0ec",
+      "weight": 48
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f1f0ec",
+      "weight": 1876
+    },
+    {
+      "value": "#ffffff",
+      "weight": 489
+    },
+    {
+      "value": "#050108",
+      "weight": 134
+    },
+    {
+      "value": "#121212",
+      "weight": 20
+    }
+  ],
+  "buttonBackgrounds": [
+    {
+      "value": "#121212",
+      "weight": 1
+    }
+  ],
+  "buttonTextColors": [
+    {
+      "value": "#f1f0ec",
+      "weight": 1
+    }
+  ],
+  "rootCssVariables": {}
+}

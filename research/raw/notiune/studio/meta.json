@@ -1,0 +1,48 @@
+{
+  "url": "https://notiune.xyz/studio",
+  "title": "Studio | Notiune",
+  "description": "Notiune is a design and engineering studio of three, with six products of our own. How we work, and who we are.",
+  "canonical": "https://notiune.xyz/studio",
+  "lang": "en",
+  "generator": null,
+  "openGraph": {
+    "og:type": "website",
+    "og:site_name": "Notiune",
+    "og:title": "Studio | Notiune",
+    "og:description": "Notiune is a design and engineering studio of three, with six products of our own. How we work, and who we are.",
+    "og:image": "https://notiune.xyz/og-image.jpg",
+    "og:image:type": "image/jpeg",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "The Notiune logotype on a copper and violet light, with the line Your notion, built.",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Studio | Notiune",
+    "twitter:description": "Notiune is a design and engineering studio of three, with six products of our own. How we work, and who we are.",
+    "twitter:image": "https://notiune.xyz/og-image.jpg",
+    "og:url": "https://notiune.xyz/studio"
+  },
+  "platformClues": [
+    "HubSpot",
+    "Intercom"
+  ],
+  "libraryHints": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "Lenis": true,
+    "locomotive": false,
+    "THREE": false,
+    "lottie": false,
+    "Swiper": false,
+    "barba": false,
+    "AOS": false,
+    "framerMotion": false,
+    "video": 0
+  },
+  "scripts": [
+    "https://notiune.xyz/assets/index-S9cShZPe.js"
+  ],
+  "stylesheets": [
+    "https://notiune.xyz/assets/index-CR-w7jIe.css"
+  ],
+  "pageHeight": 6629
+}

@@ -1,6 +1,6 @@
 # Research overview
 
-_Last updated: 2026-11-18 · Sites: 3 (Webisoft, Linear, Hello Monday) · Competitors (Services & pricing focus): none yet_
+_Last updated: 2026-11-22 · Sites: 4 (Webisoft, Linear, Hello Monday, Notiune) · Competitors (Services & pricing focus): Notiune (closest peer)_
 
 ## Comparison
 
@@ -9,6 +9,7 @@ _Last updated: 2026-11-18 · Sites: 3 (Webisoft, Linear, Hello Monday) · Compet
 | [Webisoft](sites/webisoft.md) | Corporate look | Swiss-editorial engineering lab: coral + black + grey, mono labels | `#de5849` coral on `#fff`/`#f0f1f4`, `#000` | Helvetica Now Display/Text + Suisse Intl Mono | Moderate→heavy (Lenis, GSAP 3, 3D canvas) | N | Not listed | "LET'S TALK →" + contact block with form + Book a call | Numbered everything + anonymized case studies with status lines + trust badge row |
 | [Linear](sites/linear.md) | Animations & motion | Dark, techy, precise; product UI as hero | `#08090a` bg, `#f7f8f8` text, white pill CTA | Inter Variable + Berkeley Mono | Moderate (CSS only, no libs) | N/A | N/A | "Sign up" / "Get started" | Scripted HTML product demos; morphing mega-menu; 100–200ms micro-motion |
 | [Hello Monday](sites/hellomonday.md) | Animations & motion + Creative presentation | Editorial, warm, witty; ink illustrations + big serif | `#000` on `#fff`/`#f8f6f5`; `#191919` dark blocks; colour from client work | Clarendon BT Light + NB International Pro | Heavy (GSAP 2, Lenis, WebGL, preloader, transitions) | N | Not listed | Footer emails ("Work with us"), /product "Ready to collaborate?" | Character-driven hero carousel; client roll-call; liquid image hover; award scoreboard |
+| [Notiune](sites/notiune.md) | Full pass (closest peer: small Pakistan-linked studio, brand + web + software) | Warm paper + black 3D scenes; confident, opinionated voice | `#F1F0EC` paper, `#121212` ink, black/`#050108` 3D; one copper → violet gradient | Schibsted Grotesk only (400/500/540) | Heavy (three.js hero tube + 3D work room, Lenis, preloader) but has reduced-motion | N | Quote after scope | "Let's talk" → short form with topic chips; email + phone big | Live project viewer (real site in iframe, Desktop/Phone switch); click-and-hold 3D tube; own products as proof |
 
 ---
 
@@ -36,8 +37,17 @@ _Last updated: 2026-11-18 · Sites: 3 (Webisoft, Linear, Hello Monday) · Compet
 - **Client roll-call** with project counts, **awards scoreboard** with big numerals, **productized offer page** with a named human contact.
 - **Case studies = client microsites** (brand-colour hero, Type/Client/Deliverables strip, chapters per design element).
 
+### Closest peer (Notiune)
+- **Live project viewer:** "Open" shows the real site in an iframe inside a browser frame, Desktop / Phone switch, arrow keys, "Visit ↗". Proof you can use, not just look at.
+- **Own products as proof** for a 3-person studio, each with one line on "what sits underneath".
+- **Honest labels:** "concept" vs "ours"; nothing pretends to be a client.
+- **"Set up in your name" + written handover guide** under Hosting and care: answers the ownership fear.
+- **One physical hero object** (click-and-hold 3D tube) that turns into the 3D logo + stats on scroll, with a cursor label that teaches the interaction.
+- Weak spots: 3–4 s preloader, 7.6-screen pinned work room, client-rendered SPA, one-paragraph journal posts, no results or engagement models.
+
 ### Services & pricing (competitors)
-- _No competitor sites yet._ From the two agencies so far:
+- Notiune: no prices ("You get a quote before any work starts"), project work only, 5 services each with "What's included" + its own CTA, 4-step process, FAQ "Straight answers.".
+- From the two agencies:
   - **Neither shows prices.** Both push to a conversation (Webisoft: "Scope under NDA → scope, timeline and cost"; Hello Monday: email).
   - Webisoft names engagement models as services: **staff augmentation, outsourcing, nearshore, fractional CTO, team extension, full build, phased delivery, long-term maintenance**.
   - Webisoft structure: 5 pillars → 10–11 sub-services each; 11 industries with filter chips; 43-item tech-stack directory; 817-article SEO blog.

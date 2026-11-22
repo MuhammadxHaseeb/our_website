@@ -1,0 +1,212 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Skip to content\nStudio\nStudio\nWork\nWork\n(12)\nServices\nServic",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Brand, web and software.",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "120.96px",
+      "weight": "540",
+      "lineHeight": "108.864px",
+      "letterSpacing": "-6.048px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h2": {
+      "selector": "h2",
+      "sample": "Brand",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "72px",
+      "weight": "540",
+      "lineHeight": "72px",
+      "letterSpacing": "-2.88px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h3": {
+      "selector": "h3",
+      "sample": "Talk",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "28px",
+      "weight": "540",
+      "lineHeight": "32.2px",
+      "letterSpacing": "-0.56px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "Menu",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "15px",
+      "weight": "500",
+      "lineHeight": "23.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "Skip to content",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "Schibsted Grotesk",
+      "weight": 2519
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "17px / 400",
+      "weight": 918
+    },
+    {
+      "value": "21px / 400",
+      "weight": 404
+    },
+    {
+      "value": "14px / 400",
+      "weight": 402
+    },
+    {
+      "value": "16px / 400",
+      "weight": 200
+    },
+    {
+      "value": "17px / 500",
+      "weight": 129
+    },
+    {
+      "value": "22px / 500",
+      "weight": 122
+    },
+    {
+      "value": "15px / 400",
+      "weight": 95
+    },
+    {
+      "value": "72px / 540",
+      "weight": 81
+    },
+    {
+      "value": "28px / 540",
+      "weight": 31
+    },
+    {
+      "value": "100.8px / 540",
+      "weight": 31
+    },
+    {
+      "value": "31.68px / 500",
+      "weight": 28
+    },
+    {
+      "value": "120.96px / 540",
+      "weight": 24
+    },
+    {
+      "value": "16px / 500",
+      "weight": 20
+    },
+    {
+      "value": "14px / 500",
+      "weight": 14
+    },
+    {
+      "value": "11px / 500",
+      "weight": 10
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#5a5853",
+      "weight": 1012
+    },
+    {
+      "value": "#121212",
+      "weight": 939
+    },
+    {
+      "value": "#f1f0ec",
+      "weight": 229
+    },
+    {
+      "value": "#6b6964",
+      "weight": 203
+    },
+    {
+      "value": "#f1f0ec@0.55",
+      "weight": 73
+    },
+    {
+      "value": "#f1f0ec@0.75",
+      "weight": 40
+    },
+    {
+      "value": "#f1f0ec@0.6",
+      "weight": 19
+    },
+    {
+      "value": "#6a35b5",
+      "weight": 4
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f1f0ec",
+      "weight": 5766
+    },
+    {
+      "value": "#050108",
+      "weight": 1982
+    },
+    {
+      "value": "#d8d5ce",
+      "weight": 754
+    },
+    {
+      "value": "#121212",
+      "weight": 8
+    },
+    {
+      "value": "#1f7a4d",
+      "weight": 0
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [],
+  "rootCssVariables": {}
+}

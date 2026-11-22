@@ -1,0 +1,174 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fonts": {
+    "body": {
+      "selector": "body",
+      "sample": "Skip to content\nStudio\nStudio\nWork\nWork\n(12)\nServices\nServic",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h1": {
+      "selector": "h1",
+      "sample": "Notes from the studio.",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "120.96px",
+      "weight": "540",
+      "lineHeight": "108.864px",
+      "letterSpacing": "-6.048px",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "h2": {
+      "selector": "h2",
+      "sample": "So what are you making?",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "100.8px",
+      "weight": "540",
+      "lineHeight": "92.736px",
+      "letterSpacing": "-5.04px",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "h3": null,
+    "button": {
+      "selector": "button, a[class*=\"btn\" i], a[class*=\"button\" i], [role=button]",
+      "sample": "Menu",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "15px",
+      "weight": "500",
+      "lineHeight": "23.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    },
+    "link": {
+      "selector": "main a, p a, a",
+      "sample": "Skip to content",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#f1f0ec"
+    },
+    "nav": {
+      "selector": "nav a, header a",
+      "sample": "",
+      "family": "\"Schibsted Grotesk\", ui-sans-serif, -apple-system, \"Helvetica Neue\", Arial, sans-serif",
+      "size": "17px",
+      "weight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "color": "#121212"
+    }
+  },
+  "fontFamiliesByUsage": [
+    {
+      "value": "Schibsted Grotesk",
+      "weight": 1708
+    }
+  ],
+  "fontSizeWeightByUsage": [
+    {
+      "value": "16px / 400",
+      "weight": 1099
+    },
+    {
+      "value": "36px / 540",
+      "weight": 176
+    },
+    {
+      "value": "14px / 400",
+      "weight": 163
+    },
+    {
+      "value": "21px / 400",
+      "weight": 78
+    },
+    {
+      "value": "15px / 400",
+      "weight": 50
+    },
+    {
+      "value": "31.68px / 500",
+      "weight": 28
+    },
+    {
+      "value": "100.8px / 540",
+      "weight": 23
+    },
+    {
+      "value": "120.96px / 540",
+      "weight": 22
+    },
+    {
+      "value": "16px / 500",
+      "weight": 20
+    },
+    {
+      "value": "17px / 400",
+      "weight": 15
+    },
+    {
+      "value": "14px / 500",
+      "weight": 14
+    },
+    {
+      "value": "11px / 500",
+      "weight": 10
+    },
+    {
+      "value": "15px / 500",
+      "weight": 10
+    }
+  ],
+  "textColors": [
+    {
+      "value": "#5a5853",
+      "weight": 1177
+    },
+    {
+      "value": "#121212",
+      "weight": 288
+    },
+    {
+      "value": "#f1f0ec",
+      "weight": 143
+    },
+    {
+      "value": "#f1f0ec@0.55",
+      "weight": 73
+    },
+    {
+      "value": "#6b6964",
+      "weight": 27
+    }
+  ],
+  "backgroundColors": [
+    {
+      "value": "#f1f0ec",
+      "weight": 3614
+    },
+    {
+      "value": "#050108",
+      "weight": 1354
+    },
+    {
+      "value": "#121212",
+      "weight": 8
+    }
+  ],
+  "buttonBackgrounds": [],
+  "buttonTextColors": [],
+  "rootCssVariables": {}
+}

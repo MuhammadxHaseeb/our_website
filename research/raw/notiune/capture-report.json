@@ -1,0 +1,64 @@
+{
+  "site": "notiune",
+  "startUrl": "https://notiune.xyz/",
+  "type": "agency",
+  "capturedAt": "2026-11-22T15:46:39.987Z",
+  "pages": [
+    {
+      "url": "https://notiune.xyz",
+      "slug": "home",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/",
+      "cat": "home"
+    },
+    {
+      "url": "https://notiune.xyz/studio",
+      "slug": "studio",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/studio",
+      "cat": "about"
+    },
+    {
+      "url": "https://notiune.xyz/work",
+      "slug": "work",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/work",
+      "cat": "portfolio"
+    },
+    {
+      "url": "https://notiune.xyz/services",
+      "slug": "services",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/services",
+      "cat": "services"
+    },
+    {
+      "url": "https://notiune.xyz/journal",
+      "slug": "journal",
+      "ok": true,
+      "notes": [],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/journal",
+      "cat": "blog"
+    },
+    {
+      "url": "https://notiune.xyz/contact",
+      "slug": "contact",
+      "ok": true,
+      "notes": [
+        "sections: viewport slices"
+      ],
+      "status": 200,
+      "finalUrl": "https://notiune.xyz/contact",
+      "cat": "contact"
+    }
+  ]
+}

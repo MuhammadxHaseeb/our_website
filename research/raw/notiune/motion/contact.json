@@ -1,0 +1,262 @@
+{
+  "url": "https://notiune.xyz/contact",
+  "libraries": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "SplitText": false,
+    "Lenis": true,
+    "Locomotive": false,
+    "THREE": false,
+    "PIXI": false,
+    "Lottie": false,
+    "Rive": false,
+    "Swiper": false,
+    "Splide": false,
+    "Barba": false,
+    "Swup": false,
+    "AOS": false,
+    "FramerMotion": false,
+    "Webflow_IX2": false,
+    "Motion_one": false
+  },
+  "counts": {
+    "canvas": 0,
+    "video": 0,
+    "autoplayVideo": 0,
+    "svgAnimate": 0,
+    "webglCanvases": 0
+  },
+  "reducedMotionRules": [
+    "(prefers-reduced-motion: reduce) → #intro-door { display: none; } #root { animation: auto ease 0s 1 normal none running none; }",
+    "(prefers-reduced-motion: no-preference) → .page-enter { animation: 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0s 1 normal both running page-enter; } .line-mask > span { display: block; animation: 1s cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal both running line-up; } .fade-late { animation: 0.8s ease-out 0s 1 normal both running fade-late; }",
+    "(prefers-reduced-motion: no-preference) → .product-play { animation: 11s cubic-bezier(0.45, 0, 0.3, 1) 0.6s infinite alternate both running product-play; }",
+    "(prefers-reduced-motion: reduce) → .rise > .rise-inner { transform: none; transition: none; }",
+    "(prefers-reduced-motion: reduce) → .roll-a, .roll-b { transition: none; }",
+    "(prefers-reduced-motion: reduce) → .motion-reduce\\:relative { position: relative; }"
+  ],
+  "reducedMotionInJS": false,
+  "keyframes": {
+    "intro-door-in": [
+      "100% {transform: translate3d(0px, -30vh, 0px);}"
+    ],
+    "intro-letter": [
+      "100% {transform: none;}"
+    ],
+    "intro-dot": [
+      "30% {opacity: 1;}",
+      "100% {opacity: 1; transform: none;}"
+    ],
+    "intro-door-give-up": [
+      "100% {visibility: hidden;}"
+    ],
+    "intro-root": [
+      "0% {visibility: hidden;}",
+      "100% {visibility: visible;}"
+    ],
+    "page-enter": [
+      "0% {opacity: 0;}"
+    ],
+    "line-up": [
+      "0% {transform: translateY(125%);}"
+    ],
+    "fade-late": [
+      "0% {opacity: 0;}"
+    ],
+    "intro-settle": [
+      "0% {transform: scale(1.08) translateY(4vh);}"
+    ],
+    "product-play": [
+      "100% {transform: translateY(calc(-100% + 100cqh));}"
+    ]
+  },
+  "cssTransitionDurations": [
+    [
+      "0.15s",
+      12
+    ],
+    [
+      "0.3s",
+      2
+    ],
+    [
+      "0s",
+      2
+    ],
+    [
+      "0.5s",
+      1
+    ],
+    [
+      "0.7s",
+      1
+    ],
+    [
+      "0.9s",
+      1
+    ],
+    [
+      "1.15s",
+      1
+    ],
+    [
+      "0.55s",
+      1
+    ]
+  ],
+  "cssEasings": [
+    [
+      "1)",
+      25
+    ],
+    [
+      "0",
+      15
+    ],
+    [
+      "cubic-bezier(0.4",
+      11
+    ],
+    [
+      "0.2",
+      11
+    ],
+    [
+      "1",
+      8
+    ],
+    [
+      "0.3",
+      7
+    ],
+    [
+      "cubic-bezier(0.16",
+      5
+    ],
+    [
+      "ease",
+      3
+    ],
+    [
+      "cubic-bezier(0.23",
+      3
+    ],
+    [
+      "0.32",
+      3
+    ],
+    [
+      "cubic-bezier(0.77",
+      2
+    ],
+    [
+      "0.175",
+      2
+    ],
+    [
+      "linear",
+      1
+    ],
+    [
+      "cubic-bezier(0.34",
+      1
+    ],
+    [
+      "1.35",
+      1
+    ]
+  ],
+  "elements": [
+    {
+      "label": "button",
+      "text": "Send enquiry\nSend enquiry",
+      "cls": "relative isolate inline-flex min-h-[3.25rem] items-center justify-center gap-2 o",
+      "transition": "color 0.3s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s cubic-bezier(0.23, 1, 0.32, 1), text-decoration-color 0.3s cubic-bezier(0.23, 1, 0.32, 1), fill 0.3s cubic-bezier(0.23, 1, 0.32, 1), stroke 0.3s cubic-bezier(0.23, 1, 0.32, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Notiune, home",
+      "cls": "tap -ml-1 flex items-center px-1",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Studio\nStudio",
+      "cls": "px-3 py-2 text-[0.9375rem] transition-opacity duration-150 opacity-60 hover:opac",
+      "transition": "opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Work\nWork\n(12)",
+      "cls": "px-3 py-2 text-[0.9375rem] transition-opacity duration-150 opacity-60 hover:opac",
+      "transition": "opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Services\nServices\n(5)",
+      "cls": "px-3 py-2 text-[0.9375rem] transition-opacity duration-150 opacity-60 hover:opac",
+      "transition": "opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Journal\nJournal\n(5)",
+      "cls": "px-3 py-2 text-[0.9375rem] transition-opacity duration-150 opacity-60 hover:opac",
+      "transition": "opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "nav-link",
+      "text": "Let’s talk",
+      "cls": "group ml-3 flex items-center gap-2.5 py-2 text-[0.9375rem] font-medium",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Studio",
+      "cls": "inline-flex min-h-[2.75rem] items-center hover:text-ground",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Work",
+      "cls": "inline-flex min-h-[2.75rem] items-center hover:text-ground",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    },
+    {
+      "label": "link",
+      "text": "Services",
+      "cls": "inline-flex min-h-[2.75rem] items-center hover:text-ground",
+      "transition": "all",
+      "animation": null,
+      "willChange": null,
+      "transform": null
+    }
+  ],
+  "customCursor": true,
+  "dataAttrs": []
+}

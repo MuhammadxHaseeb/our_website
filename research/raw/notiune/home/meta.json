@@ -1,0 +1,48 @@
+{
+  "url": "https://notiune.xyz/",
+  "title": "Your notion, built | Notiune",
+  "description": "Notiune designs, builds and runs digital products: brands, websites, web apps and software.",
+  "canonical": "https://notiune.xyz/",
+  "lang": "en",
+  "generator": null,
+  "openGraph": {
+    "og:type": "website",
+    "og:site_name": "Notiune",
+    "og:title": "Your notion, built | Notiune",
+    "og:description": "Notiune designs, builds and runs digital products: brands, websites, web apps and software.",
+    "og:image": "https://notiune.xyz/og-image.jpg",
+    "og:image:type": "image/jpeg",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "The Notiune logotype on a copper and violet light, with the line Your notion, built.",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Your notion, built | Notiune",
+    "twitter:description": "Notiune designs, builds and runs digital products: brands, websites, web apps and software.",
+    "twitter:image": "https://notiune.xyz/og-image.jpg",
+    "og:url": "https://notiune.xyz/"
+  },
+  "platformClues": [
+    "HubSpot",
+    "Intercom"
+  ],
+  "libraryHints": {
+    "gsap": false,
+    "ScrollTrigger": false,
+    "Lenis": true,
+    "locomotive": false,
+    "THREE": true,
+    "lottie": false,
+    "Swiper": false,
+    "barba": false,
+    "AOS": false,
+    "framerMotion": false,
+    "video": 0
+  },
+  "scripts": [
+    "https://notiune.xyz/assets/index-S9cShZPe.js"
+  ],
+  "stylesheets": [
+    "https://notiune.xyz/assets/index-CR-w7jIe.css"
+  ],
+  "pageHeight": 13282
+}

@@ -1,0 +1,70 @@
+[
+ {
+  "t": 1.4,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6.5,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 6.6,
+  "what": "hover nav \"\""
+ },
+ {
+  "t": 7.5,
+  "what": "hover nav \"Studio\nStudio\""
+ },
+ {
+  "t": 8.5,
+  "what": "hover nav \"Work\nWork\n(12)\""
+ },
+ {
+  "t": 9.5,
+  "what": "hover nav \"Services\nServices\n(5)\""
+ },
+ {
+  "t": 10.4,
+  "what": "hover nav \"Journal\nJournal\n(5)\""
+ },
+ {
+  "t": 11.4,
+  "what": "hover nav \"Let’s talk\""
+ },
+ {
+  "t": 12.3,
+  "what": "hover nav \"Brand\""
+ },
+ {
+  "t": 16,
+  "what": "hover \"Talk to us about a website\" @y=1626"
+ },
+ {
+  "t": 18,
+  "what": "scrollY=2348 / 6895"
+ },
+ {
+  "t": 19.2,
+  "what": "hover \"Talk to us about software\" @y=3306"
+ },
+ {
+  "t": 22.1,
+  "what": "scrollY=4746 / 6895"
+ },
+ {
+  "t": 24.6,
+  "what": "hover \"Write we@notiune.xyz\" @y=5995"
+ },
+ {
+  "t": 25.8,
+  "what": "hover \"Call 1-205-374-3015\" @y=5995"
+ },
+ {
+  "t": 27.6,
+  "what": "scrollY=5995 / 6895"
+ },
+ {
+  "t": 28.6,
+  "what": "reached end"
+ }
+]

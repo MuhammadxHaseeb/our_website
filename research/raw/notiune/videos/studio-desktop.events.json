@@ -1,0 +1,50 @@
+[
+ {
+  "t": 1,
+  "what": "domcontentloaded"
+ },
+ {
+  "t": 6,
+  "what": "after load intro (5s)"
+ },
+ {
+  "t": 6.1,
+  "what": "hover nav \"\""
+ },
+ {
+  "t": 7.1,
+  "what": "hover nav \"Studio\nStudio\""
+ },
+ {
+  "t": 8.1,
+  "what": "hover nav \"Work\nWork\n(12)\""
+ },
+ {
+  "t": 9,
+  "what": "hover nav \"Services\nServices\n(5)\""
+ },
+ {
+  "t": 10,
+  "what": "hover nav \"Journal\nJournal\n(5)\""
+ },
+ {
+  "t": 10.9,
+  "what": "hover nav \"Let’s talk\""
+ },
+ {
+  "t": 11.9,
+  "what": "hover nav \"Studio\""
+ },
+ {
+  "t": 15.6,
+  "what": "hover \"Write we@notiune.xyz\" @y=5729"
+ },
+ {
+  "t": 16.9,
+  "what": "hover \"Call 1-205-374-3015\" @y=5729"
+ },
+ {
+  "t": 18.3,
+  "what": "reached end"
+ }
+]
