@@ -16,6 +16,8 @@ meta = json.load(open(os.path.join(root, 'frames.json')))
 hexc = lambda c: '#%02X%02X%02X' % tuple(int(v) for v in c[:3])
 
 out, thumbs = [], []
+first = Image.open(os.path.join(root, meta['frames'][0]['file']))
+TW, TH = (240, 150) if first.width >= first.height else (130, 282)  # keep the frames' shape (portrait for phones)
 for f in meta['frames']:
     im = Image.open(os.path.join(root, f['file'])).convert('RGB')
     small = im.resize((96, 60))
@@ -29,15 +31,15 @@ for f in meta['frames']:
     out.append({'y': f['y'], 'mean': hexc(mean), 'dominant': dom,
                 'dark': round(sum(1 for l in lum if l < 40) / len(lum), 3), 'light': round(sum(1 for l in lum if l > 200) / len(lum), 3)})
     if len(out) % every == 0 or f is meta['frames'][-1]:
-        t = im.resize((240, 150)); d = ImageDraw.Draw(t)
+        t = im.resize((TW, TH)); d = ImageDraw.Draw(t)
         d.rectangle([0, 0, 64, 14], fill=(0, 0, 0)); d.text((3, 1), str(f['y']), fill=(255, 255, 255))
         thumbs.append(t)
 
 json.dump(out, open(os.path.join(root, 'analysis.json'), 'w'), indent=1)
 rows = (len(thumbs) + cols - 1) // cols
-sheet = Image.new('RGB', (cols * 240, rows * 150), (40, 40, 40))
+sheet = Image.new('RGB', (cols * TW, rows * TH), (40, 40, 40))
 for i, t in enumerate(thumbs):
-    sheet.paste(t, ((i % cols) * 240, (i // cols) * 150))
+    sheet.paste(t, ((i % cols) * TW, (i // cols) * TH))
 sheet.save(os.path.join(root, 'contact-sheet.jpg'), quality=72)
 print(f'{len(out)} frames analysed, {len(thumbs)} on the sheet -> {root}')
 for o in out:

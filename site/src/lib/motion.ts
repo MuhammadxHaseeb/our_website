@@ -44,3 +44,7 @@ export const whenIdle = (fn: () => void): number => {
   const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
   return w.requestIdleCallback ? w.requestIdleCallback(fn, { timeout: 1500 }) : w.setTimeout(fn, 200);
 };
+export const cancelIdle = (id: number) => {
+  const w = window as Window & { cancelIdleCallback?: (id: number) => void };
+  if (w.cancelIdleCallback) w.cancelIdleCallback(id); else window.clearTimeout(id);
+};

@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { whenIdle } from '@/lib/motion';
+import { hasWebGL2, storyOn } from '@/lib/story';
 
 /**
  * Home hero logo.
@@ -25,11 +26,11 @@ function Loop({ name, className }: { name: string; className: string }) {
   );
 }
 
-/** desktop-class device that can run the glass scene comfortably */
-function canRun3D() {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)').matches) return false;
-  if ((navigator.hardwareConcurrency || 4) < 4) return false;
-  try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
+/** desktop-class device that can run the glass scene comfortably; or any device the home scroll story runs on
+ *  (the story already checked cores, memory, motion and Data Saver: lib/story storyEligible) */
+function mayRun3D() {
+  if (!storyOn() && !window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)').matches) return false;
+  return (navigator.hardwareConcurrency || 4) >= 4;
 }
 
 export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: string }) {
@@ -43,7 +44,8 @@ export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: s
     const reduced = document.documentElement.dataset.motion === 'reduced';
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
     if (reduced || saveData) return;
-    const use3D = canRun3D();
+    // the WebGL2 test itself waits for the idle moment below (a test context costs main-thread time during start-up)
+    let use3D = mayRun3D();
     const videos = Array.from(root.querySelectorAll('video'));
     const visible = () => videos.find(v => getComputedStyle(v).display !== 'none');
     videos.forEach(v => v.addEventListener('playing', () => v.setAttribute('data-on', ''), { once: true }));
@@ -59,9 +61,9 @@ export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: s
     // wait for the page to finish loading, then for an idle moment, so neither the 3D nor the video competes with the first paint.
     // The 3D scene (≈0.5 s of main-thread setup) waits for the visitor's first move, scroll or key press as well:
     // on a desktop that is almost immediate, and the page is fully interactive before any of it runs.
-    const kinds = ['pointermove', 'scroll', 'keydown', 'pointerdown'] as const;
+    const kinds = ['pointermove', 'scroll', 'keydown', 'pointerdown', 'touchstart'] as const;
     let acted = false; let loaded = false;
-    const go = () => { if (cancelled || !loaded || (use3D && !acted)) return; whenIdle(() => { if (cancelled) return; ready = true; if (use3D) setGlass(true); sync(); }); };
+    const go = () => { if (cancelled || !loaded || (use3D && !acted)) return; whenIdle(() => { if (cancelled) return; ready = true; if (use3D && !hasWebGL2()) use3D = false; if (use3D) setGlass(true); sync(); }); };
     const onAct = () => { if (acted) return; acted = true; kinds.forEach(k => window.removeEventListener(k, onAct)); go(); };
     const start = () => { loaded = true; go(); };
     if (use3D) kinds.forEach(k => window.addEventListener(k, onAct, { passive: true }));

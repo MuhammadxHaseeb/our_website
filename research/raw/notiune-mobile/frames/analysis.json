@@ -1,0 +1,342 @@
+[
+ {
+  "y": 0,
+  "mean": "#E4E2E0",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.693
+   },
+   {
+    "hex": "#B7AFB3",
+    "share": 0.125
+   },
+   {
+    "hex": "#F1F1ED",
+    "share": 0.106
+   }
+  ],
+  "dark": 0.016,
+  "light": 0.892
+ },
+ {
+  "y": 150,
+  "mean": "#EAE7E5",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.706
+   },
+   {
+    "hex": "#D2C9CE",
+    "share": 0.125
+   },
+   {
+    "hex": "#F1F1EC",
+    "share": 0.112
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.929
+ },
+ {
+  "y": 300,
+  "mean": "#ECE8E9",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.872
+   },
+   {
+    "hex": "#B996C7",
+    "share": 0.059
+   },
+   {
+    "hex": "#F0F1EB",
+    "share": 0.041
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.942
+ },
+ {
+  "y": 450,
+  "mean": "#6B4D83",
+  "dominant": [
+   {
+    "hex": "#684E7B",
+    "share": 0.817
+   },
+   {
+    "hex": "#894BB9",
+    "share": 0.117
+   },
+   {
+    "hex": "#654C78",
+    "share": 0.05
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.0
+ },
+ {
+  "y": 600,
+  "mean": "#723E9F",
+  "dominant": [
+   {
+    "hex": "#874BBC",
+    "share": 0.409
+   },
+   {
+    "hex": "#8549BA",
+    "share": 0.274
+   },
+   {
+    "hex": "#150B1C",
+    "share": 0.167
+   }
+  ],
+  "dark": 0.167,
+  "light": 0.0
+ },
+ {
+  "y": 750,
+  "mean": "#0C0410",
+  "dominant": [
+   {
+    "hex": "#040108",
+    "share": 0.453
+   },
+   {
+    "hex": "#0B030E",
+    "share": 0.354
+   },
+   {
+    "hex": "#180B1D",
+    "share": 0.162
+   }
+  ],
+  "dark": 0.977,
+  "light": 0.0
+ },
+ {
+  "y": 900,
+  "mean": "#1F1025",
+  "dominant": [
+   {
+    "hex": "#09010C",
+    "share": 0.35
+   },
+   {
+    "hex": "#1A0B24",
+    "share": 0.328
+   },
+   {
+    "hex": "#040108",
+    "share": 0.182
+   }
+  ],
+  "dark": 0.892,
+  "light": 0.011
+ },
+ {
+  "y": 1050,
+  "mean": "#1E1025",
+  "dominant": [
+   {
+    "hex": "#08000B",
+    "share": 0.394
+   },
+   {
+    "hex": "#13071A",
+    "share": 0.255
+   },
+   {
+    "hex": "#4B2F57",
+    "share": 0.181
+   }
+  ],
+  "dark": 0.892,
+  "light": 0.012
+ },
+ {
+  "y": 1200,
+  "mean": "#211327",
+  "dominant": [
+   {
+    "hex": "#09010C",
+    "share": 0.432
+   },
+   {
+    "hex": "#1A0B24",
+    "share": 0.309
+   },
+   {
+    "hex": "#040108",
+    "share": 0.132
+   }
+  ],
+  "dark": 0.87,
+  "light": 0.014
+ },
+ {
+  "y": 1350,
+  "mean": "#464048",
+  "dominant": [
+   {
+    "hex": "#040108",
+    "share": 0.678
+   },
+   {
+    "hex": "#C8BCC4",
+    "share": 0.277
+   },
+   {
+    "hex": "#010003",
+    "share": 0.03
+   }
+  ],
+  "dark": 0.703,
+  "light": 0.25
+ },
+ {
+  "y": 1500,
+  "mean": "#EEEDE9",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.836
+   },
+   {
+    "hex": "#D3D2CF",
+    "share": 0.072
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.054
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.973
+ },
+ {
+  "y": 1650,
+  "mean": "#ECEBE8",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.767
+   },
+   {
+    "hex": "#D0CECC",
+    "share": 0.082
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.077
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.959
+ },
+ {
+  "y": 1800,
+  "mean": "#ECEBE7",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.802
+   },
+   {
+    "hex": "#D4D2CF",
+    "share": 0.103
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.051
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.949
+ },
+ {
+  "y": 1950,
+  "mean": "#EBEAE6",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.673
+   },
+   {
+    "hex": "#D5D3D0",
+    "share": 0.149
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.101
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.959
+ },
+ {
+  "y": 2100,
+  "mean": "#EAE9E5",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.595
+   },
+   {
+    "hex": "#D7D5D2",
+    "share": 0.155
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.131
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.953
+ },
+ {
+  "y": 2250,
+  "mean": "#ECEAE7",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.598
+   },
+   {
+    "hex": "#DCDAD7",
+    "share": 0.169
+   },
+   {
+    "hex": "#F4F3EF",
+    "share": 0.122
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.961
+ },
+ {
+  "y": 2400,
+  "mean": "#EEEDE9",
+  "dominant": [
+   {
+    "hex": "#F2F1ED",
+    "share": 0.768
+   },
+   {
+    "hex": "#E2E0DD",
+    "share": 0.136
+   },
+   {
+    "hex": "#F3F2EE",
+    "share": 0.094
+   }
+  ],
+  "dark": 0.0,
+  "light": 0.988
+ }
+]

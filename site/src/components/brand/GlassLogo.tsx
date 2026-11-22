@@ -197,7 +197,9 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const fit = useMemo(() => {
     const cam = camera as THREE.PerspectiveCamera; const bb = mark.box;
     const viewW = 2 * REST_Z * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * (size.width / size.height);
-    return ((storyOn() ? 0.5 : 0.6) * viewW) / (bb.max.x - bb.min.x);
+    // in portrait the word is sized to the width, as on Notiune's phone version, so it does not end up a sliver
+    const frac = storyOn() ? (size.width < size.height ? 0.84 : 0.5) : 0.6;
+    return (frac * viewW) / (bb.max.x - bb.min.x);
   }, [camera, mark, size]);
 
   useFrame((state, dt) => {
@@ -214,7 +216,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     const s = story.current; const a = anchor.current;
     if (!s.on || !a) {
       // the normal hero logo (no story): word in front of its bars, camera at rest
-      sb.visible = false; w.visible = true; bd.visible = true; barsMatB.color.setScalar(1);
+      sb.visible = false; w.visible = true; bd.visible = true; barsMatB.color.setScalar(1); bd.scale.setScalar(1.15);
       (scene.background as THREE.Color).copy(BRAND_BLACK);
       w.position.set(0, 0, 0); bd.position.set(420, 10, -900);
       state.camera.position.set(0, 0, REST_Z);
@@ -264,7 +266,10 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       const world = worldAt(p);
       barsMatB.color.setScalar(world);
       bd.visible = z < 50 && world > 0.002;
-      bd.position.set(F.current.x + 420, F.current.y + 10, LOGO_Z - 900);
+      // portrait: a smaller backdrop that sits behind the word only, so the proof strip below stays on black
+      const bs = size.width < size.height ? 0.62 : 1.15;
+      bd.scale.setScalar(bs);
+      bd.position.set(F.current.x + 420 * (bs / 1.15), F.current.y + 10, LOGO_Z - 900);
 
       // the letters fly in from their own places and lock into the word
       w.visible = z < 50 && letterAt(p, 0) > 0;
@@ -280,7 +285,8 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       const bb = mark.box; w.updateMatrixWorld();
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
       corners.forEach((v, i) => {
-        v.set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z).applyMatrix4(w.matrixWorld).project(state.camera);
+        // the word's middle plane only (z = 0): the front and back faces spread wide in perspective once the word tilts
+        v.set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, 0).applyMatrix4(w.matrixWorld).project(state.camera);
         const px = (v.x + 1) / 2 * size.width; const py = (1 - v.y) / 2 * size.height;
         x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
       });

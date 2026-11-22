@@ -1,18 +1,17 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { getLenis } from '@/lib/motion';
-import { barsAlpha, camZ, clamp01, F_USER, onStory3D, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyOn, VB, Z0 } from '@/lib/story';
+import { cancelIdle, getLenis, whenIdle } from '@/lib/motion';
+import { barsAlpha, camZ, clamp01, F_USER, onStory3D, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
 
 /**
- * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktop only (html[data-story],
- * set before first paint). One continuous camera flight while the hero stage is pinned for 1.6 screens:
+ * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktops, tablets and phones in
+ * portrait (html[data-story], set before first paint; storyEligible). One continuous camera flight while the hero stage is pinned (2.17 screens; 1.75 in portrait):
  *   the copy scrolls away; the camera flies into the middle foil bar until the screen is all foil, passes through it,
  *   and glides on to the glass wordmark floating behind, which turns to face you; the Found corners lock onto it and
  *   the proof strip slides up; then the page simply scrolls on into Services. No cross-fades.
  * The 3D scene (GlassLogo) draws the bars itself, pixel-matched to the SVG, so once it is up the SVG steps aside.
  * Until then (or without WebGL) the SVG bars are scaled about the same point here, which is the same picture.
  */
-const MQ = '(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)';
 
 export function HeroStory({ children, labelledBy }: { children: React.ReactNode; labelledBy: string }) {
   const root = useRef<HTMLDivElement>(null);
@@ -24,8 +23,8 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     if (!el || !st || !fd) return;
     const svg = st.querySelector<SVGSVGElement>('.hero-bars');
     const html = document.documentElement;
-    const mq = window.matchMedia(MQ);
-    let raf = 0; let p = 0; let has3D = false;
+    const mq = window.matchMedia('(min-height: 560px)'); // phone turned to landscape and back, window resized
+    let raf = 0; let p = 0; let has3D = false; let glChecked = false;
     let a = { left: 0, top: 0, width: 0 };
 
     // where the SVG bars are laid out on the stage (computed values: no transforms, no entrance animation)
@@ -61,8 +60,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
 
     // the window crossed the desktop threshold, or reduced motion was switched on: story on/off
     const sync = () => {
-      const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
-      const ok = mq.matches && html.dataset.motion !== 'reduced' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !saveData;
+      const ok = storyEligible(glChecked);
       if (ok) html.dataset.story = 'on'; else delete html.dataset.story;
       measure(); kick();
     };
@@ -91,9 +89,13 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     window.addEventListener('resize', onResize);
     mq.addEventListener('change', sync);
     el.addEventListener('focusin', onFocus);
-    measure(); update();
+    sync(); update();
+    // WebGL2 is tested once the page is idle (a test context costs main-thread time during start-up); without it, no story
+    let idle = 0;
+    const checkGL = () => { idle = whenIdle(() => { glChecked = true; sync(); }); };
+    if (document.readyState === 'complete') checkGL(); else window.addEventListener('load', checkGL, { once: true });
     return () => {
-      cancelAnimationFrame(raf); motionObs.disconnect(); offBounds(); off3D(); resetStory3D();
+      cancelAnimationFrame(raf); cancelIdle(idle); window.removeEventListener('load', checkGL); motionObs.disconnect(); offBounds(); off3D(); resetStory3D();
       window.removeEventListener('scroll', kick); window.removeEventListener('resize', onResize);
       mq.removeEventListener('change', sync); el.removeEventListener('focusin', onFocus);
       reset();

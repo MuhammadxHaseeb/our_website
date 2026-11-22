@@ -27,7 +27,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   // --gpu: render WebGL on the real GPU (Windows ANGLE / D3D11); heavy scenes (glass transmission) time out in software
   const gpuArgs = args.includes('--gpu') ? ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
   const browser = await chromium.launch({ args: gpuArgs });
-  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+  // --mobile: a touch phone (no hover, coarse pointer, mobile user agent), e.g. --w 390 --h 844
+  const mobile = args.includes('--mobile');
+  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: mobile ? 2 : 1, ...(mobile ? { isMobile: true, hasTouch: true,
+    userAgent: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36' } : {}) });
   await page.goto(URL, { waitUntil: 'load', timeout: 60000 });
   await page.addStyleTag({ content: '#onetrust-consent-sdk,#CybotCookiebotDialog,[class*="cookie-banner" i]{display:none!important}' });
   // move the mouse once (sites that load 3D on first interaction), then rest it mid-screen

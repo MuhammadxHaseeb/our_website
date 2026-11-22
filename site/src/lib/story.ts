@@ -9,8 +9,8 @@
  * Flying straight at a point on a flat plane is the same as scaling the picture about that point, so the CSS fallback
  * (SVG bars scaled about F, before the 3D is ready) and the 3D camera draw the same frames and can swap mid-flight.
  *
- * Eligibility is decided before first paint by storyBootScript (html[data-story]): fine pointer, ≥1024 × 600,
- * motion allowed, no Data Saver. Everyone else keeps the normal hero (no pin, no story).
+ * Eligibility is decided before first paint by storyBootScript (html[data-story]); see storyEligible below.
+ * Phones and tablets get it too (Notiune runs its story on phones as well), with a portrait-tuned layout.
  */
 export type Bounds = { x: number; y: number; w: number; h: number };
 /** where the hero foil bars sit on the stage (px), as laid out (no transforms): left, top, width of the SVG box */
@@ -80,8 +80,26 @@ export function markStory3D() { ready = true; readySubs.forEach(f => f()); }
 export function onStory3D(fn: () => void) { if (ready) fn(); readySubs.add(fn); return () => { readySubs.delete(fn); }; }
 export function resetStory3D() { ready = false; }
 
+/**
+ * Who gets the story: every screen tall enough for the pinned stage (≥560px: phones in portrait, tablets, desktops;
+ * not phones in landscape), on a device with the power for the glass (4+ cores, 4GB+ memory where the browser says),
+ * with motion allowed and no Data Saver. Everyone else keeps the normal hero. Same test in the boot script below.
+ */
+export function storyEligible(checkGL = true) {
+  if (typeof window === 'undefined') return false;
+  const n = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
+  return !window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.documentElement.dataset.motion !== 'reduced'
+    && !n.connection?.saveData && window.matchMedia('(min-height: 560px)').matches
+    && (n.hardwareConcurrency || 4) >= 4 && (!n.deviceMemory || n.deviceMemory >= 4) && (!checkGL || hasWebGL2());
+}
+let webgl2: boolean | null = null;
+/** checked once, when the browser is idle (creating a context costs main-thread time); without it the story turns off */
+export function hasWebGL2() {
+  if (webgl2 === null) { try { webgl2 = !!document.createElement('canvas').getContext('webgl2'); } catch { webgl2 = false; } }
+  return webgl2;
+}
 /** inline in <head>, so the pinned layout is there from the first paint: no layout shift */
-export const storyBootScript = `(function(){try{var d=document.documentElement,c=navigator.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)').matches)d.dataset.story='on';}catch(e){}})();`;
+export const storyBootScript = `(function(){try{var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(min-height: 560px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
 
 export function clamp01(v: number) { return Math.min(1, Math.max(0, v)); }
 export const smooth = (v: number) => { const t = clamp01(v); return t * t * (3 - 2 * t); };

@@ -1,0 +1,96 @@
+{
+ "url": "https://notiune.xyz/",
+ "viewport": [
+  390,
+  844
+ ],
+ "step": 150,
+ "settle": 600,
+ "frames": [
+  {
+   "y": 0,
+   "actual": 0,
+   "file": "f-00000.jpg"
+  },
+  {
+   "y": 150,
+   "actual": 150,
+   "file": "f-00150.jpg"
+  },
+  {
+   "y": 300,
+   "actual": 300,
+   "file": "f-00300.jpg"
+  },
+  {
+   "y": 450,
+   "actual": 450,
+   "file": "f-00450.jpg"
+  },
+  {
+   "y": 600,
+   "actual": 600,
+   "file": "f-00600.jpg"
+  },
+  {
+   "y": 750,
+   "actual": 750,
+   "file": "f-00750.jpg"
+  },
+  {
+   "y": 900,
+   "actual": 900,
+   "file": "f-00900.jpg"
+  },
+  {
+   "y": 1050,
+   "actual": 1050,
+   "file": "f-01050.jpg"
+  },
+  {
+   "y": 1200,
+   "actual": 1200,
+   "file": "f-01200.jpg"
+  },
+  {
+   "y": 1350,
+   "actual": 1350,
+   "file": "f-01350.jpg"
+  },
+  {
+   "y": 1500,
+   "actual": 1500,
+   "file": "f-01500.jpg"
+  },
+  {
+   "y": 1650,
+   "actual": 1650,
+   "file": "f-01650.jpg"
+  },
+  {
+   "y": 1800,
+   "actual": 1800,
+   "file": "f-01800.jpg"
+  },
+  {
+   "y": 1950,
+   "actual": 1950,
+   "file": "f-01950.jpg"
+  },
+  {
+   "y": 2100,
+   "actual": 2100,
+   "file": "f-02100.jpg"
+  },
+  {
+   "y": 2250,
+   "actual": 2250,
+   "file": "f-02250.jpg"
+  },
+  {
+   "y": 2400,
+   "actual": 2400,
+   "file": "f-02400.jpg"
+  }
+ ]
+}

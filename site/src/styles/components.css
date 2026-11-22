@@ -96,6 +96,8 @@
     --c: calc(clamp(0, (var(--p) - 0.64) / 0.06, 1) * (1 - clamp(0, (var(--p) - 0.86) / 0.03, 1))); /* corners lock, let go for the dive */
     --s: clamp(0, (var(--p) - 0.74) / 0.05, 1);    /* proof strip comes in (theirs ~1470 → 1500px) */
     --sx: clamp(0, (var(--p) - 0.87) / 0.03, 1); } /* and leaves for the dive */
+  /* portrait (phones, tablets upright): a shorter pin, as Notiune's phone version (~1.7 screens) */
+  @media (max-aspect-ratio: 1/1) { html[data-story="on"] .story { height: 275svh; } }
   html[data-story="on"] .story > .hero { position: sticky; top: 0; height: 100svh; pointer-events: auto; }
   /* the dive ends in black, which is the Services ground: Services is tucked up under the stage so that, the moment the
      black lets go, its heading is already in place about three quarters down the screen (theirs: content 60px after) */
