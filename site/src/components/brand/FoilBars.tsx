@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useId, useRef } from 'react';
 import { onLight } from '@/lib/light';
+import { getStory, onStory, storyOn } from '@/lib/story';
 
 /**
  * The brand device (Ice Mint, assets/Brand device/epox-foil-bars.svg): three foil bars with slanted left ends that run
@@ -46,6 +47,7 @@ export function FoilBars({ className = '', mode = 'split' }: { className?: strin
     const light = { x: 0.5, y: 0.35 };
     const p = { t: 0, c: 0 }; // separation: target / current (0 = whole E)
     let raf = 0; let visible = true;
+    const inStory = !!el.closest('.story');
 
     const progress = () => {
       const r = host.getBoundingClientRect(); const vh = window.innerHeight;
@@ -56,6 +58,8 @@ export function FoilBars({ className = '', mode = 'split' }: { className?: strin
         const d = Math.hypot(light.x * window.innerWidth - cx, light.y * vh - cy) / window.innerWidth;
         return Math.min(1, Math.max(0, (d - 0.06) / 0.4));
       }
+      // home scroll story: the hero is pinned, so the split follows the story's progress instead of the scroll position
+      if (mode === 'split' && inStory && storyOn()) return Math.min(1, getStory() / 0.25);
       if (mode === 'split') return Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
       // assemble: apart while the footer is entering, whole once its top is in the upper part of the screen
       return Math.min(1, Math.max(0, (r.top - vh * 0.35) / (vh * 0.6)));
@@ -78,11 +82,12 @@ export function FoilBars({ className = '', mode = 'split' }: { className?: strin
     const kick = () => { if (!raf && visible) raf = requestAnimationFrame(draw); };
     const onScroll = () => { p.t = progress(); kick(); };
     const off = onLight(l => { light.x = l.x; light.y = l.y; if (mode === 'scatter') p.t = progress(); kick(); });
+    const offStory = inStory ? onStory(() => { p.t = progress(); kick(); }) : () => {};
     window.addEventListener('scroll', onScroll, { passive: true });
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) onScroll(); });
     io.observe(el);
     p.t = progress(); p.c = mode === 'enter' || mode === 'scatter' ? 1 : p.t; kick();
-    return () => { cancelAnimationFrame(raf); io.disconnect(); off(); window.removeEventListener('scroll', onScroll); };
+    return () => { cancelAnimationFrame(raf); io.disconnect(); off(); offStory(); window.removeEventListener('scroll', onScroll); };
   }, [id, mode]);
 
   return (

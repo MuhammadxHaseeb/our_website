@@ -8,6 +8,7 @@ import { RiseText } from '@/components/motion/RiseText';
 import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 import { FoilBars } from '@/components/brand/FoilBars';
 import { LiquidLogo } from '@/components/brand/LiquidLogo';
+import { HeroStory } from '@/components/brand/HeroStory';
 import { alsoServices, cases, company, industries, services } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -23,33 +24,38 @@ export default function Home() {
     <>
       {/* 1 · Hero (H3 intro, H14 media expand, L10 CTAs) */}
       {/* Black hero band with the brand device: foil bars running off the right edge. Saffron = this layout's one main action, azure = its one highlight. */}
-      <section className="hero" aria-labelledby="hero-title">
+      {/* Desktop: HeroStory pins this as a stage for 1.2 screens (H16 scroll story); everyone else gets it as a normal hero. */}
+      <HeroStory labelledBy="hero-title">
         <FoilBars className="hero-bars hero-bars--home" />
         <div className="container-x pt-[calc(72px+var(--space-10))] pb-[var(--space-9)]">
-          <p className="t-label muted hero-after" style={d(0)}><span className="normal-case">epox</span> · Software house · {company.city}</p>
-          <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '12.5ch' }}
-            parts={['We find the problem', { t: 'before', hl: true }, 'you do.']} />
-          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
-            <p className="t-lead muted hero-after lg:col-span-6" style={{ maxWidth: '44ch', ...d(650) }}>
-              We build web, mobile and AI software, then stay to keep it running. If we reached out to you, we&apos;ve already found something worth fixing.
-            </p>
-            <div className="flex flex-wrap gap-3 hero-after lg:col-span-6 lg:justify-end" style={d(800)}>
-              <Button href="/contact" size="lg" variant="accent" arrow>Let&apos;s talk</Button>
-              <Button href="/work" size="lg" variant="secondary">See our work</Button>
+          <div className="hero-copy">
+            <p className="t-label muted hero-after" style={d(0)}><span className="normal-case">epox</span> · Software house · {company.city}</p>
+            <RiseText as="h1" on="load" id="hero-title" className="t-display mt-8" style={{ maxWidth: '12.5ch' }}
+              parts={['We find the problem', { t: 'before', hl: true }, 'you do.']} />
+            <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
+              <p className="t-lead muted hero-after lg:col-span-6" style={{ maxWidth: '44ch', ...d(650) }}>
+                We build web, mobile and AI software, then stay to keep it running. If we reached out to you, we&apos;ve already found something worth fixing.
+              </p>
+              <div className="flex flex-wrap gap-3 hero-after lg:col-span-6 lg:justify-end" style={d(800)}>
+                <Button href="/contact" size="lg" variant="accent" arrow>Let&apos;s talk</Button>
+                <Button href="/work" size="lg" variant="secondary">See our work</Button>
+              </div>
             </div>
           </div>
-          <ExpandOnScroll className="mt-[var(--space-9)]">
+          <ExpandOnScroll className="hero-logo">
             <LiquidLogo variant="hero" />
           </ExpandOnScroll>
 
           {/* 2 · Proof strip */}
-          <ul className="mt-[var(--space-8)] grid gap-6 border-t border-line pt-6 sm:grid-cols-3" aria-label="epox in short">
-            <li data-reveal style={{ '--i': 0 } as CSSProperties}><Label as="p">Since</Label><p className="mt-2 t-h3 t-num">{company.founded}</p></li>
-            <li data-reveal style={{ '--i': 1 } as CSSProperties}><Label as="p"><Live>Live, run by us</Live></Label><p className="mt-2 t-h3">2 products</p></li>
-            <li data-reveal style={{ '--i': 2 } as CSSProperties}><Label as="p">We build</Label><p className="mt-2 t-h3">Web · Mobile · AI</p></li>
-          </ul>
+          <div className="hero-proof">
+            <ul className="grid gap-6 border-t border-line pt-6 sm:grid-cols-3" aria-label="epox in short">
+              <li data-reveal style={{ '--i': 0 } as CSSProperties}><Label as="p">Since</Label><p className="mt-2 t-h3 t-num">{company.founded}</p></li>
+              <li data-reveal style={{ '--i': 1 } as CSSProperties}><Label as="p"><Live>Live, run by us</Live></Label><p className="mt-2 t-h3">2 products</p></li>
+              <li data-reveal style={{ '--i': 2 } as CSSProperties}><Label as="p">We build</Label><p className="mt-2 t-h3">Web · Mobile · AI</p></li>
+            </ul>
+          </div>
         </div>
-      </section>
+      </HeroStory>
 
       {/* 3 · Services (H7 stacking rows) */}
       <section className="section" aria-labelledby="services-title">

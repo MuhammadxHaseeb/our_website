@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
+import { onStory, setStoryBounds, smooth, storyOn } from '@/lib/story';
 import { WORDMARK_PATH } from './wordmark-path';
 
 /**
@@ -15,6 +16,7 @@ import { WORDMARK_PATH } from './wordmark-path';
  * one light (lib/light: the cursor) and the bars' foil shifts with it.
  * Loaded only on capable desktops after the page is idle (see LiquidLogo); renders only while on screen.
  */
+const REST_Z = 2300; // camera distance at rest
 const STOPS = ['#BFE3FF', '#E2FFF4', '#8FC9FF', '#7FF5D0', '#E4FBFF', '#A8F0E0'];
 
 function studio(renderer: THREE.WebGLRenderer) {
@@ -71,17 +73,26 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     clearcoat: 1, clearcoatRoughness: 0.03, attenuationColor: new THREE.Color('#BFE3FF'), attenuationDistance: 900,
   }), []);
 
+  // home scroll story (lib/story): target / current progress, smoothed here so the turn never steps
+  const story = useRef({ on: false, t: 0, c: 0 });
+  const tilt = useRef({ x: 0, y: 0 });
+  const box = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
+  const last = useRef({ x: 0, y: 0, w: 0, h: 0 });
+
   useEffect(() => {
     const env = studio(gl); scene.environment = env; scene.background = new THREE.Color('#0B0C0F');
     const off = onLight(l => { light.current = { x: l.x, y: l.y }; });
-    return () => { off(); env.dispose(); geo.dispose(); bars.dispose(); glass.dispose(); };
+    story.current.on = storyOn();
+    const offStory = onStory(p => { story.current.t = p; story.current.on = storyOn(); });
+    story.current.c = story.current.t;
+    return () => { off(); offStory(); env.dispose(); geo.dispose(); bars.dispose(); glass.dispose(); };
   }, [gl, scene, geo, bars, glass]);
 
-  // fit the word to ~60% of the frame width at any aspect
+  // fit the word to ~60% of the frame width at any aspect (~50% when the canvas fills the whole screen in the story)
   const fit = useMemo(() => {
     const cam = camera as THREE.PerspectiveCamera; const bb = geo.boundingBox!;
-    const viewW = 2 * cam.position.z * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * (size.width / size.height);
-    return (0.6 * viewW) / (bb.max.x - bb.min.x);
+    const viewW = 2 * REST_Z * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * (size.width / size.height);
+    return ((storyOn() ? 0.5 : 0.6) * viewW) / (bb.max.x - bb.min.x);
   }, [camera, geo, size]);
 
   useFrame((state, dt) => {
@@ -91,8 +102,28 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     const ty = (light.current.x - 0.5) * 0.7 + Math.sin(t * 0.35) * 0.08;
     const tx = (light.current.y - 0.5) * 0.35 + Math.cos(t * 0.3) * 0.04 - 0.04;
     const k = 1 - Math.exp(-dt * 3.2);
-    m.rotation.y += (ty - m.rotation.y) * k; m.rotation.x += (tx - m.rotation.x) * k;
-    bars.offset.x = (light.current.x - 0.5) * 0.12 + Math.sin(t * 0.2) * 0.02;
+    tilt.current.y += (ty - tilt.current.y) * k; tilt.current.x += (tx - tilt.current.x) * k;
+    // story pose: the word starts edge-on (a thin sliver of glass) and turns to face the visitor while the camera eases back
+    const s = story.current;
+    if (s.on) s.c += (s.t - s.c) * (1 - Math.exp(-dt * 9)); else s.c = 1;
+    const turn = smooth((s.c - 0.12) / 0.46);
+    const back = smooth((s.c - 0.08) / 0.5);
+    m.rotation.y = tilt.current.y * (0.35 + 0.65 * turn) + (1 - turn) * 1.48;
+    m.rotation.x = tilt.current.x + (1 - turn) * 0.12;
+    state.camera.position.z = REST_Z - (1 - back) * 620;
+    bars.offset.x = (light.current.x - 0.5) * 0.12 + Math.sin(t * 0.2) * 0.02 + (1 - back) * 0.08;
+    // publish where the word sits on screen (canvas px = stage px), so the Found corners lock onto the glass
+    if (s.on && s.c > 0.35) {
+      const bb = geo.boundingBox!; m.updateMatrixWorld();
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      box.forEach((v, i) => {
+        v.set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z).applyMatrix4(m.matrixWorld).project(state.camera);
+        const px = (v.x + 1) / 2 * size.width; const py = (1 - v.y) / 2 * size.height;
+        x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
+      });
+      const b = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }; const l = last.current;
+      if (Math.abs(b.x - l.x) + Math.abs(b.y - l.y) + Math.abs(b.w - l.w) + Math.abs(b.h - l.h) > 0.6) { last.current = b; setStoryBounds(b); }
+    }
     if (first.current) { first.current = false; requestAnimationFrame(onFirstFrame); }
   });
 
@@ -112,8 +143,8 @@ export default function GlassLogo({ onReady, active }: { onReady: () => void; ac
     <Canvas
       className="glass-logo"
       frameloop={active ? 'always' : 'never'}
-      dpr={[1, 1.5]}
-      camera={{ fov: 28, near: 10, far: 10000, position: [0, 0, 2300] }}
+      dpr={storyOn() ? [1, 1.25] : [1, 1.5]} /* full-screen canvas in the story: cap the pixel count */
+      camera={{ fov: 28, near: 10, far: 10000, position: [0, 0, REST_Z] }}
       gl={{ antialias: true, powerPreference: 'high-performance', toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15, outputColorSpace: THREE.SRGBColorSpace }}
       aria-hidden
     >

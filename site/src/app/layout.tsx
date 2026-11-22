@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { BrandDefs } from '@/components/brand/FoilBars';
 import { MotionProvider, motionBootScript } from '@/components/motion/MotionProvider';
 import { PageWipe } from '@/components/motion/PageWipe';
+import { storyBootScript } from '@/lib/story';
 
 // Ice Mint brand fonts, self-hosted from the brand system's files (app/fonts). Both families are in the hero
 // (headline, lead, labels, buttons), so the faces used there are preloaded to avoid layout shift on swap.
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" data-fonts={FONT_SET} className={`${spaceGrotesk.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <Script id="motion-boot" strategy="beforeInteractive">{motionBootScript}</Script>
+        <Script id="story-boot" strategy="beforeInteractive">{storyBootScript}</Script>
         {FONT_SET === 'licensed' && <link rel="preload" href="/fonts/licensed/HelveticaNowDisplay-Medium.woff2" as="font" type="font/woff2" crossOrigin="" />}
       </head>
       <body>

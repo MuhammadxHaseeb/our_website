@@ -47,6 +47,7 @@ const MOTION = [
   ['H13', 'Section titles: words rise one by one', '1000ms, 60ms per word, once', 'Every section title', 'Bolder pass'],
   ['H14', 'Hero media opens to full width while scrolling', 'scrubbed (clip-path)', 'Hero logo placeholder (≥768px)', 'Bolder pass'],
   ['H15', 'Media wipes up + settles from zoom', '1100ms / 1400ms ease-out-quint', '§ Case cards', 'Bolder pass'],
+  ['H16', 'Hero scroll story: copy steps back, glass logo turns to face you, Found corners lock on, proof rises, foil bar sweeps onto Services', 'scrubbed, pinned 1.2 screens (desktop ≥1024 only)', 'Home hero', 'Notiune research'],
   ['H6', 'Statement reveal (GSAP ScrollTrigger scrub)', 'scrubbed', '§ Statement', 'Hello Monday'],
   ['H7', 'Stacking service rows (sticky)', 'CSS sticky', '§ Service rows (tablet and up)', 'Webisoft'],
   ['H8', 'Roll-call lights at screen centre', '400ms', '§ Roll-call', 'Hello Monday'],

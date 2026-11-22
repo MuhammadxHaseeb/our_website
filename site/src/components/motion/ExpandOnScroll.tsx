@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { loadGsap, prefersReducedMotion } from '@/lib/motion';
+import { storyOn } from '@/lib/story';
 
 /**
  * H14 media expand: large media starts inset with bigger corners and opens to full width as it scrolls
@@ -12,6 +13,7 @@ export function ExpandOnScroll({ children, className = '' }: { children: React.R
   useEffect(() => {
     const el = ref.current;
     if (!el || prefersReducedMotion() || !window.matchMedia('(min-width: 768px)').matches) return;
+    if (el.closest('.story') && storyOn()) return; // home scroll story: the logo is the full-screen stage instead
     let kill = () => {};
     loadGsap().then(({ gsap }) => {
       const tw = gsap.fromTo(el,
