@@ -112,9 +112,18 @@
      once the camera is through the foil, the still stands in for the glass if the 3D never came */
   html[data-story="on"] .story .hero-logo { position: absolute; inset: 0; z-index: 0; margin: 0; visibility: hidden; }
   html[data-story="on"] .story[data-3d] .hero-logo, html[data-story="on"] .story[data-no3d] .hero-logo { visibility: visible; }
-  /* past the foil before the 3D has arrived: hold on the flat foil colour (the screen was all foil a moment ago, the
-     scene picks up from that same colour when it arrives); data-no3d (4 s, never arrived) shows the still instead */
-  html[data-story="on"] .story[data-through]:not([data-3d]):not([data-no3d]) > .hero { background: #C7F2F2; }
+  /* past the foil before the 3D has arrived (a phone still loading it): the colour opening plays here instead, on the
+     same scroll timing (lib/story slitAt / horizonAt): two halves of flat foil pushed apart by black from a line across
+     the middle, a thin foil horizon in the opening. The scene picks up from there when it arrives; data-no3d (4 s, never
+     arrived) shows the still instead */
+  .story-slit { display: none; }
+  html[data-story="on"] .story[data-through]:not([data-3d]):not([data-no3d]) .story-slit { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .story-slit i { position: absolute; left: 0; right: 0; height: calc(50% * (1 - var(--slit, 0)) + 1px); background: #C7F2F2; }
+  .story-slit i:first-child { top: 0; }
+  .story-slit i:nth-child(2) { bottom: 0; }
+  .story-slit b { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; opacity: var(--hz, 0);
+    background: linear-gradient(90deg, #8FC9FF 10%, #E4FBFF 50%, #7FF5D0 90%);
+    box-shadow: 0 0 8px 1px rgba(143, 220, 255, 0.55), 0 0 26px 4px rgba(127, 245, 208, 0.18); }
   html[data-story="on"] .story .liquid--hero { aspect-ratio: auto; height: 100%; border-radius: 0; box-shadow: none; }
   html[data-story="on"] .story .liquid-3d { transition: none; opacity: 1; } /* takes over from the SVG on its first frame, no gap */
   html[data-story="on"] .story:not([data-3d]) .liquid-still { transform: scale(calc(0.8 + 0.2 * clamp(0, (var(--p) - 0.55) / 0.32, 1))); }

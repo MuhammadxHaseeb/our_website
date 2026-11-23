@@ -9,6 +9,13 @@
       "url": "http://localhost:3000"
     },
     {
+      "name": "site-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "site", "run", "start", "--", "--port", "3100"],
+      "port": 3100,
+      "url": "http://localhost:3100"
+    },
+    {
       "name": "brand-preview",
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5180", "--directory", "docs"],

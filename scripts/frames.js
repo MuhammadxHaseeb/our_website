@@ -7,6 +7,7 @@
  *   --to      last scroll position in px          --step   px between frames
  *   --settle  ms to wait after each scroll (lets damped / lerped 3D catch up)
  *   --wait    ms after load before the first frame (preloaders, lazy 3D)
+ *   --cpu     slow the CPU N times (e.g. 4 = a mid phone) · --gpu real GPU · --mobile touch phone UA
  * Output: research/raw/<out-name>/frames/f-<scrollY>.jpg + frames.json (scrollY, file) — then run
  *         `python scripts/frames-analyze.py <out-name>` for per-frame colours + a contact sheet.
  */
@@ -16,7 +17,7 @@ const { chromium } = require('playwright');
 
 const args = process.argv.slice(2);
 const opt = (n, d) => { const i = args.indexOf('--' + n); return i === -1 ? d : Number(args[i + 1]); };
-const [NAME, URL] = args.filter((a, i) => !a.startsWith('--') && !(/^--(from|to|step|settle|w|h|wait)$/.test(args[i - 1] || '')));
+const [NAME, URL] = args.filter((a, i) => !a.startsWith('--') && !(/^--(from|to|step|settle|w|h|wait|cpu)$/.test(args[i - 1] || '')));
 if (!NAME || !URL) { console.error('Usage: node scripts/frames.js <out-name> <url> [--to px] [--step px] [--settle ms]'); process.exit(1); }
 const FROM = opt('from', 0), TO = opt('to', 2700), STEP = opt('step', 25), SETTLE = opt('settle', 500), W = opt('w', 1440), H = opt('h', 900), WAIT = opt('wait', 6000);
 const OUT = path.join(__dirname, '..', 'research', 'raw', NAME, 'frames');
@@ -31,6 +32,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   const mobile = args.includes('--mobile');
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: mobile ? 2 : 1, ...(mobile ? { isMobile: true, hasTouch: true,
     userAgent: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36' } : {}) });
+  // --cpu N: slow the CPU N times (CDP), to see what a phone sees while the 3D is still loading
+  const CPU = opt('cpu', 1);
+  if (CPU > 1) { const cdp = await page.context().newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate', { rate: CPU }); }
   await page.goto(URL, { waitUntil: 'load', timeout: 60000 });
   await page.addStyleTag({ content: '#onetrust-consent-sdk,#CybotCookiebotDialog,[class*="cookie-banner" i]{display:none!important}' });
   // move the mouse once (sites that load 3D on first interaction), then rest it mid-screen

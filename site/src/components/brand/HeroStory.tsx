@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { cancelIdle, getLenis, whenIdle } from '@/lib/motion';
-import { barsAlpha, camZ, clamp01, F_USER, onStory3D, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, clamp01, F_USER, horizonAt, onStory3D, slitAt, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
 
 /**
  * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktops, tablets and phones in
@@ -35,7 +35,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       setAnchor({ ...a, stageW: st.clientWidth, stageH: st.clientHeight });
     };
     const clearFallback = () => { if (svg) { svg.style.transform = ''; svg.style.transformOrigin = ''; svg.style.opacity = ''; } };
-    const reset = () => { clearFallback(); el.style.removeProperty('--p'); el.removeAttribute('data-past'); setStory(0); };
+    const reset = () => { clearFallback(); el.style.removeProperty('--p'); el.style.removeProperty('--slit'); el.style.removeProperty('--hz'); el.removeAttribute('data-past'); setStory(0); };
 
     const update = () => {
       raf = 0;
@@ -43,6 +43,8 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       const r = el.getBoundingClientRect(); const vh = window.innerHeight;
       p = clamp01(-r.top / Math.max(1, r.height - vh));
       el.style.setProperty('--p', p.toFixed(4));
+      // the colour opening for the stage while the 3D isn't drawing yet (CSS .story-slit): same timing as the scene
+      el.style.setProperty('--slit', slitAt(p).toFixed(4)); el.style.setProperty('--hz', horizonAt(p).toFixed(4));
       el.toggleAttribute('data-past', p > 0.12);
       el.toggleAttribute('data-through', p > PASS);
       // past the foil before the 3D is ready (slow phone): the stage holds on the flat foil colour (CSS) and the scene
@@ -52,6 +54,9 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       setStory(p);
       // fallback flight until the 3D scene is drawing: the same frames, as a 2D scale of the SVG about F
       if (!has3D && svg) {
+        // a visitor who scrolls straight away (phones) would otherwise catch the bars' 1.4 s entrance still running,
+        // and a running CSS animation beats the inline transform: the E would sit still instead of flying in
+        if (p > 0.005) svg.getAnimations().forEach(an => an.finish());
         const z = camZ(p);
         const k = a.width / VB.w;
         const ox = (F_USER.x - VB.x) * k; const oy = (F_USER.y - VB.y) * k;
@@ -113,6 +118,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     <div ref={root} className="story">
       <section ref={stage} className="hero" aria-labelledby={labelledBy}>
         {children}
+        <div className="story-slit" aria-hidden><i /><i /><b /></div>
         <div ref={found} className="story-found" aria-hidden />
       </section>
     </div>

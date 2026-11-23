@@ -7,7 +7,7 @@ import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
 import { cancelIdle, whenIdle } from '@/lib/motion';
-import { barsAlpha, camZ, centreAt, diveAt, F_USER, getAnchor, getStory, horizonAt, PASS, letterAt, slitAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, centreAt, diveAt, F_USER, getAnchor, getStory, horizonAt, PASS, letterAt, SLIT_END, slitAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
 import { FOIL_STOPS, SLICES } from './FoilBars';
 import { WORDMARK_PATH } from './wordmark-path';
 
@@ -218,8 +218,9 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
 
   // home scroll story (lib/story)
   // c = the progress the scene shows. If the 3D arrives after the visitor is already past the foil (slow phone), the
-  // stage held on flat foil meanwhile (HeroStory), and the scene catches up from the foil moment instead of jumping.
-  const story = useRef({ on: storyOn(), p: getStory(), c: Math.min(getStory(), PASS), catching: getStory() > PASS });
+  // stage played the colour opening meanwhile (HeroStory, .story-slit), and the scene catches up from its end instead of jumping.
+  // (the stage already played the colour opening itself meanwhile, so the scene joins at the end of it at the latest)
+  const story = useRef({ on: storyOn(), p: getStory(), c: Math.min(getStory(), SLIT_END), catching: getStory() > SLIT_END });
   const tilt = useRef({ x: 0, y: 0 });
   const corners = useMemo(() => Array.from({ length: 8 }, () => new THREE.Vector3()), []);
   const last = useRef({ x: 0, y: 0, w: 0, h: 0 });
