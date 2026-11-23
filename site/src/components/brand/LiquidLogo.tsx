@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { whenIdle } from '@/lib/motion';
-import { hasWebGL2, storyOn } from '@/lib/story';
+import { getStory, hasWebGL2, onStory, story2D, storyOn } from '@/lib/story';
 
 /**
  * Home hero logo.
@@ -27,8 +27,9 @@ function Loop({ name, className }: { name: string; className: string }) {
 }
 
 /** desktop-class device that can run the glass scene comfortably; or any device the home scroll story runs on
- *  (the story already checked cores, memory, motion and Data Saver: lib/story storyEligible) */
+ *  (the story already checked cores, memory, motion and Data Saver: lib/story storyMode) */
 function mayRun3D() {
+  if (story2D()) return false; // the flat story (phones, tablets) uses the video loop
   if (!storyOn() && !window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)').matches) return false;
   return (navigator.hardwareConcurrency || 4) >= 4;
 }
@@ -50,11 +51,16 @@ export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: s
     const visible = () => videos.find(v => getComputedStyle(v).display !== 'none');
     videos.forEach(v => v.addEventListener('playing', () => v.setAttribute('data-on', ''), { once: true }));
     let seen = false; let ready = false; let cancelled = false;
+    // the flat phone story shows the loop only from the dark after the colour opening to the dive: it is loaded and
+    // played from just before then (a full-screen video playing, invisible, from page load cost ~1.3 s of main thread)
+    const storyWants = (q: number) => !story2D() || (q > 0.3 && q < 0.997);
+    let wanted = storyWants(getStory());
+    const offStory = onStory(q => { const w = storyWants(q); if (w !== wanted) { wanted = w; sync(); } });
     const sync = () => {
       if (use3D) return;
       const v = visible();
-      videos.forEach(x => { if (x !== v || !seen) x.pause(); });
-      if (!v || !seen || !ready) return;
+      videos.forEach(x => { if (x !== v || !seen || !wanted) x.pause(); });
+      if (!v || !seen || !ready || !wanted) return;
       if (v.preload !== 'auto') { v.preload = 'auto'; v.load(); }
       v.play().catch(() => {});
     };
@@ -81,7 +87,7 @@ export function LiquidLogo({ className = '' }: { variant?: 'hero'; className?: s
     const io = new IntersectionObserver(([e]) => { seen = e.isIntersecting; setOnScreen(seen); sync(); }, { threshold: 0.05 });
     io.observe(root);
     const mq = window.matchMedia('(min-width: 768px)'); mq.addEventListener('change', sync);
-    return () => { cancelled = true; io.disconnect(); mq.removeEventListener('change', sync); window.removeEventListener('load', start); kinds.forEach(k => window.removeEventListener(k, onAct)); videos.forEach(v => v.pause()); };
+    return () => { cancelled = true; offStory(); io.disconnect(); mq.removeEventListener('change', sync); window.removeEventListener('load', start); kinds.forEach(k => window.removeEventListener(k, onAct)); videos.forEach(v => v.pause()); };
   }, []);
 
   return (

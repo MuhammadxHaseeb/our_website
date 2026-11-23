@@ -1,11 +1,12 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { cancelIdle, getLenis, whenIdle } from '@/lib/motion';
-import { barsAlpha, camZ, clamp01, STORY_MQ, F_USER, horizonAt, onStory3D, slitAt, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, clamp01, F_USER, horizonAt, LOOP_WORD, onStory3D, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, setStoryBounds, slitAt, story2D, STORY_MQ, storyMode, storyOn, tintAt, VB, videoAt, videoScale, Z0 } from '@/lib/story';
 
 /**
- * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktops, tablets and phones in
- * portrait (html[data-story], set before first paint; storyEligible). One continuous camera flight while the hero stage is pinned (2.17 screens; 1.75 in portrait):
+ * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktops (live 3D) and phones / tablets
+ * in portrait (flat: SVG bars, CSS colour opening, the glass as the video loop) (html[data-story] + data-story-mode,
+ * set before first paint; storyMode). One continuous camera flight while the hero stage is pinned (2.17 screens; 1.75 in portrait):
  *   the copy scrolls away; the camera flies into the middle foil bar until the screen is all foil, passes through it,
  *   and glides on to the glass wordmark floating behind, which turns to face you; the Found corners lock onto it and
  *   the proof strip slides up; then the page simply scrolls on into Services. No cross-fades.
@@ -35,7 +36,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       setAnchor({ ...a, stageW: st.clientWidth, stageH: st.clientHeight });
     };
     const clearFallback = () => { if (svg) { svg.style.transform = ''; svg.style.transformOrigin = ''; svg.style.opacity = ''; } };
-    const reset = () => { clearFallback(); el.style.removeProperty('--p'); el.style.removeProperty('--slit'); el.style.removeProperty('--hz'); el.removeAttribute('data-past'); setStory(0); };
+    const reset = () => { clearFallback(); ['--p', '--slit', '--hz', '--tint', '--v', '--vs', '--vo'].forEach(k => el.style.removeProperty(k)); el.removeAttribute('data-past'); setStory(0); };
 
     const update = () => {
       raf = 0;
@@ -49,9 +50,11 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       el.toggleAttribute('data-through', p > PASS);
       // past the foil before the 3D is ready (slow phone): the stage holds on the flat foil colour (CSS) and the scene
       // catches up from there once it arrives; only if it never does (4 s) does the still stand in
-      if (p > PASS && !has3D && !waitTimer && !el.hasAttribute('data-no3d')) waitTimer = window.setTimeout(() => { if (!has3D) el.setAttribute('data-no3d', ''); }, 4000);
+      const flat = story2D();
+      if (!flat && p > PASS && !has3D && !waitTimer && !el.hasAttribute('data-no3d')) waitTimer = window.setTimeout(() => { if (!has3D) el.setAttribute('data-no3d', ''); }, 4000);
       el.toggleAttribute('data-done', p > 0.995); // all black now: let the stage go, Services is already underneath
       setStory(p);
+      if (flat) flatScene();
       // fallback flight until the 3D scene is drawing: the same frames, as a 2D scale of the SVG about F
       if (!has3D && svg) {
         // a visitor who scrolls straight away (phones) would otherwise catch the bars' 1.4 s entrance still running,
@@ -70,10 +73,33 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     };
     const kick = () => { if (!raf) raf = requestAnimationFrame(update); };
 
+    // the flat story's own scene (phones, tablets): the ground's foil tint before the pass (the 3D does it in the
+    // scene), and the glass as the video loop, brought up in the dark, pushed in, then dived through at its "o"
+    const logo = st.querySelector<HTMLElement>('.liquid--hero');
+    const flatScene = () => {
+      el.style.setProperty('--tint', (camZ(p) > 0 ? tintAt(p) : 0).toFixed(4));
+      el.style.setProperty('--v', videoAt(p).toFixed(4));
+      if (!logo) return;
+      // the video is fitted inside the stage (object-fit: contain), so work out the frame it is drawn in
+      const W = st.clientWidth; const H = st.clientHeight;
+      const w = LOOP_WORD[W >= 768 ? 'wide' : 'tall'];
+      const fw = Math.min(W, H * w.ar); const fh = fw / w.ar; const fx = (W - fw) / 2; const fy = (H - fh) / 2;
+      const ox = fx + w.ox * fw; const oy = fy + w.oy * fh; // the hole of the "o": the scale (and so the dive) centres here
+      // the word takes ~70% of the width at most, so the Found corners (22px out) stay on screen on a phone
+      const fit = Math.min(1, (0.7 * W) / ((w.x1 - w.x0) * fw));
+      const k = videoScale(p) * fit;
+      el.style.setProperty('--vs', k.toFixed(4)); el.style.setProperty('--vo', `${ox.toFixed(1)}px ${oy.toFixed(1)}px`);
+      if (p > 0.6 && p < 0.95) {
+        const x0 = ox + (fx + w.x0 * fw - ox) * k; const x1 = ox + (fx + w.x1 * fw - ox) * k;
+        const y0 = oy + (fy + w.y0 * fh - oy) * k; const y1 = oy + (fy + w.y1 * fh - oy) * k;
+        setStoryBounds({ x: x0, y: y0, w: x1 - x0, h: y1 - y0 });
+      }
+    };
+
     // the window crossed the desktop threshold, or reduced motion was switched on: story on/off
     const sync = () => {
-      const ok = storyEligible(glChecked);
-      if (ok) html.dataset.story = 'on'; else delete html.dataset.story;
+      const mode = storyMode(glChecked);
+      if (mode) { html.dataset.story = 'on'; html.dataset.storyMode = mode; } else { delete html.dataset.story; delete html.dataset.storyMode; }
       measure(); kick();
     };
     const motionObs = new MutationObserver(sync);

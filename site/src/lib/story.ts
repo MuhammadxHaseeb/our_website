@@ -9,7 +9,7 @@
  * Flying straight at a point on a flat plane is the same as scaling the picture about that point, so the CSS fallback
  * (SVG bars scaled about F, before the 3D is ready) and the 3D camera draw the same frames and can swap mid-flight.
  *
- * Eligibility is decided before first paint by storyBootScript (html[data-story]); see storyEligible below.
+ * Eligibility is decided before first paint by storyBootScript (html[data-story]); see storyMode below.
  * Phones and tablets get it too (Notiune runs its story on phones as well), with a portrait-tuned layout.
  */
 export type Bounds = { x: number; y: number; w: number; h: number };
@@ -95,19 +95,33 @@ export function onStory3D(fn: () => void) { if (ready) fn(); readySubs.add(fn); 
 export function resetStory3D() { ready = false; }
 
 /**
- * Who gets the story: desktops and laptops (mouse or trackpad, a screen at least 1024 × 600) with the power for the
- * glass (4+ cores, 4GB+ memory where the browser says), motion allowed and no Data Saver. Same test in the boot script.
- * Phones and tablets keep the normal hero with the glass rendered as a video loop (LiquidLogo): owner, 2026-11-23,
- * after the live glass broke up on a real phone ("the words are not clear… keep a stored video for mobile").
+ * Who gets the story, and which one.
+ * · '3d': desktops and laptops (mouse or trackpad, at least 1024 × 600) with the power for the glass (4+ cores, 4GB+
+ *   memory where the browser says) and WebGL2: the live scene (GlassLogo).
+ * · '2d': everyone else with a screen tall enough for the pinned stage (≥560px: phones in portrait, tablets): the same
+ *   choreography drawn flat (SVG bars, CSS colour opening) with the glass as the stored video loop (owner, 2026-11-23:
+ *   the live glass broke up on a real phone; "yes, build it" for the 2D phone story).
+ * · null: reduced motion, Data Saver, phones in landscape: the normal hero. Same test in the boot script below.
  */
 export const STORY_MQ = '(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)';
-export function storyEligible(checkGL = true) {
-  if (typeof window === 'undefined') return false;
+export type StoryMode = '3d' | '2d' | null;
+export function storyMode(checkGL = true): StoryMode {
+  if (typeof window === 'undefined') return null;
   const n = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
-  return !window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.documentElement.dataset.motion !== 'reduced'
-    && !n.connection?.saveData && window.matchMedia(STORY_MQ).matches
-    && (n.hardwareConcurrency || 4) >= 4 && (!n.deviceMemory || n.deviceMemory >= 4) && (!checkGL || hasWebGL2());
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced' || n.connection?.saveData) return null;
+  if (window.matchMedia(STORY_MQ).matches && (n.hardwareConcurrency || 4) >= 4 && (!n.deviceMemory || n.deviceMemory >= 4) && (!checkGL || hasWebGL2())) return '3d';
+  return window.matchMedia('(min-height: 560px)').matches ? '2d' : null;
 }
+/** where the word sits in the stored glass loops (fractions of the frame; measured on hero-4x5 / hero-16x9 stills) */
+export const LOOP_WORD = {
+  tall: { x0: 0.081, y0: 0.379, x1: 0.907, y1: 0.592, ox: 0.63, oy: 0.473, ar: 4 / 5 },
+  wide: { x0: 0.19, y0: 0.315, x1: 0.80, y1: 0.593, ox: 0.585, oy: 0.463, ar: 16 / 9 },
+};
+/** the flat story's video: comes up in the dark as the 3D word would (0.52→0.60), slow push-in, then the dive */
+export const videoAt = (p: number) => smooth((p - 0.52) / 0.08) * (1 - smooth((diveAt(p) - 0.5) / 0.45));
+export const videoScale = (p: number) => (0.9 + 0.1 * easeOut3((p - 0.52) / 0.1)) * (1 + 0.1 * clamp01((p - 0.6) / (DIVE - 0.6))) * (1 + 11 * Math.pow(diveAt(p), 2.2));
+/** the flat story (phones, tablets, desktops without WebGL2): no live 3D, the glass is the video loop */
+export const story2D = () => typeof document !== 'undefined' && document.documentElement.dataset.storyMode === '2d';
 let webgl2: boolean | null = null;
 /** checked once, when the browser is idle (creating a context costs main-thread time); without it the story turns off */
 export function hasWebGL2() {
@@ -116,7 +130,7 @@ export function hasWebGL2() {
 }
 /** inline in <head>, so the pinned layout is there from the first paint: no layout shift. It also notes the visitor's
  *  first interaction (window.__epoxActed) for the 3D loader, in case it happens before the page has started up. */
-export const storyBootScript = `(function(){try{['pointermove','pointerdown','touchstart','wheel','scroll','keydown'].forEach(function(k){addEventListener(k,function(){window.__epoxActed=true},{once:true,passive:true})});var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
+export const storyBootScript = `(function(){try{['pointermove','pointerdown','touchstart','wheel','scroll','keydown'].forEach(function(k){addEventListener(k,function(){window.__epoxActed=true},{once:true,passive:true})});var d=document.documentElement,n=navigator,c=n.connection;if(matchMedia('(prefers-reduced-motion: reduce)').matches||(c&&c.saveData))return;if(matchMedia('${STORY_MQ}').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4)){d.dataset.story='on';d.dataset.storyMode='3d';}else if(matchMedia('(min-height: 560px)').matches){d.dataset.story='on';d.dataset.storyMode='2d';}}catch(e){}})();`;
 
 export function clamp01(v: number) { return Math.min(1, Math.max(0, v)); }
 export const smooth = (v: number) => { const t = clamp01(v); return t * t * (3 - 2 * t); };

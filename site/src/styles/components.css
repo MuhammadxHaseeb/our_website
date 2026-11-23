@@ -118,7 +118,15 @@
      arrived) shows the still instead */
   .story-slit { display: none; }
   html[data-story="on"] .story[data-through]:not([data-3d]):not([data-no3d]) .story-slit { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-  .story-slit i { position: absolute; left: 0; right: 0; height: calc(50% * (1 - var(--slit, 0)) + 1px); background: #C7F2F2; }
+  .story-slit i { position: absolute; left: 0; right: 0; height: calc(50% * (1 - var(--slit, 0)) + (1 - var(--slit, 0)) * 1px); background: #C7F2F2; }
+  /* the flat story (phones, tablets: html[data-story-mode="2d"]): no live 3D. The ground picks up the foil's tint before
+     the pass (--tint), the colour opening is .story-slit above, and the glass is the stored video loop, fitted inside the
+     stage, brought up in the dark (--v), pushed in and dived through at its "o" (--vs about --vo); HeroStory flatScene */
+  html[data-story-mode="2d"] .story > .hero { background: color-mix(in srgb, #C7F2F2 calc(var(--tint, 0) * 100%), var(--brand-black)); }
+  html[data-story-mode="2d"] .story[data-through] .story-slit { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  html[data-story-mode="2d"] .story .hero-logo { visibility: visible; opacity: var(--v, 0); }
+  html[data-story-mode="2d"] .story .liquid--hero { transform: scale(var(--vs, 1)); transform-origin: var(--vo, 50% 50%); }
+  html[data-story-mode="2d"] .story .liquid-still, html[data-story-mode="2d"] .story .liquid-video { object-fit: contain; transform: none; }
   .story-slit i:first-child { top: 0; }
   .story-slit i:nth-child(2) { bottom: 0; }
   .story-slit b { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; opacity: var(--hz, 0);
