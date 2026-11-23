@@ -95,15 +95,17 @@ export function onStory3D(fn: () => void) { if (ready) fn(); readySubs.add(fn); 
 export function resetStory3D() { ready = false; }
 
 /**
- * Who gets the story: every screen tall enough for the pinned stage (≥560px: phones in portrait, tablets, desktops;
- * not phones in landscape), on a device with the power for the glass (4+ cores, 4GB+ memory where the browser says),
- * with motion allowed and no Data Saver. Everyone else keeps the normal hero. Same test in the boot script below.
+ * Who gets the story: desktops and laptops (mouse or trackpad, a screen at least 1024 × 600) with the power for the
+ * glass (4+ cores, 4GB+ memory where the browser says), motion allowed and no Data Saver. Same test in the boot script.
+ * Phones and tablets keep the normal hero with the glass rendered as a video loop (LiquidLogo): owner, 2026-11-23,
+ * after the live glass broke up on a real phone ("the words are not clear… keep a stored video for mobile").
  */
+export const STORY_MQ = '(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)';
 export function storyEligible(checkGL = true) {
   if (typeof window === 'undefined') return false;
   const n = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
   return !window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.documentElement.dataset.motion !== 'reduced'
-    && !n.connection?.saveData && window.matchMedia('(min-height: 560px)').matches
+    && !n.connection?.saveData && window.matchMedia(STORY_MQ).matches
     && (n.hardwareConcurrency || 4) >= 4 && (!n.deviceMemory || n.deviceMemory >= 4) && (!checkGL || hasWebGL2());
 }
 let webgl2: boolean | null = null;
@@ -114,7 +116,7 @@ export function hasWebGL2() {
 }
 /** inline in <head>, so the pinned layout is there from the first paint: no layout shift. It also notes the visitor's
  *  first interaction (window.__epoxActed) for the 3D loader, in case it happens before the page has started up. */
-export const storyBootScript = `(function(){try{['pointermove','pointerdown','touchstart','wheel','scroll','keydown'].forEach(function(k){addEventListener(k,function(){window.__epoxActed=true},{once:true,passive:true})});var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(min-height: 560px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
+export const storyBootScript = `(function(){try{['pointermove','pointerdown','touchstart','wheel','scroll','keydown'].forEach(function(k){addEventListener(k,function(){window.__epoxActed=true},{once:true,passive:true})});var d=document.documentElement,n=navigator,c=n.connection;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(c&&c.saveData)&&matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px) and (min-height: 600px)').matches&&(n.hardwareConcurrency||4)>=4&&(!n.deviceMemory||n.deviceMemory>=4))d.dataset.story='on';}catch(e){}})();`;
 
 export function clamp01(v: number) { return Math.min(1, Math.max(0, v)); }
 export const smooth = (v: number) => { const t = clamp01(v); return t * t * (3 - 2 * t); };

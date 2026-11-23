@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { cancelIdle, getLenis, whenIdle } from '@/lib/motion';
-import { barsAlpha, camZ, clamp01, F_USER, horizonAt, onStory3D, slitAt, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, clamp01, STORY_MQ, F_USER, horizonAt, onStory3D, slitAt, onStoryBounds, PASS, resetStory3D, setAnchor, setStory, storyEligible, storyOn, VB, Z0 } from '@/lib/story';
 
 /**
  * H16 · Home hero scroll story (docs/hero-scroll-story-plan.md, lib/story.ts). Desktops, tablets and phones in
@@ -23,7 +23,7 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
     if (!el || !st || !fd) return;
     const svg = st.querySelector<SVGSVGElement>('.hero-bars');
     const html = document.documentElement;
-    const mq = window.matchMedia('(min-height: 560px)'); // phone turned to landscape and back, window resized
+    const mq = window.matchMedia(STORY_MQ); // window resized across the desktop threshold
     let raf = 0; let p = 0; let has3D = false; let glChecked = false; let waitTimer = 0;
     let a = { left: 0, top: 0, width: 0 };
 
