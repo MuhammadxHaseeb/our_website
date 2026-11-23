@@ -134,7 +134,7 @@ export default function HowWeWorkPage() {
             { q: 'Who owns the code?', a: `You do. ${terms.ownership}` },
             { q: 'How do payments work?', a: terms.payment },
             { q: 'How fast do you respond when something breaks?', a: terms.response },
-            { q: 'Do you work with clients outside Pakistan?', a: 'Yes. We work with anyone who needs it. One of the two apps in our work runs for tenants and landlords across Europe.' },
+            { q: 'Do you work with clients outside Pakistan?', a: 'Yes. We work with anyone who needs it. The rental app in our work runs for tenants and landlords across Europe.' },
           ]} />
         </div>
       </section>

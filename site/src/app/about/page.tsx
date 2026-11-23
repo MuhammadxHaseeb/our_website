@@ -17,7 +17,7 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 
 const principles = [
   { title: 'We find it first', text: 'Most of our projects start with us spotting a problem before anyone asked. We would rather show you the fix than wait for a brief.' },
-  { title: 'We stay after launch', text: 'Both products in our work are still live, and we still market and maintain them. Launch is the middle, not the end.' },
+  { title: 'We stay after launch', text: 'The apps in our work are still live, and we still market and maintain them. Launch is the middle, not the end.' },
   { title: 'Plain, regular updates', text: 'One project lead and a short written update every week: what shipped, what is next, what we need from you.' },
   { title: 'Your code is yours', text: terms.ownership },
 ];
@@ -80,7 +80,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5" data-reveal><LocalClock /></div>
             <div className="lg:col-span-6 lg:col-start-7" data-reveal>
               <p className="t-lead" style={{ maxWidth: '40ch' }}>
-                We work with clients wherever they are. One of the two apps in our work runs for tenants and landlords across Europe.
+                We work with clients wherever they are. The rental app in our work runs for tenants and landlords across Europe.
               </p>
               <div className="mt-8"><ArrowLink href="/how-we-work">How we work together</ArrowLink></div>
             </div>

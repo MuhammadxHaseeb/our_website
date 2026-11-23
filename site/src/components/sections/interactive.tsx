@@ -24,7 +24,7 @@ export function CountUp({ to, raw = false, duration = 1200 }: { to: number; raw?
 
 export function StatsScoreboard({ stats }: { stats: { value: number; label: string; raw?: boolean }[] }) {
   return (
-    <dl className="grid grid-cols-2 gap-x-[var(--gutter)] gap-y-12 lg:grid-cols-4">
+    <dl className={`grid grid-cols-2 gap-x-[var(--gutter)] gap-y-12 ${stats.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}`}>
       {stats.map(s => (
         <div key={s.label} className="flex flex-col-reverse justify-end border-t border-line pt-6">
           <dt className="t-label muted mt-5">{s.label}</dt>

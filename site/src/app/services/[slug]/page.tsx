@@ -100,7 +100,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {related.length > 0 && (
         <section className="section soft" aria-labelledby="work-title">
           <div className="container-x">
-            <SectionHeader id="work-title" label="Work" title={related.length > 1 ? 'Both apps are still live' : 'Still live, still run by us'} action={<ArrowLink href="/work">All work</ArrowLink>} />
+            <SectionHeader id="work-title" label="Work" title="Still live, still run by us" action={<ArrowLink href="/work">All work</ArrowLink>} />
             <div className="grid gap-[var(--gutter)]">{related.map(c => <CaseCard key={c.slug} c={c} />)}</div>
           </div>
         </section>

@@ -52,7 +52,7 @@ export default function Home() {
           <div className="hero-proof">
             <ul className="grid gap-6 border-t border-line pt-6 sm:grid-cols-3" aria-label="epox in short">
               <li data-reveal style={{ '--i': 0 } as CSSProperties}><Label as="p">Since</Label><p className="mt-2 t-h3 t-num">{company.founded}</p></li>
-              <li data-reveal style={{ '--i': 1 } as CSSProperties}><Label as="p"><Live>Live, run by us</Live></Label><p className="mt-2 t-h3">2 products</p></li>
+              <li data-reveal style={{ '--i': 1 } as CSSProperties}><Label as="p"><Live>Live, run by us</Live></Label><p className="mt-2 t-h3">Apps we built</p></li>
               <li data-reveal style={{ '--i': 2 } as CSSProperties}><Label as="p">We build</Label><p className="mt-2 t-h3">Web · Mobile · AI</p></li>
             </ul>
           </div>
@@ -71,7 +71,7 @@ export default function Home() {
       {/* 4 · Selected work (H15 unveil, H9 hover) */}
       <section className="section soft" aria-labelledby="work-title">
         <div className="container-x">
-          <SectionHeader id="work-title" label="Work" title="Two products, both still live" action={<ArrowLink href="/work">All work</ArrowLink>} />
+          <SectionHeader id="work-title" label="Work" title="Still live, still run by us" action={<ArrowLink href="/work">All work</ArrowLink>} />
           <div className="grid gap-[var(--gutter)]">{cases.map(c => <CaseCard key={c.slug} c={c} />)}</div>
         </div>
       </section>
@@ -95,7 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Numbers live on /about only: the hero proof strip already says since 2019 · 2 products live */}
+      {/* Numbers live on /about only: the hero proof strip already says since 2019 · live, run by us (owner: no product counts anywhere) */}
       {/* 8 · Ways to work with us (no prices) */}
       <section className="section soft" aria-labelledby="models-title">
         <div className="container-x">

@@ -27,7 +27,7 @@ export default function WorkPage() {
           <RiseText as="h1" on="load" id="work-hero" className="t-h1 mt-8" style={{ maxWidth: '15ch' }}
             parts={['Products we built and', { t: 'still run.', hl: true }]} />
           <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '46ch', ...d(600) }}>
-            Both are live today, and we still market and maintain them. Client names stay private.
+            They are live today, and we still market and maintain them. Client names stay private.
           </p>
         </div>
       </section>

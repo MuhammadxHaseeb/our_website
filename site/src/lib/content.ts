@@ -130,9 +130,8 @@ export const steps = [
 
 export const stats = [
   { value: 2019, label: 'Building since', raw: true },
-  { value: 2, label: 'Products live, still run by us' },
   { value: 8, label: 'Service areas' },
-  { value: 1, label: 'Product of our own' },
+  { value: 1, label: 'Working day to reply' },
 ];
 
 export const industries = [
@@ -142,4 +141,4 @@ export const industries = [
 ];
 
 /** Contact page trust strip: only facts not already on that page (NDA and location are said elsewhere there). */
-export const trust = ['Building since 2019', '2 products live, run by us', 'A reply within one working day'];
+export const trust = ['Building since 2019', 'Apps we built, still live and run by us', 'A reply within one working day'];

@@ -55,7 +55,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     headline: 'iOS and Android apps people keep opening after week one',
     cta: 'Talk about your app',
     buildTitle: 'Everything an app needs, from one team',
-    lead: 'We build for iPhone and Android, cross-platform or native, then stay to keep the app fast, fixed and growing. Both apps in our work are still live and still run by us.',
+    lead: 'We build for iPhone and Android, cross-platform or native, then stay to keep the app fast, fixed and growing. The apps in our work are still live and still run by us.',
     capabilities: [
       { title: 'iOS and Android apps', text: 'One product on both stores, designed for how people actually hold and use a phone.' },
       { title: 'Cross-platform builds', text: 'Flutter or React Native: one codebase for both stores, so every fix ships everywhere at once.' },
@@ -82,7 +82,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       { q: 'Do I need separate apps for iPhone and Android?', a: 'Usually not. Flutter or React Native gives you both from one codebase. We suggest native only when a feature really needs it, and we tell you why.' },
       { q: 'Can you take over an app another team started?', a: 'Yes. We review the code first, tell you what is worth keeping and what will cost you later, then agree a plan before changing anything.' },
       { q: 'Who publishes the app to the stores?', a: `We prepare the release and handle App Store and Google Play submission. ${terms.stores}` },
-      { q: 'What happens after launch?', a: 'Testing, fixes, updates and marketing, usually on a monthly retainer. It is how we still run both apps in our work today.' },
+      { q: 'What happens after launch?', a: 'Testing, fixes, updates and marketing, usually on a monthly retainer. It is how we still run the apps in our work today.' },
     ],
   },
 
@@ -233,8 +233,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     features: [
       {
         label: 'From our work',
-        title: 'Both products, still ours to run',
-        text: 'We built the rental inspection app and the nutrition app, and we still test, maintain and market both today.',
+        title: 'Still ours to run',
+        text: 'We built the rental inspection app and the nutrition app, and we still test, maintain and market them today.',
       },
       {
         label: 'Rescue',
