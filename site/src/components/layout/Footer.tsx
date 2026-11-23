@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { FoilBars } from '@/components/brand/FoilBars';
 import { Logo } from '@/components/brand/Logo';
-import { Val } from '@/components/ui/primitives';
 import { company, services } from '@/lib/content';
+import { product } from '@/lib/product';
 
 /** Footer: brand-black ground. Opens with a sign-off band (foil lockup + the bars locking back into the E), then links. */
 export function Footer() {
@@ -26,15 +26,16 @@ export function Footer() {
           <nav aria-label="Company" className="md:col-span-3">
             <p className="t-label muted">Company</p>
             <ul className="mt-5 grid gap-2">
-              {[['/work', 'Work'], ['/how-we-work', 'How we work'], ['/about', 'About'], ['/contact', 'Contact']].map(([h, t]) =>
+              {[['/work', 'Work'], [product.href, product.short], ['/how-we-work', 'How we work'], ['/about', 'About'], ['/contact', 'Contact']].map(([h, t]) =>
                 <li key={h}><Link className="link-quiet" href={h}>{t}</Link></li>)}
             </ul>
           </nav>
           <div className="md:col-span-4">
             <p className="t-label muted">Contact</p>
             <ul className="mt-5 grid gap-2">
-              <li><Val v={company.email} /></li>
-              <li><Val v={company.whatsapp} /></li>
+              {company.email && <li><a className="link-quiet" href={`mailto:${company.email}`}>{company.email}</a></li>}
+              {company.whatsapp && <li><a className="link-quiet" href={`https://wa.me/${company.whatsapp.replace(/\D/g, '')}`}>{company.whatsapp}</a></li>}
+              <li><Link className="link-quiet" href="/contact">Send us a message</Link></li>
               <li className="muted">{company.city}, {company.country} · {company.timezone}</li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
-import { Label, Val } from '@/components/ui/primitives';
+import { Label } from '@/components/ui/primitives';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { nextSteps } from '@/components/sections/ContactBlock';
 import { TrustStrip } from '@/components/sections/blocks';
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   description: 'Tell epox the problem and we will tell you how we would fix it. A person reads every message and replies within one working day.',
 };
 
-const isPh = (v: string) => v.startsWith('[PLACEHOLDER');
 const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
 
 /** /contact (design brief §6): hero → form (main feature) + what happens next + direct contacts → trust strip. */
@@ -45,10 +44,10 @@ export default function ContactPage() {
             </ol>
 
             <dl className="mt-12 grid gap-5">
-              <div><dt className="t-label muted">Prefer a call?</dt>
-                <dd className="mt-1.5">{company.bookingUrl ? <a className="link" href={company.bookingUrl}>Book 20 minutes</a> : <Val v="[PLACEHOLDER: booking link]" />}</dd></div>
-              <div><dt className="t-label muted">Email</dt><dd className="mt-1.5">{isPh(company.email) ? <Val v={company.email} /> : <a className="link" href={`mailto:${company.email}`}>{company.email}</a>}</dd></div>
-              <div><dt className="t-label muted">WhatsApp</dt><dd className="mt-1.5">{isPh(company.whatsapp) ? <Val v={company.whatsapp} /> : <a className="link" href={`https://wa.me/${company.whatsapp.replace(/\D/g, '')}`}>{company.whatsapp}</a>}</dd></div>
+              {/* direct contacts appear once they're filled in lib/content.ts → company */}
+              {company.bookingUrl && <div><dt className="t-label muted">Prefer a call?</dt><dd className="mt-1.5"><a className="link" href={company.bookingUrl}>Book 20 minutes</a></dd></div>}
+              {company.email && <div><dt className="t-label muted">Email</dt><dd className="mt-1.5"><a className="link" href={`mailto:${company.email}`}>{company.email}</a></dd></div>}
+              {company.whatsapp && <div><dt className="t-label muted">WhatsApp</dt><dd className="mt-1.5"><a className="link" href={`https://wa.me/${company.whatsapp.replace(/\D/g, '')}`}>{company.whatsapp}</a></dd></div>}
               <div><dt className="t-label muted">Where</dt><dd className="mt-1.5">{company.city}, {company.country} · {company.timezone}</dd></div>
             </dl>
           </div>

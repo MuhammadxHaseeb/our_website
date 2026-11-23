@@ -1,5 +1,4 @@
 import { ContactForm } from './ContactForm';
-import { Val } from '@/components/ui/primitives';
 import { company } from '@/lib/content';
 import { RiseText } from '@/components/motion/RiseText';
 
@@ -26,9 +25,7 @@ export function ContactBlock() {
                 </li>
               ))}
             </ol>
-            <p className="mt-10 t-small muted">
-              Prefer a call? {company.bookingUrl ? <a className="link" href={company.bookingUrl}>Book 20 minutes</a> : <Val v="[PLACEHOLDER: booking link]" />}
-            </p>
+            {company.bookingUrl && <p className="mt-10 t-small muted">Prefer a call? <a className="link" href={company.bookingUrl}>Book 20 minutes</a></p>}
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <ContactForm />

@@ -7,6 +7,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { Logo } from '@/components/brand/Logo';
 import { BtnLabel } from '@/components/ui/primitives';
 import { services } from '@/lib/content';
+import { product } from '@/lib/product';
 import { getLenis } from '@/lib/motion';
 
 type Panel = 'services' | 'company' | null;
@@ -122,6 +123,7 @@ export function Header() {
             </button>
           ))}
           <Link ref={workRef} href="/work" className="nav-link" aria-current={isActive('/work') ? 'page' : undefined} onMouseEnter={scheduleClose}>Work</Link>
+          <Link href={product.href} className="nav-link" aria-current={isActive(product.href) ? 'page' : undefined} onMouseEnter={scheduleClose}>{product.short}</Link>
 
           <div id="mega" ref={megaRef} className="mega" data-open={panel !== null} onMouseEnter={() => open(panel)} onMouseLeave={scheduleClose}
             onKeyDown={(e) => {
@@ -196,11 +198,11 @@ export function Header() {
             ))}
           </ul>
           <ul className="sheet-rule mt-6 grid gap-0 border-t pt-4">
-            {[{ href: '/work', t: 'Work' }, ...company.map(c => ({ href: c.href, t: c.title }))].map((l, i) => (
+            {[{ href: '/work', t: 'Work' }, { href: product.href, t: product.short }, ...company.map(c => ({ href: c.href, t: c.title }))].map((l, i) => (
               <li key={l.href} className="sheet-in" style={{ '--i': services.length + 1 + i } as CSSProperties}><Link href={l.href} className="block py-1.5 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{l.t}</Link></li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-lg btn-accent sheet-in mt-auto self-start" style={{ '--i': services.length + 6 } as CSSProperties} tabIndex={sheet ? 0 : -1}><BtnLabel arrow>Let&apos;s talk</BtnLabel></Link>
+          <Link href="/contact" className="btn btn-lg btn-accent sheet-in mt-auto self-start" style={{ '--i': services.length + 7 } as CSSProperties} tabIndex={sheet ? 0 : -1}><BtnLabel arrow>Let&apos;s talk</BtnLabel></Link>
         </div>
       </div>
     </>

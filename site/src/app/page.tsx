@@ -10,6 +10,8 @@ import { FoilBars } from '@/components/brand/FoilBars';
 import { LiquidLogo } from '@/components/brand/LiquidLogo';
 import { HeroStory } from '@/components/brand/HeroStory';
 import { alsoServices, cases, company, industries, services } from '@/lib/content';
+import { modules, product } from '@/lib/product';
+import { Tags } from '@/components/ui/primitives';
 
 export const metadata: Metadata = {
   title: { absolute: 'epox: we find the problem before you do' },
@@ -74,8 +76,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 5 · Our own product (the restaurant system; prices live on its page) */}
+      <section className="section border-t border-line" aria-labelledby="product-title">
+        <div className="container-x">
+          <SectionHeader id="product-title" label="Our product" title="Our own system for restaurants and shops" action={<ArrowLink href={product.href}>See the system and prices</ArrowLink>} />
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-[var(--gutter)]">
+            <p className="t-lead muted lg:col-span-6" style={{ maxWidth: '44ch' }} data-reveal>{product.promise} One login for every branch, plans from $25 per branch a month.</p>
+            <div className="lg:col-span-5 lg:col-start-8" data-reveal><Tags items={modules.map(m => m.title)} /></div>
+          </div>
+        </div>
+      </section>
+
       {/* 6 · Built for (H8 roll-call) */}
-      <section className="section dark" aria-labelledby="industries-title">
+      <section className="section dark border-t border-line" aria-labelledby="industries-title">
         <div className="container-x">
           <SectionHeader id="industries-title" label="Built for" title="Industries we've shipped in" />
           <RollCall items={industries} />

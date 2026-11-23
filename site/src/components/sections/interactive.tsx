@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { loadGsap, prefersReducedMotion } from '@/lib/motion';
-import { Ph } from '@/components/ui/primitives';
 
 /* ------------------------------------------------ Count-up number (L7), tabular, once */
 export function CountUp({ to, raw = false, duration = 1200 }: { to: number; raw?: boolean; duration?: number }) {
@@ -23,14 +22,14 @@ export function CountUp({ to, raw = false, duration = 1200 }: { to: number; raw?
   return <span ref={ref} className="t-num">{v}</span>;
 }
 
-export function StatsScoreboard({ stats }: { stats: { value: number | null; label: string; raw?: boolean }[] }) {
+export function StatsScoreboard({ stats }: { stats: { value: number; label: string; raw?: boolean }[] }) {
   return (
     <dl className="grid grid-cols-2 gap-x-[var(--gutter)] gap-y-12 lg:grid-cols-4">
       {stats.map(s => (
         <div key={s.label} className="flex flex-col-reverse justify-end border-t border-line pt-6">
-          <dt className="t-label muted mt-5">{s.label.startsWith('[') ? <Ph>{s.label}</Ph> : s.label}</dt>
+          <dt className="t-label muted mt-5">{s.label}</dt>
           <dd className="t-num" style={{ font: '500 clamp(3.5rem, 2.4rem + 4.5vw, 8rem)/0.95 var(--font-display)', letterSpacing: 'var(--tr-h1)' }}>
-            {s.value === null ? <Ph>[PLACEHOLDER]</Ph> : <CountUp to={s.value} raw={s.raw} />}
+            <CountUp to={s.value} raw={s.raw} />
           </dd>
         </div>
       ))}
@@ -39,7 +38,7 @@ export function StatsScoreboard({ stats }: { stats: { value: number | null; labe
 }
 
 /* ------------------------------------------------ Roll-call (H8): names light up at screen centre */
-export function RollCall({ items }: { items: { name: string; count: number; line: string }[] }) {
+export function RollCall({ items }: { items: { name: string; meta: string; line: string }[] }) {
   const ref = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -53,12 +52,11 @@ export function RollCall({ items }: { items: { name: string; count: number; line
   return (
     <ol ref={ref} className="grid gap-6 md:gap-10">
       {items.map((it, i) => {
-        const ph = it.name.startsWith('[');
         return (
           <li key={it.name + i} data-roll={i} className="roll-item grid items-end gap-x-[var(--gutter)] gap-y-3 md:grid-cols-12" data-active={active === i}>
-            <span className="roll-meta t-label md:col-span-2 md:pb-4" style={{ color: 'var(--muted)' }}>{ph ? '' : `• ${it.count} project${it.count === 1 ? '' : 's'}`}</span>
-            <span className="t-rollcall md:col-span-6">{ph ? <Ph>{it.name}</Ph> : it.name}</span>
-            <span className={`roll-meta md:col-span-4 ${ph ? '' : 'md:pb-4'}`} style={{ color: 'var(--muted)' }}>{it.line.startsWith('[') ? <Ph>{it.line}</Ph> : it.line}</span>
+            <span className="roll-meta t-label md:col-span-2 md:pb-4" style={{ color: 'var(--muted)' }}>• {it.meta}</span>
+            <span className="t-rollcall md:col-span-6">{it.name}</span>
+            <span className="roll-meta md:col-span-4 md:pb-4" style={{ color: 'var(--muted)' }}>{it.line}</span>
           </li>
         );
       })}

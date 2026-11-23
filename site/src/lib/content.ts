@@ -1,4 +1,5 @@
-// Real content from our-company.md. Gaps are marked [PLACEHOLDER: …] and tracked in CLAUDE.md.
+// Real content from our-company.md. Unknown facts are left empty and simply not shown (client-ready since 2026-11-23);
+// the list of what is still missing lives in CLAUDE.md.
 
 export const company = {
   name: 'epox',
@@ -6,9 +7,10 @@ export const company = {
   country: 'Pakistan',
   founded: 2019,
   timezone: 'UTC+5',
-  email: '[PLACEHOLDER: email]',
-  whatsapp: '[PLACEHOLDER: WhatsApp]',
-  bookingUrl: '', // [PLACEHOLDER: booking link]
+  // Empty = not shown anywhere (the contact form is the way in). Fill these and every page links them.
+  email: '',
+  whatsapp: '',
+  bookingUrl: '',
 };
 
 export type Service = {
@@ -56,21 +58,21 @@ export const alsoServices = ['Desktop apps', 'Blockchain', 'Game development'];
 
 export type CaseStudy = {
   n: string; slug: string; headline: string; summary: string; sector: string; region?: string;
-  client: string; platforms: string; engagement: string; status: string; duration: string; asset: string;
+  client?: string; platforms: string; engagement: string; status: string; duration?: string; tech?: string[];
 };
 
 export const cases: CaseStudy[] = [
   {
     n: '001', slug: 'rental-inspection-app', headline: 'Apps that settle rental disputes before they start',
     summary: 'Tenants photograph the property at move-in into a tamper-proof record, then both sides compare it side by side at move-out.',
-    sector: 'PropTech', region: 'Europe', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
-    engagement: 'Build, marketing, maintenance', status: 'Live', duration: '[PLACEHOLDER: duration]', asset: 'case 001 hero · 16:10',
+    sector: 'PropTech', region: 'Europe', platforms: 'iOS · Android · Web',
+    engagement: 'Build, marketing, maintenance', status: 'Live',
   },
   {
     n: '002', slug: 'nutrition-coaching-app', headline: 'A nutrition app with a real nutritionist inside',
     summary: 'People log meals and track their nutrition, then talk directly to a real nutrition doctor inside the app, not a generic diet bot.',
-    sector: 'Health & nutrition', client: '[PLACEHOLDER: client descriptor]', platforms: 'iOS · Android · Web',
-    engagement: 'Build, marketing, maintenance', status: 'Live', duration: '[PLACEHOLDER: duration]', asset: 'case 002 hero · 16:10',
+    sector: 'Health & nutrition', platforms: 'iOS · Android · Web',
+    engagement: 'Build, marketing, maintenance', status: 'Live',
   },
 ];
 
@@ -90,12 +92,27 @@ export const modelCompare = {
   ],
 };
 
-/** /how-we-work communication. Specifics the owner hasn't confirmed are placeholders. */
+/** /how-we-work communication (default terms written 2026-11-23, owner to confirm). */
 export const communication = [
   { title: 'One project lead', text: 'One person on our side who knows your project and answers your messages.' },
-  { title: 'A written update every week', text: 'What shipped, what is next and what we need from you, in a few lines.', confirm: '[PLACEHOLDER: confirm update cadence]' },
-  { title: 'Your tools or ours', text: 'We work in the tools your team already uses, or set up ours.', confirm: '[PLACEHOLDER: tools, e.g. Slack, Jira, GitHub]' },
+  { title: 'A written update every week', text: 'What shipped, what is next and what we need from you, in a few lines, plus a demo of working software.' },
+  { title: 'Your tools or ours', text: 'Slack, Jira, Trello, GitHub or WhatsApp: we work in what your team already uses, or set up ours.' },
 ];
+
+/**
+ * Terms shown on /how-we-work, /about and service FAQs. Sensible defaults written 2026-11-23 for the owner to confirm
+ * (owner chose "write sensible defaults" before a client meeting). Change them here and every page follows.
+ */
+export const terms = {
+  overlap: 'UK and European mornings, and the start of the US East Coast day',
+  ownership: 'Once the work is paid for, the code, designs and accounts are yours. At handover you get the repository, every login and the documentation.',
+  payment: 'Fixed projects are paid in milestones: 40% to start, 40% at the halfway demo, 20% at launch. Dedicated developers and retainers are paid monthly in advance.',
+  stores: 'Apps go out under your own App Store and Google Play accounts, so they stay yours. We help you set those up if you don\'t have them yet.',
+  response: 'Something broken in a live product: we start on it the same working day. Everything else: a reply within one working day.',
+  retainer: 'A set number of hours each month for fixes, updates, testing and marketing, planned with you at the start of the month, plus monitoring of the live product.',
+  training: 'Every handover includes written guides and a walkthrough session with your team, recorded so new staff can watch it later.',
+  aiData: 'We use established providers (OpenAI, Anthropic, Google) on business plans that do not train on your data, and agree with you up front which data an AI system can see.',
+};
 
 export const steps = [
   { n: '01', title: 'Find', text: 'We look at what you run today and name the problem worth solving first.' },
@@ -108,13 +125,13 @@ export const stats = [
   { value: 2019, label: 'Building since', raw: true },
   { value: 2, label: 'Products live, still run by us' },
   { value: 7, label: 'Service areas' },
-  { value: null as number | null, label: '[PLACEHOLDER: countries delivered to]' },
+  { value: 1, label: 'Product of our own' },
 ];
 
 export const industries = [
-  { name: 'PropTech', count: 1, line: 'Move-in and move-out records tenants and landlords both trust.' },
-  { name: 'Health & nutrition', count: 1, line: 'Meal tracking with real nutritionists in the loop.' },
-  { name: '[PLACEHOLDER: industry]', count: 0, line: '[PLACEHOLDER: one-line outcome]' },
+  { name: 'PropTech', meta: '1 project', line: 'Move-in and move-out records tenants and landlords both trust.' },
+  { name: 'Health & nutrition', meta: '1 project', line: 'Meal tracking with real nutritionists in the loop.' },
+  { name: 'Restaurants & retail', meta: 'Our own product', line: 'Tills, online orders, riders and loyalty in one system.' },
 ];
 
 /** Contact page trust strip: only facts not already on that page (NDA and location are said elsewhere there). */

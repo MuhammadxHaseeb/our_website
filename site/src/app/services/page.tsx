@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
-import { SectionHeader } from '@/components/ui/primitives';
+import { ArrowLink, SectionHeader } from '@/components/ui/primitives';
+import { product } from '@/lib/product';
 import { EngagementModels } from '@/components/sections/blocks';
 import { ServiceChapters } from '@/components/sections/ServiceChapters';
 import { ContactBlock } from '@/components/sections/ContactBlock';
@@ -33,6 +34,17 @@ export default function ServicesPage() {
 
       <section className="py-[var(--section-y)]" aria-label="Service areas">
         <div className="container-x"><ServiceChapters items={services} /></div>
+      </section>
+
+      <section className="section-tight border-t border-line" aria-labelledby="product-band">
+        <div className="container-x grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-[var(--gutter)]">
+          <div className="lg:col-span-8">
+            <p className="t-label muted">/ Our product</p>
+            <h2 id="product-band" className="t-h2 mt-6" style={{ maxWidth: '18ch' }}>Run a restaurant or a shop?</h2>
+            <p className="t-lead muted mt-6" style={{ maxWidth: '46ch' }}>{product.promise} Ready to use, with prices on the page.</p>
+          </div>
+          <div className="lg:col-span-4 lg:flex lg:justify-end"><ArrowLink href={product.href}>See the restaurant system</ArrowLink></div>
+        </div>
       </section>
 
       <section className="section soft" aria-labelledby="models-title">

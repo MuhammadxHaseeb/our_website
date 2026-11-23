@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
-import { ArrowLink, Label, Ph, SectionHeader } from '@/components/ui/primitives';
+import { ArrowLink, Label, SectionHeader } from '@/components/ui/primitives';
 import { Faq, ProcessSteps } from '@/components/sections/blocks';
 import { LocalClock } from '@/components/sections/LocalClock';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { RiseText } from '@/components/motion/RiseText';
-import { communication, modelCompare, models } from '@/lib/content';
+import { communication, modelCompare, models, terms } from '@/lib/content';
 import { FoilBars } from '@/components/brand/FoilBars';
 
 export const metadata: Metadata = {
@@ -109,7 +109,7 @@ export default function HowWeWorkPage() {
             <div className="lg:col-span-5" data-reveal>
               <LocalClock />
               <p className="mt-8 muted" style={{ maxWidth: '40ch' }}>
-                Our working hours overlap with yours: <Ph>[PLACEHOLDER: overlap hours, e.g. UK and EU mornings, US East early]</Ph>
+                Our working day overlaps with {terms.overlap}, and urgent messages are answered outside it.
               </p>
             </div>
             <ol className="grid gap-8 lg:col-span-6 lg:col-start-7">
@@ -118,7 +118,6 @@ export default function HowWeWorkPage() {
                   <Label>{String(i + 1).padStart(2, '0')}</Label>
                   <h3 className="t-h3 mt-3">{c.title}</h3>
                   <p className="mt-2 muted" style={{ maxWidth: '44ch' }}>{c.text}</p>
-                  {c.confirm && <p className="mt-3"><Ph>{c.confirm}</Ph></p>}
                 </li>
               ))}
             </ol>
@@ -132,8 +131,9 @@ export default function HowWeWorkPage() {
           <SectionHeader id="faq-title" label="FAQ" title="Questions we hear first" />
           <Faq items={[
             { q: 'Do you work under NDA?', a: 'Yes. We can sign yours or send ours before you share anything.' },
-            { q: 'Who owns the code?', a: <>You do. <Ph>[PLACEHOLDER: confirm ownership and handover terms]</Ph></> },
-            { q: 'How do payments work?', a: <Ph>[PLACEHOLDER: payment terms, e.g. milestones for fixed projects, monthly for developers and retainers]</Ph> },
+            { q: 'Who owns the code?', a: `You do. ${terms.ownership}` },
+            { q: 'How do payments work?', a: terms.payment },
+            { q: 'How fast do you respond when something breaks?', a: terms.response },
             { q: 'Do you work with clients outside Pakistan?', a: 'Yes. We work with anyone who needs it. One of the two apps in our work runs for tenants and landlords across Europe.' },
           ]} />
         </div>

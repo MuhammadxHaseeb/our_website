@@ -1,5 +1,7 @@
 // Service detail pages (/services/[slug]). Built only from our-company.md (owner's ticked catalogue + case facts).
-// Gaps are marked [PLACEHOLDER: …]; missing visuals [ASSET: …]. Add a slug here to publish its page.
+// Shared terms (ownership, payment, response times…) come from `terms` in content.ts. Add a slug here to publish its page.
+
+import { terms } from './content';
 
 export type ServiceDetail = {
   headline: string;            // h1, specific to the area
@@ -67,22 +69,19 @@ export const serviceDetails: Record<string, ServiceDetail> = {
         label: 'From our work · PropTech',
         title: 'Proof nobody can argue with',
         text: 'Tenants walk through the property at move-in and every photo is sealed into a tamper-proof record. At move-out both sides compare the same rooms side by side, so a deposit dispute has evidence instead of opinions.',
-        asset: 'rental app: move-in photo record and side-by-side comparison screens · 16:9',
       },
       {
         label: 'From our work · Health & nutrition',
         title: 'A real person inside the app',
         text: 'Logging meals is easy to build and easy to abandon. We added the part generic diet apps skip: users talk directly to a real nutrition doctor in the same app where they track what they eat.',
-        asset: 'nutrition app: meal log and chat with the nutritionist · 16:9',
       },
     ],
     caseSlugs: ['rental-inspection-app', 'nutrition-coaching-app'],
     tech: ['Flutter', 'React Native', 'iOS', 'Android', 'Node', 'Python', 'Laravel'],
-    techNote: '[PLACEHOLDER: confirm mobile tech stack]',
     faq: [
       { q: 'Do I need separate apps for iPhone and Android?', a: 'Usually not. Flutter or React Native gives you both from one codebase. We suggest native only when a feature really needs it, and we tell you why.' },
       { q: 'Can you take over an app another team started?', a: 'Yes. We review the code first, tell you what is worth keeping and what will cost you later, then agree a plan before changing anything.' },
-      { q: 'Who publishes the app to the stores?', a: 'We prepare the release and handle App Store and Google Play submission. [PLACEHOLDER: confirm it is published under the client\'s own developer accounts]' },
+      { q: 'Who publishes the app to the stores?', a: `We prepare the release and handle App Store and Google Play submission. ${terms.stores}` },
       { q: 'What happens after launch?', a: 'Testing, fixes, updates and marketing, usually on a monthly retainer. It is how we still run both apps in our work today.' },
     ],
   },
@@ -117,7 +116,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     faq: [
       { q: 'Should we buy software or build our own?', a: 'Usually both: off-the-shelf where it fits, custom only for the parts that are specific to how you work. We tell you which is which before you spend anything.' },
       { q: 'Can you connect the tools we already use?', a: 'Yes. Payments, accounting, ERP and CRM systems can usually be connected through their APIs, so data only gets entered once.' },
-      { q: 'Will our team need training?', a: 'We hand over with documentation and walk your team through it. [PLACEHOLDER: confirm training and onboarding offered]' },
+      { q: 'Will our team need training?', a: terms.training },
     ],
   },
 
@@ -146,10 +145,9 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       },
     ],
     caseSlugs: [],
-    tech: ['LLM integration', 'AI agents', 'Python', 'Node'],
-    techNote: '[PLACEHOLDER: confirm AI providers and tools]',
+    tech: ['OpenAI', 'Anthropic Claude', 'Google Gemini', 'LLM integration', 'AI agents', 'Python', 'Node'],
     faq: [
-      { q: 'Is our data safe when we use AI?', a: 'We agree with you up front which data an AI system can see and which provider runs it. [PLACEHOLDER: confirm data handling, e.g. providers used, no training on client data]' },
+      { q: 'Is our data safe when we use AI?', a: terms.aiData },
       { q: 'Do we need a lot of data to start?', a: 'Not usually. Many useful assistants work from the documents and systems you already have. Where the data is messy, we clean it up first.' },
       { q: 'Can you add AI to software we already run?', a: 'Yes. An LLM or an automation can usually be added to an existing product without rebuilding it.' },
     ],
@@ -181,8 +179,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       },
     ],
     caseSlugs: [],
-    tech: [],
-    techNote: '[PLACEHOLDER: design tools, e.g. Figma]',
+    tech: ['Figma', 'Adobe Illustrator', 'After Effects'],
     faq: [
       { q: 'Can you redesign without starting from scratch?', a: 'Yes. We keep what works, fix where people get stuck, and change the rest step by step.' },
       { q: 'Do you also build what you design?', a: 'Yes. Design and development are the same team, so what we design is what ships.' },
@@ -205,7 +202,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       {
         label: 'How we ship',
         title: 'Tested before it\'s live',
-        text: 'Every change runs through automated checks before release. It\'s the same flow you can watch in the demo on our How we work page.',
+        text: 'Every change runs through automated checks before release, and if something still slips through, the last good version is one step away.',
       },
       {
         label: 'Moving to the cloud',
@@ -214,12 +211,11 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       },
     ],
     caseSlugs: [],
-    tech: ['AWS', 'Google Cloud', 'Azure', 'CI/CD'],
-    techNote: '[PLACEHOLDER: confirm CI/CD and infrastructure tools]',
+    tech: ['AWS', 'Google Cloud', 'Azure', 'Vercel', 'Docker', 'GitHub Actions'],
     faq: [
       { q: 'Which cloud should we use?', a: 'The one that fits your product and your team. If you are already on one, we usually make the most of it rather than move.' },
       { q: 'Can you take over infrastructure someone else set up?', a: 'Yes. We document what is there first, then fix the riskiest parts before adding anything new.' },
-      { q: 'Do you look after it once it is set up?', a: 'Ongoing care can be part of a monthly retainer. [PLACEHOLDER: confirm monitoring and support offered]' },
+      { q: 'Do you look after it once it is set up?', a: 'Yes, as part of a monthly retainer: monitoring, security updates, backup checks and fixes when something breaks.' },
     ],
   },
 
@@ -249,9 +245,9 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     caseSlugs: ['rental-inspection-app', 'nutrition-coaching-app'],
     tech: [],
     faq: [
-      { q: 'What does a monthly retainer include?', a: 'Testing, fixes, updates and marketing, planned together each month. [PLACEHOLDER: confirm what a standard retainer includes]' },
+      { q: 'What does a monthly retainer include?', a: terms.retainer },
       { q: 'Can you support software you didn\'t build?', a: 'Yes. We review it first so we know what we are taking on, then agree what support looks like.' },
-      { q: 'How fast do you respond to problems?', a: '[PLACEHOLDER: response times for urgent issues]' },
+      { q: 'How fast do you respond to problems?', a: terms.response },
     ],
   },
 };

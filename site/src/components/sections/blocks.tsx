@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { ArrowLink, AssetPlaceholder, FactTable, Label, Live, Tags, Val } from '@/components/ui/primitives';
+import { ArrowLink, FactTable, Label, Live, Tags } from '@/components/ui/primitives';
 import type { CaseStudy, Service } from '@/lib/content';
 import { models, steps, trust } from '@/lib/content';
 import { StackList } from './StackList';
@@ -31,8 +31,11 @@ export function ServiceRows({ items, stacking = false }: { items: Service[]; sta
 export function CaseCard({ c, size = 'lg', headingAs: H = 'h3' }: { c: CaseStudy; size?: 'lg' | 'md'; headingAs?: 'h2' | 'h3' }) {
   return (
     <article className={`case-card group grid rounded-[var(--r-card)] bg-card p-[var(--r-card-pad)] ${size === 'lg' ? 'lg:grid-cols-[1.15fr_1fr]' : ''}`} data-reveal>
-      <Link href={`/work/${c.slug}`} className="media-hover block" tabIndex={-1} aria-hidden data-unveil>
-        <AssetPlaceholder name={c.asset} ratio="16 / 10" />
+      {/* no screenshots yet: the card leads with the case number instead of an image (swap for <Image> once the owner sends them) */}
+      <Link href={`/work/${c.slug}`} className="case-cover" tabIndex={-1} aria-hidden data-theme="dark">
+        <span className="case-cover-bars"><i /><i /><i /></span>
+        <span className="case-cover-n foil-text t-num">{c.n}</span>
+        <span className="t-label muted">{c.platforms}</span>
       </Link>
       <div className="flex flex-col p-6 md:p-10">
         <Label>Case {c.n} · {c.sector}{c.region ? ` · ${c.region}` : ''}</Label>
@@ -42,7 +45,7 @@ export function CaseCard({ c, size = 'lg', headingAs: H = 'h3' }: { c: CaseStudy
         <p className="mt-4 max-w-[46ch] muted">{c.summary}</p>
         <div className="mt-8">
           <FactTable facts={[
-            { k: 'Client', v: <Val v={c.client} /> },
+            ...(c.client ? [{ k: 'Client', v: c.client }] : []),
             { k: 'Platforms', v: c.platforms },
             { k: 'Engagement', v: c.engagement },
             { k: 'Status', v: <Live>{c.status}</Live> },

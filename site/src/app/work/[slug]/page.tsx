@@ -3,10 +3,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { MDXProps } from 'mdx/types';
-import { AssetPlaceholder, FactTable, Live, Ph, Val } from '@/components/ui/primitives';
+import { FactTable, Live, Tags } from '@/components/ui/primitives';
 import { ContactBlock } from '@/components/sections/ContactBlock';
 import { caseMdxComponents } from '@/components/sections/caseMdx';
-import { ExpandOnScroll } from '@/components/motion/ExpandOnScroll';
 import { RiseText } from '@/components/motion/RiseText';
 import { cases } from '@/lib/content';
 import { FoilBars } from '@/components/brand/FoilBars';
@@ -53,10 +52,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             <span>Case {c.n}</span>{/* sector, region and status are in the fact table right below */}
           </p>
           <RiseText as="h1" on="load" id="case-title" className="t-h1 mt-8" style={{ maxWidth: '16ch' }} parts={[c.headline]} />
-          <p className="t-lead muted mt-10 hero-after" style={{ maxWidth: '48ch', ...d(600) }}>{c.summary}</p>
-          <ExpandOnScroll className="mt-[var(--space-9)]">
-            <AssetPlaceholder name={`${c.asset.split(' · ')[0]} · 16:9`} ratio="16 / 9" />
-          </ExpandOnScroll>
+          <p className="t-lead muted mt-10 pb-[var(--space-9)] hero-after" style={{ maxWidth: '48ch', ...d(600) }}>{c.summary}</p>
         </div>
       </section>
 
@@ -66,12 +62,12 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       <section className="section-tight" aria-label="Project facts">
         <div className="container-x">
           <FactTable cols={4} facts={[
-            { k: 'Client', v: <Val v={c.client} /> },
+            ...(c.client ? [{ k: 'Client', v: c.client }] : []),
             { k: 'Sector', v: c.region ? `${c.sector} · ${c.region}` : c.sector },
             { k: 'Platforms', v: c.platforms },
             { k: 'Engagement', v: c.engagement },
             { k: 'Status', v: <Live>{c.status}, run by epox</Live> },
-            { k: 'Duration', v: <Val v={c.duration} /> },
+            ...(c.duration ? [{ k: 'Duration', v: c.duration }] : []),
           ]} />
         </div>
       </section>
@@ -82,12 +78,12 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       </div>
 
       {/* tech */}
-      <section className="section-tight border-t border-line" aria-labelledby="tech-title">
+      {c.tech && c.tech.length > 0 && <section className="section-tight border-t border-line" aria-labelledby="tech-title">
         <div className="container-x grid gap-6 lg:grid-cols-12 lg:gap-[var(--gutter)]">
           <h2 id="tech-title" className="t-label muted lg:col-span-4">/ Tech</h2>
-          <p className="lg:col-span-7 lg:col-start-6"><Ph>[PLACEHOLDER: tech stack for this project]</Ph></p>
+          <div className="lg:col-span-7 lg:col-start-6"><Tags items={c.tech} /></div>
         </div>
-      </section>
+      </section>}
       </div>
 
       {/* next case */}
