@@ -9,9 +9,43 @@ let lenis: Lenis | null = null;
 export const prefersReducedMotion = () =>
   typeof document !== 'undefined' && document.documentElement.dataset.motion === 'reduced';
 
-/** Smooth scroll is for fine pointers (mouse/trackpad) only; touch keeps native scroll. */
+/** Smooth scroll for mouse / trackpad. Touch keeps native scroll, except inside the home scroll story (storyGovernor). */
 export const canSmoothScroll = () =>
   typeof window !== 'undefined' && !prefersReducedMotion() && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const isTouchDevice = () => typeof window !== 'undefined' && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+/*
+ * Speed limit for the home scroll story (owner, 2026-11-23: "if scrolled quickly it moves fast… make the scroll speed
+ * fixed so all the scrolling animation can be seen"). While the story is pinned, every scroll step goes through here:
+ * · wheel / trackpad: the scroll target may run at most WHEEL_LEAD px ahead of where the page is, so with lerp 0.1 the
+ *   page moves at most ~0.1 × 130 px a frame (~780 px/s): a hard spin takes ~2.5 s through the desktop story;
+ * · touch: Lenis takes over the gesture (syncTouch) only inside the story, each move is capped at TOUCH_STEP px and a
+ *   flick coasts only a little (inertia = velocity^1.25, not ^1.7): ~290 px per fast swipe, ~5 swipes through the story. Outside the story, touch stays native.
+ */
+const WHEEL_LEAD = 130, TOUCH_STEP = 28, TOUCH_INERTIA = 1.25, EDGE = 24;
+function inStory(y: number) {
+  if (document.documentElement.dataset.story !== 'on') return false;
+  const el = document.querySelector<HTMLElement>('.story'); if (!el) return false;
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  return y >= top - EDGE && y <= top + el.offsetHeight - window.innerHeight + EDGE;
+}
+function storyGovernor(data: { deltaX: number; deltaY: number; event: WheelEvent | TouchEvent }) {
+  const l = lenis; if (!l) return true;
+  const touch = data.event.type.includes('touch');
+  const y = touch && data.event.type === 'touchstart' ? l.animatedScroll : l.targetScroll;
+  const on = inStory(y) || inStory(l.animatedScroll);
+  if (touch) {
+    // decide per gesture: a gesture that starts in the story is ours to the end, one that starts outside is native
+    if (data.event.type === 'touchstart') { l.options.syncTouch = on; l.options.touchInertiaExponent = on ? TOUCH_INERTIA : 1.7; }
+    if (l.options.syncTouch) data.deltaY = Math.max(-TOUCH_STEP, Math.min(TOUCH_STEP, data.deltaY));
+    return true;
+  }
+  if (on) {
+    const lead = l.targetScroll - l.animatedScroll;
+    data.deltaY = Math.max(-WHEEL_LEAD - lead, Math.min(WHEEL_LEAD - lead, data.deltaY));
+  }
+  return true;
+}
 
 export function loadGsap(): Promise<GsapBundle> {
   if (!gsapPromise) {
@@ -25,9 +59,10 @@ export function loadGsap(): Promise<GsapBundle> {
 }
 
 export async function startLenis() {
-  if (lenis || !canSmoothScroll()) return lenis;
+  // touch devices get Lenis only for the story's speed limit (syncTouch stays off outside it: native scroll)
+  if (lenis || prefersReducedMotion() || !(canSmoothScroll() || (isTouchDevice() && document.documentElement.dataset.story === 'on'))) return lenis;
   const { default: LenisCtor } = await import('lenis');
-  lenis = new LenisCtor({ lerp: 0.1, smoothWheel: true, anchors: true });
+  lenis = new LenisCtor({ lerp: 0.1, smoothWheel: true, anchors: true, syncTouch: false, syncTouchLerp: 0.08, virtualScroll: storyGovernor });
   const raf = (t: number) => { lenis?.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
   if (gsapPromise) gsapPromise.then(({ ScrollTrigger }) => lenis?.on('scroll', ScrollTrigger.update));
