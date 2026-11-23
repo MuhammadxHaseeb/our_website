@@ -7,7 +7,7 @@ import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { onLight } from '@/lib/light';
 import { cancelIdle, whenIdle } from '@/lib/motion';
-import { barsAlpha, camZ, diveAt, F_USER, getAnchor, getStory, PASS, glowAt, letterAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
+import { barsAlpha, camZ, centreAt, diveAt, F_USER, getAnchor, getStory, horizonAt, PASS, letterAt, slitAt, LOGO_Z, markStory3D, onAnchor, onStory, setStoryBounds, smooth, storyOn, tintAt, VB, worldAt, Z0 } from '@/lib/story';
 import { FOIL_STOPS, SLICES } from './FoilBars';
 import { WORDMARK_PATH } from './wordmark-path';
 
@@ -138,6 +138,32 @@ function foilAt(x: number, y: number, shift: THREE.Vector2, sheen: THREE.Vector2
   return c;
 }
 const BRAND_BLACK = new THREE.Color('#0B0C0F');
+/** flat foil for the two halves the black slit pushes apart: raw sRGB out, like the bars shader, so the colours match */
+function slitMaterial() {
+  return new THREE.ShaderMaterial({
+    depthTest: false, depthWrite: false, toneMapped: false, uniforms: { uColor: { value: new THREE.Vector3(1, 1, 1) } },
+    vertexShader: 'void main() { gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'uniform vec3 uColor; void main() { gl_FragColor = vec4(uColor, 1.0); }',
+  });
+}
+/** the thin foil horizon inside the slit: a bright core and a soft glow, sky blue on the left to mint on the right */
+function horizonMaterial() {
+  return new THREE.ShaderMaterial({
+    transparent: true, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.AdditiveBlending,
+    uniforms: { uOpacity: { value: 0 }, uPx: { value: 64 }, uA: { value: hex('#8FC9FF') }, uB: { value: hex('#7FF5D0') } },
+    vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: /* glsl */`
+      uniform float uOpacity; uniform float uPx; uniform vec3 uA; uniform vec3 uB; varying vec2 vUv;
+      void main() {
+        float d = abs(vUv.y - 0.5) * uPx;                       // px from the centre line
+        float core = 1.0 - smoothstep(0.6, 1.8, d);
+        float glow = exp(-d / 7.0) * 0.45 + exp(-d / 22.0) * 0.12;
+        vec3 c = mix(uA, uB, smoothstep(0.1, 0.9, vUv.x));
+        c = mix(c, vec3(1.0), core * 0.35);
+        gl_FragColor = vec4(c * (core + glow) * uOpacity, 1.0);
+      }`,
+  });
+}
 const BLACK_SRGB = hex('#0B0C0F');
 function storyBarsMaterial() {
   return new THREE.ShaderMaterial({
@@ -205,6 +231,9 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
   const F = useRef(new THREE.Vector2()); // world position of the point the camera flies at
   const O = useRef(new THREE.Vector3()); // world position of the hole of the "o" (the dive goes through it)
   const sky = useRef(new THREE.Color());
+  const slitTop = useRef<THREE.Mesh>(null); const slitBottom = useRef<THREE.Mesh>(null); const horizon = useRef<THREE.Mesh>(null);
+  const slitMat = useMemo(() => slitMaterial(), []);
+  const horizonMat = useMemo(() => horizonMaterial(), []);
 
   useEffect(() => {
     scene.background = new THREE.Color('#0B0C0F');
@@ -228,9 +257,9 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     return () => {
       cancelled = true; cancelIdle(id);
       off(); offStory(); offAnchor(); env?.dispose(); mark.letters.forEach(l => l.geo.dispose()); bars.dispose(); barsMatB.dispose();
-      glass.dispose(); barsGeo.dispose(); barsMat.dispose(); prepared = null;
+      glass.dispose(); barsGeo.dispose(); barsMat.dispose(); slitMat.dispose(); horizonMat.dispose(); prepared = null;
     };
-  }, [gl, scene, camera, mark, bars, barsMatB, glass, barsGeo, barsMat]);
+  }, [gl, scene, camera, mark, bars, barsMatB, glass, barsGeo, barsMat, slitMat, horizonMat]);
 
   // fit the word to ~60% of the frame width at any aspect (50% in the story, where the canvas fills the whole screen)
   const fit = useMemo(() => {
@@ -243,6 +272,7 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
 
   useFrame((state, dt) => {
     const w = word.current; const bd = backdrop.current; const sb = storyBars.current; if (!w || !bd || !sb) return;
+    const st = slitTop.current; const sbot = slitBottom.current; const hz = horizon.current;
     const t = state.clock.elapsedTime;
     // tilt toward the light (cursor), with a slow breathing sway on top
     const ty = (light.current.x - 0.5) * 0.7 + Math.sin(t * 0.35) * 0.08;
@@ -256,7 +286,8 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
     if (s.catching) { s.c += (s.p - s.c) * (1 - Math.exp(-dt * 4)); if (Math.abs(s.p - s.c) < 0.003) s.catching = false; } else s.c = s.p;
     if (!s.on || !a) {
       // the normal hero logo (no story): word in front of its bars, camera at rest
-      sb.visible = false; w.visible = true; bd.visible = true; barsMatB.color.setScalar(1); bd.scale.setScalar(1.15);
+      sb.visible = false; if (st && sbot && hz) { st.visible = false; sbot.visible = false; hz.visible = false; }
+      w.visible = true; bd.visible = true; barsMatB.color.setScalar(1); bd.scale.setScalar(1.15);
       (scene.background as THREE.Color).copy(BRAND_BLACK);
       w.position.set(0, 0, 0); bd.position.set(420, 10, -900);
       state.camera.position.set(0, 0, REST_Z);
@@ -281,14 +312,17 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       O.current.copy(mark.letters[Math.min(2, mark.letters.length - 1)].rest).applyMatrix4(w.matrixWorld);
 
       // the flight: straight at F until the foil, on through the dark to the word, then into the "o"
-      const z = camZ(p); const f = z > 0 ? 1 - z / Z0 : 1;
+      const z = camZ(p); const f = centreAt(z);
       const d = smooth(dive);
       cam.position.set(F.current.x * f + (O.current.x - F.current.x) * d, F.current.y * f + (O.current.y - F.current.y) * d, z);
 
       // the bars' foil follows the light exactly as the SVG's does (FoilBars): gradient shift + sheen under the cursor
       const zoom = z > 1 ? Z0 / z : Z0;
       const fpx = { x: a.left + (F_USER.x - VB.x) * kpx, y: a.top + (F_USER.y - VB.y) * kpx };
-      const lx = fpx.x + (light.current.x * size.width - fpx.x) / zoom; const ly = fpx.y + (light.current.y * size.height - fpx.y) / zoom;
+      // F drifts from its place on the bars to the middle of the screen as the camera nears it (centreAt)
+      const drift = z > 0 ? Math.min(1, z / Z0) : 0;
+      const fsx = size.width / 2 + (fpx.x - size.width / 2) * drift; const fsy = size.height / 2 + (fpx.y - size.height / 2) * drift;
+      const lx = fpx.x + (light.current.x * size.width - fsx) / zoom; const ly = fpx.y + (light.current.y * size.height - fsy) / zoom;
       const u = barsMat.uniforms;
       u.uShift.value.set((light.current.x - 0.5) * 160, (light.current.y - 0.5) * 50);
       u.uSheen.value.set(Math.max(110, Math.min(380, VB.x + (lx - a.left) / kpx)), Math.max(20, Math.min(175, VB.y + (ly - a.top) / kpx)));
@@ -298,9 +332,29 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
       // the ground: black, picking up the foil's tint as we near it, the foil's own colour just behind it, then black
       // (mixed in sRGB, as the eye sees it: a 20% tint looks like 20%, the way Notiune's ground tints)
       const c = foilAt(F_USER.x, F_USER.y, u.uShift.value, u.uSheen.value);
-      const k2 = z > 0 ? tintAt(p) : glowAt(z);
+      const k2 = z > 0 ? tintAt(p) : 0;
       sky.current.setRGB(BLACK_SRGB.x + (c.x - BLACK_SRGB.x) * k2, BLACK_SRGB.y + (c.y - BLACK_SRGB.y) * k2, BLACK_SRGB.z + (c.z - BLACK_SRGB.z) * k2, THREE.SRGBColorSpace);
       (scene.background as THREE.Color).copy(sky.current);
+
+      // behind the foil: black opens from a line across the middle and pushes the foil off the top and bottom edges,
+      // with a thin foil horizon in the opening (Notiune's colour "opening", 770→910px, re-timed in lib/story)
+      if (st && sbot && hz) {
+        const D = 5; const hD = 2 * D * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); const wD = hD * (size.width / size.height) * 1.2;
+        const open = slitAt(p); const on = p > PASS && open < 1;
+        st.visible = on; sbot.visible = on;
+        if (on) {
+          slitMat.uniforms.uColor.value.copy(c);
+          st.scale.set(wD, hD, 1); sbot.scale.set(wD, hD, 1);
+          st.position.set(cam.position.x, cam.position.y + (open * hD) / 2 + hD / 2, cam.position.z - D);
+          sbot.position.set(cam.position.x, cam.position.y - (open * hD) / 2 - hD / 2, cam.position.z - D);
+        }
+        const hzA = horizonAt(p); hz.visible = hzA > 0.002;
+        if (hz.visible) {
+          const px = 64; hz.scale.set(wD, (px / size.height) * hD, 1);
+          hz.position.set(cam.position.x, cam.position.y, cam.position.z - D);
+          horizonMat.uniforms.uOpacity.value = hzA; horizonMat.uniforms.uPx.value = px;
+        }
+      }
 
       // the world behind the foil (our bars behind the word) lights up in the dark, and goes out for the dive
       const world = worldAt(p);
@@ -348,6 +402,10 @@ function Scene({ onFirstFrame }: { onFirstFrame: () => void }) {
         ))}
       </group>
       <mesh ref={storyBars} geometry={barsGeo} material={barsMat} visible={false} renderOrder={2} frustumCulled={false} />
+      {/* the slit: two halves of flat foil and the horizon between them, held just in front of the camera */}
+      <mesh ref={slitTop} material={slitMat} visible={false} renderOrder={10} frustumCulled={false}><planeGeometry args={[1, 1]} /></mesh>
+      <mesh ref={slitBottom} material={slitMat} visible={false} renderOrder={10} frustumCulled={false}><planeGeometry args={[1, 1]} /></mesh>
+      <mesh ref={horizon} material={horizonMat} visible={false} renderOrder={11} frustumCulled={false}><planeGeometry args={[1, 1]} /></mesh>
     </>
   );
 }

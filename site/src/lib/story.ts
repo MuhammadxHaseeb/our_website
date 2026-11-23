@@ -20,7 +20,8 @@ export type Anchor = { left: number; top: number; width: number; stageW: number;
 // Timed on Notiune's hero, measured frame by frame (research/raw/notiune/frames, 900px window, story = 1950px of
 // scroll = 2.17 screens): p = scroll / pin length. Our own objects and colours, their choreography.
 export const Z0 = 2300;          // camera distance to the bars plane at rest (the bars' on-screen size = the SVG's)
-export const PASS = 0.42;        // camera passes through the foil   (theirs: the band fills the screen ~750–820px)
+export const PASS = 0.395;       // camera passes through the foil   (theirs: the band fills the screen at ~765px, black opens at 770)
+export const SLIT_END = 0.467;   // the black slit has opened to the screen's edges (theirs: 770→910px)
 export const GLIDE_END = 0.55;   // the glide behind the foil settles (theirs: dark breathing room 900–1080px)
 export const GLIDE_Z = -700;
 export const PUSH_Z = -1100;     // slow push-in while the word holds (theirs: 1170–1680px)
@@ -39,15 +40,28 @@ export function camZ(p: number) {
   return PUSH_Z + (DIVE_Z - PUSH_Z) * Math.pow(clamp01((p - DIVE) / (1 - DIVE)), 2.2);   // accelerating dive through the "o"
 }
 export const diveAt = (p: number) => clamp01((p - DIVE) / (1 - DIVE));
+/**
+ * How far the camera has moved onto F's line (0 = at rest, 1 = straight in front of F). Ahead of z it, so F drifts from
+ * its place on the bars to the middle of the screen as the camera nears it: the band then opens evenly about the
+ * middle, as Notiune's tube does (F's offset from the centre shrinks in step with z).
+ */
+export const centreAt = (z: number) => (z >= Z0 ? 0 : z <= 0 ? 1 : 1 - (z / Z0) * (z / Z0));
+/**
+ * Behind the foil, black opens from a line across the middle of the screen and keeps opening until the foil has gone
+ * off the top and bottom edges: share of the screen height that is black (theirs, measured every 10px: half-height
+ * 10, 24, 40, 62, 86 … 404, 450 from 770 to 910px, i.e. about t^1.4).
+ */
+export const slitAt = (p: number) => (p <= PASS ? 0 : Math.pow(clamp01((p - PASS) / (SLIT_END - PASS)), 1.4));
+/** a thin foil horizon in the middle of the slit: on as it opens, slowly brighter in the dark, gone as the word forms */
+export const horizonAt = (p: number) => (p <= PASS ? 0 : (0.55 + 0.45 * smooth((p - SLIT_END) / 0.08)) * smooth((p - PASS) / 0.012) * (1 - smooth((p - 0.525) / 0.06)));
 /** the bars plane stays solid until the camera is right at it (by then one flat patch of foil fills the screen) */
 export const barsAlpha = (z: number) => (z > 3 ? 1 : 0);
-/** behind the foil the space starts in the foil's own colour and drops to black within a short glide (theirs: 870→900px) */
-export const glowAt = (z: number) => (z > 0 ? 1 : 1 - smooth(-z / 260));
 /** before the pass the black ground picks up the foil's tint, then darkens again as the foil fills (theirs: 300→660px) */
 export const tintAt = (p: number) => (p < 0.154 ? 0 : p < 0.277 ? 0.2 * smooth((p - 0.154) / 0.123) : p < PASS ? 0.2 - 0.16 * smooth((p - 0.277) / 0.1) : 0);
 /** the light of the world behind the foil (our bars behind the word): comes up in the dark, goes out for the dive */
 // (peaks at 0.6, so the glass word stays the brightest thing on screen, as Notiune's word is on its dark sky)
-export const worldAt = (p: number) => 0.6 * smooth((p - 0.45) / 0.15) * (1 - smooth((p - 0.95) / 0.045));
+// (starts once the slit is fully open, so the dark holds just the horizon for a moment, as theirs does 910→1080px)
+export const worldAt = (p: number) => 0.6 * smooth((p - SLIT_END) / 0.13) * (1 - smooth((p - 0.95) / 0.045));
 /** each letter flies in from its own place and locks into the word (theirs: 1110→1170px) */
 export const letterAt = (p: number, i: number) => easeOut3((p - 0.52 - i * 0.016) / 0.085);
 /** the copy fades and lifts away before the flight speeds up (theirs: 150→300px) */

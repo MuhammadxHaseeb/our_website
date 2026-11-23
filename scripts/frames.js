@@ -3,7 +3,7 @@
  * frames.js: scroll a page in small steps and save one viewport frame per step, to study a scroll animation frame by
  * frame (timing, colours, when each element appears). Read-only: only scrolls and moves the mouse.
  *
- * Usage: node scripts/frames.js <out-name> <url> [--to 2700] [--step 25] [--settle 500] [--w 1440] [--h 900] [--wait 6000]
+ * Usage: node scripts/frames.js <out-name> <url> [--from 0] [--to 2700] [--step 25] [--settle 500] [--w 1440] [--h 900] [--wait 6000]
  *   --to      last scroll position in px          --step   px between frames
  *   --settle  ms to wait after each scroll (lets damped / lerped 3D catch up)
  *   --wait    ms after load before the first frame (preloaders, lazy 3D)
@@ -16,9 +16,9 @@ const { chromium } = require('playwright');
 
 const args = process.argv.slice(2);
 const opt = (n, d) => { const i = args.indexOf('--' + n); return i === -1 ? d : Number(args[i + 1]); };
-const [NAME, URL] = args.filter((a, i) => !a.startsWith('--') && !(/^--(to|step|settle|w|h|wait)$/.test(args[i - 1] || '')));
+const [NAME, URL] = args.filter((a, i) => !a.startsWith('--') && !(/^--(from|to|step|settle|w|h|wait)$/.test(args[i - 1] || '')));
 if (!NAME || !URL) { console.error('Usage: node scripts/frames.js <out-name> <url> [--to px] [--step px] [--settle ms]'); process.exit(1); }
-const TO = opt('to', 2700), STEP = opt('step', 25), SETTLE = opt('settle', 500), W = opt('w', 1440), H = opt('h', 900), WAIT = opt('wait', 6000);
+const FROM = opt('from', 0), TO = opt('to', 2700), STEP = opt('step', 25), SETTLE = opt('settle', 500), W = opt('w', 1440), H = opt('h', 900), WAIT = opt('wait', 6000);
 const OUT = path.join(__dirname, '..', 'research', 'raw', NAME, 'frames');
 fs.mkdirSync(OUT, { recursive: true });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -37,7 +37,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await page.mouse.move(W * 0.5, H * 0.45); await page.mouse.move(W * 0.52, H * 0.46);
   await sleep(WAIT);
   const frames = [];
-  for (let y = 0; y <= TO; y += STEP) {
+  for (let y = FROM; y <= TO; y += STEP) {
     await page.evaluate(v => window.scrollTo(0, v), y);
     await sleep(SETTLE);
     const actual = await page.evaluate(() => Math.round(window.scrollY));

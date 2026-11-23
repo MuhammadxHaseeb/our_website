@@ -54,8 +54,12 @@ export function HeroStory({ children, labelledBy }: { children: React.ReactNode;
       if (!has3D && svg) {
         const z = camZ(p);
         const k = a.width / VB.w;
-        svg.style.transformOrigin = `${((F_USER.x - VB.x) * k).toFixed(1)}px ${((F_USER.y - VB.y) * k).toFixed(1)}px`;
-        svg.style.transform = z > 1 ? `scale(${(Z0 / z).toFixed(4)})` : 'scale(0)';
+        const ox = (F_USER.x - VB.x) * k; const oy = (F_USER.y - VB.y) * k;
+        // F drifts to the middle of the stage as the camera nears it (same as the 3D camera, lib/story centreAt)
+        const drift = 1 - Math.min(1, Math.max(0, z / Z0));
+        const tx = (st.clientWidth / 2 - (a.left + ox)) * drift; const ty = (st.clientHeight / 2 - (a.top + oy)) * drift;
+        svg.style.transformOrigin = `${ox.toFixed(1)}px ${oy.toFixed(1)}px`;
+        svg.style.transform = z > 1 ? `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${(Z0 / z).toFixed(4)})` : 'scale(0)';
         svg.style.opacity = String(barsAlpha(z));
       }
     };

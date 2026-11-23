@@ -28,6 +28,16 @@ contact sheet `raw/notiune/frames/contact-sheet.jpg`). The whole hero story = **
 | 1890–1950 | The i's dot (a sphere) grows to fill the screen in the next section's ground | `#F2F1ED` full at 1950 |
 | 2010–2040 | Next section's content fades/rises in at ~75% of the screen height, then the page scrolls normally | |
 
+**The colour opening, every 10px (measured 2026-11-23, `frames.js notiune-open … --from 480 --to 1150 --step 10`,
+`scripts/frames-bands.py notiune-open`, sheet `raw/notiune-open/open-sheet.jpg`):** the camera ends square on the straight
+part of the tube, so the violet is a **horizontal band centred on the screen** that opens vertically: 298px tall at
+650, 344 at 670, 437 at 700, 620 at 740, 812 at 760, full at ~765. At 770 **black opens from a line across the middle**
+and keeps opening, pushing the violet off the top and bottom edges: half-height 10, 24, 40, 62, 86, 110, 139, 171, 209,
+241, 278, 317, 360, 404 px at 770…900 (about t^1.4), gone at 910. A thin glowing horizon (copper → violet) sits in
+the middle of the opening from the first frames and slowly brightens in the dark until the logo arrives (~1080).
+Ours since 2026-11-23: same timing (PASS 0.395, SLIT_END 0.467, `slitAt` t^1.4, `horizonAt`), foil halves + a foil
+horizon line; side by side `raw/epox-open/compare.jpg`, phone `raw/epox-open-mobile/sheet.jpg`.
+
 Our version (H16, branch `hero-story`) uses this exact timing with our own pieces: foil E → screen all foil →
 quick drop to black → our bars light up in the dark → glass e·p·o·x fly in and lock → slow push-in with Found corners
 + proof → dive through the hole of the "o" into black (the Services ground) → Services already in place. Side by
