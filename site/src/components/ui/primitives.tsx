@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Bot, Cloud, Globe, LayoutDashboard, PenTool, Rocket, Smartphone, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Bot, Cloud, Globe, LayoutDashboard, PenTool, Rocket, Smartphone, UtensilsCrossed, type LucideIcon } from 'lucide-react';
 import type { ComponentProps, ReactNode } from 'react';
 import { RiseText } from '@/components/motion/RiseText';
 
@@ -64,7 +64,7 @@ export function CharacterSlot({ art, fallback = null, label }: { art?: ReactNode
 /** 44px brand-black tile with a 24px foil-mint line icon (1.9 stroke): the one place the foil colour appears in the UI. */
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   'web-saas-development': Globe, 'mobile-apps': Smartphone, 'business-software': LayoutDashboard, 'ai-solutions': Bot,
-  'ui-ux-branding': PenTool, 'cloud-devops': Cloud, 'launch-growth-support': Rocket,
+  'ui-ux-branding': PenTool, 'cloud-devops': Cloud, 'launch-growth-support': Rocket, 'restaurant-system': UtensilsCrossed,
 };
 export function ServiceIcon({ slug }: { slug: string }) {
   const Icon = SERVICE_ICONS[slug] ?? Globe;

@@ -3,14 +3,14 @@ import { Plus } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { ArrowLink, FactTable, Label, Live, Tags } from '@/components/ui/primitives';
 import type { CaseStudy, Service } from '@/lib/content';
-import { models, steps, trust } from '@/lib/content';
+import { models, serviceHref, steps, trust } from '@/lib/content';
 import { StackList } from './StackList';
 
 /* ------------------------------------------------ Numbered service rows (H7 stacking on desktop) */
 export function ServiceRows({ items, stacking = false }: { items: Service[]; stacking?: boolean }) {
   const rows = items.map((s, i) => (
     <li key={s.slug} className="stack-row border-t border-line" style={{ '--i': i } as React.CSSProperties}>
-      <Link href={`/services/${s.slug}`} className="svc-row group grid grid-cols-[3.75rem_1fr] gap-x-3 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
+      <Link href={serviceHref(s)} className="svc-row group grid grid-cols-[3.75rem_1fr] gap-x-3 md:grid-cols-12 md:gap-x-[var(--gutter)] md:gap-y-3" data-reveal style={{ '--i': 0 } as React.CSSProperties}>
         {/* the big foil number, same as /services; it and the title fill the pinned strip exactly */}
         <span className="svc-num foil-text md:col-span-3" aria-hidden>{s.n}</span>
         <span className="md:col-span-8">

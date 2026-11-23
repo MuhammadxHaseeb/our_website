@@ -62,7 +62,7 @@ export default function Home() {
       {/* 3 · Services (H7 stacking rows) */}
       <section className="section" aria-labelledby="services-title">
         <div className="container-x">
-          <SectionHeader id="services-title" label="Services" title="Seven ways we can help" action={<ArrowLink href="/services">All services</ArrowLink>} />
+          <SectionHeader id="services-title" label="Services" title="Eight ways we can help" action={<ArrowLink href="/services">All services</ArrowLink>} />
           <ServiceRows items={services} stacking />
           <p className="mt-8 t-small muted">Also: {alsoServices.join(' · ')}</p>
         </div>

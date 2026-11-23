@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ArrowLink, CharacterSlot, Live, Tags } from '@/components/ui/primitives';
 import { RiseText } from '@/components/motion/RiseText';
-import { cases, serviceStories, type Service } from '@/lib/content';
+import { cases, serviceHref, serviceStories, type Service } from '@/lib/content';
 
 /**
  * /services story chapters (H5 slot + H12 focus).
  * Desktop: a sticky left rail holds the big chapter number (rolls 01 → 07 as you scroll) and an index of all
- * seven areas (current one in ink, links jump to the chapter). Right: the chapters.
+ * service areas (current one in ink, links jump to the chapter). Right: the chapters.
  * Mobile: no rail; each chapter shows its own number. Reduced motion: number swaps without rolling.
  * CharacterSlot keeps the place for character art later (owner: no characters at launch).
  */
@@ -68,7 +68,7 @@ export function ServiceChapters({ items }: { items: Service[] }) {
                   <span className="t-h3 mt-2" style={{ maxWidth: '24ch' }}>{related.headline}</span>
                 </Link>
               )}
-              <div className="mt-8"><ArrowLink href={`/services/${s.slug}`}>Explore {s.title}</ArrowLink></div>
+              <div className="mt-8"><ArrowLink href={serviceHref(s)}>Explore {s.title}</ArrowLink></div>
             </li>
           );
         })}

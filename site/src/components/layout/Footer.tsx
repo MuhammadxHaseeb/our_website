@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FoilBars } from '@/components/brand/FoilBars';
 import { Logo } from '@/components/brand/Logo';
-import { company, services } from '@/lib/content';
+import { company, serviceHref, services } from '@/lib/content';
 import { product } from '@/lib/product';
 
 /** Footer: brand-black ground. Opens with a sign-off band (foil lockup + the bars locking back into the E), then links. */
@@ -20,7 +20,7 @@ export function Footer() {
           <nav aria-label="Services" className="md:col-span-5">
             <p className="t-label muted">Services</p>
             <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-              {services.map(s => <li key={s.slug}><Link className="link-quiet" href={`/services/${s.slug}`}>{s.title}</Link></li>)}
+              {services.map(s => <li key={s.slug}><Link className="link-quiet" href={serviceHref(s)}>{s.title}</Link></li>)}
             </ul>
           </nav>
           <nav aria-label="Company" className="md:col-span-3">

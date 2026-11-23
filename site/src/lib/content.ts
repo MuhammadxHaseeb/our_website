@@ -15,7 +15,10 @@ export const company = {
 
 export type Service = {
   n: string; slug: string; title: string; promise: string; tags: string[];
+  href?: string; // a service with its own page outside /services (our restaurant product)
 };
+/** where a service links to: its own page if it has one, else /services/<slug> */
+export const serviceHref = (s: Service) => s.href ?? `/services/${s.slug}`;
 
 /** /services story chapters: one opinionated paragraph per area (built only from the owner's ticked catalogue) + related case. */
 export const serviceStories: Record<string, { story: string; related?: string }> = {
@@ -43,6 +46,9 @@ export const serviceStories: Record<string, { story: string; related?: string }>
     story: 'Launch is where many teams hand over the keys and leave. We stay: testing, fixing, updating and marketing the product. We also take over projects another team left half-finished.',
     related: 'rental-inspection-app',
   },
+  'restaurant-system': {
+    story: 'Most restaurants run the till, the delivery apps, the riders and the loyalty cards as four separate things, and count them up by hand at night. Ours is one system for all of it: every order in one queue, stock tied to recipes, your own website and app, and the numbers ready in the morning. Plans start at $25 per branch a month.',
+  },
 };
 
 export const services: Service[] = [
@@ -53,6 +59,7 @@ export const services: Service[] = [
   { n: '05', slug: 'ui-ux-branding', title: 'UI/UX & branding', promise: 'Design that makes products clear and brands memorable.', tags: ['UI/UX', 'UX research', 'Design systems', 'Brand identity', 'Motion'] },
   { n: '06', slug: 'cloud-devops', title: 'Cloud & DevOps', promise: 'Infrastructure that stays fast and ships safely.', tags: ['Cloud setup & migration', 'CI/CD'] },
   { n: '07', slug: 'launch-growth-support', title: 'Launch, growth & support', promise: 'We stay after launch: testing, marketing and maintenance.', tags: ['QA', 'Maintenance', 'Marketing', 'Project rescue'] },
+  { n: '08', slug: 'restaurant-system', href: '/restaurant-system', title: 'Restaurant system', promise: 'Our own system for restaurants and shops: tills, online orders, riders and loyalty.', tags: ['Point of sale', 'Online ordering', 'Delivery riders', 'Loyalty', 'Reports'] },
 ];
 export const alsoServices = ['Desktop apps', 'Blockchain', 'Game development'];
 
@@ -124,7 +131,7 @@ export const steps = [
 export const stats = [
   { value: 2019, label: 'Building since', raw: true },
   { value: 2, label: 'Products live, still run by us' },
-  { value: 7, label: 'Service areas' },
+  { value: 8, label: 'Service areas' },
   { value: 1, label: 'Product of our own' },
 ];
 

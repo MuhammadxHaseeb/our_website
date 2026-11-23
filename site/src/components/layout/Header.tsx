@@ -6,7 +6,7 @@ import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/brand/Logo';
 import { BtnLabel } from '@/components/ui/primitives';
-import { services } from '@/lib/content';
+import { serviceHref, services } from '@/lib/content';
 import { product } from '@/lib/product';
 import { getLenis } from '@/lib/motion';
 
@@ -146,7 +146,7 @@ export function Header() {
                   <ul>
                     {services.map((s, i) => (
                       <li key={s.slug}>
-                        <Link href={`/services/${s.slug}`} className="mega-row" data-on={svc === i} tabIndex={panel === 'services' ? 0 : -1}
+                        <Link href={serviceHref(s)} className="mega-row" data-on={svc === i} tabIndex={panel === 'services' ? 0 : -1}
                           onMouseEnter={() => setSvc(i)} onFocus={() => setSvc(i)}>{s.title}</Link>
                       </li>
                     ))}
@@ -158,7 +158,7 @@ export function Header() {
                     <p className="mt-6 t-lead" style={{ maxWidth: '24ch' }}>{services[svc].promise}</p>
                   </div>
                   <div className="mt-auto flex flex-col gap-1">
-                    <Link href={`/services/${services[svc].slug}`} className="arrow-link" tabIndex={-1} aria-hidden><span>Explore {services[svc].title}</span><ArrowRight className="icon" strokeWidth={1.9} /></Link>
+                    <Link href={serviceHref(services[svc])} className="arrow-link" tabIndex={-1} aria-hidden><span>Explore {services[svc].title}</span><ArrowRight className="icon" strokeWidth={1.9} /></Link>
                     <Link href="/services" className="arrow-link muted" tabIndex={panel === 'services' ? 0 : -1}><span>All services</span><ArrowRight className="icon" strokeWidth={1.9} aria-hidden /></Link>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ export function Header() {
           <p className="t-label sheet-in" style={{ '--i': 0 } as CSSProperties}>Services</p>
           <ul className="mt-4 grid gap-1">
             {services.map((s, i) => (
-              <li key={s.slug} className="sheet-in" style={{ '--i': i + 1 } as CSSProperties}><Link href={`/services/${s.slug}`} className="block py-1 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{s.title}</Link></li>
+              <li key={s.slug} className="sheet-in" style={{ '--i': i + 1 } as CSSProperties}><Link href={serviceHref(s)} className="block py-1 text-[1.375rem] font-medium tracking-tight" tabIndex={sheet ? 0 : -1}>{s.title}</Link></li>
             ))}
           </ul>
           <ul className="sheet-rule mt-6 grid gap-0 border-t pt-4">
